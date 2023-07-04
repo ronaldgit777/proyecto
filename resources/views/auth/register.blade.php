@@ -57,6 +57,19 @@
                 </div>
               </div>
 
+              <div class="form-group">
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-users"></i></span>
+                  </div>
+                  <select type="text" name="role" id="role" class="form-control">
+                    <option value="admin">admin</option>
+                    <option value="admin">profesor</option>
+                    <option value="admin">alumno</option>
+                </select><br>
+                </div>
+              </div>
+
               <div class="text-center">
                 <button type="submit" class="btn btn-primary mt-4">registrarse</button>
               </div>

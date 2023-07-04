@@ -2,18 +2,18 @@
 
 @section('content')
   <div class="card shadow">
-        <div class="card-header border-0">
-          <div class="row align-items-center">
-            <div class="col">
-              <h3 class="mb-0">LISTA DE TODOS LOS PROFESORES</h3>
-            </div>
-            <div class="col text-right">
-              <a href="{{url('profesor/create')}}" class="btn btn-sm btn-primary">
-              <i class="fas fa-plus-circle"></i>
-              NUEVO PROFESOR</a>
+          <div class="card-header border-0">
+            <div class="row align-items-center">
+              <div class="col">
+                <h3 class="mb-0">LISTA DE TODOS LOS PROFESORES</h3>
+              </div>
+              <div class="col text-right">
+                <a href="{{url('profesor/create')}}" class="btn btn-sm btn-primary">
+                <i class="fas fa-plus-circle"></i>
+                NUEVO PROFESOR</a>
+              </div>
             </div>
           </div>
-        </div>
         <div class="table-responsive">
           <!-- Projects table -->
           <table class="table align-items-center table-flush">
@@ -30,6 +30,7 @@
                 <th scope="col">correo</th>
                 <th scope="col">estado</th>
                 <th scope="col">imagen</th>
+                <th scope="col">rol</th>
                 <th scope="col">acciones</th>
               </tr>
             </thead>
@@ -49,6 +50,7 @@
                             <td>
                             <img src="{{ asset('storage').'/'.$profesor->imagen}}" alt=""  width="50px" class="img-thumbnail img-fluid">
                             </td>
+                            <td>{{ $profesor->user->role }}</td>
                             <td>
                             <a href="{{ url('/profesor/'.$profesor->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
                               <i class="fas fa-edit"></i>
@@ -63,6 +65,6 @@
             </tbody>
           </table>
         </div>
-      </div>
+   </div>
 @endsection
 

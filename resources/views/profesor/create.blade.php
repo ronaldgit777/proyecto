@@ -1,24 +1,23 @@
 @extends('layouts.panel')
 
 @section('content')
-<br><br>
-<div class="card shadow">
-<div class="container " >
-    <div class="card-header border-0">
-        <div class="row align-items-center">
-          <div class="col">
-            <h3 class="mb-0">REGISTRO DE PROFESOR</h3>
-          </div>
-          <div class="col text-right">
-            <a href="{{url('profesor/')}}" class="btn btn-sm btn-success">
-                <i class="fas fa-undo"></i>
-                regresar</a>
-          </div>
-        </div>
-      </div>
-<?php $fcha = date("Y-m-d"); ?>
-    <form method="post" action="{{ url('/profesor')}}" enctype="multipart/form-data">
-     @csrf   
+<div class="container" >
+    <div class="card shadow">
+            <div class="card-header border-0">
+                <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="mb-0">REGISTRO DE PROFESOR</h3>
+                </div>
+                <div class="col text-right">
+                    <a href="{{url('profesor/')}}" class="btn btn-sm btn-success">
+                        <i class="fas fa-undo"></i>
+                        regresar</a>
+                </div>
+                </div>
+            </div>
+        <?php $fcha = date("Y-m-d"); ?>
+        <form method="post" action="{{ url('/profesor')}}" enctype="multipart/form-data">
+         @csrf   
         <div class="row p-3 mb-2 " >
             <div class="col-12  " > 
                 <div class="m-portlet__body m-portlet--primary" data-portlet="true" m-portlet="true">
@@ -129,12 +128,21 @@
                             </div>
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
-                                    <div class="col-12 col-md-12 text-align: center;">
-                                        <center><a href="{{ url('profesor/') }}" class="btn btn-info text-capitalize btn-sm">
-                                            <i class="fas fa-undo"></i>regresar</a></center> <br>
+                                    <div class="col-4 col-md-3">
+                                        <label class="text-primary text-capitalize">rol</label>
+                                    </div>
+                                    <div class="col-8 col-md-9">
+                                        <select type="text" name="profesor_id" id="profesor_id" class="form-control">
+                                            @foreach ($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->role }}></option>
+                                            @endforeach
+                                        </select><br>
                                     </div>
                                 </div>
                             </div>
+
+                           
+
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-12 col-md-12 " >
@@ -142,13 +150,12 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
-</div>
-
+        </form>
+    </div>
 </div>
 @endsection
 

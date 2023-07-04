@@ -60,7 +60,7 @@
                                         <label class="text-primary text-capitalize">apellido paterno</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="apellidopaterno" id="apellidopaterno" class="form-control"> <br>
+                                        <input type="text" name="apellidopaterno" id="apellidopaterno" class="form-control" value="{{ $profesor->apellidopaterno }}"> <br>
                                     </div>
                                 </div>
                             </div>
@@ -124,15 +124,20 @@
                                         <img src="{{asset('storage').'/'.$profesor->imagen }}" alt=""  width="50px" class="img-thumbnail img-fluid" >
                                     </div>
                                     <div class="col-8 col-md-9">
-                                     <input type="file" name="imagen" id="imagen" class="form-control"><br>
+                                     <input type="file" name="imagen" id="imagen" class="form-control" value="{{ $profesor->imagen }}">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
-                                    <div class="col-12 col-md-12 text-align: center;">
-                                        <center><a href="{{ url('profesor/') }}" class="btn btn-info text-capitalize btn-sm">
-                                            <i class="fas fa-undo"></i>regresar</a></center> <br>
+                                    <div class="col-4 col-md-3">
+                                        <label class="text-primary text-capitalize">role</label>
+                                    </div>
+                                    <div class="col-8 col-md-9">
+                                        <select type="text" name="estado" id="estado" class="form-control"  value="{{ $profesor->role }}">
+                                            <option value="activo">activo</option>
+                                            <option value="inactivo">inactivo</option>
+                                        </select><br>
                                     </div>
                                 </div>
                             </div>

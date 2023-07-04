@@ -6,17 +6,11 @@
       </a>
     </li>
     <li class="nav-item">
-    <a class="nav-link nav-link-icon" href="{{url('register')}}">
-      <i class="ni ni-circle-08"></i>
-      <span class="nav-link-inner--text">usuarios</span>
-    </a>
-  </li>
-    <li class="nav-item">
         <a class="nav-link " href="{{ url('/profesor') }}">
           <i class="fas fa-chalkboard-teacher text-blue"></i> profesores
         </a>
         <a class="nav-link " href="{{ url('/sueldopro') }}">
-          <i class="fas fa-chalkboard-teacher text-blue"></i> sueldo
+          <i class="fas fa-donate text-blue"></i> sueldo
         </a>
         <a class="nav-link " href="{{ url('/detallesupro') }}">
           <i class="fas fa-chalkboard-teacher text-blue"></i> detallesueldo
@@ -24,27 +18,28 @@
     </li>
     <li class="nav-item">
       <a class="nav-link " href="{{ url('/aula') }}">
-        <i class="fas fa-stethoscope text-info"></i>aula
+        <i class="fas fa-university text-info"></i>aula
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link " href="{{ url('/materia') }}">
-        <i class="fas fa-bed text-warning"></i>materia
+        <i class="fas fa-book text-warning"></i>materia
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link " href="{{ url('/periodo') }}">
-        <i class="fas fa-bed text-warning"></i>periodo
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link " href="{{ url('/materia') }}">
-        <i class="fas fa-bed text-warning"></i>materia
+        <i class="far fa-calendar-alt text-success"></i>periodo
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link " href="{{ url('/asignarproma') }}">
         <i class="fas fa-bed text-warning"></i>asignarproma
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link nav-link-icon" href="{{url('register')}}">
+        <i class="ni ni-circle-08"></i>
+        <span class="nav-link-inner--text">registrar usuario</span>
       </a>
     </li>
     <li class="nav-item">

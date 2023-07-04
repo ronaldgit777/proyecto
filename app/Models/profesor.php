@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class profesor extends Model
 {
@@ -11,10 +12,14 @@ class profesor extends Model
    // protected $perpage=20;
 
   //  protected $fillable = ['fechadeingreso'];
-    protected $table = "profesors";
-      /*      public function sueldopros()
-        {
-            return $this->hasMany('app\models\sueldopro','profesor_id','id');
-        } */
+  protected $table = "profesors";
+   
+  public function User()
+  {
+      return $this->belongsTo(User::class,'user_id');
+  }
 
 }
+
+
+   

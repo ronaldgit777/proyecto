@@ -7,6 +7,7 @@
   <title>
     {{ config('app.name')}}
   </title>
+  @yield('css')
   <!-- Favicon -->
   <link href="{{asset ('img/brand/favicon.png')}}" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -55,26 +56,26 @@
         </li>
       </ul>
       <!-- Collapse -->
-      <div class="collapse navbar-collapse" id="sidenav-collapse-main">
-        <!-- Collapse header -->
-        <div class="navbar-collapse-header d-md-none">
-          <div class="row">
-            <div class="col-6 collapse-brand">
-              <a href="./index.html">
-                <img src="./assets/img/brand/blue.png">
-              </a>
+          <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+            <!-- Collapse header -->
+            <div class="navbar-collapse-header d-md-none">
+              <div class="row">
+                <div class="col-6 collapse-brand">
+                  <a href="./index.html">
+                    <img src="./assets/img/brand/blue.png">
+                  </a>
+                </div>
+                <div class="col-6 collapse-close">
+                  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
+                    <span></span>
+                    <span></span>
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="col-6 collapse-close">
-              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
-                <span></span>
-                <span></span>
-              </button>
-            </div>
+            <!-- Navigation -->
+            @include('includes.panel.menu')
           </div>
-        </div>
-        <!-- Navigation -->
-        @include('includes.panel.menu')
-      </div>
     </div>
   </nav>
   <div class="main-content">
@@ -123,6 +124,7 @@
     </div>
   </div>
   <!--   Core   -->
+  @yield('js')
   <script src="{{asset ('js/plugins/jquery/dist/jquery.min.js')}}"></script>
   <script src="{{asset ('js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
   <!--   Optional JS   -->

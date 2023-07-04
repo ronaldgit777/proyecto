@@ -2,34 +2,36 @@
 
 @section('content')
 <div class="container">
-<h1 class="text-center"> LISTA DE SUELDOS</h1>
-          <div class="row mt-3">
-              <div  class="col-md-4 offset-md-4">
-                <div  class="d-grid mx-auto">
-                    <a href="{{ url('sueldopro/create') }}" class="btn btn-primary">registrar nuevo sueldo</a>
-                   
+  <div class="card shadow">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">LISTA DE SUELDOS
+                      <i class="fas fa-donate text-blue"></i> 
+                  </h3>
+                </div>
+                <div class="col text-right">
+                  <a href="{{ url('sueldopro/create') }}" class="btn btn-primary"> <i class="fas fa-plus-circle"></i> registrar nuevo sueldo</a>
                 </div>
               </div>
-          </div>  
-      <div class="row mt-3">
-          <div  class="">
-              <div  class="table-responsive">
-                <table class="table table-light table-border table-bordered table-striped ">
-                    <thead class="thead-light table-primary">
-                        <tr>
-                            <th>#</th>
-                            <th>fechadesueldo</th>
-                            <th>mesdepago</th>
-                            <th>sueldo</th>
-                            <th>totaldescuento</th>
-                            <th>totalpago</th>
-                            <th>observacion</th>
-                            <th>profesor_id</th>
-                            <th>acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($sueldopros as $sueldopro)
+            </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                             <th>#</th>
+                            <th scope="col"> fechadesueldo</th>
+                            <th scope="col"> mesdepago</th>
+                            <th scope="col">sueldo</th>
+                            <th scope="col">totaldescuento</th>
+                            <th scope="col">totalpago</th>
+                            <th scope="col">observacion</th>
+                            <th scope="col">profesor_id</th>
+                            <th scope="col">acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($sueldopros as $sueldopro)
                         <tr>
                             <td>{{ $sueldopro->id }}</td>
                             <td>{{ $sueldopro->fechadesueldo }}</td>
@@ -40,13 +42,13 @@
                             <td>{{ $sueldopro->observacion }}</td>
                             <td>{{ $sueldopro->profesor->nombre }}</td>
                             <td> <a href="{{ url('/sueldopro/'.$sueldopro->id.'/show') }}" method="post">ver</a>
+                            </td>           
                             </td>
                         </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                @endforeach
+            </tbody>
+          </table>
         </div>
-     </div>
+   </div>
 </div>
 @endsection

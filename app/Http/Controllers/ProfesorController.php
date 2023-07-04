@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Custom\MyClass;
 
 use App\Models\profesor;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,8 +17,12 @@ class ProfesorController extends Controller
      */
     public function index()
     {   
-        $datos['profesors']=profesor::paginate(7);
-        return view('profesor.index',$datos);
+        $profesors=profesor::all();
+        // return profesor::with('sueldopro')->get(); 
+         //$datos['sueldopros']=sueldopro::paginate(7);
+         return view('profesor.index',compact('profesors'));
+
+     
     }
 
     /**
@@ -27,7 +32,8 @@ class ProfesorController extends Controller
      */
     public function create()
     {
-        return view('profesor.create');
+        //return view('profesor.create');
+        return view('profesor.create',['users'=>User::all()]);
     }
 
     /**

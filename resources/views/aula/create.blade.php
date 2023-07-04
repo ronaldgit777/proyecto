@@ -3,10 +3,10 @@
 @section('content')
 
 <div class="container " >
-<h1 class="text-center"> REGISTRO DE NUEVA AULA</h1>
-
-    <form method="post" action="{{ url('/aula')}}" enctype="multipart/form-data">
-     @csrf   
+    <div class="card shadow">
+        <h1 class="text-center"> REGISTRO DE NUEVA AULA</h1>
+        <form method="post" action="{{ url('/aula')}}" enctype="multipart/form-data">
+        @csrf   
         <div class="row p-3 mb-2 bg-dark text-white"   >
             <div class="col-12"> 
                 <div class="m-portlet__body m-portlet--primary" data-portlet="true" m-portlet="true">
@@ -51,10 +51,11 @@
                                 </div>
                             </div>
                                     
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
+                         </div>
+                      </div>
+                  </div>
+             </div>
+         </form>
+    </div>
 </div>
 @endsection
