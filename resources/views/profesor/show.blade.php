@@ -1,31 +1,39 @@
-@extends('layouts.app')
+@extends('layouts.panel')
 
 @section('content')
-<div class="container">
-<h1 class="text-center">VER DATOS DEL PROFESOR</h1>
-<div class="row mt-3">
-          <div  class="">
-              <div  class="table-responsive">
-                <table class="table table-light table-border table-bordered table-striped ">
-                    <thead class="thead-light table-primary">
-                        <tr>
-                            <th>#</th>
-                            <th>fechadeingreso</th>
-                            <th>ci</th>
-                            <th>nombre</th>
-                            <th>apellidopaterno</th>
-                            <th>apellidomaterno</th>
-                            <th>celular</th>
-                            <th>direccion</th>
-                            <th>correo</th>
-                            <th>estado</th>
-                            <th>imagen</th>
-                            <th>acciones</th>
-                        </tr>
-                    </thead>
-                 
-
-                    <tbody>
+  <div class="card shadow">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="mb-0">DATOS DEL PROFESOR</h3>
+            </div>
+            <div class="col text-right">
+              <a href="{{url('profesor/')}}" class="btn btn-sm btn-success">
+                <i class="fas fa-undo"></i>
+                regresar</a>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <!-- Projects table -->
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th colspan="col">#</th>
+                <th>fechadeingreso</th>
+                <th>ci</th>
+                <th>nombre</th>
+                <th>apellidopaterno</th>
+                <th>apellidomaterno</th>
+                <th>celular</th>
+                <th>direccion</th>
+                <th>correo</th>
+                <th>estado</th>
+                <th>imagen</th>
+                <th>acciones</th>
+              </tr>
+            </thead>
+            <tbody>
                         <tr>
                             <td>{{ $profesor->id }}</td>
                             <td>{{ $profesor->fechadeingreso }}</td>
@@ -41,13 +49,14 @@
                             <img src="{{ asset('storage').'/'.$profesor->imagen}}" alt=""  width="50px" class="img-thumbnail img-fluid">
                             </td>
                             <td>
-                            <a href="{{ url('/profesor/') }}" method="post">retroceder</a>
+                            <IMPRIMIR href="{{ url('/profesor/') }}" method="post" class="btn btn-sm btn-danger">
+                                <i class="fas fa-external-link-alt"></i>
+                                IMPRIMIR</a>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
-            </div>
+            </tbody>
+          </table>
         </div>
-     </div>
-</div>
+      </div>
 @endsection
+

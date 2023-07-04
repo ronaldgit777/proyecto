@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.panel')
 
 @section('content')
 <div class="container">
           <div class="row mt-3">
               <div  class="col-md-4 offset-md-4">
                 <div  class="d-grid mx-auto">
-                    <a href="{{ url('sueldopro/create') }}" class="btn btn-primary">registrar de detalle de sueldo</a>
+                    <a href="{{ url('sueldopro/create') }}" class="btn btn-primary">falta registrar detalle sueldo</a>
                    
                 </div>
               </div>

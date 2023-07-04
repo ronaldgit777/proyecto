@@ -1,7 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.panel')
 
 @section('content')
 
+<div class="card shadow">
 <div class="container">
 <h1 class="text-center">REGISTRO DE ASIGNACION A PROFESOR</h1>
 <?php $fcha = date("Y-m-d"); ?>
@@ -91,5 +92,6 @@
             </div>
         </div>
     </form>
+</div>
 </div>
 @endsection
