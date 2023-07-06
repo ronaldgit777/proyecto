@@ -132,3 +132,9 @@
     </form>
 </div>
 @endsection
+
+<select type="text" name="role" id="role" class="form-control">
+    <option value="admin">admin</option>
+    <option value="profesor">profesor</option>
+    <option value="secreataria">secreataria</option>
+</select><br>

@@ -34,19 +34,6 @@ Route::get('/profesor', function () {
     return view('profesor.hola');
 });
 
-/*route::resource('profesor',ProfesorController::class)->middleware('auth');
-route::get('/',[ProfesorController::class,'prueba'])->name('home');
-//route::resource('/profesor/sueldorpo/',MyClass::class)->middleware('auth');
-//route::get('/profesor/sueldorpo',[MyClass::class,'sueldorpo'])->name('home');
-route::resource('sueldopro',SueldoproController::class)->middleware('auth');
-route::resource('detallesupro',DetallesuproController::class)->middleware('auth');
-route::resource('materia',MateriaController::class)->middleware('auth');
-route::resource('periodo',PeriodoController::class)->middleware('auth');
-route::resource('aula',AulaController::class)->middleware('auth');
-route::resource('asignarproma',AsignarpromaController::class)->middleware('auth');*/
-
-//route::get('sueldopro/test/{id}',AsignarpromaControlle@myMetodo)->middleware('auth');
-
 Auth::routes();
 
 //route::get('/home',[ProfesorController::class,'index'])->name('home');
@@ -56,7 +43,7 @@ Auth::routes();
     //route::get('/',[ProfesorController::class,'index'])->name('home');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     //abre el formulario de registro de usuario
-          route::view('/register','auth.register')->name('register');
+         
         route::resource('profesor',ProfesorController::class)->middleware('auth');
         //route::resource('/profesor/sueldorpo/',MyClass::class)->middleware('auth');
         //route::get('/profesor/sueldorpo',[MyClass::class,'sueldorpo'])->name('home');
@@ -66,6 +53,11 @@ Auth::routes();
         route::resource('periodo',PeriodoController::class)->middleware('auth');
         route::resource('aula',AulaController::class)->middleware('auth');
         route::resource('asignarproma',AsignarpromaController::class)->middleware('auth');
+        route::view('/register','auth.register')->name('register')->middleware('auth');
 
+       
+
+//route::get('/home',[ProfesorController::class,'index'])->name('home');
+//route::get('/home',[SueldoproController::class,'index'])->name('home');
 
 

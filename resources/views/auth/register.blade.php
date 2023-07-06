@@ -1,8 +1,7 @@
-@extends('layouts.panel')
-
+@extends('layouts.form')
+@section('title','registrate')
 @section('content')
-<div class="card shadow">
-  <div class="container " >
+<div class="container mt--8 pb-5">
     <!-- Table -->
     <div class="row justify-content-center">
       <div class="col-lg-6 col-md-8">
@@ -60,13 +59,13 @@
               <div class="form-group">
                 <div class="input-group input-group-alternative">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-users"></i></span>
+                    <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                   </div>
-                  <select type="text" name="role" id="role" class="form-control">
+                    <select type="text" name="role" id="role" class="form-control">
+                   
                     <option value="admin">admin</option>
-                    <option value="admin">profesor</option>
-                    <option value="admin">alumno</option>
-                </select><br>
+                    <option value="profesor">profesor</option>
+                </select><br>  
                 </div>
               </div>
 
@@ -79,6 +78,4 @@
       </div>
     </div>
   </div>
-</div>
-</div>
 @endsection

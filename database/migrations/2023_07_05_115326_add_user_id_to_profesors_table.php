@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddProfesorIdToProfesorsTable extends Migration
+class AddUserIdToProfesorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,6 +14,7 @@ class AddProfesorIdToProfesorsTable extends Migration
     public function up()
     {
         Schema::table('profesors', function (Blueprint $table) {
+            
             $table->bigInteger('user_id')->unsigned()->nullable()->after('imagen');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
@@ -28,7 +29,9 @@ class AddProfesorIdToProfesorsTable extends Migration
     public function down()
     {
         Schema::table('profesors', function (Blueprint $table) {
+            
             $table->dropColumn('user_id');
+
         });
     }
 }
