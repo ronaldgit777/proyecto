@@ -71,7 +71,16 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'role' => $data['role'],
         ]);
+       // return redirect('profesor');
+    }
+    public function index()
+    {
+        $users=user::all();
+        // return profesor::with('sueldopro')->get(); 
+         //$datos['sueldopros']=sueldopro::paginate(7);
+         return view('user.index',compact('users'));
+         
     }
 }
-xdebug
+//xdebug
 

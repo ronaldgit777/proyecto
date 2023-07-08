@@ -2,18 +2,21 @@
 
 @section('content')
 <div class="container">
-<h1 class="text-center"> LISTA DE ASIGNACIONES DE MATERIA A PROFESORES</h1>
-          <div class="row mt-3">
-              <div  class="col-md-4 offset-md-4">
-                <div  class="d-grid mx-auto">
-                    <a href="{{ url('asignarproma/create') }}" class="btn btn-primary">ASIGNAR MATERIA A PROFESOR</a>
-                   
-                </div>
-              </div>
-          </div>  
-      <div class="row mt-3">
-          <div  class="">
-              <div  class="table-responsive">
+    <div class="card shadow">
+                        <div class="card-header border-0">
+                        <div class="row align-items-center">
+                            <div class="col">
+                            <h3 class="mb-0">LISTA DE ASIGNACION
+                                <i class="far fa-calendar-alt  text-blue"></i> 
+                            </h3>
+                            </div>
+                            <div class="col text-right">
+                            <a href="{{ url('asignarproma/create') }}" class="btn btn-primary">
+                                <i class="fas fa-plus-circle"></i> registrar nueva asignacion</a>
+                            </div>
+                        </div>
+                        </div>
+                    <div  class="table-responsive">
                 <table class="table table-light table-border table-bordered table-striped ">
                     <thead class="thead-light table-primary">
                         <tr>

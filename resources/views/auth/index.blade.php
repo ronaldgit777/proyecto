@@ -6,13 +6,13 @@
                         <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col">
-                            <h3 class="mb-0">LISTA DE PERIODOS
+                            <h3 class="mb-0">LISTA DE usuarios
                                 <i class="far fa-calendar-alt  text-blue"></i> 
                             </h3>
                             </div>
                             <div class="col text-right">
-                            <a href="{{ url('periodo/create') }}" class="btn btn-primary">
-                                <i class="fas fa-plus-circle"></i> registrar nuevo turno</a>
+                            <a href="{{ url('register') }}" class="btn btn-primary">
+                                <i class="fas fa-plus-circle"></i> registrar nuevo usuario</a>
                             </div>
                         </div>
                         </div>
@@ -21,20 +21,24 @@
                             <thead class="thead-light table-primary">
                                 <tr>
                                     <th>#</th>
-                                    <th>periodo</th>
-                                    <th>estado</th>
+                                    <th>name</th>
+                                    <th>email</th>
+                                    <th>password</th>
+                                    <th>rol</th>
                                     <th>acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($periodos as $periodo)
+                                @foreach ($users as $user)
                                 <tr>
-                                    <td>{{ $periodo->id }}</td>
-                                    <td>{{ $periodo->periodo }}</td>
-                                    <td>{{ $periodo->estado }}</td>
+                                    <td>{{ $user->id }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->password }}</td>
+                                    <td>{{ $user->rol }}</td>
                                     <td>
-                                    <a href="{{ url('/periodo/'.$periodo->id.'/edit') }}" method="post">editar</a>//
-                                    <a href="{{ url('/periodo/'.$periodo->id.'/') }}" method="post">ver</a>
+                                    <a href="{{ url('/user/'.$user->id.'/edit') }}" method="post">editar</a>//
+                                    <a href="{{ url('/user/'.$user->id.'/') }}" method="post">ver</a>
                                     </td>
                                 </tr>
                                 @endforeach

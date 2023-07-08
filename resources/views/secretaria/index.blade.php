@@ -5,12 +5,12 @@
           <div class="card-header border-0">
             <div class="row align-items-center">
               <div class="col">
-                <h3 class="mb-0">LISTA DE TODOS LOS PROFESORES</h3>
+                <h3 class="mb-0">LISTA DE TODAS LAS SECRETARIAS</h3>
               </div>
               <div class="col text-right">
-                <a href="{{url('profesor/create')}}" class="btn btn-sm btn-primary">
+                <a href="{{url('secretaria/create')}}" class="btn btn-sm btn-primary">
                 <i class="fas fa-plus-circle"></i>
-                NUEVO PROFESOR</a>
+                NUEVA SECRETARIA</a>
               </div>
             </div>
           </div>
@@ -30,32 +30,30 @@
                 <th scope="col">correo</th>
                 <th scope="col">estado</th>
                 <th scope="col">imagen</th>
-                <th scope="col">rol</th>
                 <th scope="col">acciones</th>
               </tr>
             </thead>
             <tbody>
-              @foreach ($profesors as $profesor)
+              @foreach ($secretarias as $secretaria)
                         <tr>
-                            <td scope="row">{{ $profesor->id }}</td>
-                            <td>{{ $profesor->fechadeingreso }}</td>
-                            <td>{{ $profesor->ci }}</td>
-                            <td>{{ $profesor->nombre }}</td>
-                            <td>{{ $profesor->apellidopaterno }}</td>
-                            <td>{{ $profesor->apellidomaterno }}</td>
-                            <td>{{ $profesor->celular }}</td>
-                            <td>{{ $profesor->direccion }}</td>
-                            <td>{{ $profesor->correo }}</td>
-                            <td>{{ $profesor->estado }}</td>
+                            <td scope="row">{{ $secretaria->id }}</td>
+                            <td>{{ $secretaria->fechadeingreso }}</td>
+                            <td>{{ $secretaria->ci }}</td>
+                            <td>{{ $secretaria->nombre }}</td>
+                            <td>{{ $secretaria->apellidopaterno }}</td>
+                            <td>{{ $secretaria->apellidomaterno }}</td>
+                            <td>{{ $secretaria->celular }}</td>
+                            <td>{{ $secretaria->direccion }}</td>
+                            <td>{{ $secretaria->correo }}</td>
+                            <td>{{ $secretaria->estado }}</td>
                             <td>
-                            <img src="{{ asset('storage').'/'.$profesor->imagen}}" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid">
+                            <img src="{{ asset('storage').'/'.$secretaria->imagen}}" alt=""  width="50px" height="50px" class="img-thumbnail img-fluid">
                             </td>
-                            <td>{{ $profesor->user->role }}</td>
                             <td>
-                            <a href="{{ url('/profesor/'.$profesor->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
+                            <a href="{{ url('/secretaria/'.$secretaria->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
                               <i class="fas fa-edit"></i>
                               editar</a>//
-                            <a href="{{ url('/profesor/'.$profesor->id.'/') }}" method="post" class="btn btn-sm btn-danger">
+                            <a href="{{ url('/secretaria/'.$secretaria->id.'/') }}" method="post" class="btn btn-sm btn-danger">
                               <i class="far fa-eye"></i>
                               ver</a>     
                                                 
@@ -67,4 +65,3 @@
         </div>
    </div>
 @endsection
-

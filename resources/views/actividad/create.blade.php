@@ -6,16 +6,16 @@
             <div class="card-header border-0">
                 <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="mb-0">REGISTRO DE NUEVA AULA</h3>
+                    <h3 class="mb-0">REGISTRO DE NUEVA actividad</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{url('aula/')}}" class="btn btn-sm btn-success">
+                    <a href="{{url('actividad/')}}" class="btn btn-sm btn-success">
                         <i class="fas fa-undo"></i>
                         regresar</a>
                 </div>
                 </div>
             </div>
-        <form method="post" action="{{ url('/aula')}}" enctype="multipart/form-data">
+        <form method="post" action="{{ url('/actividad')}}" enctype="multipart/form-data">
         @csrf   
         <div class="row p-3 mb-2  text-white"   >
             <div class="col-12"> 
@@ -26,10 +26,10 @@
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
 
                                     <div class="col-4 col-md-3">
-                                         <label class="text-primary text-capitalize">aula</label>
+                                         <label class="text-primary text-capitalize">actividad</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="aula" id="aula" class="form-control" > <br>
+                                        <input type="text" name="actividad" id="actividad" class="form-control" > <br>
                                     </div>
                                 </div>
                             </div>

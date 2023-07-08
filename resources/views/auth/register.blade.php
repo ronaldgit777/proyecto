@@ -65,6 +65,7 @@
                    
                     <option value="admin">admin</option>
                     <option value="profesor">profesor</option>
+                    <option value="secreataria">secreataria</option>
                 </select><br>  
                 </div>
               </div>

@@ -6,17 +6,17 @@
             <div class="card-header border-0">
                 <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="mb-0">REGISTRO DE PROFESOR</h3>
+                    <h3 class="mb-0">REGISTRO DE SECRETARIA</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{url('profesor/')}}" class="btn btn-sm btn-success">
+                    <a href="{{url('secretaria/')}}" class="btn btn-sm btn-success">
                         <i class="fas fa-undo"></i>
                         regresar</a>
                 </div>
                 </div>
             </div>
         <?php $fcha = date("Y-m-d"); ?>
-        <form method="post" action="{{ url('/profesor')}}" enctype="multipart/form-data">
+        <form method="post" action="{{ url('/secretaria')}}" enctype="multipart/form-data">
          @csrf   
         <div class="row p-3 mb-2 " >
             <div class="col-12  " > 

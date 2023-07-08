@@ -6,17 +6,17 @@
             <div class="card-header border-0">
                 <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="mb-0">REGISTRO DE PROFESOR</h3>
+                    <h3 class="mb-0">REGISTRO DE ALUMNO</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{url('profesor/')}}" class="btn btn-sm btn-success">
+                    <a href="{{url('alumno/')}}" class="btn btn-sm btn-success">
                         <i class="fas fa-undo"></i>
                         regresar</a>
                 </div>
                 </div>
             </div>
         <?php $fcha = date("Y-m-d"); ?>
-        <form method="post" action="{{ url('/profesor')}}" enctype="multipart/form-data">
+        <form method="post" action="{{ url('/alumno')}}" enctype="multipart/form-data">
          @csrf   
         <div class="row p-3 mb-2 " >
             <div class="col-12  " > 
@@ -126,27 +126,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-6">
-                                <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
-                                    <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">rol</label>
-                                    </div>
-                                    <div class="col-8 col-md-9">
-                                        <select type="text" name="user_id" id="user_id" class="form-control">
-                                            @foreach ($users as $user)
-                                            <option value="{{ $user->id }}">{{ $user->role }}</option>
-                                            @endforeach
-                                        </select><br>
-                                    </div>
-                                </div>
-                            </div>
 
                            
 
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-12 col-md-12 " >
-                                    <center><input type="submit" value="crear profesor" class="btn btn-primary btn-sm"></center>
+                                    <center><input type="submit" value="crear alumno" class="btn btn-primary btn-sm"></center>
                                     </div>
                                 </div>
                             </div>
