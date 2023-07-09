@@ -12,6 +12,17 @@ class profesor extends Model
    // protected $perpage=20;
 
   //  protected $fillable = ['fechadeingreso'];
+  protected $fillable = [
+    'fechadeingreso',
+    'ci',
+    'apellidopaterno',
+    'apellidomaterno',
+    'celular',
+    'direccion',
+    'estado',
+    'imagen',
+    'user_id'
+];
   protected $table = "profesors";
    
   public function User()

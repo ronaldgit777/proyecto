@@ -1,4 +1,4 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title','registrate')
 @section('content')
 <div class="container mt--8 pb-5">

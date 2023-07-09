@@ -11,7 +11,18 @@ class secretaria extends Model
    // protected $perpage=20;
 
   //  protected $fillable = ['fechadeingreso'];
-  protected $table = "secretaria";
+  protected $fillable = [
+    'fechadeingreso',
+    'ci',
+    'apellidopaterno',
+    'apellidomaterno',
+    'celular',
+    'direccion',
+    'estado',
+    'imagen',
+    'user_id'
+];
+  protected $table = "secretarias";
    
   public function User()
   {

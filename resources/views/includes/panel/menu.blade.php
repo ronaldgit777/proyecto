@@ -6,18 +6,11 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link " href="{{ url('/user') }}">
-        <i class="fas fa-university text-info"></i>usuarios
-      </a>
-    </li>
-    <li class="nav-item">
       <a class="nav-link " href="{{ url('/secretaria') }}">
         <i class="fas fa-university text-info"></i>secretarias
       </a>
     </li>  
- 
-
-    <li class="nav-item">
+     <li class="nav-item">
       <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
           <i class="fab fa-laravel" style="color: #f4645f;"></i>
           <span class="nav-link-text" style="color: #f4645f;">{{ __('PROFESOR') }}</span>
@@ -101,6 +94,12 @@
   <!-- Navigation -->
   <ul class="navbar-nav mb-md-3">
     <li class="nav-item">
+      <a class="nav-link nav-link-icon" href="{{url('registroEmpleado')}}">
+        <i class="ni ni-circle-08"></i>
+        <span class="nav-link-inner--text">registrar usuario</span>
+      </a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link" href="">
         <i class="ni ni-books text-default"></i>citas
       </a>
@@ -108,12 +107,6 @@
     <li class="nav-item">
       <a class="nav-link" href="">
         <i class="ni ni-chart-bar-32"></i> desempeño medico
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link nav-link-icon" href="{{url('register')}}">
-        <i class="ni ni-circle-08"></i>
-        <span class="nav-link-inner--text">registrar usuario</span>
       </a>
     </li>
   </ul>

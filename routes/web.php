@@ -30,7 +30,7 @@ Route::get('/sueldopro', function () {
 });
 */
 
-
+Auth::routes();
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -38,7 +38,7 @@ Route::get('/profesor', function () {
     return view('profesor.hola');
 });
 
-Auth::routes();
+//Auth::routes();
 
 //route::get('/home',[ProfesorController::class,'index'])->name('home');
 //route::get('/home',[SueldoproController::class,'index'])->name('home');
@@ -59,7 +59,9 @@ Auth::routes();
         route::resource('alumno',AlumnoController::class)->middleware('auth');
         route::resource('inscripcion',InscripcionController::class)->middleware('auth');
         route::resource('actividad',ActividadController::class)->middleware('auth');
-        route::view('/register','auth.register')->name('register');
+        //route::get('/register','auth.register')->name('register');
+        Route::get('/registroEmpleado', [App\Http\Controllers\Auth\RegisterController::class, 'formularioEmpleado'])->name('formularioEmpleado');
+        Route::post('/registroEmpleado', [App\Http\Controllers\Auth\RegisterController::class, 'registrarEmpleado'])->name('registroEmpleado');
 
        
 
