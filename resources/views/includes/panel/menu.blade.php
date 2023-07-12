@@ -72,6 +72,11 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link " href="{{ url('/turno') }}">
+                <i class="fas fa-bed text-warning"></i>turno
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link " href="{{ url('/inscripcion') }}">
                 <i class="fas fa-bed text-warning"></i>inscripcion
               </a>
@@ -179,8 +184,13 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link " href="{{ url('/turno') }}">
+            <i class="fas fa-bed text-warning"></i>turno
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link " href="{{ url('/inscripcion') }}">
-            <i class="fas fa-bed text-warning"></i>inscripcion
+            <i class="fas fa-bed text-warning"></i>inscripcions
           </a>
         </li>
         <li class="nav-item">

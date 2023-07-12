@@ -12,6 +12,7 @@ use App\Http\Controllers\PeriodoController;
 use App\Http\Controllers\ProfesorController;
 use App\Http\Controllers\SecretariaController;
 use App\Http\Controllers\SueldoproController;
+use App\Http\Controllers\TurnoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,6 +59,7 @@ Route::get('/', function () {
         route::resource('materia',MateriaController::class)->middleware('auth');       
         route::resource('asignarproma',AsignarpromaController::class)->middleware('auth');
         route::resource('alumno',AlumnoController::class)->middleware('auth');
+        route::resource('turno',TurnoController::class)->middleware('auth');
         route::resource('inscripcion',InscripcionController::class)->middleware('auth');
         route::resource('actividad',ActividadController::class)->middleware('auth');
         //route::get('/register','auth.register')->name('register');

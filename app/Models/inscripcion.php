@@ -7,9 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class inscripcion extends Model
 {
-    protected $table = "inscripcion";
-    public function User()
+    protected $table = "inscripcions";
+   
+    public function asignarproma()
     {
-        return $this->belongsTo(alumnos::class,'alumno_id');
+        return $this->belongsTo(asignarproma::class,'asignarproma_id');
     }
+
+    public function alumno()
+    {
+        return $this->belongsTo(alumno::class,'alumno_id');
+    }
+    
+    public function turno()
+    {
+        return $this->belongsTo(turno::class,'turno_id');
+    }
+
+    
 }

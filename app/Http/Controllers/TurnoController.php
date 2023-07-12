@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\inscripcion;
 use App\Models\turno;
-use App\Models\User;
-use App\Models\asignarproma;
-use App\Models\alumno;
-use App\Models\profesor;
 use Illuminate\Http\Request;
 
-class InscripcionController extends Controller
+class TurnoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +14,8 @@ class InscripcionController extends Controller
      */
     public function index()
     {
-        $inscripcions=inscripcion::all();
-        // return profesor::with('sueldopro')->get(); 
-         //$datos['sueldopros']=sueldopro::paginate(7);
-         return view('inscripcion.index',compact('inscripcions'));
+        $datos['turnos']=turno::paginate(7);
+        return view('turno.index',$datos);
     }
 
     /**
@@ -32,11 +25,7 @@ class InscripcionController extends Controller
      */
     public function create()
     {
-        return view('inscripcion.create',
-        ['asignarpromas'=>asignarproma::all(),
-        'alumnos'=>alumno::all(),
-        'turnos'=>turno::all(),'profesors'=>profesor::all(),'users'=>user::all()
-        ]);
+        return view('turno.create');
     }
 
     /**
@@ -47,20 +36,19 @@ class InscripcionController extends Controller
      */
     public function store(Request $request)
     {
-        $datosinscripcion=request()->except('_token');
-       
-        inscripcion::insert($datosinscripcion);
+        $datosturno=request()->except('_token');
+        turno::insert($datosturno);
         //return response()->json($datosprofesor);
-        return redirect('inscripcion');
+        return redirect('turno');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\inscripcion  $inscripcion
+     * @param  \App\Models\turno  $turno
      * @return \Illuminate\Http\Response
      */
-    public function show(inscripcion $inscripcion)
+    public function show(turno $turno)
     {
         //
     }
@@ -68,10 +56,10 @@ class InscripcionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\inscripcion  $inscripcion
+     * @param  \App\Models\turno  $turno
      * @return \Illuminate\Http\Response
      */
-    public function edit(inscripcion $inscripcion)
+    public function edit(turno $turno)
     {
         //
     }
@@ -80,10 +68,10 @@ class InscripcionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\inscripcion  $inscripcion
+     * @param  \App\Models\turno  $turno
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, inscripcion $inscripcion)
+    public function update(Request $request, turno $turno)
     {
         //
     }
@@ -91,10 +79,10 @@ class InscripcionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\inscripcion  $inscripcion
+     * @param  \App\Models\turno  $turno
      * @return \Illuminate\Http\Response
      */
-    public function destroy(inscripcion $inscripcion)
+    public function destroy(turno $turno)
     {
         //
     }

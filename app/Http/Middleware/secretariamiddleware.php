@@ -2,10 +2,11 @@
 
 namespace App\Http\Middleware;
 
+namespace App\Http\Middleware\adminmiddleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class secremiddleware
+class secretariamiddleware
 {
     /**
      * Handle an incoming request.
