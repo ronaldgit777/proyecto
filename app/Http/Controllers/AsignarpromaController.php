@@ -7,6 +7,7 @@ use App\Models\profesor;
 use App\Models\materia;
 use App\Models\aula;
 use App\Models\periodo;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AsignarpromaController extends Controller
@@ -32,8 +33,12 @@ class AsignarpromaController extends Controller
     public function create()
     {
         //return view('asignarproma.create',['profesors'=>profesor::all(),],['materias'=>materia::all()],['aulas'=>aula::all()],['periodos'=>periodo::all()]);
-        return view('asignarproma.create',['profesors'=>profesor::all(),
-        'materias'=>materia::all(),'aulas'=>aula::all(),'periodos'=>periodo::all()
+        return view('asignarproma.create',
+        ['profesors'=>profesor::all(),
+        'materias'=>materia::all(),
+        'aulas'=>aula::all(),
+        'periodos'=>periodo::all(),
+        'users'=>user::all()
         ]);
     }
 

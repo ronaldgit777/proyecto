@@ -29,11 +29,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
                         @foreach ($asignarpromas as $asignarproma)
                         <tr>
                             <td>{{ $asignarproma->id }}</td>
-                            <td>{{ $asignarproma->profesor->nombre }}</td>
+                            <td>{{ $asignarproma->profesor->apellidopaterno."-".$asignarproma->profesor->apellidomaterno }}</td>
                             <td>{{ $asignarproma->materia->materia }}</td>
                             <td>{{ $asignarproma->aula->aula }}</td>
                             <td>{{ $asignarproma->periodo->periodo }}</td>

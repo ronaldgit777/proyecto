@@ -28,14 +28,15 @@ Route::get('/profesor', function () {
 Route::get('/sueldopro', function () {
     return view('sueldopro.index');
 });
+
+Route::get('/profesor', function () {
+    return view('profesor.hola');
+});
 */
 
 Auth::routes();
 Route::get('/', function () {
     return view('auth.login');
-});
-Route::get('/profesor', function () {
-    return view('profesor.hola');
 });
 
 //Auth::routes();
@@ -60,15 +61,54 @@ Route::get('/profesor', function () {
         route::resource('inscripcion',InscripcionController::class)->middleware('auth');
         route::resource('actividad',ActividadController::class)->middleware('auth');
         //route::get('/register','auth.register')->name('register');
-        Route::get('/registroEmpleado', [App\Http\Controllers\Auth\RegisterController::class, 'formularioEmpleado'])->name('formularioEmpleado');
-        Route::post('/registroEmpleado', [App\Http\Controllers\Auth\RegisterController::class, 'registrarEmpleado'])->name('registroEmpleado');
+        Route::get('/registroEmpleado', [App\Http\Controllers\Auth\RegisterController::class, 'formularioEmpleado'])->name('formularioEmpleado')->middleware('auth');
+        Route::post('/registroEmpleado', [App\Http\Controllers\Auth\RegisterController::class, 'registrarEmpleado'])->name('registroEmpleado')->middleware('auth');
 
-       
+/*
+Route::middleware(['auth', 'admin'])->group(function () {
+    //abre el formulario de registro de usuario
+   // route::resource('user',user::class)->middleware('auth');
+   route::resource('secretaria',SecretariaController::class)->middleware('auth');
+   route::resource('profesor',ProfesorController::class)->middleware('auth');
+   route::resource('sueldopro',SueldoproController::class)->middleware('auth');
+   route::resource('detallesupro',DetallesuproController::class)->middleware('auth');
+   route::resource('periodo',PeriodoController::class)->middleware('auth');
+   route::resource('aula',AulaController::class)->middleware('auth');
+   route::resource('materia',MateriaController::class)->middleware('auth');       
+   route::resource('asignarproma',AsignarpromaController::class)->middleware('auth');
+   route::resource('alumno',AlumnoController::class)->middleware('auth');
+   route::resource('inscripcion',InscripcionController::class)->middleware('auth');
+   route::resource('actividad',ActividadController::class)->middleware('auth');
+   //route::get('/register','auth.register')->name('register');
+   Route::get('/registroEmpleado', [App\Http\Controllers\Auth\RegisterController::class, 'formularioEmpleado'])->name('formularioEmpleado')->middleware('auth');
+   Route::post('/registroEmpleado', [App\Http\Controllers\Auth\RegisterController::class, 'registrarEmpleado'])->name('registroEmpleado')->middleware('auth');
+});
+Route::middleware(['auth', 'secretaria'])->group(function () {
+    //abre el formulario de registro de usuario
+   // route::resource('user',user::class)->middleware('auth');
+   route::resource('profesor',ProfesorController::class)->middleware('auth');
+   route::resource('sueldopro',SueldoproController::class)->middleware('auth');
+   route::resource('detallesupro',DetallesuproController::class)->middleware('auth');
+   route::resource('periodo',PeriodoController::class)->middleware('auth');
+   route::resource('aula',AulaController::class)->middleware('auth');
+   route::resource('materia',MateriaController::class)->middleware('auth');       
+   route::resource('asignarproma',AsignarpromaController::class)->middleware('auth');
+   route::resource('alumno',AlumnoController::class)->middleware('auth');
+   route::resource('inscripcion',InscripcionController::class)->middleware('auth');
+   route::resource('actividad',ActividadController::class)->middleware('auth');
+   //route::get('/register','auth.register')->name('register');
+   Route::get('/registroEmpleado', [App\Http\Controllers\Auth\RegisterController::class, 'formularioEmpleado'])->name('formularioEmpleado')->middleware('auth');
+   Route::post('/registroEmpleado', [App\Http\Controllers\Auth\RegisterController::class, 'registrarEmpleado'])->name('registroEmpleado')->middleware('auth');
+});*/
+
+
+
+
+
+
+
 
 //route::get('/home',[ProfesorController::class,'index'])->name('home');
 //route::get('/home',[SueldoproController::class,'index'])->name('home');
-
-
-
         //route::resource('/profesor/sueldorpo/',MyClass::class)->middleware('auth');
         //route::get('/profesor/sueldorpo',[MyClass::class,'sueldorpo'])->name('home');

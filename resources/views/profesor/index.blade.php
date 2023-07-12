@@ -40,12 +40,12 @@
                             <td scope="row">{{ $profesor->id }}</td>
                             <td>{{ $profesor->fechadeingreso }}</td>
                             <td>{{ $profesor->ci }}</td>
-                            <td>{{ $profesor->nombre }}</td>
+                            <td>{{ $profesor->user->name }}</td>
                             <td>{{ $profesor->apellidopaterno }}</td>
                             <td>{{ $profesor->apellidomaterno }}</td>
                             <td>{{ $profesor->celular }}</td>
                             <td>{{ $profesor->direccion }}</td>
-                            <td>{{ $profesor->correo }}</td>
+                            <td>{{ $profesor->user->email }}</td>
                             <td>{{ $profesor->estado }}</td>
                             <td>
                             <img src="{{ asset('storage').'/'.$profesor->imagen}}" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid">
