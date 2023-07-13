@@ -17,8 +17,8 @@
                         </div>
                         </div>
                     <div  class="table-responsive">
-                        <table class="table table-light table-border table-bordered table-striped ">
-                            <thead class="thead-light table-primary">
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
                                 <tr>
                                     <th>#</th>
                                     <th>actividad</th>
@@ -30,7 +30,7 @@
                                 @foreach ($actividads as $actividad)
                                 <tr>
                                     <td>{{ $actividad->id }}</td>
-                                    <td>{{ $actividad->periodo }}</td>
+                                    <td>{{ $actividad->actividad }}</td>
                                     <td>{{ $actividad->estado }}</td>
                                     <td>
                                     <a href="{{ url('/actividad/'.$actividad->id.'/edit') }}" method="post">editar</a>//

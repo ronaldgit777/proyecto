@@ -6,9 +6,10 @@
                         <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col">
-                            <h3 class="mb-0">LISTA DE ASIGNACION
+                            <h3 class="mb-0">LISTA DE ASIGNACION--
                                 <i class="far fa-calendar-alt  text-blue"></i> 
                             </h3>
+                            
                             </div>
                             <div class="col text-right">
                             <a href="{{ url('asignarproma/create') }}" class="btn btn-primary">
@@ -17,8 +18,8 @@
                         </div>
                         </div>
                     <div  class="table-responsive">
-                <table class="table table-light table-border table-bordered table-striped ">
-                    <thead class="thead-light table-primary">
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
                         <tr>
                             <th>#</th>
                             <th>profesor_id</th>
@@ -32,7 +33,7 @@
                         @foreach ($asignarpromas as $asignarproma)
                         <tr>
                             <td>{{ $asignarproma->id }}</td>
-                            <td>{{ $asignarproma->profesor->apellidopaterno."-".$asignarproma->profesor->apellidomaterno }}</td>
+                            <td>{{ $asignarproma->profesor->nombre."-".$asignarproma->profesor->apellidopaterno }}</td>
                             <td>{{ $asignarproma->materia->materia }}</td>
                             <td>{{ $asignarproma->aula->aula }}</td>
                             <td>{{ $asignarproma->periodo->periodo }}</td>

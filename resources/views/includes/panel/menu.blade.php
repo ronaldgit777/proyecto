@@ -33,6 +33,11 @@
                           </a>      
                       </li>
                       <li class="nav-item">
+                        <a class="nav-link " href="{{ url('/asignarproma/asigpro') }}">
+                          <i class="fas fa-bed text-warning"></i>ver asignaciones
+                        </a>
+                      </li>
+                      <li class="nav-item">
                           <a class="nav-link " href="{{ url('/sueldopro') }}">
                             <i class="fas fa-donate text-blue"></i> sueldo profesor
                           </a>
@@ -44,12 +49,6 @@
                       </li>
                   </ul>
               </div>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link " href="{{ url('/periodo') }}">
-                <i class="far fa-calendar-alt text-success"></i>periodo
-              </a>
             </li>
             <li class="nav-item">
               <a class="nav-link " href="{{ url('/aula') }}">
@@ -63,12 +62,12 @@
             </li>
             <li class="nav-item">
               <a class="nav-link " href="{{ url('/asignarproma') }}">
-                <i class="fas fa-bed text-warning"></i>asignar materia
+                <i class="fas fa-chalkboard-teacher text-blue"></i>asignar materia
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link " href="{{ url('/alumno') }}">
-                <i class="fas fa-bed text-warning"></i>alumnos
+                <i class="fas fa-ambulance"></i>alumnos
               </a>
             </li>
             <li class="nav-item">
@@ -78,7 +77,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link " href="{{ url('/inscripcion') }}">
-                <i class="fas fa-bed text-warning"></i>inscripcion
+                <i class="far fa-map"></i>inscripcion
               </a>
             </li>
             <li class="nav-item">
@@ -88,7 +87,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link " href="{{ url('/notas') }}">
-                <i class="fas fa-bed text-warning"></i>notas
+                <i class="fas fa-calculator text-success"></i>notas
               </a>
             </li>
             <li class="nav-item">
@@ -156,12 +155,6 @@
                   </li>
               </ul>
           </div>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link " href="{{ url('/periodo') }}">
-            <i class="far fa-calendar-alt text-success"></i>periodo
-          </a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="{{ url('/aula') }}">
@@ -245,13 +238,8 @@
             </li>
 
           <li class="nav-item">
-            <a class="nav-link " href="{{ url('/alumno') }}">
-              <i class="fas fa-bed text-warning"></i>alumnos
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="{{ url('/inscripcion') }}">
-              <i class="fas fa-bed text-warning"></i>inscripcion
+            <a class="nav-link " href="{{ url('/asignarproma') }}">
+              <i class="fas fa-bed text-warning"></i>materias asignadas
             </a>
           </li>
           <li class="nav-item">

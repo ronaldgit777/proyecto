@@ -14,8 +14,8 @@ class ActividadController extends Controller
      */
     public function index()
     {
-        $actividad['actividads']=actividad::paginate(7);
-        return view('actividad.index',$actividad);
+        $actividads['actividads']=actividad::paginate(7);
+        return view('actividad.index',$actividads);
     }
 
     /**
@@ -36,7 +36,10 @@ class ActividadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datosactividad=request()->except('_token');
+        actividad::insert($datosactividad);
+        //return response()->json($datosprofesor);
+        return redirect('actividad');
     }
 
     /**

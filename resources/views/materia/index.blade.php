@@ -17,8 +17,8 @@
                         </div>
                         </div>
                     <div  class="table-responsive">
-                        <table class="table table-light table-border table-bordered table-striped ">
-                            <thead class="thead-light table-primary">
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
                                 <tr>
                                     <th>#</th>
                                     <th>materia</th>

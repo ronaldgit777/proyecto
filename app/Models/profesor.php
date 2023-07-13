@@ -15,6 +15,7 @@ class profesor extends Model
   protected $fillable = [
     'fechadeingreso',
     'ci',
+    'nombre',
     'apellidopaterno',
     'apellidomaterno',
     'celular',

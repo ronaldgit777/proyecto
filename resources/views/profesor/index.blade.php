@@ -40,7 +40,7 @@
                             <td scope="row">{{ $profesor->id }}</td>
                             <td>{{ $profesor->fechadeingreso }}</td>
                             <td>{{ $profesor->ci }}</td>
-                            <td>{{ $profesor->user->name }}</td>
+                            <td>{{ $profesor->nombre }}</td>
                             <td>{{ $profesor->apellidopaterno }}</td>
                             <td>{{ $profesor->apellidomaterno }}</td>
                             <td>{{ $profesor->celular }}</td>

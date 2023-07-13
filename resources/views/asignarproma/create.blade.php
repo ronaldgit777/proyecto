@@ -30,7 +30,7 @@
                                     <div class="col-8 col-md-9">
                                         <select type="text" name="profesor_id" id="profesor_id" class="form-control">
                                             @foreach ($profesors as $profesor)
-                                            <option value="{{ $profesor->id }}">{{ $profesor->apellidopaterno."-".$profesor->apellidomaterno }}</option>
+                                            <option value="{{ $profesor->id }}">{{ $profesor->nombre."-".$profesor->apellidopaterno }}</option>
                                             @endforeach
 
                                         </select><br>

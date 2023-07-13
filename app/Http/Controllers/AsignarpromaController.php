@@ -19,11 +19,17 @@ class AsignarpromaController extends Controller
      */
     public function index()
     {
-        $asignarpromas=asignarproma::all();
+       // $asignarpromas=asignarproma::where('profesor_id','=','profesor.id')->where('profesor.id','=','user.profesor:id')->get();
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);
-         return view('asignarproma.index',compact('asignarpromas'));
+//          return view('asignarproma.index',compact('asignarpromas'));
+
+        $asignarpromas=asignarproma::all();
+        // return profesor::with('sueldopro')->get(); 
+        //$datos['sueldopros']=sueldopro::paginate(7);
+        return view('asignarproma.index',compact('asignarpromas'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -40,6 +46,13 @@ class AsignarpromaController extends Controller
         'periodos'=>periodo::all(),
         'users'=>user::all()
         ]);
+    }
+
+    public function asigpro()
+    {
+        //return view('asignarproma.create',['profesors'=>profesor::all(),],['materias'=>materia::all()],['aulas'=>aula::all()],['periodos'=>periodo::all()]);
+        $asignarpromas=asignarproma::all();
+         return view('asignarproma.index',compact('asignarpromas'));    
     }
 
     /**
@@ -91,7 +104,7 @@ class AsignarpromaController extends Controller
         //
     }
 
-    /**
+    /** 
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\asignarproma  $asignarproma

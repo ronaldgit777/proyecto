@@ -29,7 +29,7 @@
                   </div>
                   <input class="form-control" placeholder="nombre" type="text" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                 </div>
-              </div>
+              </div> -->
               <div class="form-group">
                 <div class="input-group input-group-alternative mb-3">
                   <div class="input-group-prepend">

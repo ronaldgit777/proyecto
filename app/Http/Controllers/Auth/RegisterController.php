@@ -87,7 +87,7 @@ class RegisterController extends Controller
         ]);*/
       
         $user = User::create([
-            'name' => $request->input('name'),
+           // 'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'role' => $request->input('role'),
@@ -98,6 +98,7 @@ class RegisterController extends Controller
         $empleado = $roleUser::create([
             'fechadeingreso' => $request->input('fechadeingreso'),
             'ci' => $request->input('ci'),
+            'nombre' => $request->input('nombre'),
             'apellidopaterno' => $request->input('apellidopaterno'),
             'apellidomaterno' => $request->input('apellidomaterno'),
             'celular' => $request->input('celular'),

@@ -14,6 +14,7 @@ class secretaria extends Model
   protected $fillable = [
     'fechadeingreso',
     'ci',
+    'nombre',
     'apellidopaterno',
     'apellidomaterno',
     'celular',

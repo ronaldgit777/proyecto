@@ -17,8 +17,8 @@
                         </div>
                         </div>
                     <div  class="table-responsive">
-                <table class="table table-light table-border table-bordered table-striped ">
-                    <thead class="thead-light table-primary">
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
                         <tr>
                             <th>#</th>
                             <th>asignarproma</th>
@@ -31,7 +31,8 @@
                         @foreach ($inscripcions as $inscripcion)
                         <tr>
                             <td>{{ $inscripcion->id }}</td>
-                            <td>{{ $inscripcion->asignarproma->materia->materia."--".$inscripcion->asignarproma->profesor->user->name }}</td>
+                          <!--  <td> /* $inscripcion->asignarproma->materia->materia."--".$inscripcion->asignarproma->profesor->user->name}} */</td>-->
+                            <td>{{ $inscripcion->asignarproma->materia->materia."--".$inscripcion->asignarproma->profesor->nombre }}</td>
                             <td>{{ $inscripcion->alumno->nombre }}</td>
                             <td>{{ $inscripcion->turno->turno }}</td>
                             <td> <a href="{{ url('/inscripcion/'.$inscripcion->id.'/show') }}" method="post">ver</a>

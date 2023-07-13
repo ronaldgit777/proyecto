@@ -48,7 +48,7 @@
                                             @foreach ($asignarpromas as $asignarproma)
                                             <option value="{{ $asignarproma->id }}">{{ "materia-".$asignarproma->materia->materia." ".
                                             "costo-".$asignarproma->materia->costo." ".
-                                            "profesor-".$asignarproma->profesor->apellidopaterno }}</option>
+                                            "profesor-".$asignarproma->profesor->nombre }}</option>
                                             @endforeach
                                         </select><br>
                                     </div>

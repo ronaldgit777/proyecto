@@ -58,6 +58,10 @@ Route::get('/', function () {
         route::resource('aula',AulaController::class)->middleware('auth');
         route::resource('materia',MateriaController::class)->middleware('auth');       
         route::resource('asignarproma',AsignarpromaController::class)->middleware('auth');
+
+      //  route::get('/asignarproma',AsignarpromaController::class,'asigpro')->middleware('auth');
+      Route::get('/asignarproma/{asigpro}', [AsignarpromaController::class, 'asigpro']);
+
         route::resource('alumno',AlumnoController::class)->middleware('auth');
         route::resource('turno',TurnoController::class)->middleware('auth');
         route::resource('inscripcion',InscripcionController::class)->middleware('auth');
@@ -65,7 +69,7 @@ Route::get('/', function () {
         //route::get('/register','auth.register')->name('register');
         Route::get('/registroEmpleado', [App\Http\Controllers\Auth\RegisterController::class, 'formularioEmpleado'])->name('formularioEmpleado')->middleware('auth');
         Route::post('/registroEmpleado', [App\Http\Controllers\Auth\RegisterController::class, 'registrarEmpleado'])->name('registroEmpleado')->middleware('auth');
-
+       // Route::get('/asignarproma', [App\Http\Controllers\AsignarpromaController::class, 'asigpro'])->name('asig')->middleware('auth');
 /*
 Route::middleware(['auth', 'admin'])->group(function () {
     //abre el formulario de registro de usuario

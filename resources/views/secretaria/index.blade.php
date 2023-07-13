@@ -44,7 +44,7 @@
                             <td>{{ $secretaria->apellidomaterno }}</td>
                             <td>{{ $secretaria->celular }}</td>
                             <td>{{ $secretaria->direccion }}</td>
-                            <td>{{ $secretaria->correo }}</td>
+                            <td>{{ $secretaria->user->email }}</td>
                             <td>{{ $secretaria->estado }}</td>
                             <td>
                             <img src="{{ asset('storage').'/'.$secretaria->imagen}}" alt=""  width="50px" height="50px" class="img-thumbnail img-fluid">
