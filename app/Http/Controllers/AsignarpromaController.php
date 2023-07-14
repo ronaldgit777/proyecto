@@ -9,6 +9,7 @@ use App\Models\aula;
 use App\Models\periodo;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AsignarpromaController extends Controller
 {
@@ -23,10 +24,22 @@ class AsignarpromaController extends Controller
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);
 //          return view('asignarproma.index',compact('asignarpromas'));
+       $userid=auth()->user()->id;
+       //s SELECT * FROM `asignarpromas` WHERE asignarpromas.profesor_id = 13
 
-        $asignarpromas=asignarproma::all();
+       // $asignarpromas=asignarproma::where('asignarpromas.profesor_id', '=' ,'profesors.id')->get();
+        $asignarpromas =asignarproma::
+        //::join('asignarpromas','asignarpromas.profesor_id','=','profesors.id')
+        join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('asignarpromas.*','profesors.*')
+        ->where('profesors.user_id','=',$userid)
+        //  ->asignarpromas()
+        ->get();
         // return profesor::with('sueldopro')->get(); 
         //$datos['sueldopros']=sueldopro::paginate(7);
+      // $asignarpromas=asignarproma::all();
+      
         return view('asignarproma.index',compact('asignarpromas'));
     }
 

@@ -67,12 +67,12 @@
             </li>
             <li class="nav-item">
               <a class="nav-link " href="{{ url('/alumno') }}">
-                <i class="fas fa-ambulance"></i>alumnos
+                <i class="fas fa-users"></i>alumnos
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link " href="{{ url('/turno') }}">
-                <i class="fas fa-bed text-warning"></i>turno
+                <i class="	far fa-clock"></i>turno
               </a>
             </li>
             <li class="nav-item">
@@ -82,7 +82,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link " href="{{ url('/actividad') }}">
-                <i class="fas fa-bed text-warning"></i>actividad
+                <i class="fas fa-table"></i>actividad
               </a>
             </li>
             <li class="nav-item">

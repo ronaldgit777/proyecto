@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\asignarproma;
 
 class profesor extends Model
 {
@@ -26,10 +27,16 @@ class profesor extends Model
 ];
   protected $table = "profesors";
    
+  public function asignarprom()
+  {
+      return $this->hasMany(asignarproma::class,'profesor_id','id');
+  }
+
   public function User()
   {
       return $this->belongsTo(User::class,'user_id');
   }
+ 
 
 }
 

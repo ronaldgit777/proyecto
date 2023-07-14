@@ -52,6 +52,7 @@ Route::get('/', function () {
         // route::resource('user',user::class)->middleware('auth');
         route::resource('secretaria',SecretariaController::class)->middleware('auth');
         route::resource('profesor',ProfesorController::class)->middleware('auth');
+        
         route::resource('sueldopro',SueldoproController::class)->middleware('auth');
         route::resource('detallesupro',DetallesuproController::class)->middleware('auth');
         route::resource('periodo',PeriodoController::class)->middleware('auth');
@@ -60,8 +61,7 @@ Route::get('/', function () {
         route::resource('asignarproma',AsignarpromaController::class)->middleware('auth');
 
       //  route::get('/asignarproma',AsignarpromaController::class,'asigpro')->middleware('auth');
-      Route::get('/asignarproma/{asigpro}', [AsignarpromaController::class, 'asigpro']);
-
+     
         route::resource('alumno',AlumnoController::class)->middleware('auth');
         route::resource('turno',TurnoController::class)->middleware('auth');
         route::resource('inscripcion',InscripcionController::class)->middleware('auth');
