@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container" >
-    <div class="card shadow ">
+    <div class="card shadow p-3 mb-2 bg-info text-white">
             <div class="card-header border-0">
                 <div class="row align-items-center">
                 <div class="col">
@@ -26,7 +26,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text text-capitalize">asignarproma </label>
+                                        <label class="text text-capitalize">profesor </label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <select type="text" name="asignarproma_id" id="asignarproma_id" class="form-control">
@@ -43,12 +43,12 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text text-capitalize">alumno </label>
+                                        <label class="text text-capitalize">materia </label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <select type="text" name="alumno_id" id="alumno_id" class="form-control">
-                                            @foreach ($alumnos as $alumno)
-                                            <option value="{{ $alumno->id }}">{{ $alumno->nombre }}</option>
+                                        <select type="text" name="" id="" class="form-control">
+                                            @foreach ($materias as $materia)
+                                            <option value="{{ $materia->id }}">{{ $materia->materia }}</option>
                                             @endforeach
                                         </select><br>
                                     </div>
@@ -58,31 +58,79 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text text-capitalize">turno </label>
+                                        <label class="text text-capitalize">periodo </label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <select type="text" name="turno_id" id="turno_id" class="form-control">
-                                            @foreach ($turnos as $turno)
-                                            <option value="{{ $turno->id }}">{{ $turno->turno }}</option>
+                                        <select type="text" name="" id="" class="form-control">
+                                            @foreach ($periodos as $periodo)
+                                            <option value="{{ $periodo->id }}">{{ $periodo->periodo }}</option>
+                                            @endforeach
+                                        </select><br>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-sm-12 col-md-6">
+                                <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
+                                    <div class="col-4 col-md-3">
+                                        <label class="text text-capitalize">costo </label>
+                                    </div>
+                                    <div class="col-8 col-md-9">
+                                        <select type="text" name="" id="" class="form-control">
+                                            @foreach ($materias as $materia)
+                                            <option value="{{ $materia->id }}">{{ $materia->costo }}</option>
                                             @endforeach
                                         </select><br>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-12 col-sm-12 col-md-12">
-                                <div class="form-group m-form__group row" style="display: flex; margin-left: 2px"> 
+                            
+                            <div class="col-12 col-sm-12 col-md-6">
+                                <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
+                                    <div class="col-4 col-md-3">
+                                        <label class="text text-capitalize">aula </label>
+                                    </div>
+                                    <div class="col-8 col-md-9">
+                                        <select type="text" name="" id="" class="form-control">
+                                            @foreach ($aulas as $aula)
+                                            <option value="{{ $aula->id }}">{{ $aula->aula }}</option>
+                                            @endforeach
+                                        </select><br>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-sm-12 col-md-6">
+                                <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
+                                    <div class="col-4 col-md-3">
+                                        <label class="text text-capitalize">alumno </label>
+                                    </div>
+                                    <div class="col-8 col-md-9">
+                                        <select type="text" name="alumno_id" id="alumno_id" class="form-control">
+                                            @foreach ($alumnos as $alumno)
+                                            <option value="{{ $alumno->id }}">{{ $alumno->nombre."-".$alumno->apellidopaterno }}</option>
+                                            @endforeach
+                                        </select><br>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-12 col-sm-12 col-md-6">
+                                <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
                                         <label class="text text-capitalize">estado</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                            <select type="text" name="estado" id="estado" class="form-control">
+                                        <select type="text" name="estado" id="estado" class="form-control">
                                             <option value="activo">activo</option> 
                                             <option value="inactivo">inactivo</option> 
                                             </select><br>
                                     </div>
                                 </div>
                             </div>
+
                          
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">

@@ -25,4 +25,18 @@ class asignarproma extends Model
     {
         return $this->belongsTo(periodo::class,'periodo_id');
     }
+    
+    public static function existeRegistroEnPeriodoYAula($periodoId, $aulaId)
+    {
+        return static::where('periodo_id', $periodoId)
+            ->where('aula_id', $aulaId)
+            ->exists();
+    }
+
+    public function inscripcion()
+    {
+        return $this->hasMany(inscripcion::class,'asignarproma_id','id');
+    }
+
+   
 }

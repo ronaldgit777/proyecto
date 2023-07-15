@@ -34,7 +34,7 @@
               </tr>
             </thead>
             <tbody>
-              @foreach ($alumnos as $alumno)
+                       @foreach ($alumnos as $alumno)
                         <tr>
                             <td scope="row">{{ $alumno->id }}</td>
                             <td>{{ $alumno->fechadeingreso }}</td>
@@ -55,8 +55,7 @@
                               editar</a>//
                             <a href="{{ url('/alumno/'.$alumno->id.'/') }}" method="post" class="btn btn-sm btn-danger">
                               <i class="far fa-eye"></i>
-                              ver</a>     
-                                                
+                              ver</a>                                                     
                             </td>
                         </tr>
                         @endforeach

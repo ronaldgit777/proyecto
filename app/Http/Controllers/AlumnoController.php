@@ -3,7 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\alumno;
+use App\Models\asignarproma;
+use App\Models\profesor;
+use App\Models\materia;
+use App\Models\aula;
+use App\Models\periodo;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class AlumnoController extends Controller
 {
@@ -12,6 +20,28 @@ class AlumnoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    /* SELECT * FROM `alumnos`INNER JOIN inscripcions ON alumnos.id = inscripcions.alumno_id 
+    INNER JOIN asignarpromas ON inscripcions.asignarproma_id = asignarpromas.id 
+    INNER JOIN profesors ON profesors.id = asignarpromas.profesor_id
+    where profesors.id =20*/
+     public function index2()
+     {   
+        $userid=auth()->user()->id;
+        $alumnos =alumno
+        ::join('inscripcions','inscripcions.alumno_id','=','alumnos.id')
+         ->join('asignarpromas','inscripcions.asignarproma_id','=','asignarpromas.id')
+         ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+         ->join('users','users.id','=','profesors.user_id')
+         ->select('alumnos.*')
+         ->where('profesors.user_id','=',$userid)
+         //  ->asignarpromas()
+         ->get();  
+        // $alumnos=alumno::all();
+         // return profesor::with('sueldopro')->get(); 
+          //$datos['sueldopros']=sueldopro::paginate(7);
+          return view('alumno.alumpro',compact('alumnos'));
+          
+     }
     public function index()
     {
         $alumnos=alumno::all();

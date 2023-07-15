@@ -40,7 +40,7 @@
                                     <label class="text text-capitalize" >monto</label>
                                 </div>
                                 <div class="col-8 col-md-9">
-                                    <input class="form-control" placeholder="monto " type="text" name="monto" required autocomplete="new-password">
+                                    <input class="form-control" placeholder="monto " type="text" name="monto" required autocomplete="monto">
                                
                                 </div>
                               </div>
@@ -52,7 +52,7 @@
                                     <label class="text text-capitalize">observacion</label>
                                 </div>
                                   <div class="col-8 col-md-9">
-                                    <input class="form-control" placeholder="observacion" type="observacion" name="observacion" required autocomplete="new-password">
+                                    <input class="form-control" placeholder="observacion" type="observacion" name="observacion" required autocomplete="observacion">
                                   </div>
                             </div>
                           </div>

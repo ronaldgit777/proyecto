@@ -7,6 +7,9 @@ use App\Models\turno;
 use App\Models\User;
 use App\Models\asignarproma;
 use App\Models\alumno;
+use App\Models\periodo;
+use App\Models\aula;
+use App\Models\materia;
 use App\Models\profesor;
 use Illuminate\Http\Request;
 
@@ -32,11 +35,23 @@ class InscripcionController extends Controller
      */
     public function create()
     {
-        return view('inscripcion.create',
+        /*return view('inscripcion.create',
         ['asignarpromas'=>asignarproma::all(),
         'alumnos'=>alumno::all(),
-        'profesors'=>profesor::all(),'users'=>user::all()
-        ]);
+        'profesors'=>profesor::all(),
+        'users'=>user::all(),
+        'periodos'=>periodo::all(),
+        'materias'=>materia::all(),
+        'aulas'=>aula::all()
+        ]);*/
+        $asignarpromas =asignarproma::all();
+        $alumnos =alumno::all();
+        $profesors =profesor::all();
+        $users =user::all();
+        $materias =materia::all();
+        $aulas =aula::all();
+        $periodos =periodo::all();
+        return view('inscripcion.create', compact('asignarpromas','alumnos','profesors', 'users', 'materias', 'aulas', 'periodos'));
     }
 
     /**

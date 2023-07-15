@@ -29,7 +29,7 @@
                                          <label class="text text-capitalize">fecha de ingreso</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="date" name="fechadeingreso" id="fechadeingreso" class="form-control" value="<?php echo $fcha; ?>" readonly> <br>
+                                        <input type="date" name="fechadeingreso" id="fechadeingreso" class="form-control" value="<?php echo $fcha; ?>" > <br>
                                     </div>
                                 </div>
                             </div>
@@ -39,7 +39,7 @@
                                         <label class="text text-capitalize" >ci</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="ci" id="ci" class="form-control"> <br>
+                                        <input type="text" name="ci" id="ci" class="form-control" required> <br>
                                     </div>
                                 </div>
                             </div>
@@ -49,7 +49,7 @@
                                         <label class="text text-capitalize">nombre</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="nombre" id="nombre" class="form-control"> <br>
+                                        <input type="text" name="nombre" id="nombre" class="form-control" required> <br>
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                                         <label class="text text-capitalize">apellido paterno</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="apellidopaterno" id="apellidopaterno" class="form-control"> <br>
+                                        <input type="text" name="apellidopaterno" id="apellidopaterno" class="form-control" required> <br>
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                         <label class="text text-capitalize">apellido materno</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="apellidomaterno" id="apellidomaterno" class="form-control"> <br>
+                                        <input type="text" name="apellidomaterno" id="apellidomaterno" class="form-control" required> <br>
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                         <label class="text text-capitalize">celular</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="celular" id="celular" class="form-control"> <br>
+                                        <input type="text" name="celular" id="celular" class="form-control" required> <br>
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                                         <label class="text text-capitalize">direccion</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="direccion" id="direccion" class="form-control"> <br>
+                                        <input type="text" name="direccion" id="direccion" class="form-control" required> <br>
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
                                         <label class="text text-capitalize">correo</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="correo" id="correo" class="form-control"><br>
+                                        <input type="text" name="correo" id="correo" class="form-control" required><br>
                                     </div>
                                 </div>
                             </div>
@@ -109,7 +109,8 @@
                                         <label class="text text-capitalize">estado</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <select type="text" name="estado" id="estado" class="form-control">
+                                        <select type="text" name="estado" id="estado" class="form-control" required>
+                                            <option selected disabled value="">seleccione un estado</option>
                                             <option value="activo">activo</option>
                                             <option value="inactivo">inactivo</option>
                                         </select><br>
@@ -122,7 +123,7 @@
                                         <label class="text text-capitalize">imagen</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                     <input type="file" name="imagen" id="imagen" class="form-control"><br>
+                                     <input type="file" name="imagen" id="imagen" class="form-control" required><br>
                                     </div>
                                 </div>
                             </div>

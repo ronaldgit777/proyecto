@@ -78,9 +78,8 @@
                                         <label class="text text-capitalize">sueldo</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        @foreach ($profesors as $profesor)
-                                        <input type="text" name="fechadesueldo" id="sueldo" class="form-control"  value="{{ $profesor->sueldo }}" >
-                                        @endforeach
+                                        <input type="text" name="fechadesueldo" id="sueldo" class="form-control"  value=""  > 
+                                      
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +89,7 @@
                                         <label class="text text-capitalize">totaldescuento</label>
                                     </div>
                                     <div class="col-8 col-md-6">
-                                        <input type="text" name="totaldescuento" id="totaldescuento" class="form-control"> <br>
+                                        <input type="text" name="totaldescuento" id="totaldescuento" class="form-control" > <br>
                                        
                                     </div>
                                     <div class="col-8 col-md-3">
@@ -104,7 +103,7 @@
                                         <label class="text text-capitalize">totalpago</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="totalpago" id="totalpago" class="form-control"> <br>
+                                        <input type="text" name="totalpago" id="totalpago" class="form-control" > <br>
                                     </div>
                                 </div>
                             </div>
@@ -114,7 +113,7 @@
                                         <label class="text text-capitalize">observacion</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="observacion" id="observacion" class="form-control"> <br>
+                                        <input type="text" name="observacion" id="observacion" class="form-control" required> <br>
                                     </div>
                                 </div>
                             </div>

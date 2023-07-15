@@ -18,7 +18,7 @@ class inscripcion extends Model
     {
         return $this->belongsTo(alumno::class,'alumno_id');
     }
+  
     
 
-    
 }

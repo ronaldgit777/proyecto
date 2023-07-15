@@ -23,7 +23,6 @@
                             <th>#</th>
                             <th>asignarproma</th>
                             <th>alumno_id</th>
-                            <th>turno_id</th>
                             <th>acciones</th>
                         </tr>
                     </thead>
@@ -34,7 +33,6 @@
                           <!--  <td> /* $inscripcion->asignarproma->materia->materia."--".$inscripcion->asignarproma->profesor->user->name}} */</td>-->
                             <td>{{ $inscripcion->asignarproma->materia->materia."--".$inscripcion->asignarproma->profesor->nombre }}</td>
                             <td>{{ $inscripcion->alumno->nombre }}</td>
-                            <td>{{ $inscripcion->turno->turno }}</td>
                             <td> <a href="{{ url('/inscripcion/'.$inscripcion->id.'/show') }}" method="post">ver</a>
                             </td>
                         </tr>

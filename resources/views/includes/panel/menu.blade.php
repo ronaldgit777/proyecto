@@ -137,16 +137,16 @@
     <!-- profesor -->
       @else
       <ul class="navbar-nav ">
-       
           
            <li class="nav-item">
-            <a class="nav-link " href="{{ url('/asignarproma/asigpro') }}">
-            <i class="fas fa-bed text-warning"></i>ver materias asignadas
+            <a class="nav-link " href="{{ url('/asigpro') }}">
+            <i class="fas fa-bed text-warning"></i>
+            <span class="nav-link-inner--text">ver materias asisgnadas</span>
             </a>
           </li>
              
         <li class="nav-item">
-          <a class="nav-link " href="{{ url('/aula') }}">
+          <a class="nav-link " href="{{ url('/alumpro') }}">
             <i class="fas fa-university text-info"></i>alumnos
           </a>
         </li>

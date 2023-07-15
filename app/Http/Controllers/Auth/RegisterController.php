@@ -116,14 +116,8 @@ class RegisterController extends Controller
     {
         return view('auth.registroEmpleado');
     }
-    public function index()
-    {
-        $users=user::all();
-        // return profesor::with('sueldopro')->get(); 
-         //$datos['sueldopros']=sueldopro::paginate(7);
-         return view('user.index',compact('users'));
-         
-    }
+    
+    
 }
 //xdebug
 

@@ -9,4 +9,6 @@ class alumno extends Model
 {
     protected $table = "alumnos";
    
+   //public $timestamps=false;
+   //protected $primarykey ='id';
 }
