@@ -15,6 +15,7 @@
                 </div>
                 </div>
             </div>
+            
         <?php $fcha = date("Y-m-d"); ?>
         <form method="post" action="{{ url('/profesor')}}" enctype="multipart/form-data">
          @csrf   

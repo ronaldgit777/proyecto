@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\adelanto;
+use App\Models\adelantopro;
+use App\Models\profesor;
 use Illuminate\Http\Request;
 
-class AdelantoController extends Controller
+class AdelantoproController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,10 @@ class AdelantoController extends Controller
      */
     public function index()
     {
-        //
+        $adelantopros=adelantopro::all();
+        // return profesor::with('sueldopro')->get(); 
+         //$datos['sueldopros']=sueldopro::paginate(7);
+         return view('adelantopro.index',compact('adelantopros'));
     }
 
     /**
@@ -24,7 +28,7 @@ class AdelantoController extends Controller
      */
     public function create()
     {
-        //
+        return view('adelantopro.create',['profesors'=>profesor::all()]);
     }
 
     /**
@@ -41,10 +45,10 @@ class AdelantoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\adelanto  $adelanto
+     * @param  \App\Models\adelantopro  $adelantopro
      * @return \Illuminate\Http\Response
      */
-    public function show(adelanto $adelanto)
+    public function show(adelantopro $adelantopro)
     {
         //
     }
@@ -52,10 +56,10 @@ class AdelantoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\adelanto  $adelanto
+     * @param  \App\Models\adelantopro  $adelantopro
      * @return \Illuminate\Http\Response
      */
-    public function edit(adelanto $adelanto)
+    public function edit(adelantopro $adelantopro)
     {
         //
     }
@@ -64,10 +68,10 @@ class AdelantoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\adelanto  $adelanto
+     * @param  \App\Models\adelantopro  $adelantopro
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, adelanto $adelanto)
+    public function update(Request $request, adelantopro $adelantopro)
     {
         //
     }
@@ -75,10 +79,10 @@ class AdelantoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\adelanto  $adelanto
+     * @param  \App\Models\adelantopro  $adelantopro
      * @return \Illuminate\Http\Response
      */
-    public function destroy(adelanto $adelanto)
+    public function destroy(adelantopro $adelantopro)
     {
         //
     }

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container" >
-    <div class="card shadow">
+    <div class="card shadow shadow p-3 mb-2 bg-info text-white">
             <div class="card-header border-0">
                 <div class="row align-items-center">
                 <div class="col">
@@ -26,7 +26,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                         <label class="text-primary text-capitalize">fecha de ingreso</label>
+                                         <label class="text text-capitalize">fecha de ingreso</label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <input type="date" name="fechadeingreso" id="fechadeingreso" class="form-control" value="<?php echo $fcha; ?>" readonly> <br>
@@ -36,7 +36,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize" >ci</label>
+                                        <label class="text text-capitalize" >ci</label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <input type="text" name="ci" id="ci" class="form-control"> <br>
@@ -46,7 +46,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">nombre</label>
+                                        <label class="text text-capitalize">nombre</label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <input type="text" name="nombre" id="nombre" class="form-control"> <br>
@@ -56,7 +56,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">apellido paterno</label>
+                                        <label class="text text-capitalize">apellido paterno</label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <input type="text" name="apellidopaterno" id="apellidopaterno" class="form-control"> <br>
@@ -66,7 +66,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">apellido materno</label>
+                                        <label class="text text-capitalize">apellido materno</label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <input type="text" name="apellidomaterno" id="apellidomaterno" class="form-control"> <br>
@@ -76,7 +76,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">celular</label>
+                                        <label class="text text-capitalize">celular</label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <input type="text" name="celular" id="celular" class="form-control"> <br>
@@ -86,7 +86,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">direccion</label>
+                                        <label class="text text-capitalize">direccion</label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <input type="text" name="direccion" id="direccion" class="form-control"> <br>
@@ -96,7 +96,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">correo</label>
+                                        <label class="text text-capitalize">correo</label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <input type="text" name="correo" id="correo" class="form-control"><br>
@@ -106,7 +106,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">estado</label>
+                                        <label class="text text-capitalize">estado</label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <select type="text" name="estado" id="estado" class="form-control">
@@ -119,7 +119,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">imagen</label>
+                                        <label class="text text-capitalize">imagen</label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                      <input type="file" name="imagen" id="imagen" class="form-control"><br>

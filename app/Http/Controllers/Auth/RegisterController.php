@@ -105,6 +105,7 @@ class RegisterController extends Controller
             'direccion' => $request->input('direccion'),
             'estado' => $request->input('estado'),
             'imagen' =>$request->file('imagen')->store('uploads','public'),
+            'sueldo' => $request->input('sueldo'),
             'user_id' => $user->id
         ]);
 

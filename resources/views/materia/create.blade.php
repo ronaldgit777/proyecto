@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container" >
-    <div class="card shadow">
+    <div class="card shadow shadow p-3 mb-2 bg-info text-white">
             <div class="card-header border-0">
                 <div class="row align-items-center">
                 <div class="col">
@@ -26,7 +26,7 @@
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
 
                                     <div class="col-4 col-md-3">
-                                         <label class="text-primary text-capitalize">materia</label>
+                                         <label class="text text-capitalize">materia</label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <input type="text" name="materia" id="materia" class="form-control" > <br>
@@ -37,7 +37,7 @@
                             <div class="col-12 col-sm-12 col-md-12">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px"> 
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">costo</label>
+                                        <label class="text text-capitalize">costo</label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <input type="text" name="costo" id="costo" class="form-control"> <br>
@@ -48,7 +48,7 @@
                             <div class="col-12 col-sm-12 col-md-12">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px"> 
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">estado</label>
+                                        <label class="text text-capitalize">estado</label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                             <select type="text" name="estado" id="estado" class="form-control">

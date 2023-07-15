@@ -30,6 +30,8 @@
                 <th scope="col">correo</th>
                 <th scope="col">estado</th>
                 <th scope="col">imagen</th>
+                <th scope="col">sueldo</th>
+                <th scope="col">rol</th>
                 <th scope="col">acciones</th>
               </tr>
             </thead>
@@ -49,6 +51,8 @@
                             <td>
                             <img src="{{ asset('storage').'/'.$secretaria->imagen}}" alt=""  width="50px" height="50px" class="img-thumbnail img-fluid">
                             </td>
+                            <td>{{ $secretaria->sueldo }}</td>
+                            <td>{{ $profesor->user->role }}</td>
                             <td>
                             <a href="{{ url('/secretaria/'.$secretaria->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
                               <i class="fas fa-edit"></i>

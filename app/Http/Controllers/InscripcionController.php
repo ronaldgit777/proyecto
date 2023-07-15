@@ -35,7 +35,7 @@ class InscripcionController extends Controller
         return view('inscripcion.create',
         ['asignarpromas'=>asignarproma::all(),
         'alumnos'=>alumno::all(),
-        'turnos'=>turno::all(),'profesors'=>profesor::all(),'users'=>user::all()
+        'profesors'=>profesor::all(),'users'=>user::all()
         ]);
     }
 

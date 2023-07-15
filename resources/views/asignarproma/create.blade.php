@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container" >
-    <div class="card shadow">
+    <div class="card shadow shadow p-3 mb-2 bg-info text-white">
             <div class="card-header border-0">
                 <div class="row align-items-center">
                 <div class="col">
@@ -25,7 +25,7 @@
                              <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">profesor </label>
+                                        <label class="text text-capitalize">profesor </label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <select type="text" name="profesor_id" id="profesor_id" class="form-control">
@@ -41,7 +41,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">materias </label>
+                                        <label class="text text-capitalize">materias </label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <select type="text" name="materia_id" id="materia_id" class="form-control">
@@ -56,7 +56,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">aula </label>
+                                        <label class="text text-capitalize">aula </label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <select type="text" name="aula_id" id="aula_id" class="form-control">
@@ -71,7 +71,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">periodo </label>
+                                        <label class="text text-capitalize">periodo </label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <select type="text" name="periodo_id" id="periodo_id" class="form-control">

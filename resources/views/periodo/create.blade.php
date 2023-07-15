@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container" >
-    <div class="card shadow">
+    <div class="card shadow shadow p-3 mb-2 bg-info text-white">
             <div class="card-header border-0">
                 <div class="row align-items-center">
                 <div class="col">
@@ -40,7 +40,7 @@
                                         <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
 
                                             <div class="col-4 col-md-3">
-                                                <label class="text-primary text-capitalize">estado</label>
+                                                <label class="text text-capitalize">estado</label>
                                             </div>
                                             <div class="col-8 col-md-9">
                                                 <select type="text" name="estado" id="estado" class="form-control">

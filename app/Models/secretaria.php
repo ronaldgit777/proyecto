@@ -21,6 +21,7 @@ class secretaria extends Model
     'direccion',
     'estado',
     'imagen',
+    'sueldo',
     'user_id'
 ];
   protected $table = "secretarias";

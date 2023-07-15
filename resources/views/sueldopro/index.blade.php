@@ -6,12 +6,12 @@
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0">LISTA DE SUELDOS
+                  <h3 class="mb-0">LISTA DE PAGO DE SUELDOS DE LOS PROFESORES
                       <i class="fas fa-donate text-blue"></i> 
                   </h3>
                 </div>
                 <div class="col text-right">
-                  <a href="{{ url('sueldopro/create') }}" class="btn btn-primary"> <i class="fas fa-plus-circle"></i> registrar nuevo sueldo</a>
+                  <a href="{{ url('sueldopro/create') }}" class="btn btn-primary"> <i class="fas fa-plus-circle"></i> registrar nuevo pago</a>
                 </div>
               </div>
             </div>

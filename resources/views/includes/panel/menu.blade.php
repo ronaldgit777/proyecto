@@ -8,17 +8,40 @@
      @endif</h6>
     @if(auth()->user()->role == 'admin')
         <ul class="navbar-nav ">
-            <li class="nav-item  active ">
-              <a class="nav-link  active " href="./index.html">
-                <i class="ni ni-tv-2 text-danger"></i> Dashboard
-              </a>
-            </li>
           
-            <li class="nav-item">
-              <a class="nav-link " href="{{ url('/secretaria') }}">
-                <i class="fas fa-university text-info"></i>secretarias
-              </a>
-            </li>  
+                <li class="nav-item">
+                  <a class="nav-link nav-link-icon" href="{{url('registroEmpleado')}}">
+                    <i class="fas fa-users"></i>
+                    <span class="nav-link-inner--text">registrar empleado-usuario</span>
+                  </a>
+                </li>
+                  <li class="nav-item">
+                      <a class="nav-link active" href="#navbar-examples1" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples1">
+                          <i class="far fa-id-badge text-info" style="color: #f4645f;"></i>
+                          <span class="nav-link-text" style="color: #124ad88e;">{{ __('SECRETARIA') }}</span>
+                      </a>
+
+                      <div class="collapse show" id="navbar-examples1">
+                          <ul class="nav nav-sm flex-column">
+                              <li class="nav-item">
+                                <a class="nav-link " href="{{ url('/secretaria') }}">
+                                  <i class="fas fa-university text-info"></i>secretarias
+                                </a>
+                              </li> 
+                              <li class="nav-item">
+                                <a class="nav-link " href="{{ url('/detallesupro') }}">
+                                  <i class="fas fa-hand-holding-usd text-info"></i> adelanto
+                                </a>
+                            </li>
+                              <li class="nav-item">
+                                  <a class="nav-link " href="{{ url('/sueldopro') }}">
+                                    <i class="fas fa-donate text-info"></i>pagar sueldo
+                                  </a>
+                              </li>
+                            
+                          </ul>
+                      </div>
+                </li>
             <li class="nav-item">
               <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
                   <i class="fab fa-laravel" style="color: #f4645f;"></i>
@@ -33,20 +56,16 @@
                           </a>      
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link " href="{{ url('/asignarproma/asigpro') }}">
-                          <i class="fas fa-bed text-warning"></i>ver asignaciones
+                        <a class="nav-link " href="{{ url('/adelantopro') }}">
+                          <i class="fas fa-hand-holding-usd text-blue"></i> adelanto
                         </a>
-                      </li>
+                    </li>
                       <li class="nav-item">
                           <a class="nav-link " href="{{ url('/sueldopro') }}">
-                            <i class="fas fa-donate text-blue"></i> sueldo profesor
+                            <i class="fas fa-donate text-blue"></i>pagar sueldo
                           </a>
                       </li>
-                      <li class="nav-item">
-                          <a class="nav-link " href="{{ url('/detallesupro') }}">
-                            <i class="fas fa-chalkboard-teacher text-blue"></i> detallesueldo
-                          </a>
-                      </li>
+                    
                   </ul>
               </div>
             </li>
@@ -61,18 +80,18 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link " href="{{ url('/periodo') }}">
+                <i class="	far fa-clock"></i>periodo
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link " href="{{ url('/asignarproma') }}">
                 <i class="fas fa-chalkboard-teacher text-blue"></i>asignar materia
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link " href="{{ url('/alumno') }}">
-                <i class="fas fa-users"></i>alumnos
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " href="{{ url('/turno') }}">
-                <i class="	far fa-clock"></i>turno
+                <i class="fas fa-user-graduate"></i>alumnos
               </a>
             </li>
             <li class="nav-item">
@@ -108,94 +127,30 @@
           <li class="nav-item">
             <a class="nav-link nav-link-icon" href="{{url('registroEmpleado')}}">
               <i class="ni ni-circle-08"></i>
-              <span class="nav-link-inner--text">registrar empleado-usuario</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">
-              <i class="ni ni-books text-default"></i>citas
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">
-              <i class="ni ni-chart-bar-32"></i> desempeño medico
+              <span class="nav-link-inner--text">reporteso</span>
             </a>
           </li>
         </ul>
    <!-- secretaria -->
  @elseif(auth()->user()->role == 'secretaria')
-        <ul class="navbar-nav ">
-          <li class="nav-item  active ">
-            <a class="nav-link  active " href="./index.html">
-              <i class="ni ni-tv-2 text-danger"></i> Dashboard
+   
+    <!-- profesor -->
+      @else
+      <ul class="navbar-nav ">
+       
+          
+           <li class="nav-item">
+            <a class="nav-link " href="{{ url('/asignarproma/asigpro') }}">
+            <i class="fas fa-bed text-warning"></i>ver materias asignadas
             </a>
           </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
-              <i class="fab fa-laravel" style="color: #f4645f;"></i>
-              <span class="nav-link-text" style="color: #f4645f;">{{ __('PROFESOR') }}</span>
-          </a>
-
-          <div class="collapse show" id="navbar-examples">
-              <ul class="nav nav-sm flex-column">
-                  <li class="nav-item">
-                      <a class="nav-link " href="{{ url('/profesor') }}">
-                        <i class="fas fa-chalkboard-teacher text-blue"></i> profesores
-                      </a>      
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link " href="{{ url('/sueldopro') }}">
-                        <i class="fas fa-donate text-blue"></i> sueldo profesor
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link " href="{{ url('/detallesupro') }}">
-                        <i class="fas fa-chalkboard-teacher text-blue"></i> detallesueldo
-                      </a>
-                  </li>
-              </ul>
-          </div>
-        </li>
+             
         <li class="nav-item">
           <a class="nav-link " href="{{ url('/aula') }}">
-            <i class="fas fa-university text-info"></i>aula
+            <i class="fas fa-university text-info"></i>alumnos
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link " href="{{ url('/materia') }}">
-            <i class="fas fa-book text-warning"></i>materia
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="{{ url('/asignarproma') }}">
-            <i class="fas fa-bed text-warning"></i>asignar materia
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="{{ url('/alumno') }}">
-            <i class="fas fa-bed text-warning"></i>alumnos
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="{{ url('/turno') }}">
-            <i class="fas fa-bed text-warning"></i>turno
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="{{ url('/inscripcion') }}">
-            <i class="fas fa-bed text-warning"></i>inscripcions
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="{{ url('/actividad') }}">
-            <i class="fas fa-bed text-warning"></i>actividad
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="{{ url('/notas') }}">
-            <i class="fas fa-bed text-warning"></i>notas
-          </a>
-        </li>
+         
         <li class="nav-item">
           <a class="nav-link" href="{{route('logout')}}"
             onclick="event.preventDefault(); document.getElementById('formlogout').submit();">
@@ -205,63 +160,19 @@
             @csrf
             </form>
         </li>
-      </ul>
-      <hr class="my-3">
-      <!-- Heading -->
-      <h6 class="navbar-heading text-muted">reportes</h6>
-      <!-- Navigation -->
-      <ul class="navbar-nav mb-md-3">
-        <li class="nav-item">
-          <a class="nav-link nav-link-icon" href="{{url('registroEmpleado')}}">
-            <i class="ni ni-circle-08"></i>
-            <span class="nav-link-inner--text">registrar empleado-usuario</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="">
-            <i class="ni ni-books text-default"></i>citas
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="">
-            <i class="ni ni-chart-bar-32"></i> desempeño medico
-          </a>
-        </li>
-      </ul>
-    <!-- profesor -->
-      @else
-          <ul class="navbar-nav ">
-            <li class="nav-item  active ">
-              <a class="nav-link  active " href="./index.html">
-                <i class="ni ni-tv-2 text-danger"></i> Dashboard
-              </a>
-            </li>
-
-          <li class="nav-item">
-            <a class="nav-link " href="{{ url('/asignarproma') }}">
-              <i class="fas fa-bed text-warning"></i>materias asignadas
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="{{ url('/actividad') }}">
-              <i class="fas fa-bed text-warning"></i>actividad
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="{{ url('/notas') }}">
-              <i class="fas fa-bed text-warning"></i>notas
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{route('logout')}}"
-              onclick="event.preventDefault(); document.getElementById('formlogout').submit();">
-              <i class="fas fa-sign-in-alt"></i> cerrar secion
-            </a>
-            <form action="{{route('logout')}}" method="POST" style="display: none" id="formlogout" >
-              @csrf
-              </form>
-          </li>
-        </ul>
+    </ul>
+    <hr class="my-3">
+    <!-- Heading -->
+    <h6 class="navbar-heading text-muted">reportes</h6>
+    <!-- Navigation -->
+    <ul class="navbar-nav mb-md-3">
+      <li class="nav-item">
+        <a class="nav-link nav-link-icon" href="{{url('registroEmpleado')}}">
+          <i class="ni ni-circle-08"></i>
+          <span class="nav-link-inner--text">reportes</span>
+        </a>
+      </li>
+    </ul>
 @endif 
   <!-- Divider -->
 

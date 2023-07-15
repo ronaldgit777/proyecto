@@ -19,10 +19,6 @@ class inscripcion extends Model
         return $this->belongsTo(alumno::class,'alumno_id');
     }
     
-    public function turno()
-    {
-        return $this->belongsTo(turno::class,'turno_id');
-    }
 
     
 }

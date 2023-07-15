@@ -5,7 +5,7 @@ use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\AsignarpromaController;
 use App\Http\Controllers\AulaController;
-use App\Http\Controllers\DetallesuproController;
+use App\Http\Controllers\AdelantoproController;
 use App\Http\Controllers\InscripcionController;
 use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\PeriodoController;
@@ -54,7 +54,7 @@ Route::get('/', function () {
         route::resource('profesor',ProfesorController::class)->middleware('auth');
         
         route::resource('sueldopro',SueldoproController::class)->middleware('auth');
-        route::resource('detallesupro',DetallesuproController::class)->middleware('auth');
+        route::resource('adelantopro',adelantoprocontroller::class)->middleware('auth');
         route::resource('periodo',PeriodoController::class)->middleware('auth');
         route::resource('aula',AulaController::class)->middleware('auth');
         route::resource('materia',MateriaController::class)->middleware('auth');       

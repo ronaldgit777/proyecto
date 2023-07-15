@@ -3,11 +3,11 @@
 @section('content')
 
 <div class="container" >
-    <div class="card shadow">
+    <div class="card shadow shadow p-3 mb-2 bg-info text-white">
             <div class="card-header border-0">
                 <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="mb-0">REGISTRO DE PROFESOR</h3>
+                    <h3 class="mb-0">PAGO DE SUELDO DEL PROFESOR</h3>
                 </div>
                 <div class="col text-right">
                     <a href="{{url('sueldopro/')}}" class="btn btn-sm btn-success">
@@ -27,10 +27,11 @@
                              <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                         <div class="col-4 col-md-3">
-                                            <label class="text-primary text-capitalize">profesor </label>
+                                            <label class=" text-capitalize">profesor </label>
                                         </div>
                                     <div class="col-8 col-md-9">
-                                        <select type="text" name="profesor_id" id="profesor_id" class="form-control">
+                                        <select type="text" name="profesor_id" id="profesor_id" class="form-control" required>
+                                            <option selected disabled value="">seleccione al profesor</option>
                                             @foreach ($profesors as $profesor)
                                             <option value="{{ $profesor->id }}">{{ $profesor->nombre }}</option>
                                             @endforeach
@@ -41,7 +42,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                         <label class="text-primary text-capitalize">fecha de sueldo</label>
+                                         <label class="text text-capitalize">fecha de pago</label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <input type="date" name="fechadesueldo" id="fechadesueldo" class="form-control" value="<?php echo $fcha; ?>" > <br>
@@ -51,7 +52,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize" >mes de pago</label>
+                                        <label class="text text-capitalize" >mes de pago</label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                          <select type="text" name="mesdepago" id="mesdepago" class="form-control">
@@ -74,31 +75,33 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">sueldo</label>
+                                        <label class="text text-capitalize">sueldo</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="sueldo" id="sueldo" class="form-control"> <br>
+                                        @foreach ($profesors as $profesor)
+                                        <input type="text" name="fechadesueldo" id="sueldo" class="form-control"  value="{{ $profesor->sueldo }}" >
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">totaldescuento</label>
+                                        <label class="text text-capitalize">totaldescuento</label>
                                     </div>
                                     <div class="col-8 col-md-6">
                                         <input type="text" name="totaldescuento" id="totaldescuento" class="form-control"> <br>
                                        
                                     </div>
                                     <div class="col-8 col-md-3">
-                                         <a href="{{ url('detallesupro/') }}" class="btn btn-success text-capitalize">verificar</a>
+                                         <a href="{{ url('adelantopro/') }}" class="btn btn-success text-capitalize">verificar</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">totalpago</label>
+                                        <label class="text text-capitalize">totalpago</label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <input type="text" name="totalpago" id="totalpago" class="form-control"> <br>
@@ -108,7 +111,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">observacion</label>
+                                        <label class="text text-capitalize">observacion</label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <input type="text" name="observacion" id="observacion" class="form-control"> <br>
