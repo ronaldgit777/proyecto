@@ -59,9 +59,11 @@ class AulaController extends Controller
      * @param  \App\Models\aula  $aula
      * @return \Illuminate\Http\Response
      */
-    public function edit(aula $aula)
+    public function edit($id)
     {
-        //
+        $aula=aula::findOrFail($id);
+        //$sueldopro=sueldopro::get()->where('$id','=','12');
+        return view('aula.edit',compact('aula'));
     }
 
     /**
@@ -71,9 +73,12 @@ class AulaController extends Controller
      * @param  \App\Models\aula  $aula
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, aula $aula)
+    public function update(Request $request,  $id)
     {
-        //
+        $datosaula=request()->except(['_token','_method']);
+        aula::where('id','=',$id)->update($datosaula);
+        $profesor=aula::findOrFail($id);
+        return view('aula.edit',compact('aula'));
     }
 
     /**

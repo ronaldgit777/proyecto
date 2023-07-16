@@ -59,9 +59,11 @@ class ActividadController extends Controller
      * @param  \App\Models\actividad  $actividad
      * @return \Illuminate\Http\Response
      */
-    public function edit(actividad $actividad)
+    public function edit($id)
     {
-        //
+        $actividad=actividad::findOrFail($id);
+        //$sueldopro=sueldopro::get()->where('$id','=','12');
+        return view('actividad.edit',compact('actividad'));
     }
 
     /**
@@ -71,9 +73,12 @@ class ActividadController extends Controller
      * @param  \App\Models\actividad  $actividad
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, actividad $actividad)
+    public function update(Request $request, actividad $id)
     {
-        //
+        $datosactividad=request()->except(['_token','_method']);
+        actividad::where('id','=',$id)->update($datosactividad);
+        $actividad=actividad::findOrFail($id);
+        return view('actividad.edit',compact('actividad'));
     }
 
     /**

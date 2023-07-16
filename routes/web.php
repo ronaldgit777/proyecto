@@ -1,5 +1,4 @@
 <?php
-
 use App\Custom\MyClass;
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\AlumnoController;
@@ -45,31 +44,23 @@ Route::get('/', function () {
 //route::get('/home',[ProfesorController::class,'index'])->name('home');
 //route::get('/home',[SueldoproController::class,'index'])->name('home');
 
-
         //route::get('/',[ProfesorController::class,'index'])->name('home');
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
          //abre el formulario de registro de usuario
         // route::resource('user',user::class)->middleware('auth');
         route::resource('secretaria',SecretariaController::class)->middleware('auth');
         route::resource('profesor',ProfesorController::class)->middleware('auth');
-        
         route::resource('sueldopro',SueldoproController::class)->middleware('auth');
         route::resource('adelantopro',adelantoprocontroller::class)->middleware('auth');
         route::resource('periodo',PeriodoController::class)->middleware('auth');
         route::resource('aula',AulaController::class)->middleware('auth');
         route::resource('materia',MateriaController::class)->middleware('auth');       
         route::resource('asignarproma',AsignarpromaController::class)->middleware('auth');
-
-      
-     
-     
         route::resource('alumno',AlumnoController::class)->middleware('auth');
         route::resource('inscripcion',InscripcionController::class)->middleware('auth');
         route::resource('actividad',ActividadController::class)->middleware('auth');
-        //route::get('/register','auth.register')->name('register');
         Route::get('/registroEmpleado', [App\Http\Controllers\Auth\RegisterController::class, 'formularioEmpleado'])->name('formularioEmpleado')->middleware('auth');
         Route::post('/registroEmpleado', [App\Http\Controllers\Auth\RegisterController::class, 'registrarEmpleado'])->name('registroEmpleado')->middleware('auth');
-
         Route::get('/asigpro', [App\Http\Controllers\AsignarpromaController::class, 'index2'])->name('index2')->middleware('auth');
         Route::post('/asigpro', [App\Http\Controllers\AsignarpromaController::class, 'index2'])->name('index2')->middleware('auth');
         Route::get('/alumpro', [App\Http\Controllers\AlumnoController::class, 'index2'])->name('index2')->middleware('auth');
@@ -111,13 +102,6 @@ Route::middleware(['auth', 'secretaria'])->group(function () {
    Route::get('/registroEmpleado', [App\Http\Controllers\Auth\RegisterController::class, 'formularioEmpleado'])->name('formularioEmpleado')->middleware('auth');
    Route::post('/registroEmpleado', [App\Http\Controllers\Auth\RegisterController::class, 'registrarEmpleado'])->name('registroEmpleado')->middleware('auth');
 });*/
-
-
-
-
-
-
-
 
 //route::get('/home',[ProfesorController::class,'index'])->name('home');
 //route::get('/home',[SueldoproController::class,'index'])->name('home');

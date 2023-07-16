@@ -17,6 +17,7 @@
             </div>
         <form method="post" action="{{ url('/aula')}}" enctype="multipart/form-data">
         @csrf   
+    
         <div class="row p-3 mb-2  text-white"   >
             <div class="col-12"> 
                 <div class="m-portlet__body m-portlet--primary" data-portlet="true" m-portlet="true">
@@ -29,7 +30,7 @@
                                          <label class="text text-capitalize">aula</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="aula" id="aula" class="form-control" > <br>
+                                        <input type="text" name="aula" id="aula" class="form-control" required> <br>
                                     </div>
                                 </div>
                             </div>
@@ -40,7 +41,8 @@
                                         <label class="text text-capitalize">estado</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                            <select type="text" name="estado" id="estado" class="form-control">
+                                            <select type="text" name="estado" id="estado" class="form-control" required>
+                                                <option selected disabled value="">seleccione el estado</option>
                                             <option value="activo">activo</option> 
                                             <option value="inactivo">inactivo</option> 
                                             </select><br>

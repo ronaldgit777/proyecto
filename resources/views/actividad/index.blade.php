@@ -33,8 +33,12 @@
                                     <td>{{ $actividad->actividad }}</td>
                                     <td>{{ $actividad->estado }}</td>
                                     <td>
-                                    <a href="{{ url('/actividad/'.$actividad->id.'/edit') }}" method="post">editar</a>//
-                                    <a href="{{ url('/actividad/'.$actividad->id.'/') }}" method="post">ver</a>
+                                        <a href="{{ url('/actividad/'.$actividad->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                            editar</a>//
+                                          <a href="{{ url('/actividad/'.$actividad->id.'/') }}" method="post" class="btn btn-sm btn-danger">
+                                            <i class="far fa-eye"></i>
+                                            ver</a> 
                                     </td>
                                 </tr>
                                 @endforeach

@@ -12,13 +12,13 @@
                             </div>
                             <div class="col text-right">
                             <a href="{{ url('periodo/create') }}" class="btn btn-primary">
-                                <i class="fas fa-plus-circle"></i> registrar nuevo turno</a>
+                                <i class="fas fa-plus-circle"></i> registrar nuevo periodo</a>
                             </div>
                         </div>
                         </div>
-                    <div  class="table-responsive">
-                        <table class="table table-light table-border table-bordered table-striped ">
-                            <thead class="thead-light table-primary">
+                        <div  class="table-responsive">
+                            <table class="table align-items-center table-flush">
+                                <thead class="thead-light">
                                 <tr>
                                     <th>#</th>
                                     <th>periodo</th>
@@ -33,8 +33,12 @@
                                     <td>{{ $periodo->periodo }}</td>
                                     <td>{{ $periodo->estado }}</td>
                                     <td>
-                                    <a href="{{ url('/periodo/'.$periodo->id.'/edit') }}" method="post">editar</a>//
-                                    <a href="{{ url('/periodo/'.$periodo->id.'/') }}" method="post">ver</a>
+                                        <a href="{{ url('/periodo/'.$periodo->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                            editar</a>//
+                                          <a href="{{ url('/periodo/'.$periodo->id.'/') }}" method="post" class="btn btn-sm btn-danger">
+                                            <i class="far fa-eye"></i>
+                                            ver</a> 
                                     </td>
                                 </tr>
                                 @endforeach

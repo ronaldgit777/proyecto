@@ -59,10 +59,13 @@ class MateriaController extends Controller
      * @param  \App\Models\materia  $materia
      * @return \Illuminate\Http\Response
      */
-    public function edit(materia $materia)
+    public function edit($id)
     {
-        //
+        $materia=materia::findOrFail($id);
+        //$sueldopro=sueldopro::get()->where('$id','=','12');
+        return view('materia.edit',compact('materia'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -71,9 +74,12 @@ class MateriaController extends Controller
      * @param  \App\Models\materia  $materia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, materia $materia)
+    public function update(Request $request,  $id)
     {
-        //
+        $datosmateria=request()->except(['_token','_method']);
+        materia::where('id','=',$id)->update($datosmateria);
+        $materia=materia::findOrFail($id);
+        return view('materia.edit',compact('materia'));
     }
 
     /**

@@ -8,6 +8,8 @@
     {{ config('app.name')}}
   </title>
   @yield('css')
+
+  
   <!-- Favicon -->
   <link href="{{asset ('img/brand/favicon.png')}}" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -17,9 +19,13 @@
   <link href="{{asset ('js/plugins/@fortawesome/fontawesome-free/css/all.min.css')}}"" rel="stylesheet" />
   <!-- CSS Files -->
   <link href="{{asset ('css/argon-dashboard.css?v=1.1.2g')}}" rel="stylesheet" />
+
+
+  
 </head>
 
-<body class="">
+<body class="bg-gradient-info">
+  
   <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
     <div class="container-fluid">
       <!-- Toggler -->
@@ -116,7 +122,7 @@
     </nav>
     <!-- End Navbar -->
     <!-- Header -->
-    <div class="header bg-gradient-primary pb-8 pt-4 pt-md-6">
+    <div class="header bg-gradient-info pb-8 pt-4 pt-md-6">
     </div>
     <div class="container-fluid mt--7">
         @yield('content')

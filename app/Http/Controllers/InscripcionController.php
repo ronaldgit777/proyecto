@@ -33,20 +33,21 @@ class InscripcionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function guardarDatos(Request $request)
+{
+    $usuarioId = $request->input('usuario_id');
+
+    // Realiza las acciones necesarias con el ID del usuario seleccionado
+
+    // Redirige a otra página o realiza cualquier otra acción
+
+}
+
     public function create()
     {
-        /*return view('inscripcion.create',
-        ['asignarpromas'=>asignarproma::all(),
-        'alumnos'=>alumno::all(),
-        'profesors'=>profesor::all(),
-        'users'=>user::all(),
-        'periodos'=>periodo::all(),
-        'materias'=>materia::all(),
-        'aulas'=>aula::all()
-        ]);*/
         $asignarpromas =asignarproma::all();
         $alumnos =alumno::all();
-        $profesors =profesor::all();
+        $profesors =profesor::has('asignarproma');
         $users =user::all();
         $materias =materia::all();
         $aulas =aula::all();
@@ -63,7 +64,7 @@ class InscripcionController extends Controller
     public function store(Request $request)
     {
         $datosinscripcion=request()->except('_token');
-       
+        $asignarpromas = $request->input('materia_id');
         inscripcion::insert($datosinscripcion);
         //return response()->json($datosprofesor);
         return redirect('inscripcion');

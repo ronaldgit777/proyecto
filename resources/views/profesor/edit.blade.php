@@ -131,13 +131,10 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">role</label>
+                                        <label class="text-primary text-capitalize">sueldo</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <select type="text" name="estado" id="estado" class="form-control"  value="{{ $profesor->role }}">
-                                            <option value="activo">activo</option>
-                                            <option value="inactivo">inactivo</option>
-                                        </select><br>
+                                        <input type="text" name="imagen" id="imagen" class="form-control" value="{{ $profesor->sueldo }}">
                                     </div>
                                 </div>
                             </div>

@@ -8,7 +8,7 @@
                 <h3 class="mb-0">LISTA DE TODOS LOS PROFESORES</h3>
               </div>
               <div class="col text-right">
-                <a href="{{url('profesor/create')}}" class="btn btn-sm btn-primary">
+                <a href="{{url('profesor/create')}}" class="btn btn-sm btn-primary" >
                 <i class="fas fa-plus-circle"></i>
                 NUEVO PROFESOR</a>
               </div>

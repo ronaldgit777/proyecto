@@ -16,9 +16,10 @@ class AdelantoproController extends Controller
     public function index()
     {
         $adelantopros=adelantopro::all();
+        $profesors=profesor::all();
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);
-         return view('adelantopro.index',compact('adelantopros'));
+         return view('adelantopro.index',compact('adelantopros','profesors'));
     }
 
     /**

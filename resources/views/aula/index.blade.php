@@ -34,8 +34,12 @@
                     <td>{{ $aula->aula }}</td>
                     <td>{{ $aula->estado }}</td>
                     <td>
-                    <a href="{{ url('/aula/'.$aula->id.'/edit') }}" method="post">editar</a>//
-                    <a href="{{ url('/aula/'.$aula->id.'/') }}" method="post">ver</a>
+                    <a href="{{ url('/aula/'.$aula->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
+                      <i class="fas fa-edit"></i>
+                      editar</a>//
+                    <a href="{{ url('/aula/'.$aula->id.'/') }}" method="post" class="btn btn-sm btn-danger">
+                      <i class="far fa-eye"></i>
+                      ver</a> 
                     </td>
                 </tr>
                 @endforeach

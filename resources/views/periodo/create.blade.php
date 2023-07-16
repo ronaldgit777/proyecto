@@ -6,7 +6,7 @@
             <div class="card-header border-0">
                 <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="mb-0">REGISTRO DE turno/PERIODO</h3>
+                    <h3 class="mb-0">REGISTRO DE PERIODO</h3>
                 </div>
                 <div class="col text-right">
                     <a href="{{url('periodo/')}}" class="btn btn-sm btn-success">
@@ -27,7 +27,8 @@
                                                         <label class="text-primary text-capitalize">periodo</label>
                                             </div>
                                             <div class="col-8 col-md-9">
-                                                            <select type="text" name="periodo" id="periodo" class="form-control">
+                                                            <select type="text" name="periodo" id="periodo" class="form-control" required>
+                                                                <option selected disabled value="">seleccione el periodo</option>
                                                             <option value="manana">mañana</option> 
                                                             <option value="tarde">tarde</option> 
                                                             <option value="noche">noche</option> 
@@ -43,7 +44,8 @@
                                                 <label class="text text-capitalize">estado</label>
                                             </div>
                                             <div class="col-8 col-md-9">
-                                                <select type="text" name="estado" id="estado" class="form-control">
+                                                <select type="text" name="estado" id="estado" class="form-control" required>
+                                                    <option selected disabled value="">seleccione el estado</option>
                                                     <option value="activo">activo</option> 
                                                     <option value="inactivo">inactivo</option> 
                                                 </select><br>

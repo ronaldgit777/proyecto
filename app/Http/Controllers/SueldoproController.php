@@ -16,9 +16,10 @@ class SueldoproController extends Controller
     public function index()
     {
         $sueldopros=sueldopro::all();
+        $profesors=profesor::all();
        // return profesor::with('sueldopro')->get(); 
         //$datos['sueldopros']=sueldopro::paginate(7);
-        return view('sueldopro.index',compact('sueldopros'));
+        return view('sueldopro.index',compact('sueldopros','profesors'));
     }
 
     /**

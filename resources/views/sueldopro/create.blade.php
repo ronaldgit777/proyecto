@@ -32,9 +32,11 @@
                                     <div class="col-8 col-md-9">
                                         <select type="text" name="profesor_id" id="profesor_id" class="form-control" required>
                                             <option selected disabled value="">seleccione al profesor</option>
+                                            
                                             @foreach ($profesors as $profesor)
-                                            <option value="{{ $profesor->id }}">{{ $profesor->nombre }}</option>
+                                            <option value="{{ $profesor->id }}">{{ $profesor->nombre."-SUELDO : ".$profesor->sueldo }}</option>
                                             @endforeach
+                                           
                                         </select>
                                     </div>
                                 </div>
@@ -78,6 +80,7 @@
                                         <label class="text text-capitalize">sueldo</label>
                                     </div>
                                     <div class="col-8 col-md-9">
+                                  
                                         <input type="text" name="fechadesueldo" id="sueldo" class="form-control"  value=""  > 
                                       
                                     </div>

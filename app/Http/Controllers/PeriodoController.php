@@ -59,9 +59,11 @@ class PeriodoController extends Controller
      * @param  \App\Models\periodo  $periodo
      * @return \Illuminate\Http\Response
      */
-    public function edit(periodo $periodo)
+    public function edit($id)
     {
-        //
+        $periodo=periodo::findOrFail($id);
+        //$sueldopro=sueldopro::get()->where('$id','=','12');
+        return view('periodo.edit',compact('periodo'));
     }
 
     /**
@@ -71,9 +73,12 @@ class PeriodoController extends Controller
      * @param  \App\Models\periodo  $periodo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, periodo $periodo)
+    public function update(Request $request, periodo $id)
     {
-        //
+        $datosperiodo=request()->except(['_token','_method']);
+        periodo::where('id','=',$id)->update($datosperiodo);
+        $periodo=periodo::findOrFail($id);
+        return view('periodo.edit',compact('periodo'));
     }
 
     /**

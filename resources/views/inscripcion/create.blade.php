@@ -31,9 +31,7 @@
                                     <div class="col-8 col-md-9">
                                         <select type="text" name="asignarproma_id" id="asignarproma_id" class="form-control">
                                             @foreach ($asignarpromas as $asignarproma)
-                                            <option value="{{ $asignarproma->id }}">{{ "materia-".$asignarproma->materia->materia." ".
-                                            "costo-".$asignarproma->materia->costo." ".
-                                            "profesor-".$asignarproma->profesor->nombre }}</option>
+                                            <option value="{{ $asignarproma->id }}">{{ $asignarproma->profesor->nombre }}</option>
                                             @endforeach
                                         </select><br>
                                     </div>
@@ -46,11 +44,7 @@
                                         <label class="text text-capitalize">materia </label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <select type="text" name="" id="" class="form-control">
-                                            @foreach ($materias as $materia)
-                                            <option value="{{ $materia->id }}">{{ $materia->materia }}</option>
-                                            @endforeach
-                                        </select><br>
+                                        <input type="text"  class="btn btn-primary" id="materia_id">
                                     </div>
                                 </div>
                             </div>
@@ -61,11 +55,7 @@
                                         <label class="text text-capitalize">periodo </label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <select type="text" name="" id="" class="form-control">
-                                            @foreach ($periodos as $periodo)
-                                            <option value="{{ $periodo->id }}">{{ $periodo->periodo }}</option>
-                                            @endforeach
-                                        </select><br>
+                                        <input type="text"  class="btn btn-primary">
                                     </div>
                                 </div>
                             </div>
@@ -76,11 +66,7 @@
                                         <label class="text text-capitalize">costo </label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <select type="text" name="" id="" class="form-control">
-                                            @foreach ($materias as $materia)
-                                            <option value="{{ $materia->id }}">{{ $materia->costo }}</option>
-                                            @endforeach
-                                        </select><br>
+                                        <input type="text"  class="btn btn-primary">
                                     </div>
                                 </div>
                             </div>
@@ -92,11 +78,7 @@
                                         <label class="text text-capitalize">aula </label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <select type="text" name="" id="" class="form-control">
-                                            @foreach ($aulas as $aula)
-                                            <option value="{{ $aula->id }}">{{ $aula->aula }}</option>
-                                            @endforeach
-                                        </select><br>
+                                        <input type="text"  class="btn btn-primary">
                                     </div>
                                 </div>
                             </div>
@@ -111,6 +93,7 @@
                                             @foreach ($alumnos as $alumno)
                                             <option value="{{ $alumno->id }}">{{ $alumno->nombre."-".$alumno->apellidopaterno }}</option>
                                             @endforeach
+                                            
                                         </select><br>
                                     </div>
                                 </div>

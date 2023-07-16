@@ -7,7 +7,7 @@
           bienveido profesor
      @endif</h6>
     @if(auth()->user()->role == 'admin')
-        <ul class="navbar-nav ">
+        <ul class="navbar-nav  ">
           
                 <li class="nav-item">
                   <a class="nav-link nav-link-icon" href="{{url('registroEmpleado')}}">
@@ -133,7 +133,7 @@
         </ul>
    <!-- secretaria -->
  @elseif(auth()->user()->role == 'secretaria')
-   
+      
     <!-- profesor -->
       @else
       <ul class="navbar-nav ">
