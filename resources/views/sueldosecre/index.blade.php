@@ -9,12 +9,12 @@
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0">LISTA DE PAGO DE SUELDOS DE LOS PROFESORES
+                  <h3 class="mb-0">LISTA DE PAGO DE SUELDOS DE LAS SECREATARIAS
                       <i class="fas fa-donate text-blue"></i> 
                   </h3>
                 </div>
                 <div class="col text-right">
-                  <a href="{{ url('sueldopro/create') }}" class="btn btn-primary"> <i class="fas fa-plus-circle"></i> registrar nuevo pago</a>
+                  <a href="{{ url('sueldosecre/create') }}" class="btn btn-primary"> <i class="fas fa-plus-circle"></i> registrar nuevo pago</a>
                      <!--empeiza el modal-->
 
                       <a href="" class="btn btn-primary" data-toggle="modal" data-target="#myModal"> <i class="fas fa-plus-circle"></i> registrar nuevo pago modal</a>
@@ -29,17 +29,17 @@
                                 <div class="card-header border-0">
                                     <div class="row align-items-center">
                                         <div class="col">
-                                            <h3 class="mb-0">PAGO DE SUELDO DEL PROFESOR</h3>
+                                            <h3 class="mb-0">PAGO DE SUELDO DE LA SECRETARIA</h3>
                                         </div>
                                         <div class="col text-right">
-                                            <a href="{{url('sueldopro/')}}" class="btn btn-sm btn-success">
+                                            <a href="{{url('sueldosecre/')}}" class="btn btn-sm btn-success">
                                                 <i class="fas fa-undo"></i>
                                                 regresar</a>
                                         </div>
                                     </div>
                                 </div>
                             <?php $fcha = date("Y-m-d"); ?>
-                                <form method="post" action="{{ url('/sueldopro')}}" enctype="multipart/form-data">
+                                <form method="post" action="{{ url('/sueldosecre')}}" enctype="multipart/form-data">
                                 @csrf   
                                     <div class="row p-3 mb-2 text-white">
                                         <div class="col-12"> 
@@ -49,14 +49,14 @@
                                                         <div class="col-12 col-sm-12 col-md-6">
                                                             <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                                                     <div class="col-4 col-md-3">
-                                                                        <label class=" text-capitalize">profesor </label>
+                                                                        <label class=" text-capitalize">secretaria </label>
                                                                     </div>
                                                                 <div class="col-8 col-md-9">
                                                                     <select type="text" name="profesor_id" id="profesor_id" class="form-control" required>
-                                                                        <option selected disabled value="">seleccione al profesor</option>
+                                                                        <option selected disabled value="">seleccione a la secretaria</option>
                                                                         
-                                                                        @foreach ($profesors as $profesor)
-                                                                        <option value="{{ $profesor->id }}">{{ $profesor->nombre."-SUELDO : ".$profesor->sueldo }}</option>
+                                                                        @foreach ($secretarias as $secretaria)
+                                                                        <option value="{{ $secretaria->id }}">{{ $secretaria->nombre."-SUELDO : ".$secretaria->sueldo }}</option>
                                                                         @endforeach
                                                                       
                                                                     </select>
@@ -180,22 +180,22 @@
                             <th scope="col">totaldescuento</th>
                             <th scope="col">totalpago</th>
                             <th scope="col">observacion</th>
-                            <th scope="col">profesor_id</th>
+                            <th scope="col">secretaria_id</th>
                             <th scope="col">acciones</th>
               </tr>
             </thead>
             <tbody>
-              @foreach ($sueldopros as $sueldopro)
+              @foreach ($sueldosecres as $sueldosecre)
                         <tr>
-                            <td>{{ $sueldopro->id }}</td>
-                            <td>{{ $sueldopro->fechadesueldo }}</td>
-                            <td>{{ $sueldopro->mesdepago }}</td>
-                            <td>{{ $sueldopro->profesor->sueldo }}</td>
-                            <td>{{ $sueldopro->totaldescuento }}</td>
-                            <td>{{ $sueldopro->totalpago }}</td>
-                            <td>{{ $sueldopro->observacion }}</td>
-                            <td>{{ $sueldopro->profesor->nombre }}</td>
-                            <td> <a href="{{ url('/sueldopro/'.$sueldopro->id.'/show') }}" method="post">imprimir</a>
+                            <td>{{ $sueldosecre->id }}</td>
+                            <td>{{ $sueldosecre->fechadesueldo }}</td>
+                            <td>{{ $sueldosecre->mesdepago }}</td>
+                            <td>{{ $sueldosecre->secretaria->sueldo }}</td>
+                            <td>{{ $sueldosecre->totaldescuento }}</td>
+                            <td>{{ $sueldosecre->totalpago }}</td>
+                            <td>{{ $sueldosecre->observacion }}</td>
+                            <td>{{ $sueldosecre->secretaria->nombre }}</td>
+                            <td> <a href="{{ url('/sueldosecre/'.$sueldosecre->id.'/show') }}" method="post">imprimir</a>
                             </td>           
                             </td>
                         </tr>
@@ -206,3 +206,35 @@
    </div>
 </div>
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<script>
+         $(document).ready(function() {
+            $('#profesor_id').on('change', function() {
+            var profesorId = $(this).val();
+            
+            // Realizar la consulta AJAX
+            obtenersueldoprofesor(profesorId);
+            /*obtenerlosmeses(profesorId);
+            obtenerlasumadelosmesesadeudados(profesorId);
+            obtenerlasumatoriadeadelantos(profesorId);*/
+            
+        });
+                function obtenersueldoprofesor(profesorId) {
+            // Realizar la solicitud AJAX para obtener sueldoprofesor
+            $.ajax({
+                url: '{{ url("obtener-sueldoprofesor") }}',
+                type: 'POST',
+                data: {
+                    profesor_id: profesorId,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    // Procesar la respuesta
+                }
+            });
+}
+
+        // Simular el evento change al cargar la página
+        $('#profesor_id').trigger('change');
+    });
+</script>

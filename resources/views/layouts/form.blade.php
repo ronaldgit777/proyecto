@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
   <title>
     {{config('app.name')}}|@yield('title')
   </title>
@@ -102,6 +103,8 @@
     </footer>
   </div>
   <!--   Core   -->
+
+  
   <script src="{{asset('js/plugins/jquery/dist/jquery.min.js')}}"></script>
   <script src="{{asset('js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js')}}" "></script>
   <!--   Optional JS   -->

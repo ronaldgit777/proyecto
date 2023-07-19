@@ -5,12 +5,14 @@ use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\AsignarpromaController;
 use App\Http\Controllers\AulaController;
 use App\Http\Controllers\AdelantoproController;
+use App\Http\Controllers\AdelantosecreController;
 use App\Http\Controllers\InscripcionController;
 use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\PeriodoController;
 use App\Http\Controllers\ProfesorController;
 use App\Http\Controllers\SecretariaController;
 use App\Http\Controllers\SueldoproController;
+use App\Http\Controllers\SueldosecreController;
 use App\Http\Controllers\TurnoController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +51,9 @@ Route::get('/', function () {
          //abre el formulario de registro de usuario
         // route::resource('user',user::class)->middleware('auth');
         route::resource('secretaria',SecretariaController::class)->middleware('auth');
+        route::resource('sueldosecre',SueldosecreController::class)->middleware('auth');
+        route::resource('adelantosecre',AdelantosecreController::class)->middleware('auth');
+
         route::resource('profesor',ProfesorController::class)->middleware('auth');
         route::resource('sueldopro',SueldoproController::class)->middleware('auth');
         route::resource('adelantopro',adelantoprocontroller::class)->middleware('auth');
@@ -66,6 +71,22 @@ Route::get('/', function () {
         Route::get('/alumpro', [App\Http\Controllers\AlumnoController::class, 'index2'])->name('index2')->middleware('auth');
         Route::post('/alumpro', [App\Http\Controllers\AlumnoController::class, 'index2'])->name('index2')->middleware('auth');
        // Route::get('/asignarproma', [App\Http\Controllers\AsignarpromaController::class, 'asigpro'])->name('asig')->middleware('auth');
+       Route::post('/obtener-periodos', [App\Http\Controllers\AsignarpromaController::class, 'obtenerPeriodos'])
+        ->name('obtener-periodos');
+
+        Route::post('/obtener-sueldoprofesor', [App\Http\Controllers\SueldoproController::class, 'obtenerSueldoProfesor'])
+    ->name('obtener-sueldoprofesor');
+
+    Route::post('/obtener-SumatoriaAdelantos', [App\Http\Controllers\AdelantoproController::class, 'obtenersumatoriaadelantosProfesor'])
+    ->name('obtener-SumatoriaAdelantos');
+
+    Route::post('/obtener-adelantopro', [App\Http\Controllers\SueldoproController::class, 'obtenerlistaproid'])
+    ->name('obtener-adelantopro');
+    
+
+
+   
+
 /*
 Route::middleware(['auth', 'admin'])->group(function () {
     //abre el formulario de registro de usuario

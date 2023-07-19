@@ -130,4 +130,66 @@
 </form>
 </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<script>
+    $(document).ready(function() {
+
+        $('#aula_id').on('change', function() {
+
+            var aulaId = $(this).val(); // Obtener el valor del aula seleccionada
+            var profesorId = $('#profesor_id').val(); //obtener id del profesor
+
+            // Realizar la solicitud Ajax
+            $.ajax({
+                url: '{{ url("obtener-periodos") }}', // Ruta a tu controlador Laravel
+                type: 'POST',
+                data: {
+                    aula_id: aulaId, // Enviar el ID del aula seleccionada
+                    profesor_id: profesorId,
+                    _token: '{{ csrf_token() }}' // Agregar el token CSRF
+                },
+                success: function(response) {
+                    // Limpiar el campo de selección de periodos
+                    $('#periodo_id').empty();
+
+                    // Agregar las opciones de periodos según la respuesta del servidor
+                    $.each(response, function(key, value) {
+                        $('#periodo_id').append(
+                            '<option value="' + value.id + '">' + value.periodo + '</option>'
+                        );
+                    });
+                }
+            });
+        });
+
+        $('#profesor_id').on('change', function() {
+
+        var profesorId = $(this).val(); // Obtener el valor del profesor seleccionado
+        var aulaId = $('#aula_id').val();
+        // Realizar la solicitud Ajax
+        $.ajax({
+            url: '{{ url("obtener-periodos") }}', // Ruta a tu controlador Laravel
+            type: 'POST',
+            data: {
+                aula_id: aulaId, // Enviar el ID del aula seleccionada
+                profesor_id: profesorId,
+                _token: '{{ csrf_token() }}' // Agregar el token CSRF
+            },
+            success: function(response) {
+                // Limpiar el campo de selección de periodos
+                $('#periodo_id').empty();
+
+                // Agregar las opciones de periodos según la respuesta del servidor
+                $.each(response, function(key, value) {
+                    $('#periodo_id').append(
+                        '<option value="' + value.id + '">' + value.periodo + '</option>'
+                    );
+                });
+            }
+        });
+        });
+        // Simular el evento change al cargar la página
+        $('#aula_id').trigger('change');
+    });
+</script>
 @endsection

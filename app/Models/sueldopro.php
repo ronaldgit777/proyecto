@@ -18,6 +18,10 @@ class sueldopro extends Model
     {
         return $this->belongsTo(profesor::class,'profesor_id');
     }
+
+   
+
+    
     
 }
    

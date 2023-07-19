@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\adelantopro;
-use App\Models\profesor;
+use App\Models\adelantosecre;
+use App\Models\secretaria;
 use Illuminate\Http\Request;
 
-class AdelantoproController extends Controller
+class AdelantosecreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +15,11 @@ class AdelantoproController extends Controller
      */
     public function index()
     {
-        $adelantopros=adelantopro::all();
-        $profesors=profesor::all();
+        $adelantosecres=adelantosecre::all();
+        $secretarias=secretaria::all();
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);
-         return view('adelantopro.index',compact('adelantopros','profesors'));
+         return view('adelantosecre.index',compact('adelantosecres','secretarias'));
     }
 
     /**
@@ -29,7 +29,7 @@ class AdelantoproController extends Controller
      */
     public function create()
     {
-        return view('adelantopro.create',['profesors'=>profesor::all()]);
+        return view('adelantosecre.create',['secretarias'=>secretaria::all()]);
     }
 
     /**
@@ -40,19 +40,19 @@ class AdelantoproController extends Controller
      */
     public function store(Request $request)
     {
-        $datosadelantopro=request()->except('_token');
-        adelantopro::insert($datosadelantopro);
+        $datosadelantosecre=request()->except('_token');
+        adelantosecre::insert($datosadelantosecre);
         //return response()->json($datosprofesor);
-        return redirect('adelantopro');
+        return redirect('adelantosecre');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\adelantopro  $adelantopro
+     * @param  \App\Models\adelantosecre  $adelantosecre
      * @return \Illuminate\Http\Response
      */
-    public function show(adelantopro $adelantopro)
+    public function show(adelantosecre $adelantosecre)
     {
         //
     }
@@ -60,10 +60,10 @@ class AdelantoproController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\adelantopro  $adelantopro
+     * @param  \App\Models\adelantosecre  $adelantosecre
      * @return \Illuminate\Http\Response
      */
-    public function edit(adelantopro $adelantopro)
+    public function edit(adelantosecre $adelantosecre)
     {
         //
     }
@@ -72,10 +72,10 @@ class AdelantoproController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\adelantopro  $adelantopro
+     * @param  \App\Models\adelantosecre  $adelantosecre
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, adelantopro $adelantopro)
+    public function update(Request $request, adelantosecre $adelantosecre)
     {
         //
     }
@@ -83,19 +83,11 @@ class AdelantoproController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\adelantopro  $adelantopro
+     * @param  \App\Models\adelantosecre  $adelantosecre
      * @return \Illuminate\Http\Response
      */
-    public function destroy(adelantopro $adelantopro)
+    public function destroy(adelantosecre $adelantosecre)
     {
         //
-    }
-    public function obtenersumatoriaadelantosProfesor(Request $request)
-    {
-        $profesorId = $request->input('profesor_id');
-        $totaladelanto = adelantopro::obteneradelanto($profesorId);//obteneradelanto es la funcion del adelantopro
-            
-        return response()->json($totaladelanto);
-            
     }
 }

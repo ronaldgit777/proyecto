@@ -38,6 +38,13 @@ class profesor extends Model
       return $this->belongsTo(User::class,'user_id');
   }
  
+  public static function obtenerSueldo($profesorId)
+  {      
+      // Ejemplo de obtención del sueldo del profesor
+      $sueldo = self::where('id', $profesorId)->value('sueldo');
+      
+      return $sueldo;
+  }
 
 }
 

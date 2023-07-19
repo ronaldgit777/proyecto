@@ -1,6 +1,9 @@
 @extends('layouts.panel')
 
+
+
 @section('content')
+
   <div class="card shadow">
           <div class="card-header border-0">
             <div class="row align-items-center">
@@ -16,7 +19,7 @@
           </div>
         <div class="table-responsive">
           <!-- Projects table -->
-          <table class="table align-items-center table-flush">
+          <table id="tabla_id" class="table align-items-center table-flush" >
             <thead class="thead-light">
               <tr>
                 <th scope="col">id</th>
@@ -68,5 +71,17 @@
           </table>
         </div>
    </div>
+
+      @section('js')
+      <script src"https://code.jquery.com/jquery-3.7.0.js"></script>
+      <script src"https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+      <script src"https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+      <script>
+        $(document).ready(function() {
+                $('#articulos').DataTable();
+            });
+      </script>
+     
+      @endsection
 @endsection
 

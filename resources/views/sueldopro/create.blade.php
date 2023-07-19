@@ -96,7 +96,46 @@
                                        
                                     </div>
                                     <div class="col-8 col-md-3">
-                                         <a href="{{ url('adelantopro/') }}" class="btn btn-success text-capitalize">verificar</a>
+
+                             <a href="" class="btn btn-primary disabled" data-toggle="modal" data-target="#myModal2" onclick="veradelantos()" id="bo" > <i class="fas fa-plus-circle"></i>ver descuentos</a>
+                             
+                                        <script>
+                                                   function veradelantos() {
+                                                      
+                                                        var profesorId = $('#profesor_id').val();
+                                                        
+                                                        $.ajax({
+                                                                url: '{{ url("obtener-adelantopro") }}',
+                                                                type: 'POST',
+                                                                data: {
+                                                                    profesor_id: profesorId,
+                                                                    _token: '{{ csrf_token() }}'
+                                                                },
+                                                                success: function(response) {
+                                                                    $('#miadelanto').empty();
+                                                                   
+                                                                    $.each(response, function(key, value) {
+                                                                       // alert(value.id)
+                                                                        $('#miadelanto').append(
+                                                                            '<tr>'+
+                                                                            ' <td>'+value.id+'</td>'+
+                                                                                '<td>'+value.fechaadelantopro+'</td>'+
+                                                                                ' <td>'+value.monto+'</td>'+
+                                                                                ' <td>'+value.observacion+'</td>'+
+                                                                                '<td>'+value.nombre_profesor+'</td>'+
+                                                                            ' </tr>'
+                                                                        );
+                                                                    });
+                                                                }
+                                                                ,     error: function(xhr, status, error) {
+                                                                            // Manejar el error aquí
+                                                                            console.error(error);
+                                                                        }
+                                                                        });
+                                                   }
+                                                        
+                                        </script>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -136,3 +175,164 @@
     </form>
 </div>
 @endsection
+
+
+  <!--empeiza el modal-->
+  <div class="modal fade " id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-lg " role="document">
+      <div class="modal-content p-3 mb-2 bg-info">
+          <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+              <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="card shadow p-3 mb-2 bg-info text-white">
+              <div class="card-header border-0">
+                  <div class="row align-items-center">
+                      <div class="col">
+                          <h3 class="mb-0">REGISTRO DEL ADELANTO </h3>
+                      </div>
+                      <div class="col text-right">
+                      </div>
+                  </div>
+              </div>
+        
+
+
+              <div  class="table-responsive">
+                <table class="table align-items-center table-flush">
+            <thead class="thead-light table-primary">
+                <tr>
+                    <th>#</th>
+                    <th>fechadesupre</th>
+                    <th>monto</th>
+                    <th>observacion</th>
+                    <th>profesor_id</th>
+                </tr>
+            </thead>
+            <tbody id="miadelanto">
+                @foreach ($adelantopros as $adelantopro)
+                <tr>
+                    <td>{{ $adelantopro->id }}</td>
+                    <td>{{ $adelantopro->fechaadelantopro }}</td>
+                    <td>{{ $adelantopro->monto }}</td>
+                    <td>{{ $adelantopro->observacion }}</td>
+                    <td>{{ $adelantopro->profesor_id ."-".$adelantopro->profesor->nombre}}</td>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+            </table>
+            </div>
+
+
+
+                                  
+                                     <div class="col-12 col-sm-12 col-md-6">
+                                         <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
+                                             <div class="col-12 col-md-12 " >
+                                             <center><input type="submit" value="guardar datos" class="btn btn-primary"></center>
+                                             </div>
+                                         </div>
+                                     </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </form>
+          </div>
+      </div>
+      </div>
+  </div>
+<!--filaliza el modal-->
+
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<script>
+    $(document).ready(function() {
+
+        var bansueldo = false;
+        var bandescuento =false;
+        $('#profesor_id').on('change', function() {
+        var profesorId = $(this).val();
+         bansueldo = false;
+         bandescuento =false;
+        //$('#bo').class=disabled
+        $('#bo').removeClass('disabled');
+      //  $('#bo').addClass('clase-nueva');
+        
+        // Realizar la consulta AJAX para obtener sueldoprofesor
+        obtenersueldoprofesor(profesorId);
+        
+        // Realizar la consulta AJAX para obtener los meses de deuda
+        //obtenerlosmesesdeuda(profesorId);
+        
+        // Realizar la consulta AJAX para obtener la sumatoria de adelantos
+        obtenerSumatoriaAdelantos(profesorId);
+        //resultado de el suedo menos los adaelnto
+        /*setTimeout(function() {
+                console.log('Ejecutando función cada 2 segundos.');
+                var totalpago = $('#sueldo').val()-$('#totaldescuento').val();
+                    $('#totalpago').val(totalpago); 
+                    //alert($('#sueldo').val());
+                // Agrega aquí el código que deseas ejecutar cada 2 segundos
+            }, 1000); // 2000 milisegundos = 2 segundos */
+       
+        });
+
+
+        function obtenersueldoprofesor(profesorId) {
+            
+            // Realizar la solicitud AJAX para obtener sueldoprofesor
+            $.ajax({
+                url: '{{ url("obtener-sueldoprofesor") }}',
+                type: 'POST',
+                data: {
+                    profesor_id: profesorId,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    //alert(response);
+                    $('#sueldo').val(response);
+                    if(bandescuento) {
+                        var totalpago = $('#sueldo').val()-$('#totaldescuento').val();
+                         $('#totalpago').val(totalpago);
+                    } else{
+                        bansueldo = true;
+                    }
+                }
+            });
+        }
+
+        
+        function obtenerSumatoriaAdelantos(profesorId) {
+            // Realizar la solicitud AJAX para obtener sueldoprofesor
+            $.ajax({
+                url: '{{ url("obtener-SumatoriaAdelantos") }}',
+                type: 'POST',
+                data: {
+                    profesor_id: profesorId,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    //alert(response);
+                    $('#totaldescuento').val(response);
+                    if(bansueldo) {
+                        var totalpago = $('#sueldo').val()-$('#totaldescuento').val();
+                         $('#totalpago').val(totalpago);
+                    } else{
+                        bandescuento = true;
+                    }
+                }
+            });
+        }
+            // Simular el evento change al cargar la página
+        $('#aula_id').trigger('change');
+    });
+</script>

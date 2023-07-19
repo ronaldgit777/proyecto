@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfesorController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *

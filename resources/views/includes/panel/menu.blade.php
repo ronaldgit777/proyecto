@@ -29,12 +29,12 @@
                                 </a>
                               </li> 
                               <li class="nav-item">
-                                <a class="nav-link " href="{{ url('/detallesupro') }}">
+                                <a class="nav-link " href="{{ url('/adelantosecre') }}">
                                   <i class="fas fa-hand-holding-usd text-info"></i> adelanto
                                 </a>
                             </li>
                               <li class="nav-item">
-                                  <a class="nav-link " href="{{ url('/sueldopro') }}">
+                                  <a class="nav-link " href="{{ url('/sueldosecre') }}">
                                     <i class="fas fa-donate text-info"></i>pagar sueldo
                                   </a>
                               </li>

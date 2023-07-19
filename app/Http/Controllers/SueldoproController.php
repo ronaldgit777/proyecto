@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\adelantopro;
 use App\Models\sueldopro;
 use App\Models\profesor;
 use Illuminate\Http\Request;
@@ -34,7 +35,7 @@ class SueldoproController extends Controller
         //$profesors=profesor::pluck('nombre','id');
        // return view('sueldopro.create',compact('profesors'));
 
-        return view('sueldopro.create',['profesors'=>profesor::all()]);
+        return view('sueldopro.create',['profesors'=>profesor::all()],['adelantopros'=>adelantopro::all()]);
     }
 
     /**
@@ -102,4 +103,22 @@ class SueldoproController extends Controller
     {
         //
     }
+    public function obtenerSueldoProfesor(Request $request)
+    {
+        $profesorId = $request->input('profesor_id');
+        $sueldo = profesor::obtenersueldo($profesorId);
+            
+        return response()->json($sueldo);
+            
+    }
+    public function obtenerlistaproid(Request $request)
+    {
+        $profesorId = $request->input('profesor_id');
+        $listapro = adelantopro::obtenerlistaproid2($profesorId);
+            
+        return response()->json($listapro);
+            
+    }
+
+    
 }

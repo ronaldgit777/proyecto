@@ -7,17 +7,17 @@
             <div class="card-header border-0">
                 <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="mb-0">REGISTRAR NUEVO ADELANTO</h3>
+                    <h3 class="mb-0">REGISTRAR NUEVO ADELANTO DE SECRETARIA</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{url('adelantopro/')}}" class="btn btn-sm btn-success">
+                    <a href="{{url('adelantosecre/')}}" class="btn btn-sm btn-success">
                         <i class="fas fa-undo"></i>
                         regresar</a>
                 </div>
                 </div>
             </div>
             <?php $fcha = date("Y-m-d"); ?>
-    <form method="post" action="{{ url('/adelantopro')}}" enctype="multipart/form-data">
+    <form method="post" action="{{ url('/adelantosecre')}}" enctype="multipart/form-data">
      @csrf   
         <div class="row p-3 mb-2  text-white">
             <div class="col-12"> 
@@ -29,7 +29,7 @@
                                     <label class="text-black text-capitalize">fecha de adelanto</label>
                                 </div>
                                   <div class="col-8 col-md-9">
-                                    <input class="form-control" placeholder="fechaadelantopro" type="date" name="fechaadelantopro"  value="<?php echo $fcha; ?>"  >
+                                    <input class="form-control" placeholder="fechaadelantosecre" type="date" name="fechaadelantosecre"  value="<?php echo $fcha; ?>"  >
                                   </div>
                             </div>
                           </div>
@@ -60,14 +60,14 @@
                           <div class="col-12 col-sm-12 col-md-6">
                             <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                 <div class="col-4 col-md-3">
-                                    <label class="text text-capitalize" >profesor</label>
+                                    <label class="text text-capitalize" >secretaria</label>
                                 </div>
                                 <div class="col-8 col-md-9">
 
-                                <select type="text" name="profesor_id" id="profesor_id" class="form-control" required>
+                                <select type="text" name="secretaria_id" id="secretaria_id" class="form-control" required>
                                     <option selected disabled value="">seleccione al profesor</option>
-                                    @foreach ($profesors as $profesor)
-                                    <option value="{{ $profesor->id }}">{{ $profesor->nombre }}</option>
+                                    @foreach ($secretarias as $secretaria)
+                                    <option value="{{ $secretaria->id }}">{{ $secretaria->nombre }}</option>
                                     @endforeach
                                 </select>
                                 </div>
@@ -100,5 +100,3 @@
 </div>
 </div>
 @endsection
-
-    

@@ -79,6 +79,7 @@ class AsignarpromaController extends Controller
         ->get();*/
         //return view('asignarproma.create',['profesors'=>profesor::all(),],['materias'=>materia::all()],['aulas'=>aula::all()],['periodos'=>periodo::all()]);      
         //todos los profesores con id mayor a 10
+        //1paso envio de datos 
         $profesors = profesor::all();
         $materias = materia::all();
         //limit 2 registros
@@ -159,5 +160,19 @@ class AsignarpromaController extends Controller
     {
         //
     }
+    public function obtenerPeriodos(Request $request)
+    {
+        /*$aulaId = $request->input('aula_id');
+        
+        $periodosDisponibles = periodo::obtenerPeriodosDisponibles($aulaId);
+            
+        return response()->json($periodosDisponibles);*/
 
+        $aulaId = $request->input('aula_id');
+        $profesorId = $request->input('profesor_id');
+        
+        $periodosDisponibles = Periodo::obtenerPeriodosDisponibles($aulaId, $profesorId);
+            
+        return response()->json($periodosDisponibles);
+    }
 }

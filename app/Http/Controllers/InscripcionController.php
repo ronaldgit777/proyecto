@@ -47,7 +47,8 @@ class InscripcionController extends Controller
     {
         $asignarpromas =asignarproma::all();
         $alumnos =alumno::all();
-        $profesors =profesor::has('asignarproma');
+        //$profesors =profesor::has('asignarproma');
+        $profesors =profesor::all();
         $users =user::all();
         $materias =materia::all();
         $aulas =aula::all();
