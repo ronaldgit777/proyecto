@@ -6,6 +6,7 @@ use App\Models\adelantopro;
 use App\Models\sueldopro;
 use App\Models\profesor;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class SueldoproController extends Controller
 {
@@ -50,6 +51,8 @@ class SueldoproController extends Controller
        
         sueldopro::insert($datossueldopro);
         //return response()->json($datosprofesor);
+        $profesorId = $request->input('profesor_id');
+        adelantopro::where('profesor_id', $profesorId)->update(['observacion' => 'pagado']);
         return redirect('sueldopro');
     }
 
@@ -120,5 +123,40 @@ class SueldoproController extends Controller
             
     }
 
+    public function mesessaldopro(Request $request)
+    {
+        $profesorId = $request->input('profesor_id');
+
+        $cantidadRegistros = sueldopro::where('profesor_id', $profesorId)->count();  
+
+        // Obtén el profesor utilizando el profesor_id
+        $profesor = profesor::findOrFail($profesorId);
+        // Obtén la fecha de ingreso del profesor
+        $fechaIngreso = Carbon::parse($profesor->fechadeingreso); 
+
+        // Establecer la configuración local a español
+         Carbon::setLocale('es');
+        // Obtén la fecha actual
+        $fechaActual = Carbon::now();  
+
+        //sumar los meses pagados
+        $fechaIngreso->addMonths($cantidadRegistros); 
+
+        // Calcula la diferencia en meses
+        $mesesTranscurridos = $fechaIngreso->diffInMonths($fechaActual); 
+        // Genera los nombres de los meses para cada mes transcurrido
+        $mesesTexto = [];
+
+        for ($i = 0; $i < $mesesTranscurridos; $i++) {
+
+            $fechaMes = $fechaIngreso->copy()->addMonths($i);
+           // $mesesTexto[] = $fechaMes->IsoformatLocalized('%B');
+            $mesesTexto[] = $fechaMes->isoFormat('MMMM');
+        }
+
+            
+        return response()->json($mesesTexto);
+            
+    }
     
 }

@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class adelantopro extends Model
 {
     protected $table = "adelantopros";
+
+    protected $fillable = [
+        'profesor_id', 
+        'monto',
+        'observacion',
+        'fechaadelantopro'
+    ];
    
     public function profesor()
     {

@@ -82,7 +82,8 @@ Route::get('/', function () {
 
     Route::post('/obtener-adelantopro', [App\Http\Controllers\SueldoproController::class, 'obtenerlistaproid'])
     ->name('obtener-adelantopro');
-    
+    Route::post('/obtener-mesessaldopro', [App\Http\Controllers\SueldoproController::class, 'mesessaldopro'])
+    ->name('obtener-mesessaldopro');
 
 
    

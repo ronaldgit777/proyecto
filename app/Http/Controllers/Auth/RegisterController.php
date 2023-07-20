@@ -7,6 +7,8 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\profesor;
 use App\Models\secretaria;
+use App\Models\adelantopro;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -94,7 +96,8 @@ class RegisterController extends Controller
         ]);
         
         $roleUser = "App\\Models\\".$request->input('role'); //profesor::create secretaria::create
-     
+        $sueldo =  $request->input('sueldo');
+        
         $empleado = $roleUser::create([
             'fechadeingreso' => $request->input('fechadeingreso'),
             'ci' => $request->input('ci'),
@@ -108,6 +111,36 @@ class RegisterController extends Controller
             'sueldo' => $request->input('sueldo'),
             'user_id' => $user->id
         ]);
+                //para obtener el id del profesor recien registrado es con: $empleado->id
+         // Obtén la fecha actual del servidor
+         $fechaActual = Carbon::now();
+         // Obtén el día del mes    
+         $dia = $fechaActual->day;
+
+        //fecha de registro del profesor: $empleado->created_at
+        if($dia>1){      
+            $descuento = ($sueldo/30)*($dia-1);      
+            $observacion = "Pendiente";
+            if(str_contains($roleUser, 'profesor')){
+                adelantopro::create([
+                    'profesor_id' => $empleado->id,
+                    'monto' => round($descuento),
+                    'observacion' => $observacion,
+                    'fechaadelantopro' => $fechaActual
+                ]);
+            }
+            else{
+                // si fuera secretaria 
+                /*adelantosecre::create([
+                    'secretaria_id' => $empleado->id,
+                    'monto' => $descuento,
+                    'observacion' => $observacion,
+                    'fechaadelantopro' => $fechaActual
+                ]);*/
+            }
+            
+        }
+
 
         return redirect('profesor');
     }
@@ -115,9 +148,7 @@ class RegisterController extends Controller
     public function formularioEmpleado()
     {
         return view('auth.registroEmpleado');
-    }
-    
-    
+    }  
 }
 //xdebug
 

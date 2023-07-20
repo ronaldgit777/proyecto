@@ -81,7 +81,7 @@
                                     </div>
                                     <div class="col-8 col-md-9">
                                   
-                                        <input type="text" name="fechadesueldo" id="sueldo" class="form-control"  value=""  > 
+                                        <input type="text"  id="sueldo" class="form-control"  value=""  > 
                                       
                                     </div>
                                 </div>
@@ -164,7 +164,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-12 col-md-12 " >
-                                    <center><input type="submit" value="guardar datos" class="btn btn-primary"></center>
+                                    <center><input type="submit" value="guardar datos" class="btn btn-primary disabled" id="botonguardar" ></center>
                                     </div>
                                 </div>
                             </div>
@@ -180,67 +180,59 @@
   <!--empeiza el modal-->
   <div class="modal fade " id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog modal-lg " role="document">
-      <div class="modal-content p-3 mb-2 bg-info">
-          <div class="modal-body">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-              <span aria-hidden="true">&times;</span>
-          </button>
-          <div class="card shadow p-3 mb-2 bg-info text-white">
-              <div class="card-header border-0">
-                  <div class="row align-items-center">
-                      <div class="col">
-                          <h3 class="mb-0">REGISTRO DEL ADELANTO </h3>
-                      </div>
-                      <div class="col text-right">
-                      </div>
-                  </div>
-              </div>
-        
-
-
-              <div  class="table-responsive">
-                <table class="table align-items-center table-flush">
-            <thead class="thead-light table-primary">
-                <tr>
-                    <th>#</th>
-                    <th>fechadesupre</th>
-                    <th>monto</th>
-                    <th>observacion</th>
-                    <th>profesor_id</th>
-                </tr>
-            </thead>
-            <tbody id="miadelanto">
-                @foreach ($adelantopros as $adelantopro)
-                <tr>
-                    <td>{{ $adelantopro->id }}</td>
-                    <td>{{ $adelantopro->fechaadelantopro }}</td>
-                    <td>{{ $adelantopro->monto }}</td>
-                    <td>{{ $adelantopro->observacion }}</td>
-                    <td>{{ $adelantopro->profesor_id ."-".$adelantopro->profesor->nombre}}</td>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-            </table>
-            </div>
-
-
-
-                                  
-                                     <div class="col-12 col-sm-12 col-md-6">
-                                         <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
-                                             <div class="col-12 col-md-12 " >
-                                             <center><input type="submit" value="guardar datos" class="btn btn-primary"></center>
-                                             </div>
-                                         </div>
-                                     </div>
+            <div class="modal-content p-3 mb-2 bg-info">
+                 <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                      <div class="card shadow p-3 mb-2 bg-info text-white">
+                            <div class="card-header border-0">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h3 class="mb-0">REGISTRO DEL ADELANTO </h3>
+                                    </div>
+                                    <div class="col text-right">
+                                    </div>
+                                </div>
+                            </div>
+                                    <div  class="table-responsive">
+                                        <table class="table align-items-center table-flush">
+                                            <thead class="thead-light table-primary">
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>fechadesupre</th>
+                                                    <th>monto</th>
+                                                    <th>observacion</th>
+                                                    <th>profesor_id</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="miadelanto">
+                                                @foreach ($adelantopros as $adelantopro)
+                                                <tr>
+                                                    <td>{{ $adelantopro->id }}</td>
+                                                    <td>{{ $adelantopro->fechaadelantopro }}</td>
+                                                    <td>{{ $adelantopro->monto }}</td>
+                                                    <td>{{ $adelantopro->observacion }}</td>
+                                                    <td>{{ $adelantopro->profesor_id ."-".$adelantopro->profesor->nombre}}</td>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>  
+                                        <div class="col-12 col-sm-12 col-md-6">
+                                            <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
+                                                <div class="col-12 col-md-12 " >
+                                                </div>
+                                            </div>
+                                        </div>
                              </div>
                          </div>
                      </div>
                  </div>
              </form>
-          </div>
-      </div>
+                </div>
+            </div>
       </div>
   </div>
 <!--filaliza el modal-->
@@ -256,7 +248,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <script>
     $(document).ready(function() {
-
+        //verificar q esten el sueldo y descuento 
         var bansueldo = false;
         var bandescuento =false;
         $('#profesor_id').on('change', function() {
@@ -283,7 +275,8 @@
                     //alert($('#sueldo').val());
                 // Agrega aquí el código que deseas ejecutar cada 2 segundos
             }, 1000); // 2000 milisegundos = 2 segundos */
-       
+        //generar meses
+        obtenerMeses(profesorId);
         });
 
 
@@ -329,6 +322,44 @@
                     } else{
                         bandescuento = true;
                     }
+                }
+            });
+        }
+
+        function obtenerMeses(profesorId) {
+            $('#botonguardar').addClass('disabled');
+            // Realizar la solicitud AJAX para obtener sueldoprofesor
+            $.ajax({
+                url: '{{ url("obtener-mesessaldopro") }}',
+                type: 'POST',
+                data: {
+                    profesor_id: profesorId,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(meses) {
+                   var cont=0;
+                   // alert("todo ok");
+                     // Limpiar el campo de selección de periodos
+                     $('#mesdepago').empty();
+                   //  for (var i = 0; i < meses.length; i++) {
+                    for (var i = 0; i < 1; i++) {
+                            var mes = meses[i];
+                            //alert(mes);
+                            $('#mesdepago').append(
+                                //obteniendo todos los meses
+                                '<option value="' + mes + '">' + mes + '</option>'
+                            );
+                            cont++;
+                        }
+                    if(cont >0){
+                        $('#botonguardar').removeClass('disabled');
+                    }
+                  
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+                      // Limpiar el campo de selección de periodos
+                       
                 }
             });
         }
