@@ -11,10 +11,13 @@
                 <h3 class="mb-0">LISTA DE TODOS LOS PROFESORES</h3>
               </div>
               <div class="col text-right">
+                <a href="{{url('profesor/create')}}" class="btn btn-sm btn-danger" onclick="generarpdflista()">
+                  <i class="fas fa-plus-circle"></i>
+                  IMPRIMIR </a>
                 <a href="{{url('profesor/create')}}" class="btn btn-sm btn-primary" >
                 <i class="fas fa-plus-circle"></i>
                 NUEVO PROFESOR</a>
-              </div>
+              </div>  
             </div>
           </div>
         <div class="table-responsive">
@@ -71,17 +74,6 @@
           </table>
         </div>
    </div>
-
-      @section('js')
-      <script src"https://code.jquery.com/jquery-3.7.0.js"></script>
-      <script src"https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-      <script src"https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
-      <script>
-        $(document).ready(function() {
-                $('#articulos').DataTable();
-            });
-      </script>
      
-      @endsection
 @endsection
 

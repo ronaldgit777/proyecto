@@ -127,13 +127,54 @@
           <li class="nav-item">
             <a class="nav-link nav-link-icon" href="{{url('registroEmpleado')}}">
               <i class="ni ni-circle-08"></i>
-              <span class="nav-link-inner--text">reporteso</span>
+              <span class="nav-link-inner--text">reportes </span>
             </a>
           </li>
         </ul>
    <!-- secretaria -->
  @elseif(auth()->user()->role == 'secretaria')
-      
+ <ul class="navbar-nav ">
+          
+
+ </li>
+ <li class="nav-item">
+   <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
+       <i class="fab fa-laravel" style="color: #f4645f;"></i>
+       <span class="nav-link-text" style="color: #f4645f;">{{ __('PROFESOR') }}</span>
+   </a>
+
+   <div class="collapse show" id="navbar-examples">
+       <ul class="nav nav-sm flex-column">
+           <li class="nav-item">
+               <a class="nav-link " href="{{ url('/profesor') }}">
+                 <i class="fas fa-chalkboard-teacher text-blue"></i> profesores
+               </a>      
+           </li>
+           <li class="nav-item">
+             <a class="nav-link " href="{{ url('/adelantopro') }}">
+               <i class="fas fa-hand-holding-usd text-blue"></i> adelanto
+             </a>
+         </li>
+           <li class="nav-item">
+               <a class="nav-link " href="{{ url('/sueldopro') }}">
+                 <i class="fas fa-donate text-blue"></i>pagar sueldo
+               </a>
+           </li>
+         
+       </ul>
+   </div>
+ </li>
+
+<li class="nav-item">
+ <a class="nav-link" href="{{route('logout')}}"
+   onclick="event.preventDefault(); document.getElementById('formlogout').submit();">
+   <i class="fas fa-sign-in-alt"></i> cerrar secion
+ </a>
+ <form action="{{route('logout')}}" method="POST" style="display: none" id="formlogout" >
+   @csrf
+   </form>
+</li>
+</ul>
     <!-- profesor -->
       @else
       <ul class="navbar-nav ">
@@ -160,7 +201,7 @@
             @csrf
             </form>
         </li>
-    </ul>
+     </ul>
     <hr class="my-3">
     <!-- Heading -->
     <h6 class="navbar-heading text-muted">reportes</h6>

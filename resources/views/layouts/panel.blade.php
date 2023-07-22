@@ -143,6 +143,8 @@
   <script src="{{asset ('js/argon-dashboard.min.js?v=1.1.2')}}"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
 
+  <script src="{{asset ('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js')}}"></script>
+
 
 </body>
 

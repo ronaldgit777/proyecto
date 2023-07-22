@@ -11,9 +11,12 @@
                                     </h3>
                                     </div>
                                 <div class="col text-right">
-                                        <a href="{{ url('adelantopro/create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> adelanto</a>
+                                    <a href="" class="btn btn-sm btn-danger" onclick="generarpdflistaadelantopro()">
+                                        <i class="fas fa-plus-circle"></i>
+                                        IMPRIMIR </a>
+                                        <a href="{{ url('adelantopro/create') }}" class="btn btn-sm  btn-primary"><i class="fas fa-plus-circle"></i> adelanto</a>
                                             <!--empeiza el modal-->
-                                        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#myModal"> <i class="fas fa-plus-circle"></i> registrar nuevo adelanto modal</a>
+                                        <a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"> <i class="fas fa-plus-circle"></i> registrar nuevo adelanto modal</a>
                                         <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                             <div class="modal-dialog modal-lg " role="document">
                                             <div class="modal-content p-3 mb-2 bg-info">
@@ -155,4 +158,51 @@
         
      </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
+<!-- Link to pdfmake font files -->
+<script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
+<script>
+    var adelantoprosData = {!! json_encode($adelantopros) !!};
+    function generarpdflistaadelantopro() {
+    // Construir el contenido del reporte utilizando los datos de adelantoprosData
+    const filas = [];
+    filas.push(['#', 'Fecha de Adelanto', 'Monto', 'Observación', 'Profesor']);
+    for (let i = 0; i < adelantoprosData.length; i++) {
+      const adelantopro = adelantoprosData[i];
+      const id = adelantopro.id;
+      const fechaadelantopro = adelantopro.fechaadelantopro;
+      const monto = adelantopro.monto;
+      const observacion = adelantopro.observacion;
+      const profesor_id = adelantopro.profesor_id + "-" + adelantopro.profesor.nombre;
+      filas.push([id, fechaadelantopro, monto, observacion, profesor_id]);
+    }
+   
+
+    // Definir la estructura del documento PDF con estilos para la tabla
+    const docDefinition = {
+      content: [
+        { text: 'Lista de Adelantos del Profesor', style: 'header' },
+        {
+          table: {
+            headers: ['#', 'Fecha de Adelanto', 'Monto', 'Observación', 'Profesor'],
+            body: filas,
+          },
+          // Estilo para la cabecera de la tabla
+          headerRows: 1,
+          fillColor: '#2c6aa6', // Color de fondo azul para la cabecera
+        },
+      ],
+      styles: {
+        header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] },
+      },
+      // Estilo para las celdas del cuerpo de la tabla
+      defaultStyle: { fillColor: '#bdd7e7' }, // Color de fondo azul claro para las celdas
+    };
+
+    // Generar el documento PDF
+    pdfMake.createPdf(docDefinition).download('reporte_adelantos.pdf');
+  }
+</script>
 @endsection
