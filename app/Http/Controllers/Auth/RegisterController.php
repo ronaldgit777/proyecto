@@ -120,11 +120,13 @@ class RegisterController extends Controller
         //fecha de registro del profesor: $empleado->created_at
         if($dia>1){      
             $descuento = ($sueldo/30)*($dia-1);      
-            $observacion = "Pendiente";
+            $observacion = "por fecha de ingreso";
+            $estadoade = "pendiente";
             if(str_contains($roleUser, 'profesor')){
                 adelantopro::create([
                     'profesor_id' => $empleado->id,
                     'monto' => round($descuento),
+                    'estadoade' => $estadoade,
                     'observacion' => $observacion,
                     'fechaadelantopro' => $fechaActual
                 ]);

@@ -71,19 +71,22 @@ Route::get('/', function () {
         Route::get('/alumpro', [App\Http\Controllers\AlumnoController::class, 'index2'])->name('index2')->middleware('auth');
         Route::post('/alumpro', [App\Http\Controllers\AlumnoController::class, 'index2'])->name('index2')->middleware('auth');
        // Route::get('/asignarproma', [App\Http\Controllers\AsignarpromaController::class, 'asigpro'])->name('asig')->middleware('auth');
-       Route::post('/obtener-periodos', [App\Http\Controllers\AsignarpromaController::class, 'obtenerPeriodos'])
+        Route::post('/obtener-periodos', [App\Http\Controllers\AsignarpromaController::class, 'obtenerPeriodos'])
         ->name('obtener-periodos');
         Route::post('/obtener-sueldoprofesor', [App\Http\Controllers\SueldoproController::class, 'obtenerSueldoProfesor'])
-     ->name('obtener-sueldoprofesor');
-     Route::post('/obtener-SumatoriaAdelantos', [App\Http\Controllers\AdelantoproController::class, 'obtenersumatoriaadelantosProfesor'])
-     ->name('obtener-SumatoriaAdelantos');
-     Route::post('/obtener-adelantopro', [App\Http\Controllers\SueldoproController::class, 'obtenerlistaproid'])
-     ->name('obtener-adelantopro');
-     Route::post('/obtener-mesessaldopro', [App\Http\Controllers\SueldoproController::class, 'mesessaldopro'])
-     ->name('obtener-mesessaldopro');
+        ->name('obtener-sueldoprofesor');
+        Route::post('/obtener-SumatoriaAdelantos', [App\Http\Controllers\AdelantoproController::class, 'obtenersumatoriaadelantosProfesor'])
+        ->name('obtener-SumatoriaAdelantos');
+        Route::post('/obtener-adelantopro', [App\Http\Controllers\SueldoproController::class, 'obtenerlistaproid'])
+        ->name('obtener-adelantopro');
+        Route::post('/obtener-mesessaldopro', [App\Http\Controllers\SueldoproController::class, 'mesessaldopro'])
+        ->name('obtener-mesessaldopro');
 
 
+        Route::post('/reporopciones', [App\Http\Controllers\ProfesorController::class, 'opcionesreporte'])->name('opcionesreporte')->middleware('auth');
+        Route::get('/reporopciones', [App\Http\Controllers\ProfesorController::class, 'opcionesreporte'])->name('opcionesreporte')->middleware('auth');
 
+        Route::get('/reporpro', [App\Http\Controllers\ProfesorController::class, 'reporpro'])->name('reporpro')->middleware('auth');
 /*
    
 

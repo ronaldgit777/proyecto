@@ -93,9 +93,7 @@ class AdelantoproController extends Controller
     public function obtenersumatoriaadelantosProfesor(Request $request)
     {
         $profesorId = $request->input('profesor_id');
-        $totaladelanto = adelantopro::obteneradelanto($profesorId);//obteneradelanto es la funcion del adelantopro
-            
+        $totaladelanto = adelantopro::obteneradelanto($profesorId);//obteneradelanto es la funcion del adelantopro el modelo
         return response()->json($totaladelanto);
-            
     }
 }

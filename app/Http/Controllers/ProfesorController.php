@@ -16,14 +16,21 @@ class ProfesorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function reporpro()
+    {   
+        $profesors=profesor::all();
+         return view('profesor.reporpro',compact('profesors'));    
+    }
+    public function opcionesreporte()
+    {   
+         return view('profesor.reporopciones');    
+    }
     public function index()
     {   
         $profesors=profesor::all();
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);
-         return view('profesor.index',compact('profesors'));
-
-     
+         return view('profesor.index',compact('profesors'));    
     }
 
     /**

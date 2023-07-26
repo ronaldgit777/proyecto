@@ -12,6 +12,7 @@ class adelantopro extends Model
     protected $fillable = [
         'profesor_id', 
         'monto',
+        'estadoade',
         'observacion',
         'fechaadelantopro'
     ];
@@ -25,7 +26,7 @@ class adelantopro extends Model
 
     public static function obteneradelanto($profesorId)
     {
-        $sumatoriaMonto = adelantopro::where('profesor_id', $profesorId)->where('observacion','pendiente')
+        $sumatoriaMonto = adelantopro::where('profesor_id', $profesorId)->where('estadoade','pendiente')
         ->sum('monto');
 
         return $sumatoriaMonto;
@@ -33,7 +34,7 @@ class adelantopro extends Model
     public static function obtenerlistaproid2($profesorId)
     {
         
-        $adelantopro = adelantopro::where('profesor_id', $profesorId)->where('observacion','pendiente')
+        $adelantopro = adelantopro::where('profesor_id', $profesorId)->where('estadoade','pendiente')
                     ->join('profesors', 'adelantopros.profesor_id', '=', 'profesors.id')
                     ->select('adelantopros.*', 'profesors.nombre as nombre_profesor')
                     ->get();

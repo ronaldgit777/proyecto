@@ -90,4 +90,10 @@ class AdelantosecreController extends Controller
     {
         //
     }
+    public function obtenersumatoriaadelantossecretaria(Request $request)
+    {
+        $secretariaId = $request->input('profesor_id');
+        $totaladelanto = adelantosecre::obteneradelantosecre($secretariaId);//obteneradelanto es la funcion del adelantopro el modelo
+        return response()->json($totaladelanto);
+    }
 }

@@ -32,6 +32,7 @@ class asignarproma extends Model
             ->where('aula_id', $aulaId)
             ->exists();
     }
+    
 
     public function inscripcion()
     {

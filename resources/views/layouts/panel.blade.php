@@ -7,9 +7,7 @@
   <title>
     {{ config('app.name')}}
   </title>
-  @yield('css')
-
-  
+  @yield('css') 
   <!-- Favicon -->
   <link href="{{asset ('img/brand/favicon.png')}}" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -18,11 +16,9 @@
   <link href="{{asset ('js/plugins/nucleo/css/nucleo.css')}}" rel="stylesheet" />
   <link href="{{asset ('js/plugins/@fortawesome/fontawesome-free/css/all.min.css')}}"" rel="stylesheet" />
   <!-- CSS Files -->
-  <link href="{{asset ('css/argon-dashboard.css?v=1.1.2g')}}" rel="stylesheet" />
-
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
+  <link href="{{asset ('css/argon-dashboard.css?v=1.1.2g')}}" rel="stylesheet" /> 
+  <link href="{{asset ('css/argon-dashboard.css.map')}}" rel="stylesheet" /> 
   
-  <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
   
 </head>
 
@@ -36,7 +32,7 @@
       </button>
       <!-- Brand -->
       <a class="navbar-brand pt-0" href="./index.html">
-        <img src="{{asset ('img/brand/blue.png')}}" class="navbar-brand-img" alt="...">
+        <img src="{{asset ('img/brand/favicon.png')}}" class="navbar-brand-img" alt="...">
       </a>
       <!-- User movil -->
       <ul class="nav align-items-center d-md-none">
@@ -70,7 +66,7 @@
               <div class="row">
                 <div class="col-6 collapse-brand">
                   <a href="./index.html">
-                    <img src="./assets/img/brand/blue.png">
+                    <img src="{{asset ('/img/brand/blue.png')}}">
                   </a>
                 </div>
                 <div class="col-6 collapse-close">
@@ -141,9 +137,6 @@
   <script src="{{asset ('js/plugins/chart.js/dist/Chart.extension.js')}}"></script>
   <!--   Argon JS   -->
   <script src="{{asset ('js/argon-dashboard.min.js?v=1.1.2')}}"></script>
-  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-
-  <script src="{{asset ('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js')}}"></script>
 
 
 </body>

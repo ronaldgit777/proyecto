@@ -52,7 +52,7 @@ class SueldoproController extends Controller
         sueldopro::insert($datossueldopro);
         //return response()->json($datosprofesor);
         $profesorId = $request->input('profesor_id');
-        adelantopro::where('profesor_id', $profesorId)->update(['observacion' => 'pagado']);
+        adelantopro::where('profesor_id', $profesorId)->update(['estadoade' => 'pagado']);
         return redirect('sueldopro');
     }
 

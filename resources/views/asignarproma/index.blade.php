@@ -22,6 +22,7 @@
                             <thead class="thead-light">
                         <tr>
                             <th>#</th>
+                            <th>fecha de asignacion</th>
                             <th>profesor_id</th>
                             <th>materia_id</th>
                             <th>aula_id</th>
@@ -33,6 +34,7 @@
                         @foreach ($asignarpromas as $asignarproma)
                         <tr>
                             <td>{{ $asignarproma->id }}</td>
+                            <td>{{ $asignarproma->fechadeasignacion }}</td>
                             <td>{{ $asignarproma->profesor->nombre."-".$asignarproma->profesor->apellidopaterno }}</td>
                             <td>{{ $asignarproma->materia->materia }}</td>
                             <td>{{ $asignarproma->aula->aula }}</td>

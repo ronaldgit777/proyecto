@@ -14,12 +14,21 @@
             </div>
             </div>
         </div>
+        <?php $fcha = date("Y-m-d"); ?>
 <form method="post" action="{{ url('/asignarproma')}}" enctype="multipart/form-data">
  @csrf   
     <div class="row p-3 mb-2  text-white">
         <div class="col-12"> 
             <div class="m-portlet__body m-portlet--primary" data-portlet="true" m-portlet="true">
                 <div class="form-group m-form__group row">
+
+
+
+
+
+
+
+
                          <div class="col-12 col-sm-12 col-md-6">
                             <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                 <div class="col-4 col-md-3">
@@ -105,7 +114,19 @@
                                 </div>
                             </div>
                         </div>
-                     
+                        
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
+                                <div class="col-4 col-md-3">
+                                    <label class="text-black text-capitalize">fecha de asignacion</label>
+                                </div>
+                                  <div class="col-8 col-md-9">
+                                    <input class="form-control" placeholder="fechadeasignacion" type="date" name="fechadeasignacion"  value="<?php echo $fcha; ?>"  >
+                                   <!--  readonly -->
+                                  </div>
+                            </div>
+                          </div>
+
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                 <div class="col-12 col-md-12 " >

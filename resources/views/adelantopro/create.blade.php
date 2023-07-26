@@ -52,7 +52,7 @@
                                     <label class="text text-capitalize">observacion</label>
                                 </div>
                                   <div class="col-8 col-md-9">
-                                    <input class="form-control" placeholder="observacion" type="observacion" name="observacion" required autocomplete="observacion" id="observacion"> 
+                                    <input class="form-control" placeholder="observacion" type="observacion" name="observacion" required autocomplete="observacion" id="observacion" req> 
                                   </div>
                             </div>
                           </div>
@@ -60,16 +60,11 @@
                           <div class="col-12 col-sm-12 col-md-6">
                             <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                 <div class="col-4 col-md-3">
-                                    <label class="text text-capitalize" >profesor</label>
+                                  <label class="text text-capitalize">estado</label>
                                 </div>
                                 <div class="col-8 col-md-9">
-
-                                <select type="text" name="profesor_id" id="profesor_id" class="form-control" required>
-                                    <option selected disabled value="">seleccione al profesor</option>
-                                    @foreach ($profesors as $profesor)
-                                    <option value="{{ $profesor->id }}">{{ $profesor->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                  <input class="form-control"  type="estadoade" name="estadoade" required autocomplete="estadoade" id="estado" value="pendiente" readonly> 
+                                                           
                                 </div>
                               </div>
                           </div>
@@ -77,10 +72,15 @@
                           <div class="col-12 col-sm-12 col-md-6">
                             <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                 <div class="col-4 col-md-3">
-                                    
+                                  <label class="text text-capitalize" >profesor</label>
                                 </div>
                                   <div class="col-8 col-md-9">
-                                  
+                                    <select type="text" name="profesor_id" id="profesor_id" class="form-control" required>
+                                      <option selected disabled value="">seleccione al profesor</option>
+                                      @foreach ($profesors as $profesor)
+                                      <option value="{{ $profesor->id }}">{{ $profesor->nombre }}</option>
+                                      @endforeach
+                                  </select>
                                   </div>
                             </div>
                           </div>

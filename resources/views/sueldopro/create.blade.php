@@ -81,7 +81,7 @@
                                     </div>
                                     <div class="col-8 col-md-9">
                                   
-                                        <input type="text"  id="sueldo" class="form-control"  value=""  > 
+                                        <input type="text"  id="sueldo" class="form-control"  value=""  readonly> 
                                       
                                     </div>
                                 </div>
@@ -92,7 +92,7 @@
                                         <label class="text text-capitalize">totaldescuento</label>
                                     </div>
                                     <div class="col-8 col-md-6">
-                                        <input type="text" name="totaldescuento" id="totaldescuento" class="form-control" > <br>
+                                        <input type="text" name="totaldescuento" id="totaldescuento" class="form-control" readonly> <br>
                                        
                                     </div>
                                     <div class="col-8 col-md-3">
@@ -121,10 +121,14 @@
                                                                             ' <td>'+value.id+'</td>'+
                                                                                 '<td>'+value.fechaadelantopro+'</td>'+
                                                                                 ' <td>'+value.monto+'</td>'+
+                                                                                ' <td>'+value.estadoade+'</td>'+
                                                                                 ' <td>'+value.observacion+'</td>'+
-                                                                                '<td>'+value.nombre_profesor+'</td>'+
+                                                                                '<td>'+value.profesor_id+"-"+value.nombre_profesor+'</td>'+
                                                                             ' </tr>'
                                                                         );
+                                                                        // Agregar el estilo de borde usando jQuery
+                                                                        $('#miadelanto').find('td').css('border', '1px solid black');
+
                                                                     });
                                                                 }
                                                                 ,     error: function(xhr, status, error) {
@@ -145,7 +149,7 @@
                                         <label class="text text-capitalize">totalpago</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="totalpago" id="totalpago" class="form-control" > <br>
+                                        <input type="text" name="totalpago" id="totalpago" class="form-control" readonly> <br>
                                     </div>
                                 </div>
                             </div>
@@ -197,11 +201,15 @@
                             </div>
                                     <div  class="table-responsive">
                                         <table class="table align-items-center table-flush">
-                                            <thead class="thead-light table-primary">
+                                            <thead class="thead-light">
+
+
+                                                
                                                 <tr>
                                                     <th>#</th>
                                                     <th>fechadesupre</th>
                                                     <th>monto</th>
+                                                    <th>estado</th>
                                                     <th>observacion</th>
                                                     <th>profesor_id</th>
                                                 </tr>
