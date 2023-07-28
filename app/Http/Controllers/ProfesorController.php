@@ -16,11 +16,32 @@ class ProfesorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function reporpro()
+    
+    public function obtenermenorfechainicio()
     {   
-        $profesors=profesor::all();
-         return view('profesor.reporpro',compact('profesors'));    
+       $buscarmenorfecha = profesor::obtenermenorfechadesdefechainicio();
+       return response()->json($buscarmenorfecha);
     }
+
+     public function  obtenerfechainicio(Request $request)
+     {   
+        $rutaImagenBase = asset('storage').'/';
+        $fechaini = $request->input('fechainicio');
+        $fechafin = $request->input('fechafinal');
+        $cipro2 = $request->input('cipro');
+        $nombrepro2 = $request->input('nombrepro');
+        $sueldominpro2 = $request->input('sueldominpro');
+        $sueldomaxpro2 = $request->input('sueldomaxpro');
+        $resultadoconsulta = profesor::obtenerprofesoresdesdefechainicio($fechaini,$rutaImagenBase,$fechafin,$cipro2,$nombrepro2,$sueldominpro2,$sueldomaxpro2);
+            
+        return response()->json($resultadoconsulta);        
+     }
+
+     public function reporpro()
+     {   
+         $profesors = Profesor::obtenerProfesoresConRutaImagen();
+         return view('profesor.reporpro', compact('profesors'));    
+     }
     public function opcionesreporte()
     {   
          return view('profesor.reporopciones');    

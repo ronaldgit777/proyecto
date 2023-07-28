@@ -58,7 +58,7 @@
                         </div>
                         <div class="box">
                           <img src="imag/asigprofesores.jpg" alt="Imagen 2">
-                          <a href="#">asignaciones de profesores</a>
+                          <a href="{{ url('/reporasig') }}">asignaciones de profesores</a>
                         </div>
                         <div class="box">
                           <img src="imag/adelantopro.jpg" alt="Imagen 3">
@@ -68,7 +68,7 @@
                       <div class="bottom-row">
                         <div class="box">
                           <img src="imag/pagoprofesor.png" alt="Imagen 4">
-                          <a href="#">sueldos pagados profesores</a>
+                          <a href="/reporasig">sueldos pagados profesores</a>
                         </div>
                         <div class="box">
                           <img src="imag/alumnosprofe.jpg" alt="Imagen 5">

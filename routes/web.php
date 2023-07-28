@@ -87,6 +87,15 @@ Route::get('/', function () {
         Route::get('/reporopciones', [App\Http\Controllers\ProfesorController::class, 'opcionesreporte'])->name('opcionesreporte')->middleware('auth');
 
         Route::get('/reporpro', [App\Http\Controllers\ProfesorController::class, 'reporpro'])->name('reporpro')->middleware('auth');
+        
+        Route::get('/reporasig', [App\Http\Controllers\AsignarpromaController::class, 'reporasig'])->name('reporasig')->middleware('auth');
+
+        Route::post('/obtener-fechainicio', //rutas de vista barra de navegacion
+        [App\Http\Controllers\ProfesorController::class, 'obtenerfechainicio']) //este es la funciond el controler
+        ->name('obtener-fechainicio'); //la ruta de la view java
+        Route::post('/obtener-menorfechainicio', //rutas de vista barra de navegacion
+        [App\Http\Controllers\ProfesorController::class, 'obtenermenorfechainicio']) //este es la funciond el controler
+        ->name('obtener-menorfechainicio'); //la ruta de la view java
 /*
    
 

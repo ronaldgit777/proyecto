@@ -18,7 +18,13 @@ class AsignarpromaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-  
+    public function reporasig()
+    {
+        $asignarpromas=asignarproma::all();
+      
+        return view('asignarproma.reporasig',compact('asignarpromas'));
+    }
+     
     public function index2()
     {
           

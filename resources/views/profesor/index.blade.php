@@ -8,10 +8,10 @@
           <div class="card-header border-0">
             <div class="row align-items-center">
                       <div class="col">
-                        <h3 class="mb-0">LISTA DE DATOS</h3>
+                        <h3 class="mb-0">LISTA DE DATOS PARA REPORTES</h3>
                         <div class="row">
                                 <div class="col">
-                                    <label class="text-primary text-capitalize">fecha de inicio</label>
+                                    <label class="text-primary text-capitalize">fecha de inicioA</label>
                                     <input type="date" name="fechainicio" id="fechainicio" class="form-control" >
                                     <span class="text-muted">desde</span>
                                 </div>
