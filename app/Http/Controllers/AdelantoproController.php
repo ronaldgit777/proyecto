@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\adelantopro;
 use App\Models\profesor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class AdelantoproController extends Controller
 {
@@ -13,6 +14,27 @@ class AdelantoproController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+    public function validaradelanto(Request $request)
+    {
+        $profesorid2 = $request->input('profesorid');
+        $monto2 = $request->input('monto');
+        $resultado = false;
+        $sueldopro =profesor::obtenerSueldo($profesorid2);
+        $fechaActual = Carbon::now();
+        $diastrabajados = $fechaActual->day;
+        $maxadelantomes= ($sueldopro/30)*$diastrabajados;
+        if($maxadelantomes >= $monto2){
+            $totaladelanto = adelantopro::obteneradelanto($profesorid2);//
+            $totaladelanto = $totaladelanto+$monto2;
+            if($maxadelantomes >= $totaladelanto){
+                $resultado = true;
+            }
+        }
+       // return  $resultado; 
+        return response()->json($resultado);
+    }
+
     public function index()
     {
         $adelantopros=adelantopro::all();

@@ -82,6 +82,9 @@ Route::get('/', function () {
         Route::post('/obtener-mesessaldopro', [App\Http\Controllers\SueldoproController::class, 'mesessaldopro'])
         ->name('obtener-mesessaldopro');
 
+        Route::post('/validar-montoadelanto', [App\Http\Controllers\AdelantoproController::class, 'validaradelanto'])
+        ->name('validar-montoadelanto');
+
 
         Route::post('/reporopciones', [App\Http\Controllers\ProfesorController::class, 'opcionesreporte'])->name('opcionesreporte')->middleware('auth');
         Route::get('/reporopciones', [App\Http\Controllers\ProfesorController::class, 'opcionesreporte'])->name('opcionesreporte')->middleware('auth');
@@ -96,6 +99,10 @@ Route::get('/', function () {
         Route::post('/obtener-menorfechainicio', //rutas de vista barra de navegacion
         [App\Http\Controllers\ProfesorController::class, 'obtenermenorfechainicio']) //este es la funciond el controler
         ->name('obtener-menorfechainicio'); //la ruta de la view java
+        //trabjando buscDOR DE LISTA PROFESOR
+        Route::post('/obtener-fechainicio2', //rutas de vista barra de navegacion
+        [App\Http\Controllers\ProfesorController::class, 'obtenerfechainicio2']) //este es la funciond el controler
+        ->name('obtener-fechainicio2'); //la ruta de la view java
 /*
    
 

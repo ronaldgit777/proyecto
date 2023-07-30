@@ -40,7 +40,7 @@
                                     <label class="text text-capitalize" >monto</label>
                                 </div>
                                 <div class="col-8 col-md-9">
-                                    <input class="form-control" placeholder="monto " type="text" name="monto" required autocomplete="monto" id="monto">
+                                    <input class="form-control" placeholder="monto " type="number" name="monto" required autocomplete="monto" id="monto" disabled>
                                
                                 </div>
                               </div>
@@ -88,7 +88,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-12 col-md-12 " >
-                                    <center><input type="submit" value="guardar datos" class="btn btn-primary" onclick="generarpdfadelanto()"></center>
+                                    <center><input type="submit" value="guardar datos" class="btn btn-primary" onclick="generarpdfadelanto()" disabled id="botonadelanto"></center>
                                     </div>
                                 </div>
                             </div>
@@ -103,6 +103,44 @@
 <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
 <!-- Link to pdfmake font files -->
 <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
+
+<script>
+  $(document).ready(function() {
+      $('#monto').on('input', function() {
+        var profesorid = $('#profesor_id').val();  
+       if(profesorid != ''){
+         var monto = $('#monto').val(); 
+         
+               
+
+                  $.ajax({
+                    url: '{{ url("validar-montoadelanto") }}',
+                    type: 'POST',
+                    data: {
+                        profesorid: profesorid, //lo de blanco es la llave q tienes para q se capture la variable
+                        monto:monto,
+                        _token: '{{ csrf_token() }}'
+                      },
+                    success: function (resultado) {
+                      if(resultado){
+                        $("#botonadelanto").prop("disabled", false); 
+                      }else{
+                        $("#botonadelanto").prop("disabled", true); 
+                      }
+                    }
+                  });
+           }
+      });
+      $('#profesor_id').on('change', function() {
+            var profesorid = $('#profesor_id').val();  
+          if(profesorid != ''){
+            $("#monto").prop("disabled", false); 
+            //$("#botonadelanto").prop("disabled", false); 
+          }
+      });
+});
+</script>
+
 <script>
     function generarpdfadelanto(){
      

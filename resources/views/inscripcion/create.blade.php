@@ -31,7 +31,8 @@
                                     <div class="col-8 col-md-9">
                                         <select type="text" name="asignarproma_id" id="asignarproma_id" class="form-control">
                                             @foreach ($asignarpromas as $asignarproma)
-                                            <option value="{{ $asignarproma->id }}">{{ $asignarproma->profesor->nombre }}</option>
+                                            <option value="{{ $asignarproma->id }}">{{ $asignarproma->profesor->nombre."-materia-".$asignarproma->materia->materia
+                                              ."-costo-".$asignarproma->materia->costo}}</option>
                                             @endforeach
                                         </select><br>
                                     </div>
@@ -45,6 +46,11 @@
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <input type="text"  class="btn btn-primary" id="materia_id">
+                                        <select type="text" name="asignarproma_id" id="asignarproma_id" class="form-control">
+                                            @foreach ($asignarpromas as $asignarproma)
+                                            <option value="{{ $asignarproma->id }}">{{ $asignarproma->profesor->nombre }}</option>
+                                            @endforeach
+                                        </select><br>
                                     </div>
                                 </div>
                             </div>
@@ -56,6 +62,11 @@
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <input type="text"  class="btn btn-primary">
+                                        <select type="text" name="asignarproma_id" id="asignarproma_id" class="form-control">
+                                            @foreach ($asignarpromas as $asignarproma)
+                                            <option value="{{ $asignarproma->id }}">{{ $asignarproma->profesor->nombre }}</option>
+                                            @endforeach
+                                        </select><br>
                                     </div>
                                 </div>
                             </div>
@@ -67,6 +78,11 @@
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <input type="text"  class="btn btn-primary">
+                                        <select type="text" name="asignarproma_id" id="asignarproma_id" class="form-control">
+                                            @foreach ($asignarpromas as $asignarproma)
+                                            <option value="{{ $asignarproma->id }}">{{ $asignarproma->profesor->nombre }}</option>
+                                            @endforeach
+                                        </select><br>
                                     </div>
                                 </div>
                             </div>
@@ -79,6 +95,11 @@
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <input type="text"  class="btn btn-primary">
+                                        <select type="text" name="asignarproma_id" id="asignarproma_id" class="form-control">
+                                            @foreach ($asignarpromas as $asignarproma)
+                                            <option value="{{ $asignarproma->id }}">{{ $asignarproma->profesor->nombre }}</option>
+                                            @endforeach
+                                        </select><br>
                                     </div>
                                 </div>
                             </div>
@@ -113,8 +134,7 @@
                                     </div>
                                 </div>
                             </div>
-
-                         
+                                                     
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-12 col-md-12 " >

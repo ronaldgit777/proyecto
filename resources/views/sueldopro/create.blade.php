@@ -97,7 +97,7 @@
                                     </div>
                                     <div class="col-8 col-md-3">
 
-                             <a href="" class="btn btn-primary disabled" data-toggle="modal" data-target="#myModal2" onclick="veradelantos()" id="bo" > <i class="fas fa-plus-circle"></i>ver descuentos</a>
+                             <a href="" class="btn btn-sm btn-primary disabled" data-toggle="modal" data-target="#myModal2" onclick="veradelantos()" id="bo" > <i class="fas fa-plus-circle"></i>ver descuentos</a>
                              
                                         <script>
                                                    function veradelantos() {
@@ -168,7 +168,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-12 col-md-12 " >
-                                    <center><input type="submit" value="guardar datos" class="btn btn-primary disabled" id="botonguardar" ></center>
+                                    <center><input type="submit" value="guardar datos" class="btn btn-primary " id="botonguardar" disabled></center>
                                     </div>
                                 </div>
                             </div>
@@ -214,7 +214,7 @@
                                                     <th>profesor_id</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="miadelanto">
+                                            <tbody id="miadelanto" class="table align-items-center table-flush">
                                                 @foreach ($adelantopros as $adelantopro)
                                                 <tr>
                                                     <td>{{ $adelantopro->id }}</td>
@@ -264,7 +264,7 @@
          bansueldo = false;
          bandescuento =false;
         //$('#bo').class=disabled
-        $('#bo').removeClass('disabled');
+    
       //  $('#bo').addClass('clase-nueva');
         
         // Realizar la consulta AJAX para obtener sueldoprofesor
@@ -335,7 +335,8 @@
         }
 
         function obtenerMeses(profesorId) {
-            $('#botonguardar').addClass('disabled');
+            $("#botonguardar").prop("disabled", true); 
+            $('#bo').addClass('disabled');
             // Realizar la solicitud AJAX para obtener sueldoprofesor
             $.ajax({
                 url: '{{ url("obtener-mesessaldopro") }}',
@@ -349,19 +350,24 @@
                    // alert("todo ok");
                      // Limpiar el campo de selección de periodos
                      $('#mesdepago').empty();
-                   //  for (var i = 0; i < meses.length; i++) {
-                    for (var i = 0; i < 1; i++) {
-                            var mes = meses[i];
-                            //alert(mes);
-                            $('#mesdepago').append(
-                                //obteniendo todos los meses
-                                '<option value="' + mes + '">' + mes + '</option>'
-                            );
-                            cont++;
+                   // for (var i = 0; i < meses.length; i++) {
+                    if(meses.length>0){
+                        for (var i = 0; i < 1; i++) {
+                                var mes = meses[i];
+                                //alert(mes);
+                                $('#mesdepago').append(
+                                    //obteniendo todos los meses
+                                    '<option value="' + mes + '">' + mes + '</option>'
+                                );
+                                cont++;
+                            }
+                        if(cont >0){
+                           // $('#botonguardar').removeClass('disabled');
+                            $("#botonguardar").prop("disabled", false); 
+                            $('#bo').removeClass('disabled');
                         }
-                    if(cont >0){
-                        $('#botonguardar').removeClass('disabled');
                     }
+                      
                   
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 

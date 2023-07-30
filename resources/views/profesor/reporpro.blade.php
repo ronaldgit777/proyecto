@@ -27,11 +27,11 @@
                               </div>
                               <div class="col">
                                 <label class="text-primary text-capitalize">apellido paterno</label>
-                                <input type="text" name="fechafinal" id="fechafinal" class="form-control">
+                                <input type="text" name="apellidopaterno" id="apellidopaterno" class="form-control">
                               </div>
                               <div class="col">
                                 <label class="text-primary text-capitalize">apellido materno</label>
-                                <input type="text" name="fechafinal" id="fechafinal" class="form-control">
+                                <input type="text" name="apellidomaterno" id="apellidomaterno" class="form-control">
                               </div>
                               <div class="col-mb4">
                                 <label class="text-primary text-capitalize">Buscar</label>
@@ -56,21 +56,21 @@
                       <div class="row">
                         <div class="col">
                             <label class="text-primary text-capitalize">celular</label>
-                            <input type="text" name="fechainicio" id="fechainicio" class="form-control" >
+                            <input type="text" name="celular" id="celular" class="form-control" >
                             <span class="text-muted">desde</span>
                         </div>
                         <div class="col">
                             <label class="text-primary text-capitalize">direccion</label>
-                            <input type="text" name="fechafinal" id="fechafinal" class="form-control">
+                            <input type="text" name="direccion" id="direccion" class="form-control">
                             <span class="text-muted">hasta</span>
                         </div>
                         <div class="col">
-                          <label class="text-primary text-capitalize">correo</label>
-                          <input type="text" name="fechafinal" id="fechafinal" class="form-control">
+                          <label class="text-primary text-capitalize">email</label>
+                          <input type="text" name="email" id="email" class="form-control">
                         </div>
                         <div class="col">
                           <label class="text-primary text-capitalize">estado</label>
-                          <input type="text" name="fechafinal" id="fechafinal" class="form-control">
+                          <input type="text" name="estado" id="estado" class="form-control">
                         </div>
                         <div class="col">
                           <label class="text-primary text-capitalize">sueldo -desde</label>
@@ -86,22 +86,21 @@
                           <label class="text-primary text-capitalize">ordenar</label>
                           <div class="input-group">
                             <select type="text" name="ordenar" id="ordenar" class="form-control">
-                              <option value="activo">fechadeingreso</option> 
-                              <option value="inactivo">ci</option> 
-                              <option value="inactivo">nombre</option> 
-                              <option value="inactivo">apellidopaterno</option> 
-                              <option value="inactivo">apellidomaterno</option> 
-                              <option value="inactivo">celular</option> 
-                              <option value="inactivo">direccion</option> 
-                              <option value="inactivo">correo</option> 
-                              <option value="inactivo">estado</option> 
-                              <option value="inactivo">+sueldoM</option> 
-                              <option value="inactivo">-sueldoM</option>
+                              <option value="fechadeingreso">fechadeingreso</option> 
+                              <option value="ci">ci</option> 
+                              <option value="nombre">nombre</option> 
+                              <option value="apellidopaterno">apellidopaterno</option> 
+                              <option value="apellidomaterno">apellidomaterno</option> 
+                              <option value="celular">celular</option> 
+                              <option value="direccion">direccion</option> 
+                              <option value="email">email</option> 
+                              <option value="estado">estado</option> 
+                              <option value="sueldo">sueldo</option> 
                               </select>
                               <div class="input-group-append">
-                                <select type="text" name="ordenar" id="ordenar" class="form-control">
-                                  <option value="activo">MAYOR</option> 
-                                  <option value="inactivo">MENOR</option> 
+                                <select type="text" name="mayorymenor" id="mayorymenor" class="form-control">
+                                  <option value="desc">desc</option> 
+                                  <option value="asc">asc</option> 
                                   </select>
                               </div>
                           </div>
@@ -112,7 +111,7 @@
       </div>
     </div>
   <style>
-    .img-custom {
+ .img-custom {
   width: 50px;
   height: 50px;
 }
@@ -170,31 +169,7 @@
 <!-- Link to pdfmake font files -->
 <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
 
-<script>
-$(document).ready(function() {
-  $('.sortable').click(function() {
-      var table = $(this).parents('table').eq(0);
-      var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
-      this.asc = !this.asc;
-      if (!this.asc) {
-          rows = rows.reverse();
-      }
-      for (var i = 0; i < rows.length; i++) {
-          table.append(rows[i]);
-      }
-  });
-  function comparer(index) {
-      return function(a, b) {
-          var valA = getCellValue(a, index),
-              valB = getCellValue(b, index);
-          return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB);
-      };
-  }
-  function getCellValue(row, index) {
-      return $(row).children('td').eq(index).text();
-  }
-});
-</script> 
+<script></script> 
 
 <script>
     var profeprosData = {!! json_encode($profesors) !!};
@@ -259,6 +234,16 @@ $(document).ready(function() {
 
 <script>
     $(document).ready(function() {
+      var estiloOriginal = $('#nombre').css('border');
+
+      // Cuando se produzca el evento 'click' en cualquier input
+      $('input').on('click', function() {
+        // Restaurar el estilo original del borde en el input "nombre"
+        $('#ci').css('border', estiloOriginal),$('#nombre').css('border', estiloOriginal);$('#apellidopaterno').css('border', estiloOriginal),
+        $('#apellidomaterno').css('border', estiloOriginal),$('#celular').css('border', estiloOriginal);$('#direccion').css('border', estiloOriginal),
+        $('#email').css('border', estiloOriginal);$('#estado').css('border', estiloOriginal);$('#sueldomin').css('border', estiloOriginal);$('#sueldomax').css('border', estiloOriginal);
+        $('#ordenar').css('border', estiloOriginal);$('#mayorymenor').css('border', estiloOriginal);
+      });
 
         $('#fechainicio').on('change', function() {
 
@@ -266,12 +251,21 @@ $(document).ready(function() {
             var fecha_fin = $('#fechafinal').val();
             var ci = $('#ci').val();  
             var nombre = $('#nombre').val();  
+            var apellidopaterno = $('#apellidopaterno').val(); 
+            var apellidomaterno = $('#apellidomaterno').val(); 
+            var celular = $('#celular').val(); 
+            var direccion = $('#direccion').val(); 
+            var email = $('#email').val(); 
+            var estado = $('#estado').val();  
             var sueldomin = $('#sueldomin').val();
             var sueldomax = $('#sueldomax').val();
-            generartabla(fecha_ini,fecha_fin,ci,nombre,sueldomin,sueldomax);      
-         
+            var ordenar = $('#ordenar').val();
+            var mayorymenor = $('#mayorymenor').val();
+            generartabla(fecha_ini,fecha_fin,ci,nombre,apellidopaterno,apellidomaterno,celular,direccion,email,estado,sueldomin,sueldomax,ordenar,mayorymenor);      
+          //  alert(ordenar+mayorymenor);
         });
-        function generartabla(fecha_ini,fecha_fin,ci,nombre,sueldomin,sueldomax) {
+
+        function generartabla(fecha_ini,fecha_fin,ci,nombre,apellidopaterno,apellidomaterno,celular,direccion,email,estado,sueldomin,sueldomax,ordenar,mayorymenor) {
               $.ajax({
                     url: '{{ url("obtener-fechainicio") }}', // Ruta a tu controlador Laravel
                     type: 'POST',
@@ -280,8 +274,15 @@ $(document).ready(function() {
                         fechafinal: fecha_fin,
                         cipro: ci,// Enviar el ID del aula seleccionada
                         nombrepro:nombre,
+                        apellidopaternopro:apellidopaterno,
+                        apellidomaternopro:apellidomaterno,
+                        celularpro:celular,
+                        direccionpro:direccion,
+                        emailpro:email,
+                        estadopro:estado,
                         sueldominpro:sueldomin,
-                        sueldomaxpro:sueldomax,
+                        ordenarpro:ordenar,
+                        mayorymenorpro:mayorymenor,
                       // profesor_id: profesorId,
                         _token: '{{ csrf_token() }}' // Agregar el token CSRF
                     },
@@ -313,7 +314,7 @@ $(document).ready(function() {
                             );
                             //alert(value.id);
                             profesorreporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
-                            $('#miadelanto').find('td').css('border', '1px solid black');
+                          //  $('#miadelanto').find('td').css('border', '1px solid black');
                         });
                     }
                 });
@@ -323,21 +324,86 @@ $(document).ready(function() {
         });
         $('#ci').on('input', function() {
          // alert($(this).val())
-           $('#fechainicio').trigger('change');
+           $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
+           $(this).val($(this).val().replace(/[^\d]/g, ''));
         });
         $('#nombre').on('input', function() {
-         // alert($(this).val())
-           $('#fechainicio').trigger('change');
+           $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
+           $(this).val($(this).val().replace(/[^a-zA-Z]/g, ''));
+        });
+        $('#apellidopaterno').on('input', function() {
+           $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
+        });
+        $('#apellidomaterno').on('input', function() {
+           $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
+        });
+        $('#celular').on('input', function() {
+           $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
+        });
+        $('#direccion').on('input', function() {
+           $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
+        });
+        $('#email').on('input', function() {
+           $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
+        });
+        $('#estado').on('input', function() {
+           $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
         });
         $('#sueldomin').on('input', function() {
          // alert($(this).val())
-           $('#fechainicio').trigger('change');
+           $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
         });
         $('#sueldomax').on('input', function() {
          // alert($(this).val())
-           $('#fechainicio').trigger('change');
+           $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
         });
-    
+        $('#ordenar').on('change', function() {
+         // alert($(this).val())
+           $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
+        });
+        $('#mayorymenor').on('change', function() {
+         // alert($(this).val())
+           $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
+        });
+        //evento keydown
+          // Evento 'keydown' para el input con id "nombre"
+          $('#nombre').on('keydown', function(event) {
+            // Obtener el código de la tecla presionada
+            var keyCode = event.keyCode || event.which;
+             // Permitir las teclas "Borrar" (Eliminar o Backspace)
+              if (keyCode === 8) {
+                return true;
+              }
+             // Verificar si el código de la tecla corresponde a una letra del alfabeto (mayúscula o minúscula)
+            if ((keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122)) {
+              // Permitir que la tecla se refleje en el valor del input (es una letra)
+              return true;
+            } else {
+              // Bloquear todas las demás teclas (no es una letra)
+              event.preventDefault();
+              return false;
+            }
+          });
+          // Evento 'keydown' para el input con id "ci"
+          $('#ci').on('keydown', function(event) {
+            // Obtener el código de la tecla presionada
+            var keyCode = event.keyCode || event.which;
+
+            // Permitir las teclas "Borrar" (Eliminar o Backspace)
+            if (keyCode === 8) {
+              return true;
+            }
+
+            // Verificar si el código de la tecla corresponde a un número (0-9)
+            if ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 96 && keyCode <= 105)) {
+              // Permitir que la tecla se refleje en el valor del input (es un número)
+              return true;
+            } else {
+              // Bloquear todas las demás teclas (no es un número ni la tecla "Borrar")
+              event.preventDefault();
+              return false;
+            }
+          });
     });
 </script>
 

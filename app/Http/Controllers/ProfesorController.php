@@ -16,7 +16,17 @@ class ProfesorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+    public function  obtenerfechainicio2(Request $request)
+    {   
+       $rutaImagenBase = asset('storage').'/';
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $buscarpro2 = $request->input('buscarpro');
+       $resultadoconsulta = profesor::obtenerprofesoresdesdefechainicio2($fechaini,$rutaImagenBase,$fechafin,$buscarpro2);
+           
+       return response()->json($resultadoconsulta);        
+    }
+
     public function obtenermenorfechainicio()
     {   
        $buscarmenorfecha = profesor::obtenermenorfechadesdefechainicio();
@@ -30,9 +40,18 @@ class ProfesorController extends Controller
         $fechafin = $request->input('fechafinal');
         $cipro2 = $request->input('cipro');
         $nombrepro2 = $request->input('nombrepro');
+        $apellidopaternopro2 = $request->input('apellidopaternopro');
+        $apellidomaternopro2 = $request->input('apellidomaternopro');
+        $celularpro2 = $request->input('celularpro');
+        $direccionpro2 = $request->input('direccionpro');
+        $emailpro2 = $request->input('emailpro');
+        $estadopro2 = $request->input('estadopro');
         $sueldominpro2 = $request->input('sueldominpro');
         $sueldomaxpro2 = $request->input('sueldomaxpro');
-        $resultadoconsulta = profesor::obtenerprofesoresdesdefechainicio($fechaini,$rutaImagenBase,$fechafin,$cipro2,$nombrepro2,$sueldominpro2,$sueldomaxpro2);
+        $ordenarpro2 = $request->input('ordenarpro'); $mayorymenorpro2 = $request->input('mayorymenorpro');
+        $resultadoconsulta = profesor::obtenerprofesoresdesdefechainicio($fechaini,$rutaImagenBase,$fechafin,
+        $cipro2,$nombrepro2,$apellidopaternopro2,$apellidomaternopro2,$celularpro2,$direccionpro2,$emailpro2,$estadopro2,
+        $sueldominpro2,$sueldomaxpro2, $ordenarpro2, $mayorymenorpro2);
             
         return response()->json($resultadoconsulta);        
      }
