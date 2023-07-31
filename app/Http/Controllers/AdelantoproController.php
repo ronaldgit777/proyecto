@@ -51,7 +51,7 @@ class AdelantoproController extends Controller
      */
     public function create()
     {
-        return view('adelantopro.create',['profesors'=>profesor::all()]);
+        return view('adelantopro.create',['profesors'=>profesor::all()],['adelantopros'=>adelantopro::all()]);
     }
 
     /**

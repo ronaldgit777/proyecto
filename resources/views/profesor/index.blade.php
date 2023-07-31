@@ -24,9 +24,9 @@
                                   <label class="text-primary text-capitalize">Buscar</label>
                                   <div class="input-group">
                                     <input type="text" name="buscar" id="buscar" class="form-control" placeholder="Ingrese término de búsqueda">
-                                      <div class="input-group-append">
+                                     <!--  <div class="input-group-append">
                                         <button class="btn btn-primary" type="button"><i class="fas fa-search"></i>Buscar</button>
-                                      </div>
+                                      </div>  -->
                                   </div>
                                 </div>
                                 <div class="col">
@@ -34,7 +34,7 @@
                                   <button class="btn btn-danger" type="button"><i class="fas fa-print"></i>imprimir</button>
                                 </div>  
                                 <div class="col text-right">
-                                  <a href="{{url('reporopciones')}}" class="btn btn-sm btn-success" >
+                                  <a href="{{url('home')}}" class="btn btn-sm btn-success" >
                                   <i class="fas fa-plus-circle"></i>
                                   regresar</a>
                               </div>  
@@ -47,7 +47,7 @@
           <table id="tabla_id" class="table align-items-center table-flush" >
             <thead class="thead-light">
               <tr>
-                <th scope="col">id</th>
+                {{-- <th scope="col">id</th> --}}
                 <th scope="col">fechadeingreso</th>
                 <th scope="col">ci</th>
                 <th scope="col">nombre</th>
@@ -56,16 +56,16 @@
                 <th scope="col">celular</th>
                 <th scope="col">direccion</th>
                 <th scope="col">correo</th>
-                <th scope="col">estado</th>
+                {{-- <th scope="col">estado</th> --}}
                 <th scope="col">imagen</th>
-                <th scope="col">sueldo</th>
+                {{-- <th scope="col">sueldo</th> --}}
                 <th scope="col">acciones</th>
               </tr>
             </thead>
             <tbody id="tabla_profe2">
               @foreach ($profesors as $profesor)
                         <tr>
-                            <td scope="row">{{ $profesor->id }}</td>
+                            {{-- <td scope="row">{{ $profesor->id }}</td> --}}
                             <td>{{ $profesor->fechadeingreso }}</td>
                             <td>{{ $profesor->ci }}</td>
                             <td>{{ $profesor->nombre }}</td>
@@ -74,18 +74,18 @@
                             <td>{{ $profesor->celular }}</td>
                             <td>{{ $profesor->direccion }}</td>
                             <td>{{ $profesor->user->email }}</td>
-                            <td>{{ $profesor->estado }}</td>
+                            {{-- <td>{{ $profesor->estado }}</td> --}}
                             <td>
                             <img src="{{ asset('storage').'/'.$profesor->imagen}}" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid">
                             </td>
-                            <td>{{ $profesor->sueldo }}</td>
+                            {{-- <td>{{ $profesor->sueldo }}</td> --}}
                             <td>
                             <a href="{{ url('/profesor/'.$profesor->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
                               <i class="fas fa-edit"></i>
-                              editar</a>//
+                              </a>
                             <a href="{{ url('/profesor/'.$profesor->id.'/') }}" method="post" class="btn btn-sm btn-danger">
                               <i class="far fa-eye"></i>
-                              ver</a>                     
+                            </a>                     
                             </td>
                         </tr>
                         @endforeach
@@ -197,7 +197,7 @@
                           // alert(value.id)
                           $('#tabla_profe2').append(
                               '<tr>'+
-                              ' <td>'+value.id+'</td>'+
+                              // ' <td>'+value.id+'</td>'+
                                   '<td>'+value.fechadeingreso+'</td>'+
                                   ' <td>'+value.ci+'</td>'+
                                   ' <td>'+value.nombre+'</td>'+
@@ -206,14 +206,13 @@
                                   ' <td>'+value.celular+'</td>'+
                                   ' <td>'+value.direccion+'</td>'+
                                   ' <td>'+value.email+'</td>'+
-                                  ' <td>'+value.estado+'</td>'+
+                                  // ' <td>'+value.estado+'</td>'+
                                   ' <td><img src="'+value.ruta_imagen+'" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid"></td>'+
-                                  ' <td>'+value.sueldo+'</td>'+
+                                  //' <td>'+value.sueldo+'</td>'+
                                  // ' <td>'+value.role+'</td>'+
                                   ' <td>'+
-                                    '   <a href="/proyecto/public/profesor/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary">Editar</a>' +
-
-                                    '<a href="/proyecto/public/profesor/' + value.id + '/" method="post" class="btn btn-sm btn-danger">ver</a>'+
+                                    '<a href="/proyecto/public/profesor/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
+                                    '<a href="/proyecto/public/profesor/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
                                   ' </td>'+
                               ' </tr>'
                           );

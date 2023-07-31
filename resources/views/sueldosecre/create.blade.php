@@ -32,11 +32,9 @@
                                     <div class="col-8 col-md-9">
                                         <select type="text" name="secretaria_id" id="secretaria_id" class="form-control" required>
                                             <option selected disabled value="">seleccione a la secretaria</option>
-                                            
                                             @foreach ($secretarias as $secretaria)
                                             <option value="{{ $secretaria->id }}">{{ $secretaria->nombre."-SUELDO : ".$secretaria->sueldo }}</option>
                                             @endforeach
-                                           
                                         </select>
                                     </div>
                                 </div>
@@ -80,9 +78,7 @@
                                         <label class="text text-capitalize">sueldo</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                  
-                                        <input type="text" name="fechadesueldo" id="sueldo" class="form-control"  value=""  > 
-                                      
+                                        <input type="text"  id="sueldo" class="form-control"  value=""  readonly> 
                                     </div>
                                 </div>
                             </div>
@@ -92,12 +88,50 @@
                                         <label class="text text-capitalize">totaldescuento</label>
                                     </div>
                                     <div class="col-8 col-md-6">
-                                        <input type="text" name="totaldescuento" id="totaldescuento" class="form-control" > <br>
-                                       
+                                        <input type="text" name="totaldescuento" id="totaldescuento" class="form-control" readonly> <br>
                                     </div>
-                                    <div class="col-8 col-md-3">
-                                         <a href="{{ url('adelantosecre/') }}" class="btn btn-success text-capitalize">verificar</a>
-                                    </div>
+                                            <div class="col-8 col-md-3">
+                                                <a href="" class="btn btn-success disabled" data-toggle="modal" data-target="#myModal2" onclick="veradelantos()" id="bosecre" > 
+                                            <i class="fas fa-plus-circle"></i>descuentos</a>
+                                                   <script>
+                                                              function veradelantos() {
+                                                                   var secretariaId = $('#secretaria_id').val();
+                                                                   $.ajax({
+                                                                           url: '{{ url("obtener-adelantosecre") }}',
+                                                                           type: 'POST',
+                                                                           data: {
+                                                                            secretaria_id: secretariaId,
+                                                                               _token: '{{ csrf_token() }}'
+                                                                           },
+                                                                           success: function(response) {
+                                                                               $('#miadelantodesecre').empty();
+                                                                              
+                                                                               $.each(response, function(key, value) {
+                                                                                  // alert(value.id)
+                                                                                   $('#miadelantodesecre').append(
+                                                                                       '<tr>'+
+                                                                                       ' <td>'+value.id+'</td>'+
+                                                                                           '<td>'+value.fechaadelantosecre+'</td>'+
+                                                                                           ' <td>'+value.monto+'</td>'+
+                                                                                           ' <td>'+value.estadoade+'</td>'+
+                                                                                           ' <td>'+value.observacion+'</td>'+
+                                                                                           '<td>'+value.secretaria_id+"-"+value.nombre_secretaria+'</td>'+
+                                                                                       ' </tr>'
+                                                                                   );
+                                                                                   // Agregar el estilo de borde usando jQuery
+                                                                                   $('#miadelantodesecre').find('td').css('border', '1px solid black');
+           
+                                                                               });
+                                                                           }
+                                                                           ,     error: function(xhr, status, error) {
+                                                                                       // Manejar el error aquí
+                                                                                       console.error(error);
+                                                                                   }
+                                                                                   });
+                                                              } 
+                                                   </script>
+                                                  
+                                               </div>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-6">
@@ -106,7 +140,7 @@
                                         <label class="text text-capitalize">totalpago</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="totalpago" id="totalpago" class="form-control" > <br>
+                                        <input type="text" name="totalpago" id="totalpago" class="form-control" readonly> <br>
                                     </div>
                                 </div>
                             </div>
@@ -120,12 +154,10 @@
                                     </div>
                                 </div>
                             </div>
-                         
-                            
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-12 col-md-12 " >
-                                    <center><input type="submit" value="guardar datos" class="btn btn-primary"></center>
+                                        <center><input type="submit" value="guardar datos" class="btn btn-primary " id="botonguardar" disabled></center>
                                     </div>
                                 </div>
                             </div>
@@ -136,4 +168,190 @@
     </form>
 </div>
 @endsection
+ <!--empeiza el modal-->
+ <div class="modal fade " id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg " role="document">
+          <div class="modal-content p-3 mb-2 bg-info">
+               <div class="modal-body">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                    <div class="card shadow p-3 mb-2 bg-info text-white">
+                          <div class="card-header border-0">
+                              <div class="row align-items-center">
+                                  <div class="col">
+                                      <h3 class="mb-0">LISTA DE ADELANTOS</h3>
+                                  </div>
+                                  <div class="col text-right">
+                                  </div>
+                              </div>
+                          </div>
+                                  <div  class="table-responsive">
+                                      <table class="table align-items-center table-flush">
+                                          <thead class="thead-light">
+                                              <tr>
+                                                  <th>#</th>
+                                                  <th>fechadesupre</th>
+                                                  <th>monto</th>
+                                                  <th>estado</th>
+                                                  <th>observacion</th>
+                                                  <th>profesor_id</th>
+                                              </tr>
+                                          </thead>
+                                          <tbody id="miadelantodesecre" class="table align-items-center table-flush">
+                                              @foreach ($adelantosecres as $adelantosecre)
+                                              <tr>
+                                                  <td>{{ $adelantosecre->id }}</td>
+                                                  <td>{{ $adelantosecre->fechaadelantosecre }}</td>
+                                                  <td>{{ $adelantosecre->monto }}</td>
+                                                  <td>{{ $adelantosecre->estadoade }}</td>
+                                                  <td>{{ $adelantosecre->observacion }}</td>
+                                                  <td>{{ $adelantosecre->secretaria_id ."-".$adelantosecre->secretaria->nombre}}</td>
+                                                  </td>
+                                              </tr>
+                                              @endforeach
+                                          </tbody>
+                                      </table>
+                                  </div>  
+                                      <div class="col-12 col-sm-12 col-md-6">
+                                          <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
+                                              <div class="col-12 col-md-12 " >
+                                              </div>
+                                          </div>
+                                      </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </form>
+              </div>
+          </div>
+    </div>
+</div>
+<!--filaliza el modal-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<script>
+    $(document).ready(function() {
+        //verificar q esten el sueldo y descuento 
+        var bansueldo = false;
+        var bandescuento =false;
+        $('#secretaria_id').on('change', function() {
+        var secretariaId = $(this).val();
+         bansueldo = false;
+         bandescuento =false;
+        //$('#bo').class=disabled
+    
+      //  $('#bo').addClass('clase-nueva');
+        
+        // Realizar la consulta AJAX para obtener sueldoprofesor
+        obtenersueldosecretaria(secretariaId);
+        
+        // Realizar la consulta AJAX para obtener los meses de deuda
+        //obtenerlosmesesdeuda(profesorId);
+        
+        // Realizar la consulta AJAX para obtener la sumatoria de adelantos
+        obtenerSumatoriaAdelantossecre(secretariaId);
+        //resultado de el suedo menos los adaelnto
+        /*setTimeout(function() {
+                console.log('Ejecutando función cada 2 segundos.');
+                var totalpago = $('#sueldo').val()-$('#totaldescuento').val();
+                    $('#totalpago').val(totalpago); 
+                    //alert($('#sueldo').val());
+                // Agrega aquí el código que deseas ejecutar cada 2 segundos
+            }, 1000); // 2000 milisegundos = 2 segundos */
+        //generar meses
+        obtenerMesessecre(secretariaId);
+        });
 
+
+        function obtenersueldosecretaria(secretariaId) {
+            
+            // Realizar la solicitud AJAX para obtener sueldoprofesor
+            $.ajax({
+                url: '{{ url("obtener-sueldosecretaria") }}',
+                type: 'POST',
+                data: {
+                    secretaria_id: secretariaId,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    //alert(response);
+                    $('#sueldo').val(response);
+                    if(bandescuento) {
+                        var totalpago = $('#sueldo').val()-$('#totaldescuento').val();
+                         $('#totalpago').val(totalpago);
+                    } else{
+                        bansueldo = true;
+                    }
+                }
+            });
+        }
+        function obtenerSumatoriaAdelantossecre(secretariaId) {
+            // Realizar la solicitud AJAX para obtener sueldoprofesor
+            $.ajax({
+                url: '{{ url("obtener-SumatoriaAdelantossecre") }}',
+                type: 'POST',
+                data: {
+                    secretaria_id: secretariaId,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    //alert(response);
+                    $('#totaldescuento').val(response);
+                    if(bansueldo) {
+                        var totalpago = $('#sueldo').val()-$('#totaldescuento').val();
+                         $('#totalpago').val(totalpago);
+                    } else{
+                        bandescuento = true;
+                    }
+                }
+            });
+        }
+
+        function obtenerMesessecre(secretariaId) {
+            $("#botonguardar").prop("disabled", true); 
+            $('#bosecre').addClass('disabled');
+            // Realizar la solicitud AJAX para obtener sueldoprofesor
+            $.ajax({
+                url: '{{ url("obtener-mesessaldosecre") }}',
+                type: 'POST',
+                data: {
+                    secretaria_id: secretariaId,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(meses) {
+                   var cont=0;
+                   // alert("todo ok");
+                     // Limpiar el campo de selección de periodos
+                     $('#mesdepago').empty();
+                   // for (var i = 0; i < meses.length; i++) {
+                    if(meses.length>0){
+                        for (var i = 0; i < 1; i++) {
+                                var mes = meses[i];
+                                //alert(mes);
+                                $('#mesdepago').append(
+                                    //obteniendo todos los meses
+                                    '<option value="' + mes + '">' + mes + '</option>'
+                                );
+                                cont++;
+                            }
+                        if(cont >0){
+                           // $('#botonguardar').removeClass('disabled');
+                            $("#botonguardar").prop("disabled", false); 
+                            $('#bosecre').removeClass('disabled');
+                        }
+                    }
+                      
+                  
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+                      // Limpiar el campo de selección de periodos
+                       
+                }
+            });
+        }
+            // Simular el evento change al cargar la página
+        $('#aula_id').trigger('change');
+    });
+</script>

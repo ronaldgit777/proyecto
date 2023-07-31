@@ -48,7 +48,6 @@ class SueldoproController extends Controller
     public function store(Request $request)
     {
         $datossueldopro=request()->except('_token');
-       
         sueldopro::insert($datossueldopro);
         //return response()->json($datosprofesor);
         $profesorId = $request->input('profesor_id');

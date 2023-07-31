@@ -32,11 +32,9 @@
                                     <div class="col-8 col-md-9">
                                         <select type="text" name="profesor_id" id="profesor_id" class="form-control" required>
                                             <option selected disabled value="">seleccione al profesor</option>
-                                            
                                             @foreach ($profesors as $profesor)
                                             <option value="{{ $profesor->id }}">{{ $profesor->nombre."-SUELDO : ".$profesor->sueldo }}</option>
                                             @endforeach
-                                           
                                         </select>
                                     </div>
                                 </div>
@@ -80,9 +78,7 @@
                                         <label class="text text-capitalize">sueldo</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                  
                                         <input type="text"  id="sueldo" class="form-control"  value=""  readonly> 
-                                      
                                     </div>
                                 </div>
                             </div>
@@ -93,17 +89,13 @@
                                     </div>
                                     <div class="col-8 col-md-6">
                                         <input type="text" name="totaldescuento" id="totaldescuento" class="form-control" readonly> <br>
-                                       
                                     </div>
                                     <div class="col-8 col-md-3">
-
-                             <a href="" class="btn btn-sm btn-primary disabled" data-toggle="modal" data-target="#myModal2" onclick="veradelantos()" id="bo" > <i class="fas fa-plus-circle"></i>ver descuentos</a>
-                             
+                             <a href="" class="btn btn-success disabled" data-toggle="modal" data-target="#myModal2" onclick="veradelantos()" id="bo" > 
+                            <i class="fas fa-plus-circle"></i>descuentos</a>
                                         <script>
                                                    function veradelantos() {
-                                                      
                                                         var profesorId = $('#profesor_id').val();
-                                                        
                                                         $.ajax({
                                                                 url: '{{ url("obtener-adelantopro") }}',
                                                                 type: 'POST',
@@ -136,8 +128,7 @@
                                                                             console.error(error);
                                                                         }
                                                                         });
-                                                   }
-                                                        
+                                                   } 
                                         </script>
                                        
                                     </div>
@@ -163,8 +154,6 @@
                                     </div>
                                 </div>
                             </div>
-                         
-                            
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-12 col-md-12 " >
@@ -179,8 +168,6 @@
     </form>
 </div>
 @endsection
-
-
   <!--empeiza el modal-->
   <div class="modal fade " id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog modal-lg " role="document">
@@ -193,7 +180,7 @@
                             <div class="card-header border-0">
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <h3 class="mb-0">REGISTRO DEL ADELANTO </h3>
+                                        <h3 class="mb-0">LISTA DE ADELANTOS</h3>
                                     </div>
                                     <div class="col text-right">
                                     </div>
@@ -202,9 +189,6 @@
                                     <div  class="table-responsive">
                                         <table class="table align-items-center table-flush">
                                             <thead class="thead-light">
-
-
-                                                
                                                 <tr>
                                                     <th>#</th>
                                                     <th>fechadesupre</th>
@@ -220,6 +204,7 @@
                                                     <td>{{ $adelantopro->id }}</td>
                                                     <td>{{ $adelantopro->fechaadelantopro }}</td>
                                                     <td>{{ $adelantopro->monto }}</td>
+                                                    <td>{{ $adelantopro->estadoade }}</td>
                                                     <td>{{ $adelantopro->observacion }}</td>
                                                     <td>{{ $adelantopro->profesor_id ."-".$adelantopro->profesor->nombre}}</td>
                                                     </td>
@@ -244,14 +229,6 @@
       </div>
   </div>
 <!--filaliza el modal-->
-
-
-
-
-
-
-
-
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <script>
@@ -310,8 +287,6 @@
                 }
             });
         }
-
-        
         function obtenerSumatoriaAdelantos(profesorId) {
             // Realizar la solicitud AJAX para obtener sueldoprofesor
             $.ajax({

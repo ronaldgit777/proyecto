@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\adelantosecre;
 use App\Models\secretaria;
 use App\Models\sueldosecre;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class SueldosecreController extends Controller
 {
@@ -29,7 +31,7 @@ class SueldosecreController extends Controller
      */
     public function create()
     {
-        return view('sueldosecre.create',['secretarias'=>secretaria::all()]);
+        return view('sueldosecre.create',['secretarias'=>secretaria::all()],['adelantosecres'=>adelantosecre::all()]);
     }
 
     /**
@@ -41,9 +43,10 @@ class SueldosecreController extends Controller
     public function store(Request $request)
     {
         $datossueldosecre=request()->except('_token');
-       
         sueldosecre::insert($datossueldosecre);
-        //return response()->json($datosprofesor);
+         //return response()->json($datosprofesor);
+        $secretariaId = $request->input('secretaria_id');
+        adelantosecre::where('secretaria_id', $secretariaId)->update(['estadoade' => 'pagado']);
         return redirect('sueldosecre');
     }
 
@@ -90,5 +93,56 @@ class SueldosecreController extends Controller
     public function destroy(sueldosecre $sueldosecre)
     {
         //
+    }
+    public function obtenerSueldosecretaria(Request $request)
+    {
+        $secretariaId = $request->input('secretaria_id');
+        $sueldo = secretaria::obtenersueldo($secretariaId);
+            
+        return response()->json($sueldo);
+            
+    }
+    public function obtenerlistasecreid(Request $request)
+    {
+        $secretariaId = $request->input('secretaria_id');
+        $listasecre = adelantosecre::obtenerlistasecreid2($secretariaId);
+            
+        return response()->json($listasecre);
+            
+    }
+    public function mesessaldosecre(Request $request)
+    {
+        $secretariaId = $request->input('secretaria_id');
+
+        $cantidadRegistros = sueldosecre::where('secretaria_id', $secretariaId)->count();  
+
+        // Obtén el profesor utilizando el profesor_id
+        $secretaria= secretaria::findOrFail($secretariaId);
+        // Obtén la fecha de ingreso del profesor
+        $fechaIngreso = Carbon::parse($secretaria->fechadeingreso); 
+
+        // Establecer la configuración local a español
+         Carbon::setLocale('es');
+        // Obtén la fecha actual
+        $fechaActual = Carbon::now();  
+
+        //sumar los meses pagados
+        $fechaIngreso->addMonths($cantidadRegistros); 
+
+        // Calcula la diferencia en meses
+        $mesesTranscurridos = $fechaIngreso->diffInMonths($fechaActual); 
+        // Genera los nombres de los meses para cada mes transcurrido
+        $mesesTexto = [];
+
+        for ($i = 0; $i < $mesesTranscurridos; $i++) {
+
+            $fechaMes = $fechaIngreso->copy()->addMonths($i);
+           // $mesesTexto[] = $fechaMes->IsoformatLocalized('%B');
+            $mesesTexto[] = $fechaMes->isoFormat('MMMM');
+        }
+
+            
+        return response()->json($mesesTexto);
+            
     }
 }

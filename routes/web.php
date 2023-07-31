@@ -49,14 +49,8 @@ Route::get('/', function () {
         //route::get('/',[ProfesorController::class,'index'])->name('home');
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
          //abre el formulario de registro de usuario
-        // route::resource('user',user::class)->middleware('auth');
+        // route::resource('user',user::class)->middleware('auth');     
      
-        route::resource('secretaria',SecretariaController::class)->middleware('auth');
-        route::resource('sueldosecre',SueldosecreController::class)->middleware('auth');
-        route::resource('adelantosecre',AdelantosecreController::class)->middleware('auth');
-        route::resource('profesor', ProfesorController::class);
-        route::resource('sueldopro',SueldoproController::class)->middleware('auth');
-        route::resource('adelantopro',adelantoprocontroller::class)->middleware('auth');
         route::resource('periodo',PeriodoController::class)->middleware('auth');
         route::resource('aula',AulaController::class)->middleware('auth');
         route::resource('materia',MateriaController::class)->middleware('auth');       
@@ -71,38 +65,41 @@ Route::get('/', function () {
         Route::get('/alumpro', [App\Http\Controllers\AlumnoController::class, 'index2'])->name('index2')->middleware('auth');
         Route::post('/alumpro', [App\Http\Controllers\AlumnoController::class, 'index2'])->name('index2')->middleware('auth');
        // Route::get('/asignarproma', [App\Http\Controllers\AsignarpromaController::class, 'asigpro'])->name('asig')->middleware('auth');
-        Route::post('/obtener-periodos', [App\Http\Controllers\AsignarpromaController::class, 'obtenerPeriodos'])
-        ->name('obtener-periodos');
-        Route::post('/obtener-sueldoprofesor', [App\Http\Controllers\SueldoproController::class, 'obtenerSueldoProfesor'])
-        ->name('obtener-sueldoprofesor');
-        Route::post('/obtener-SumatoriaAdelantos', [App\Http\Controllers\AdelantoproController::class, 'obtenersumatoriaadelantosProfesor'])
-        ->name('obtener-SumatoriaAdelantos');
-        Route::post('/obtener-adelantopro', [App\Http\Controllers\SueldoproController::class, 'obtenerlistaproid'])
-        ->name('obtener-adelantopro');
-        Route::post('/obtener-mesessaldopro', [App\Http\Controllers\SueldoproController::class, 'mesessaldopro'])
-        ->name('obtener-mesessaldopro');
+        Route::post('/obtener-periodos', [App\Http\Controllers\AsignarpromaController::class, 'obtenerPeriodos'])->name('obtener-periodos');
 
-        Route::post('/validar-montoadelanto', [App\Http\Controllers\AdelantoproController::class, 'validaradelanto'])
-        ->name('validar-montoadelanto');
-
-
-        Route::post('/reporopciones', [App\Http\Controllers\ProfesorController::class, 'opcionesreporte'])->name('opcionesreporte')->middleware('auth');
-        Route::get('/reporopciones', [App\Http\Controllers\ProfesorController::class, 'opcionesreporte'])->name('opcionesreporte')->middleware('auth');
-
-        Route::get('/reporpro', [App\Http\Controllers\ProfesorController::class, 'reporpro'])->name('reporpro')->middleware('auth');
+        route::resource('profesor', ProfesorController::class);
+        route::resource('sueldopro',SueldoproController::class)->middleware('auth');
+        route::resource('adelantopro',adelantoprocontroller::class)->middleware('auth');
+        Route::post('/obtener-sueldoprofesor', [App\Http\Controllers\SueldoproController::class, 'obtenerSueldoProfesor'])->name('obtener-sueldoprofesor');
+        Route::post('/obtener-SumatoriaAdelantos', [App\Http\Controllers\AdelantoproController::class, 'obtenersumatoriaadelantosProfesor'])->name('obtener-SumatoriaAdelantos');
+        Route::post('/obtener-adelantopro', [App\Http\Controllers\SueldoproController::class, 'obtenerlistaproid'])->name('obtener-adelantopro');
+        Route::post('/obtener-mesessaldopro', [App\Http\Controllers\SueldoproController::class, 'mesessaldopro'])->name('obtener-mesessaldopro');
+        Route::post('/validar-montoadelanto', [App\Http\Controllers\AdelantoproController::class, 'validaradelanto'])->name('validar-montoadelanto');
+        Route::post('/obtener-fechainicio',[App\Http\Controllers\ProfesorController::class, 'obtenerfechainicio'])->name('obtener-fechainicio'); 
+        Route::post('/obtener-menorfechainicio',[App\Http\Controllers\ProfesorController::class, 'obtenermenorfechainicio'])->name('obtener-menorfechainicio');
+        Route::post('/obtener-fechainicio2',[App\Http\Controllers\ProfesorController::class, 'obtenerfechainicio2'])->name('obtener-fechainicio2'); //reporte buscadir
         
+
+
+        route::resource('secretaria',SecretariaController::class)->middleware('auth');
+        route::resource('sueldosecre',SueldosecreController::class)->middleware('auth');
+        route::resource('adelantosecre',AdelantosecreController::class)->middleware('auth');
+        Route::post('/obtener-sueldosecretaria', [App\Http\Controllers\SueldosecreController::class, 'obtenerSueldosecretaria'])->name('obtener-sueldosecretaria');
+        Route::post('/obtener-SumatoriaAdelantossecre', [App\Http\Controllers\AdelantosecreController::class, 'obtenersumatoriaadelantossecretaria'])->name('obtener-SumatoriaAdelantossecre');
+        Route::post('/obtener-adelantosecre', [App\Http\Controllers\SueldosecreController::class, 'obtenerlistasecreid'])->name('obtener-adelantosecre');
+        Route::post('/obtener-mesessaldosecre', [App\Http\Controllers\SueldosecreController::class, 'mesessaldosecre'])->name('obtener-mesessaldosecre');
+        Route::post('/validar-montoadelantosecre', [App\Http\Controllers\AdelantosecreController::class, 'validaradelantosecre'])->name('validar-montoadelantosecre');
+        Route::post('/obtener-fechainiciosecre',[App\Http\Controllers\SecretariaController::class, 'obtenerfechainicio'])->name('obtener-fechainiciosecre'); 
+        Route::post('/obtener-menorfechainiciosecre',[App\Http\Controllers\SecretariaController::class, 'obtenermenorfechainicio'])->name('obtener-menorfechainiciosecre');
+        Route::post('/obtener-fechainiciosecre2',[App\Http\Controllers\SecretariaController::class, 'obtenerfechainiciosecre2'])->name('obtener-fechainiciosecre2'); //reporte buscadir
+        
+
+
+        Route::get('/reporopciones', [App\Http\Controllers\ProfesorController::class, 'opcionesreporte'])->name('opcionesreporte')->middleware('auth');
+        Route::get('/reporpro', [App\Http\Controllers\ProfesorController::class, 'reporpro'])->name('reporpro')->middleware('auth');
         Route::get('/reporasig', [App\Http\Controllers\AsignarpromaController::class, 'reporasig'])->name('reporasig')->middleware('auth');
 
-        Route::post('/obtener-fechainicio', //rutas de vista barra de navegacion
-        [App\Http\Controllers\ProfesorController::class, 'obtenerfechainicio']) //este es la funciond el controler
-        ->name('obtener-fechainicio'); //la ruta de la view java
-        Route::post('/obtener-menorfechainicio', //rutas de vista barra de navegacion
-        [App\Http\Controllers\ProfesorController::class, 'obtenermenorfechainicio']) //este es la funciond el controler
-        ->name('obtener-menorfechainicio'); //la ruta de la view java
-        //trabjando buscDOR DE LISTA PROFESOR
-        Route::post('/obtener-fechainicio2', //rutas de vista barra de navegacion
-        [App\Http\Controllers\ProfesorController::class, 'obtenerfechainicio2']) //este es la funciond el controler
-        ->name('obtener-fechainicio2'); //la ruta de la view java
+        
 /*
    
 

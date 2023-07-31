@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\adelantosecre;
 use App\Models\secretaria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class AdelantosecreController extends Controller
 {
@@ -13,6 +14,25 @@ class AdelantosecreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function validaradelantosecre(Request $request)
+    {
+        $secretariaid2 = $request->input('secretariaid');
+        $monto2 = $request->input('monto');
+        $resultado = false;
+        $sueldosecre =secretaria::obtenerSueldo($secretariaid2);
+        $fechaActual = Carbon::now();
+        $diastrabajados = $fechaActual->day;
+        $maxadelantomes= ($sueldosecre/30)*$diastrabajados;
+        if($maxadelantomes >= $monto2){
+            $totaladelanto = adelantosecre::obteneradelantosecre($secretariaid2);//
+            $totaladelanto = $totaladelanto+$monto2;
+            if($maxadelantomes >= $totaladelanto){
+                $resultado = true;
+            }
+        }
+       // return  $resultado; 
+        return response()->json($resultado);
+    }
     public function index()
     {
         $adelantosecres=adelantosecre::all();
@@ -92,7 +112,7 @@ class AdelantosecreController extends Controller
     }
     public function obtenersumatoriaadelantossecretaria(Request $request)
     {
-        $secretariaId = $request->input('profesor_id');
+        $secretariaId = $request->input('secretaria_id');
         $totaladelanto = adelantosecre::obteneradelantosecre($secretariaId);//obteneradelanto es la funcion del adelantopro el modelo
         return response()->json($totaladelanto);
     }

@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class adelantosecre extends Model
 {
     protected $table = "adelantosecres";
+    protected $fillable = [
+        'secretaria_id', 
+        'monto',
+        'estadoade',
+        'observacion',
+        'fechaadelantosecre'
+    ];
    
     public function secretaria()
     {
@@ -15,19 +22,17 @@ class adelantosecre extends Model
     }
     public static function obteneradelantosecre($secretariaId)
     {
-        $sumatoriaMonto = adelantosecre::where('secretaria_id', $secretariaId)->where('observacion','pendiente')
+        $sumatoriaMonto = adelantosecre::where('secretaria_id', $secretariaId)->where('estadoade','pendiente')
         ->sum('monto');
-
         return $sumatoriaMonto;
     }
-    public static function obtenerlistaproid2($secretariaId)
+    public static function obtenerlistasecreid2($secretariaId)
     {
-        
-        $adelantopro = adelantopro::where('profesor_id', $secretariaId)->where('observacion','pendiente')
-                    ->join('profesors', 'adelantopros.profesor_id', '=', 'profesors.id')
-                    ->select('adelantopros.*', 'profesors.nombre as nombre_profesor')
+        $adelantosecre = adelantosecre::where('secretaria_id', $secretariaId)->where('estadoade','pendiente')
+                    ->join('secretarias', 'adelantosecres.secretaria_id', '=', 'secretarias.id')
+                    ->select('adelantosecres.*', 'secretarias.nombre as nombre_secretaria')
                     ->get();
 
-        return $adelantopro;
+        return $adelantosecre;
     }
-}
+    }

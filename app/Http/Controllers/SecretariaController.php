@@ -13,6 +13,45 @@ class SecretariaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function  obtenerfechainiciosecre2(Request $request)
+    {   
+       $rutaImagenBase = asset('storage').'/';
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $buscarsecre2 = $request->input('buscarsecre');
+       $resultadoconsulta = secretaria::obtenersecretariasdesdefechainicio2($fechaini,$rutaImagenBase,$fechafin,$buscarsecre2);
+           
+       return response()->json($resultadoconsulta);        
+    }
+
+    public function obtenermenorfechainicio()
+    {   
+       $buscarmenorfecha = secretaria::obtenermenorfechadesdefechainicio();
+       return response()->json($buscarmenorfecha);
+    }
+
+     public function  obtenerfechainicio(Request $request)
+     {   
+        $rutaImagenBase = asset('storage').'/';
+        $fechaini = $request->input('fechainicio');
+        $fechafin = $request->input('fechafinal');
+        $cisecre2 = $request->input('cisecre');
+        $nombresecre2 = $request->input('nombresecre');
+        $apellidopaternosecre2 = $request->input('apellidopaternosecre');
+        $apellidomaternosecre2 = $request->input('apellidomaternosecre');
+        $celularsecre2 = $request->input('celularsecre');
+        $direccionsecre2 = $request->input('direccionsecre');
+        $emailsecre2 = $request->input('emailsecre');
+        $estadosecre2 = $request->input('estadosecre');
+        $sueldominsecre2 = $request->input('sueldominsecre');
+        $sueldomaxsecre2 = $request->input('sueldomaxsecre');
+        $ordenarsecre2 = $request->input('ordenarsecre'); $mayorymenorsecre2 = $request->input('mayorymenorsecre');
+        $resultadoconsulta = secretaria::obtenersecretariasdesdefechainicio($fechaini,$rutaImagenBase,$fechafin,
+        $cisecre2,$nombresecre2,$apellidopaternosecre2,$apellidomaternosecre2,$celularsecre2,$direccionsecre2,$emailsecre2,$estadosecre2,
+        $sueldominsecre2,$sueldomaxsecre2, $ordenarsecre2, $mayorymenorsecre2);
+            
+        return response()->json($resultadoconsulta);        
+     }
     public function index()
     {
         $secretarias=secretaria::all();
