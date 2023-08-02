@@ -50,10 +50,10 @@
                           </div>
                         
                     <div  class="table-responsive">
-                        <table class="table align-items-center table-flush">
+                        <table id="tabla_id"  class="table align-items-center table-flush">
                             <thead class="thead-light table-primary">
                                 <tr>
-                                    <th>#</th>
+                                    {{-- <th>#</th> --}}
                                     <th>fechadesupre</th>
                                     <th>monto</th>
                                     <th>estado</th>
@@ -62,10 +62,10 @@
                                     <th>acciones</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody  id="tabla_profeade">
                                 @foreach ($adelantopros as $adelantopro)
                                 <tr>
-                                    <td>{{ $adelantopro->id }}</td>
+                                    {{-- <td>{{ $adelantopro->id }}</td> --}}
                                     <td>{{ $adelantopro->fechaadelantopro }}</td>
                                     <td>{{ $adelantopro->monto }}</td>
                                     <td>{{ $adelantopro->estadoade }}</td>
@@ -83,6 +83,75 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
+<script>
+  $(document).ready(function() {
+    var estiloOriginal = $('#buscar').css('border');
+
+    // Cuando se produzca el evento 'click' en cualquier input
+    $('input').on('click', function() {
+      // Restaurar el estilo original del borde en el input "nombre"
+      $('#buscar').css('border', estiloOriginal)
+    });
+
+      $('#fechainicio').on('change', function() {
+
+          var fecha_ini = $(this).val(); 
+          var fecha_fin = $('#fechafinal').val();
+          var buscar = $('#buscar').val();  
+          generartabla(fecha_ini,fecha_fin,buscar);      
+       
+      });
+      function generartabla(fecha_ini,fecha_fin,buscar) {
+            $.ajax({
+                 url: '{{ url("obtener-fechainicioproade") }}', // Ruta a tu controlador Laravel
+                  type: 'POST',
+                  data: {
+                      fechainicio: fecha_ini, //lo de blanco es la llave q tienes para q se capture la variable
+                      fechafinal: fecha_fin,
+                      buscarpro: buscar,// Enviar el ID del aula seleccionada
+                    // profesor_id: profesorId,
+                      _token: '{{ csrf_token() }}' // Agregar el token CSRF
+                  },
+                  success: function(response) {
+                      
+                
+                      // Limpiar el campo de selección de periodos
+                      $('#tabla_profeade').empty();
+                      //profesorreporte=[];
+
+                      $.each(response, function(key, value) {
+                          // alert(value.id)
+                          $('#tabla_profeade').append(
+                              '<tr>'+
+                              // ' <td>'+value.id+'</td>'+
+                                  '<td>'+value.fechaadelantopro+'</td>'+
+                                  ' <td>'+value.monto+'</td>'+
+                                  ' <td>'+value.estadoade+'</td>'+
+                                  ' <td>'+value.observacion+'</td>'+
+                                  '<td>'+value.profesor_id+"-"+value.nombre_profesor+'</td>'+
+                                  ' <td>'+
+                                    // '<a href="/proyecto/public/profesor/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
+                                    '<a href="/proyecto/public/profesor/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
+                                  ' </td>'+
+                              ' </tr>'
+                          );
+                          //alert(value.id);
+                         // profesorreporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
+                         // $('#miadelanto').find('td').css('border', '1px solid black');
+                      });
+                  }
+              });
+      }
+      $('#fechafinal').on('change', function() {
+         $('#fechainicio').trigger('change');
+      });
+      $('#buscar').on('input', function() {
+       // alert($(this).val())
+         $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
+      });
+  });
+</script>
+
 <script>
     var adelantoprosData = {!! json_encode($adelantopros) !!};
     function generarpdflistaadelantopro() {

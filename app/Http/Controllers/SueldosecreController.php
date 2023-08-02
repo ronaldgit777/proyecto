@@ -15,6 +15,15 @@ class SueldosecreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function  obtenerfechainiciosusecre(Request $request)
+    {   
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $buscarpro2 = $request->input('buscarpro');
+       $resultadoconsulta = sueldosecre::obtenersueldoprodesdefechainicio($fechaini,$fechafin,$buscarpro2);
+           
+       return response()->json($resultadoconsulta);        
+    }
     public function index()
     {
         $sueldosecres=sueldosecre::all();

@@ -114,7 +114,9 @@
                                 </div>
                             </div>
                         </div>
-                        
+                        <a href="{{ url('asignarproma/create') }}" class="btn btn-primary">
+                            <i class="fas fa-plus-circle"></i> registrar nueva asignacion</a>
+                            
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                 <div class="col-4 col-md-3">
@@ -122,21 +124,23 @@
                                 </div>
                                   <div class="col-8 col-md-9">
                                     <input class="form-control" placeholder="fechadeasignacion" type="date" name="fechadeasignacion"  value="<?php echo $fcha; ?>"  >
-                                   <!--  readonly -->
                                   </div>
                             </div>
                           </div>
 
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
-                                <div class="col-12 col-md-12 " >
-                                <center><input type="submit" value="guardar datos" class="btn btn-primary"></center>
+                                <div class="col-4 col-md-3">
+                                    <label class="text text-capitalize">estado </label>
+                                </div>
+                                <div class="col-8 col-md-9">
+                                    <input type="text" name="estado" id="estado" class="form-control" value="activo" readonly><br>
                                 </div>
                             </div>
                         </div>
                         
                 </div>
-
+                <center><input type="submit" value="guardar datos" class="btn btn-primary"></center>
                 @if(Session::has('registro_duplicado'))
                     <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
                                     {{ Session::get('registro_duplicado') }}

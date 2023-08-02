@@ -14,7 +14,15 @@ class AdelantoproController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+    public function  obtenerfechainicioproade(Request $request)
+    {   
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $buscarpro2 = $request->input('buscarpro');
+       $resultadoconsulta = adelantopro::obteneradeprodesdefechainicio($fechaini,$fechafin,$buscarpro2);
+           
+       return response()->json($resultadoconsulta);        
+    }
     public function validaradelanto(Request $request)
     {
         $profesorid2 = $request->input('profesorid');

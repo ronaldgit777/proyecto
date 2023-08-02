@@ -62,7 +62,7 @@ class secretaria extends Model
             })  
             ->where('secretarias.ci', 'like', "%$cisecre2%") 
             ->where('secretarias.nombre', 'like', "%$nombresecre2%")->where('secretarias.apellidopaterno', 'like', "%$apellidopaternosecre2%")
-            ->where('secretarias.apellidomaterno', 'like', "%$apellidomaternosecre2%")  ->where('profesors.celular', 'like', "%$celularsecre2%")  
+            ->where('secretarias.apellidomaterno', 'like', "%$apellidomaternosecre2%")  ->where('secretarias.celular', 'like', "%$celularsecre2%")  
             ->where('secretarias.direccion', 'like', "%$direccionsecre2%")->where('users.email', 'like', "%$emailsecre2%")  
             ->where('secretarias.estado', 'like', "%$estadosecre2%") 
             ->when($sueldominsecre2, function ($query, $sueldominsecre2) {

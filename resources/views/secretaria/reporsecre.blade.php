@@ -5,7 +5,7 @@
     <div class="card-header border-0">
       <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="mb-0">LISTA DE DATOS REPORTE PROFESORES</h3>
+                    <h3 class="mb-0">LISTA DE DATOS REPORTE SECRETARIAS</h3>
                       <div class="row">
                               <div class="col">
                                   <label class="text-primary text-capitalize">fecha de inicio</label>
@@ -48,7 +48,7 @@
                                   <button class="btn btn-danger" type="button" onclick="generarpdflistaprofesor()"><i class="fas fa-print"></i>imprimir</button>
                                 </div>  
                                 <div class="col text-right">
-                                  <a href="{{url('reporopciones')}}" class="btn btn-sm btn-success" >
+                                  <a href="{{url('opciones-reportesecre')}}" class="btn btn-sm btn-success" >
                                   <i class="fas fa-plus-circle"></i>
                                   regresar</a>
                               </div>  
@@ -137,25 +137,25 @@
         </tr>
       </thead>
       <tbody id="tabla_profe">
-        @foreach ($profesors as $profesor)
+        @foreach ($secretarias as $secretaria)
                   <tr>
-                      <td scope="row">{{ $profesor->id }}</td>
-                      <td>{{ $profesor->fechadeingreso }}</td>
-                      <td>{{ $profesor->ci }}</td>
-                      <td>{{ $profesor->nombre }}</td>
-                      <td>{{ $profesor->apellidopaterno }}</td>
-                      <td>{{ $profesor->apellidomaterno }}</td>
-                      <td>{{ $profesor->celular }}</td>
-                      <td>{{ $profesor->direccion }}</td>
-                      <td>{{ $profesor->user->email }}</td>
-                      <td>{{ $profesor->estado }}</td>
-                      <td>
-                      <img src="{{ asset('storage').'/'.$profesor->imagen}}" alt="" class="img-thumbnail img-fluid img-custom">
+                      <td scope="row">{{ $secretaria->id }}</td>
+                      <td>{{ $secretaria->fechadeingreso }}</td>
+                      <td>{{ $secretaria->ci }}</td>
+                      <td>{{ $secretaria->nombre }}</td>
+                      <td>{{ $secretaria->apellidopaterno }}</td>
+                      <td>{{ $secretaria->apellidomaterno }}</td>
+                      <td>{{ $secretaria->celular }}</td>
+                      <td>{{ $secretaria->direccion }}</td>
+                      <td>{{ $secretaria->user->email }}</td>
+                      <td>{{ $secretaria->estado }}</td>
+                      <td>secretaria
+                      <img src="{{ asset('storage').'/'.$secretaria->imagen}}" alt="" class="img-thumbnail img-fluid img-custom">
 
-
+a
                       </td>
-                      <td>{{ $profesor->sueldo }}</td>
-                      <td>{{ $profesor->user->role }}</td>
+                      <td>{{ $secretaria->sueldo }}</td>
+                      <td>{{ $secretaria->user->role }}</td>
                   </tr>
                   @endforeach
       </tbody>
@@ -172,31 +172,31 @@
 <script></script> 
 
 <script>
-    var profeprosData = {!! json_encode($profesors) !!};
-    var profesorreporte =  {!! json_encode($profesors) !!};
+    var secreprosData = {!! json_encode($secretarias) !!};
+    var secretariareporte =  {!! json_encode($secretarias) !!};
     function encontrarListaPorId(idLista) {
-      return profeprosData.find(item => item.id === idLista);
+      return secreprosData.find(item => item.id === idLista);
     }
     function generarpdflistaprofesor() {
     // Construir el contenido del reporte utilizando los datos de adelantoprosData
     const filas = [];
     filas.push(['#', 'fechadeingreso', 'ci', 'nombre', 'apellidopaterno','apellidomaterno','celular','direccion','email','estado','imagen','sueldo','role']);
-    for (let i = 0; i < profesorreporte.length; i++) {
-      const profesor = profesorreporte[i];
-      const id = profesor.id;
-      const fechadeingreso = profesor.fechadeingreso;
-      const ci = profesor.ci;
-      const nombre = profesor.nombre;
-      const apellidopaterno = profesor.apellidopaterno;
-      const apellidomaterno = profesor.apellidomaterno;
-      const celular = profesor.celular;
-      const direccion = profesor.direccion;
-      const user_id = profesor.user_id + "-" + profesor.user.email;
-      const estado = profesor.estado;
-      const imagen = profesor.imagen;
+    for (let i = 0; i < secretariareporte.length; i++) {
+      const secretaria = secretariareporte[i];
+      const id = secretaria.id;
+      const fechadeingreso = secretaria.fechadeingreso;
+      const ci = secretaria.ci;
+      const nombre = secretaria.nombre;
+      const apellidopaterno = secretaria.apellidopaterno;
+      const apellidomaterno = secretaria.apellidomaterno;
+      const celular = secretaria.celular;
+      const direccion = secretaria.direccion;
+      const user_id = secretaria.user_id + "-" + secretaria.user.email;
+      const estado = secretaria.estado;
+      const imagen = secretaria.imagen;
     //  {  image: 'myImageDictionary/image1.jpg' }
-      const sueldo = profesor.sueldo;
-      const role = profesor.user.role;
+      const sueldo = secretaria.sueldo;
+      const role = secretaria.user.role;
       filas.push([id, fechadeingreso, ci, nombre, apellidopaterno, apellidomaterno,celular,direccion,user_id,estado,imagen,sueldo,role]);
     }
    
@@ -228,7 +228,7 @@
     };
 
     // Generar el documento PDF
-    pdfMake.createPdf(docDefinition).download('reporte_profesores.pdf');
+    pdfMake.createPdf(docDefinition).download('reporte_secretarias.pdf');
   }
 </script>
 
@@ -267,22 +267,22 @@
 
         function generartabla(fecha_ini,fecha_fin,ci,nombre,apellidopaterno,apellidomaterno,celular,direccion,email,estado,sueldomin,sueldomax,ordenar,mayorymenor) {
               $.ajax({
-                    url: '{{ url("obtener-fechainicio") }}', // Ruta a tu controlador Laravel
+                    url: '{{ url("obtener-fechainiciosecre") }}', // Ruta a tu controlador Laravel
                     type: 'POST',
                     data: {
                         fechainicio: fecha_ini, //lo de blanco es la llave q tienes para q se capture la variable
                         fechafinal: fecha_fin,
-                        cipro: ci,// Enviar el ID del aula seleccionada
-                        nombrepro:nombre,
-                        apellidopaternopro:apellidopaterno,
-                        apellidomaternopro:apellidomaterno,
-                        celularpro:celular,
-                        direccionpro:direccion,
-                        emailpro:email,
-                        estadopro:estado,
-                        sueldominpro:sueldomin,
-                        ordenarpro:ordenar,
-                        mayorymenorpro:mayorymenor,
+                        cisecre: ci,// Enviar el ID del aula seleccionada
+                        nombresecre:nombre,
+                        apellidopaternosecre:apellidopaterno,
+                        apellidomaternosecre:apellidomaterno,
+                        celularsecre:celular,
+                        direccionsecre:direccion,
+                        emailsecre:email,
+                        estadosecre:estado,
+                        sueldominsecre:sueldomin,
+                        ordenarsecre:ordenar,
+                        mayorymenorsecre:mayorymenor,
                       // profesor_id: profesorId,
                         _token: '{{ csrf_token() }}' // Agregar el token CSRF
                     },
@@ -291,7 +291,7 @@
                   
                         // Limpiar el campo de selección de periodos
                         $('#tabla_profe').empty();
-                        profesorreporte=[];
+                        secretariareporte=[];
 
                         $.each(response, function(key, value) {
                             // alert(value.id)
@@ -313,7 +313,7 @@
                                 ' </tr>'
                             );
                             //alert(value.id);
-                            profesorreporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
+                            secretariareporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
                           //  $('#miadelanto').find('td').css('border', '1px solid black');
                         });
                     }

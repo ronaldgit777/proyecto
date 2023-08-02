@@ -30,7 +30,7 @@ class SecretariaController extends Controller
        return response()->json($buscarmenorfecha);
     }
 
-     public function  obtenerfechainicio(Request $request)
+     public function  obtenerfechainiciosecre(Request $request)
      {   
         $rutaImagenBase = asset('storage').'/';
         $fechaini = $request->input('fechainicio');
@@ -51,6 +51,15 @@ class SecretariaController extends Controller
         $sueldominsecre2,$sueldomaxsecre2, $ordenarsecre2, $mayorymenorsecre2);
             
         return response()->json($resultadoconsulta);        
+     }
+     public function reporsecres()
+     {   
+         $secretarias = secretaria::obtenerSecretariasConRutaImagen();
+         return view('secretaria.reporsecre', compact('secretarias'));    
+     }
+     public function opcionesreportesecre()
+     {   
+          return view('secretaria.reporsecretarias');    
      }
     public function index()
     {

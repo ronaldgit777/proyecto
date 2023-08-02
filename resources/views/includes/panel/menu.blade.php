@@ -133,7 +133,7 @@
                 <div class="collapse show" id="navbar-examples2">
                     <ul class="nav nav-sm flex-column">
                         <li class="nav-item">
-                          <a class="nav-link " href="{{ url('/reporsecretarias') }}">
+                          <a class="nav-link " href="{{ url('/opciones-reportesecre') }}">
                             <i class="fas fa-university text-info"></i>secretarias
                           </a>
                         </li> 

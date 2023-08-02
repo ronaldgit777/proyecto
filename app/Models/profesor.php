@@ -131,6 +131,7 @@ class profesor extends Model
           ->get();
       //return $fechaini;
   }
+
 }
 
 

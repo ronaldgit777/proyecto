@@ -35,4 +35,31 @@ class adelantopro extends Model
 
         return $adelantopro;
     }
+    public static function obteneradeprodesdefechainicio($fechaini,$fechafin,$buscarpro2)
+    {      
+        // Ejemplo de obtención del sueldo del profesor
+       // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
+        return self::join('profesors', 'adelantopros.profesor_id', '=', 'profesors.id') 
+              ->when($fechaini, function ($query, $fechaini) {
+                  return $query->where('adelantopros.fechaadelantopro', '>=', $fechaini);
+              })
+              ->when($fechafin, function ($query, $fechafin) {
+                  return $query->where('adelantopros.fechaadelantopro', '<=', $fechafin);
+              })  
+              ->when($buscarpro2, function ($query, $buscarpro2) {
+                  return $query->where(function ($query) use ($buscarpro2) {
+                      $query->where('monto', 'like', "%$buscarpro2%")
+                          ->orWhere('estadoade', 'like', "%$buscarpro2%")
+                          ->orWhere('observacion', 'like', "%$buscarpro2%")
+                          ->orWhere('profesors.nombre', 'like', "%$buscarpro2%");
+                  });
+              })  
+                
+             // ->select('profesors.*', 'users.email', 'users.role')
+            //  ->get();
+            ->select('adelantopros.*', 'profesors.nombre as nombre_profesor')
+            ->get();
+        //return $fechaini;
+    }
+
 }

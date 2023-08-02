@@ -14,6 +14,15 @@ class AdelantosecreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function  obtenerfechainiciosecreade(Request $request)
+    {   
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $buscarpro2 = $request->input('buscarpro');
+       $resultadoconsulta = adelantosecre::obteneradesecredesdefechainicio($fechaini,$fechafin,$buscarpro2);
+           
+       return response()->json($resultadoconsulta);        
+    }
     public function validaradelantosecre(Request $request)
     {
         $secretariaid2 = $request->input('secretariaid');

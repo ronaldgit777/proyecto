@@ -21,6 +21,7 @@
                             <thead class="thead-light">
                         <tr>
                             <th>#</th>
+                            <th>fechadeinscripcion</th>
                             <th>asignarproma</th>
                             <th>alumno_id</th>
                             <th>acciones</th>
@@ -31,6 +32,7 @@
                         <tr>
                             <td>{{ $inscripcion->id }}</td>
                           <!--  <td> /* $inscripcion->asignarproma->materia->materia."--".$inscripcion->asignarproma->profesor->user->name}} */</td>-->
+                            <td>{{ $inscripcion->fechadeinscripcion}}</td>
                             <td>{{ $inscripcion->asignarproma->materia->materia."--".$inscripcion->asignarproma->profesor->nombre }}</td>
                             <td>{{ $inscripcion->alumno->nombre }}</td>
                             <td> <a href="{{ url('/inscripcion/'.$inscripcion->id.'/show') }}" method="post">ver</a>
@@ -41,6 +43,6 @@
                 </table>
             </div>
         </div>
-     </div>
 </div>
+
 @endsection

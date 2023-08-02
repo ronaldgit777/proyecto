@@ -64,45 +64,8 @@
                                           <div class="col-8 col-md-3">
                                             <a href="" class="btn btn-success " data-toggle="modal" data-target="#myModal2" onclick="veradelantos()" id="bo" > 
                                            <i class="fas fa-plus-circle"></i>adelantos</a>
-                                                       <script>
-                                                                  function veradelantos() {
-                                                                       var profesorId = $('#profesor_id').val();
-                                                                       $.ajax({
-                                                                               url: '{{ url("obtener-adelantopro") }}',
-                                                                               type: 'POST',
-                                                                               data: {
-                                                                                   profesor_id: profesorId,
-                                                                                   _token: '{{ csrf_token() }}'
-                                                                               },
-                                                                               success: function(response) {
-                                                                                   $('#miadelanto').empty();
-                                                                                  
-                                                                                   $.each(response, function(key, value) {
-                                                                                      // alert(value.id)
-                                                                                       $('#miadelanto').append(
-                                                                                           '<tr>'+
-                                                                                           ' <td>'+value.id+'</td>'+
-                                                                                               '<td>'+value.fechaadelantopro+'</td>'+
-                                                                                               ' <td>'+value.monto+'</td>'+
-                                                                                               ' <td>'+value.estadoade+'</td>'+
-                                                                                               ' <td>'+value.observacion+'</td>'+
-                                                                                               '<td>'+value.profesor_id+"-"+value.nombre_profesor+'</td>'+
-                                                                                           ' </tr>'
-                                                                                       );
-                                                                                       // Agregar el estilo de borde usando jQuery
-                                                                                       $('#miadelanto').find('td').css('border', '1px solid black');
-               
-                                                                                   });
-                                                                               }
-                                                                               ,     error: function(xhr, status, error) {
-                                                                                           // Manejar el error aquí
-                                                                                           console.error(error);
-                                                                                       }
-                                                                                       });
-                                                                  } 
-                                                       </script>
                                                       
-                                                   </div>
+                                           </div>
                                     </div>
                                   </div>
 
@@ -132,7 +95,7 @@
                                     <div class="col-12 col-sm-12 col-md-6">
                                         <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                             <div class="col-12 col-md-12 " >
-                                            <center><input type="submit" value="guardar datos" class="btn btn-primary" onclick="generarpdfadelanto()" disabled id="botonadelanto"></center>
+                                            <center><input type="submit" value="guardar datos" class="btn btn-primary" onclick="generarpdfadelanto()"  id="botonadelanto" disabled></center>
                                             </div>
                                         </div>
                                     </div>
@@ -215,7 +178,6 @@
          var monto = $('#monto').val(); 
          
                
-
                   $.ajax({
                     url: '{{ url("validar-montoadelanto") }}',
                     type: 'POST',
@@ -225,6 +187,7 @@
                         _token: '{{ csrf_token() }}'
                       },
                     success: function (resultado) {
+                      alert(resultado);
                       if(resultado){
                         $("#botonadelanto").prop("disabled", false); 
                       }else{

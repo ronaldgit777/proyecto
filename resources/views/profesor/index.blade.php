@@ -64,7 +64,7 @@
             </thead>
             <tbody id="tabla_profe2">
               @foreach ($profesors as $profesor)
-                        <tr>
+                        <tr>s
                             {{-- <td scope="row">{{ $profesor->id }}</td> --}}
                             <td>{{ $profesor->fechadeingreso }}</td>
                             <td>{{ $profesor->ci }}</td>
@@ -78,7 +78,7 @@
                             <td>
                             <img src="{{ asset('storage').'/'.$profesor->imagen}}" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid">
                             </td>
-                            {{-- <td>{{ $profesor->sueldo }}</td> --}}
+                            <td>{{ $profesor->sueldo }}</td>
                             <td>
                             <a href="{{ url('/profesor/'.$profesor->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
                               <i class="fas fa-edit"></i>
@@ -159,7 +159,7 @@
 </script>
 <script>
   $(document).ready(function() {
-    var estiloOriginal = $('#nombre').css('border');
+    var estiloOriginal = $('#buscar').css('border');
 
     // Cuando se produzca el evento 'click' en cualquier input
     $('input').on('click', function() {
@@ -208,7 +208,7 @@
                                   ' <td>'+value.email+'</td>'+
                                   // ' <td>'+value.estado+'</td>'+
                                   ' <td><img src="'+value.ruta_imagen+'" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid"></td>'+
-                                  //' <td>'+value.sueldo+'</td>'+
+                                  ' <td>'+value.sueldo+'</td>'+
                                  // ' <td>'+value.role+'</td>'+
                                   ' <td>'+
                                     '<a href="/proyecto/public/profesor/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +

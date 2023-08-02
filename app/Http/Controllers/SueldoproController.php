@@ -15,6 +15,15 @@ class SueldoproController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function  obtenerfechainiciosupro(Request $request)
+    {   
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $buscarpro2 = $request->input('buscarpro');
+       $resultadoconsulta = sueldopro::obtenersueldoprodesdefechainicio($fechaini,$fechafin,$buscarpro2);
+           
+       return response()->json($resultadoconsulta);        
+    }
     public function index()
     {
         $sueldopros=sueldopro::all();

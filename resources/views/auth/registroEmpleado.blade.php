@@ -90,7 +90,7 @@
                                     <label class="text text-capitalize">fecha de ingreso</label>
                                 </div>
                                   <div class="col-8 col-md-9">
-                                    <input class="form-control" placeholder="fechadeingreso" type="date" name="fechadeingreso"  value="<?php echo $fcha; ?>" r >
+                                    <input class="form-control" placeholder="fechadeingreso" type="date" name="fechadeingreso"  value="<?php echo $fcha; ?>" >
                                   </div>
                             </div>
                           </div>

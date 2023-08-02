@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Custom\MyClass;
-
+use App\Models\adelantopro;
 use App\Models\profesor;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,6 +16,7 @@ class ProfesorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+ 
     public function  obtenerfechainicio2(Request $request)
     {   
        $rutaImagenBase = asset('storage').'/';

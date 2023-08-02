@@ -24,6 +24,15 @@ class AlumnoController extends Controller
     INNER JOIN asignarpromas ON inscripcions.asignarproma_id = asignarpromas.id 
     INNER JOIN profesors ON profesors.id = asignarpromas.profesor_id
     where profesors.id =20*/
+    public function  obtenerfecchainicioalumnos(Request $request)
+    {   
+       $rutaImagenBase = asset('storage').'/';
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $buscaralu2 = $request->input('buscaralu');
+       $resultadoconsulta = alumno::obtenerfecchainicioalumnoslista($fechaini,$rutaImagenBase,$fechafin,$buscaralu2);
+       return response()->json($resultadoconsulta); 
+    }
      public function index2()
      {   
         $userid=auth()->user()->id;
