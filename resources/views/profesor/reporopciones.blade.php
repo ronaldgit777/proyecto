@@ -54,7 +54,7 @@
                     <div class="top-row">
                         <div class="box">
                           <img src="imag/listaprofesores.jpg" alt="Imagen 1">
-                          <a href="{{ url('/reporpro') }}">lista de profesores</a>
+                          <a href="{{ url('/repor-pro') }}">lista de profesores</a>
                         </div>
                         <div class="box">
                           <img src="imag/asigprofesores.jpg" alt="Imagen 2">
@@ -62,7 +62,7 @@
                         </div>
                         <div class="box">
                           <img src="imag/adelantopro.jpg" alt="Imagen 3">
-                          <a href="#">adelantos profesores</a>
+                          <a href="{{ url('/reporadepro') }}">adelantos profesores</a>
                         </div>
                       </div>
                       <div class="bottom-row">
@@ -72,13 +72,13 @@
                         </div>
                         <div class="box">
                           <img src="imag/alumnosprofe.jpg" alt="Imagen 5">
-                          <a href="#">profesores su lista de alumnos</a>
+                          <a  href="{{ url('/reporprofealumno') }}">profesores su lista de alumnos</a>
                         </div>
                         <div class="box">
                           <img src="imagen6.jpg" alt="nose">
                           <a href="#">noce</a>
                         </div>
-
+                        
           </div>
      
    </div>

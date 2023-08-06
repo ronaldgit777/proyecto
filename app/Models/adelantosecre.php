@@ -26,6 +26,7 @@ class adelantosecre extends Model
         ->sum('monto');
         return $sumatoriaMonto;
     }
+
     public static function obtenerlistasecreid2($secretariaId)
     {
         $adelantosecre = adelantosecre::where('secretaria_id', $secretariaId)->where('estadoade','pendiente')
@@ -86,5 +87,40 @@ class adelantosecre extends Model
             ->select('adelantopros.*', 'profesors.nombre as nombre_profesor')
             ->get();
         //return $fechaini;
+    }   
+
+    public static function obteneradesecredesdefechainiciore($fechaini,$fechafin,$secretariaid2,$monto11,$monto22,$ordenaradepro2,$mayorymenoradepro2)
+    {      
+        // Ejemplo de obtención del sueldo del profesor
+       // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
+       $consulta = self::join('secretarias', 'adelantosecres.secretaria_id', '=', 'secretarias.id')  
+
+             ->when($fechaini, function ($query, $fechaini) {
+                  return $query->where('adelantosecres.fechaadelantosecre', '>=', $fechaini);
+              })
+              ->when($fechafin, function ($query, $fechafin) {
+                  return $query->where('adelantosecres.fechaadelantosecre', '<=', $fechafin);
+              })  
+              
+             // ->where('profesors.id', $profesorid2) 
+                ->when($secretariaid2, function ($query, $secretariaid2) {
+                return $query->where('secretarias.id',$secretariaid2);
+                })
+              
+                ->when($monto11, function ($query, $monto11) {
+                    return $query->where('adelantosecres.monto', '>=', $monto11);
+                })
+                ->when($monto22, function ($query, $monto22) {
+                    return $query->where('adelantosecres.monto', '<=', $monto22);
+                })  
+
+            ->select('adelantosecres.*','fechaadelantosecre', 
+            'secretarias.nombre as nombre_secretaria');
+            if (!empty($ordenaradepro2) && !empty($mayorymenoradepro2)) {
+                $consulta->orderBy($ordenaradepro2, $mayorymenoradepro2);
+            }
+            return $consulta->get();  
     }
- }
+   
+}
+

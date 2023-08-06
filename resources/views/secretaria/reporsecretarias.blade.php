@@ -43,7 +43,6 @@
                         </div>
                            
                     </div>
-
                     <div class="top-row">
                         <div class="box">
                           <img src="imag/listaprofesores.jpg" alt="Imagen 1">
@@ -51,7 +50,7 @@
                         </div>
                         <div class="box">
                           <img src="imag/adelantopro.jpg" alt="Imagen 2">
-                          <a href="{{ url('/') }}">adelantos secretarias</a>
+                          <a href="{{ url('/reporadesecre') }}">adelantos secretarias</a>
                         </div>
                         <div class="box">
                           <img src="imag/pagoprofesor.png" alt="Imagen 3">

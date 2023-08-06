@@ -61,5 +61,37 @@ class adelantopro extends Model
             ->get();
         //return $fechaini;
     }
+    public static function obteneradeprodesdefechainiciore($fechaini,$fechafin,$profesorid2,$monto11,$monto22,$ordenaradepro2,$mayorymenoradepro2)
+    {      
+        // Ejemplo de obtención del sueldo del profesor
+       // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
+       $consulta = self::join('profesors', 'adelantopros.profesor_id', '=', 'profesors.id')  
+
+             ->when($fechaini, function ($query, $fechaini) {
+                  return $query->where('adelantopros.fechaadelantopro', '>=', $fechaini);
+              })
+              ->when($fechafin, function ($query, $fechafin) {
+                  return $query->where('adelantopros.fechaadelantopro', '<=', $fechafin);
+              })  
+              
+             // ->where('profesors.id', $profesorid2) 
+                ->when($profesorid2, function ($query, $profesorid2) {
+                return $query->where('profesors.id',$profesorid2);
+                })
+              
+                ->when($monto11, function ($query, $monto11) {
+                    return $query->where('adelantopros.monto', '>=', $monto11);
+                })
+                ->when($monto22, function ($query, $monto22) {
+                    return $query->where('adelantopros.monto', '<=', $monto22);
+                })  
+
+            ->select('adelantopros.*','fechaadelantopro', 
+            'profesors.nombre as nombre_profesor');
+            if (!empty($ordenaradepro2) && !empty($mayorymenoradepro2)) {
+                $consulta->orderBy($ordenaradepro2, $mayorymenoradepro2);
+            }
+            return $consulta->get();  
+    }
 
 }

@@ -160,20 +160,16 @@
 <script>
   $(document).ready(function() {
     var estiloOriginal = $('#buscar').css('border');
-
     // Cuando se produzca el evento 'click' en cualquier input
     $('input').on('click', function() {
       // Restaurar el estilo original del borde en el input "nombre"
       $('#buscar').css('border', estiloOriginal)
     });
-
       $('#fechainicio').on('change', function() {
-
           var fecha_ini = $(this).val(); 
           var fecha_fin = $('#fechafinal').val();
           var buscar = $('#buscar').val();  
           generartabla(fecha_ini,fecha_fin,buscar);      
-       
       });
       function generartabla(fecha_ini,fecha_fin,buscar) {
             $.ajax({
@@ -187,8 +183,6 @@
                       _token: '{{ csrf_token() }}' // Agregar el token CSRF
                   },
                   success: function(response) {
-                      
-                
                       // Limpiar el campo de selección de periodos
                       $('#tabla_profe2').empty();
                       profesorreporte=[];

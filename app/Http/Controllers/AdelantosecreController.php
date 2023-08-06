@@ -14,6 +14,33 @@ class AdelantosecreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function  adelantodisposecre(Request $request)
+    {   
+        $secretariaid2 = $request->input('secretaria_id');
+       // $monto2 = $request->input('monto');
+        $resultado = 0;
+        $sueldosecre =secretaria::obtenerSueldo($secretariaid2);
+        $fechaActual = Carbon::now();
+        $diastrabajados = $fechaActual->day;
+        $maxadelantomes= ($sueldosecre/30)*$diastrabajados;
+        $totaladelanto = adelantosecre::obteneradelantosecre($secretariaid2);
+        $resultado = $maxadelantomes-$totaladelanto ;
+       // return  $resultado; 
+        return response()->json($resultado);       
+    }
+    public function  obtenerfechainiciosecreadere(Request $request)
+    {   
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $secretariaid2 = $request->input('secretariaid');
+       $monto11 = $request->input('monto1');
+       $monto22 = $request->input('monto2');
+       $ordenaradepro2 = $request->input('ordenaradepro');
+       $mayorymenoradepro2 = $request->input('mayorymenoradepro');
+       $resultadoconsulta = adelantosecre::obteneradesecredesdefechainiciore($fechaini,$fechafin,$secretariaid2,$monto11,$monto22,$ordenaradepro2,$mayorymenoradepro2);   
+       return response()->json($resultadoconsulta);        
+    }
+    
     public function  obtenerfechainiciosecreade(Request $request)
     {   
        $fechaini = $request->input('fechainicio');
@@ -33,7 +60,7 @@ class AdelantosecreController extends Controller
         $diastrabajados = $fechaActual->day;
         $maxadelantomes= ($sueldosecre/30)*$diastrabajados;
         if($maxadelantomes >= $monto2){
-            $totaladelanto = adelantosecre::obteneradelantosecre($secretariaid2);//
+            $totaladelanto = adelantosecre::obteneradelantosecre($secretariaid2);
             $totaladelanto = $totaladelanto+$monto2;
             if($maxadelantomes >= $totaladelanto){
                 $resultado = true;
@@ -41,6 +68,14 @@ class AdelantosecreController extends Controller
         }
        // return  $resultado; 
         return response()->json($resultado);
+    }
+    public function reporadesecre()
+    {
+        $adelantosecres=adelantosecre::all();
+        $secretarias=secretaria::all();
+        // return profesor::with('sueldopro')->get(); 
+         //$datos['sueldopros']=sueldopro::paginate(7);
+         return view('adelantosecre.reporadesecre',compact('adelantosecres','secretarias'));
     }
     public function index()
     {
@@ -58,7 +93,7 @@ class AdelantosecreController extends Controller
      */
     public function create()
     {
-        return view('adelantosecre.create',['secretarias'=>secretaria::all()]);
+        return view('adelantosecre.create',['secretarias'=>secretaria::all()],['adelantosecres'=>adelantosecre::all()]);
     }
 
     /**

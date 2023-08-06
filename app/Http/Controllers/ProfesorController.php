@@ -49,7 +49,8 @@ class ProfesorController extends Controller
         $estadopro2 = $request->input('estadopro');
         $sueldominpro2 = $request->input('sueldominpro');
         $sueldomaxpro2 = $request->input('sueldomaxpro');
-        $ordenarpro2 = $request->input('ordenarpro'); $mayorymenorpro2 = $request->input('mayorymenorpro');
+        $ordenarpro2 = $request->input('ordenarpro');
+         $mayorymenorpro2 = $request->input('mayorymenorpro');
         $resultadoconsulta = profesor::obtenerprofesoresdesdefechainicio($fechaini,$rutaImagenBase,$fechafin,
         $cipro2,$nombrepro2,$apellidopaternopro2,$apellidomaternopro2,$celularpro2,$direccionpro2,$emailpro2,$estadopro2,
         $sueldominpro2,$sueldomaxpro2, $ordenarpro2, $mayorymenorpro2);

@@ -10,8 +10,16 @@ class AulaController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * 
      * @return \Illuminate\Http\Response
+     * 
      */
+    public function  buscaraulas(Request $request)
+    {   
+       $buscaraula2 = $request->input('buscaraula');
+       $resultadoconsulta = aula::obtenerlistaaulas($buscaraula2);
+       return response()->json($resultadoconsulta); 
+    }
     public function index()
     {
         $datos['aulas']=aula::paginate(7);

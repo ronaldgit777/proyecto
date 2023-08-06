@@ -7,6 +7,7 @@ use App\Models\profesor;
 use App\Models\materia;
 use App\Models\aula;
 use App\Models\periodo;
+use App\Models\alumno;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,11 +19,59 @@ class AsignarpromaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function  buscarfechainicioasignacionesre(Request $request)
+    {   
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $profesorid2 = $request->input('profesorid');
+       $materiaid2 = $request->input('materiaid');
+       $periodoid2 = $request->input('periodoid');
+       $aulaid2 = $request->input('aulaid');
+       $ordenarasig2 = $request->input('ordenarasig');
+       $mayorymenorasig2 = $request->input('mayorymenorasig');
+       $resultadoconsulta = asignarproma::obtenerfecchainicioasignacionesre($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,$ordenarasig2, $mayorymenorasig2 );
+       return response()->json($resultadoconsulta); 
+    }
+    public function  buscarfechainicioasignaciones(Request $request)
+    {   
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $buscaras2 = $request->input('buscaras');
+       $resultadoconsulta = asignarproma::obtenerfecchainicioasignaciones($fechaini,$fechafin,$buscaras2);
+       return response()->json($resultadoconsulta); 
+    }
+    public function obteneraulaperiodosmateriaprofesor(Request $request)
+    {  
+       $profesorid2 = $request->input('profesorid');
+       $materiaid2 = $request->input('materiaid');
+       $periodoid2 = $request->input('periodoid');
+       $resultadoconsulta = asignarproma::obteneraulaperimateriaprofesorid($profesorid2,$materiaid2,$periodoid2);
+       return response()->json($resultadoconsulta); 
+    }
+    public function obtenerperiodosmateriaprofesor(Request $request)
+    {  
+       $profesorid2 = $request->input('profesorid');
+       $materiaid2 = $request->input('materiaid');
+       $resultadoconsulta = asignarproma::obtenerperimateriaprofesorid($profesorid2,$materiaid2);
+       return response()->json($resultadoconsulta); 
+    }
+    public function obtenermateriasdelprofesorid(Request $request)
+    {  
+       $profesorid2 = $request->input('profesorid');
+       $resultadoconsulta = asignarproma::obtenermateriaprofesorid($profesorid2);
+       return response()->json($resultadoconsulta); 
+    }
     public function reporasig()
-    {
-        $asignarpromas=asignarproma::all();
-      
-        return view('asignarproma.reporasig',compact('asignarpromas'));
+    {  
+       
+        $profesors = profesor::all();
+        $alumnos =alumno::all();
+        $materias =materia::all();
+        $aulas =aula::all();
+        $periodos =periodo::all();
+        //$asignarpromas =asignarproma::where('estado','activo')->get();
+        $asignarpromas =asignarproma::obtenerdatosde3tabla();
+        return view('asignarproma.reporasig',compact('asignarpromas','profesors','materias','aulas','periodos'));
     }
      
     public function index2()
@@ -45,27 +94,9 @@ class AsignarpromaController extends Controller
         return view('asignarproma.asigpro',compact('asignarpromas'));
     }
     public function index()
-    {
-       // $asignarpromas=asignarproma::where('profesor_id','=','profesor.id')->where('profesor.id','=','user.profesor:id')->get();
-        // return profesor::with('sueldopro')->get(); 
-         //$datos['sueldopros']=sueldopro::paginate(7);
-//          return view('asignarproma.index',compact('asignarpromas'));
-     /*  $userid=auth()->user()->id;
-       //s SELECT * FROM `asignarpromas` WHERE asignarpromas.profesor_id = 13
-
-       // $asignarpromas=asignarproma::where('asignarpromas.profesor_id', '=' ,'profesors.id')->get();
-       $asignarpromas =asignarproma
-        //join('asignarpromas','asignarpromas.profesor_id','=','profesors.id')
-        ::join('profesors','asignarpromas.profesor_id','=','profesors.id')
-        ->join('users','users.id','=','profesors.user_id')
-        ->select('asignarpromas.*','profesors.*')
-        ->where('profesors.user_id','=',$userid)
-        //  ->asignarpromas()
-        ->get();    */
-        // return profesor::with('sueldopro')->get(); 
-        //$datos['sueldopros']=sueldopro::paginate(7);
-       $asignarpromas=asignarproma::all();
-      
+    {   //$asignarpromas=asignarproma::where('estado', 'activo')->get();
+       // $asignarpromas=asignarproma::all();
+        $asignarpromas=asignarproma::obtenerdatosde3tablaas();
         return view('asignarproma.index',compact('asignarpromas'));
     }
 
@@ -77,15 +108,6 @@ class AsignarpromaController extends Controller
      */
     public function create()
     {
-        //selecinar tododsl os profesores que tengan menos de 3 registros asignados    
-        //'profesors'=>profesor::all(),
-      /*   $profesors = profesor::select('*')
-        ->havingRaw('COUNT(*) < 1')
-        ->groupBy('id')
-        ->get();*/
-        //return view('asignarproma.create',['profesors'=>profesor::all(),],['materias'=>materia::all()],['aulas'=>aula::all()],['periodos'=>periodo::all()]);      
-        //todos los profesores con id mayor a 10
-        //1paso envio de datos 
         $profesors = profesor::all();
         $materias = materia::all();
         //limit 2 registros
@@ -93,8 +115,6 @@ class AsignarpromaController extends Controller
         $periodos = periodo::all();
         $users = user::all();
         $asignarpromas = asignarproma::all();
-
-        // Pasar los resultados a la vista
         return view('asignarproma.create', compact('profesors', 'materias', 'aulas', 'periodos', 'users','asignarpromas'));
     }
 

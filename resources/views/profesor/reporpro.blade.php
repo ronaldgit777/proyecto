@@ -33,15 +33,6 @@
                                 <label class="text-primary text-capitalize">apellido materno</label>
                                 <input type="text" name="apellidomaterno" id="apellidomaterno" class="form-control">
                               </div>
-                              <div class="col-mb4">
-                                <label class="text-primary text-capitalize">Buscar</label>
-                                <div class="input-group">
-                                  <input type="text" name="buscar" id="buscar" class="form-control" placeholder="Ingrese término de búsqueda">
-                                    <div class="input-group-append">
-                                      <button class="btn btn-primary" type="button"><i class="fas fa-search"></i>Buscar</button>
-                                    </div>
-                                </div>
-                              </div>
                             
                                 <div class="col">
                                   <label class="text-primary text-capitalize">presione el boton</label><br>

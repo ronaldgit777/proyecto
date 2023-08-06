@@ -20,9 +20,24 @@ class InscripcionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function  buscarfechainicioinscripciones(Request $request)
+    {   
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $buscarin2 = $request->input('buscarin');
+       $resultadoconsulta = inscripcion::obtenerfecchainicioinscripcion($fechaini,$fechafin,$buscarin2);
+       return response()->json($resultadoconsulta); 
+    }
+    public function index2()
     {
         $inscripcions=inscripcion::all();
+        // return profesor::with('sueldopro')->get(); 
+         //$datos['sueldopros']=sueldopro::paginate(7);
+         return view('inscripcion.reporprofealumno',compact('inscripcions'));
+    }
+    public function index()
+    {
+        $inscripcions=inscripcion::obtenerdatosde3tabla();
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);
          return view('inscripcion.index',compact('inscripcions'));
@@ -36,17 +51,20 @@ class InscripcionController extends Controller
 
     public function create()
     {
-        $asignarpromas =asignarproma::all();
+       // $asignarpromas = asignarproma::where('estado', 'activo')->distinct('profesor_id')->get();
+       $asignarpromas = asignarproma::where('estado', 'activo')
+        ->select('profesor_id')
+        ->distinct()
+        ->get();
         $alumnos =alumno::all();
         //$profesors =profesor::has('asignarproma');
         $profesors =profesor::all();
         $users =user::all();
         $materias =materia::all();
         $aulas =aula::all();
-        $periodos =periodo::all();
+        $periodos =periodo::all();  
         return view('inscripcion.create', compact('asignarpromas','alumnos','profesors', 'users', 'materias', 'aulas', 'periodos'));
     }
-
     /**
      * Store a newly created resource in storage.
      *

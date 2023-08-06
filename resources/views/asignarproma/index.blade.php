@@ -34,7 +34,7 @@
                                     <label class="text-primary text-capitalize"></label> 
                                     <a href="{{url('asignarproma/create')}}" class="btn  btn-primary text-capitalize" >
                                         <i class="fas fa-plus-circle"></i>
-                                        agregar nuevo pago</a>
+                                        agregar nueva asignacion</a>
                                 </div>
                                 <div class="col text-right">
                                   <a href="{{url('home')}}" class="btn btn-sm btn-success" >
@@ -49,27 +49,35 @@
                         <table class="table align-items-center table-flush">
                                     <thead class="thead-light">
                                 <tr>
-                                    <th>#</th>
+                                    {{-- <th>#</th> --}}
                                     <th>fecha de asignacion</th>
                                     <th>profesor_id</th>
                                     <th>materia_id</th>
-                                    <th>aula_id</th>
+                                    <th>materia_costo</th>
                                     <th>periodo_id</th>
+                                    <th>aula_id</th>
                                     <th>estado</th>
                                     <th>acciones</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="tabla_asig">
                                 @foreach ($asignarpromas as $asignarproma)
                                 <tr>
-                                    <td>{{ $asignarproma->id }}</td>
+                                    {{-- <td>{{ $asignarproma->id }}</td> --}}
                                     <td>{{ $asignarproma->fechadeasignacion }}</td>
-                                    <td>{{ $asignarproma->profesor->nombre."-".$asignarproma->profesor->apellidopaterno }}</td>
-                                    <td>{{ $asignarproma->materia->materia }}</td>
-                                    <td>{{ $asignarproma->aula->aula }}</td>
-                                    <td>{{ $asignarproma->periodo->periodo }}</td>
+                                    <td>{{ $asignarproma->profesor_nombre}}</td>
+                                    <td>{{ $asignarproma->materia_nombre}}</td>
+                                    <td>{{ $asignarproma->materia_costo}}</td>
+                                    <td>{{ $asignarproma->periodo_nombre}}</td>
+                                    <td>{{ $asignarproma->aula_nombre}}</td>
                                     <td>{{ $asignarproma->estado }}</td>
-                                    <td> <a href="{{ url('/asignarproma/'.$asignarproma->id.'/show') }}" method="post">ver</a>
+                                    <td>
+                                        <a href="{{ url('/asignarproma/'.$asignarproma->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                            </a>
+                                          <a href="{{ url('/asignarproma/'.$asignarproma->id.'/') }}" method="post" class="btn btn-sm btn-danger">
+                                            <i class="far fa-eye"></i>
+                                          </a>    
                                     </td>
                                 </tr>
                                 @endforeach
@@ -77,4 +85,74 @@
                         </table>
                     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+   <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
+   <script>
+    $(document).ready(function() {
+      var estiloOriginal = $('#buscar').css('border');
+  
+      // Cuando se produzca el evento 'click' en cualquier input
+      $('input').on('click', function() {
+        // Restaurar el estilo original del borde en el input "nombre"
+        $('#buscar').css('border', estiloOriginal)
+      });
+  
+        $('#fechainicio').on('change', function() {
+  
+            var fecha_ini = $(this).val(); 
+            var fecha_fin = $('#fechafinal').val();
+            var buscar = $('#buscar').val();  
+            generartabla(fecha_ini,fecha_fin,buscar);      
+        });
+        function generartabla(fecha_ini,fecha_fin,buscar) {
+              $.ajax({
+                    url: '{{ url("obtener-fechainicioasig") }}', // Ruta a tu controlador Laravel
+                    type: 'POST',
+                    data: {
+                        fechainicio: fecha_ini, //lo de blanco es la llave q tienes para q se capture la variable
+                        fechafinal: fecha_fin,
+                        buscaras: buscar,// Enviar el ID del aula seleccionada
+                      // profesor_id: profesorId,
+                        _token: '{{ csrf_token() }}' // Agregar el token CSRF
+                    },
+                    success: function(response) {
+                        // Limpiar el campo de selección de periodos
+                        $('#tabla_asig').empty();
+                      // profesorreporte=[];
+                        $.each(response, function(key, value) {
+                            // alert(value.id)
+                            $('#tabla_asig').append(
+                                '<tr>'+
+                                // ' <td>'+value.id+'</td>'+
+                                    '<td>'+value.fechadeasignacion+'</td>'+
+                                    ' <td>'+value.profesor_nombre+'</td>'+
+                                    ' <td>'+value.materia_nombre+'</td>'+
+                                    ' <td>'+value.materia_costo+'</td>'+
+                                    ' <td>'+value.periodo_nombre+'</td>'+
+                                    ' <td>'+value.aula_nombre+'</td>'+
+                                    ' <td>'+value.estado+'</td>'+
+                                   // ' <td>'+value.role+'</td>'+
+                                    ' <td>'+
+                                       '<a href="/proyecto/public/asignacion/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
+                                      '<a href="/proyecto/public/asignacion/' + value.id + '/show" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
+                                    ' </td>'+
+                                ' </tr>'
+                            );
+                            //alert(value.id);
+                           // profesorreporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
+                           // $('#miadelanto').find('td').css('border', '1px solid black');
+                        });
+                    }
+                });
+        }
+        $('#fechafinal').on('change', function() {
+           $('#fechainicio').trigger('change');
+        });
+        $('#buscar').on('input', function() {
+         // alert($(this).val())
+           $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
+        });
+    });
+  </script>
 @endsection

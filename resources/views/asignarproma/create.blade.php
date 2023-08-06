@@ -21,14 +21,6 @@
         <div class="col-12"> 
             <div class="m-portlet__body m-portlet--primary" data-portlet="true" m-portlet="true">
                 <div class="form-group m-form__group row">
-
-
-
-
-
-
-
-
                          <div class="col-12 col-sm-12 col-md-6">
                             <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                 <div class="col-4 col-md-3">
@@ -114,8 +106,6 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{{ url('asignarproma/create') }}" class="btn btn-primary">
-                            <i class="fas fa-plus-circle"></i> registrar nueva asignacion</a>
                             
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">

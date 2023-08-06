@@ -33,25 +33,12 @@
                                 <label class="text-primary text-capitalize">apellido materno</label>
                                 <input type="text" name="apellidomaterno" id="apellidomaterno" class="form-control">
                               </div>
-                              <div class="col-mb4">
-                                <label class="text-primary text-capitalize">Buscar</label>
-                                <div class="input-group">
-                                  <input type="text" name="buscar" id="buscar" class="form-control" placeholder="Ingrese término de búsqueda">
-                                    <div class="input-group-append">
-                                      <button class="btn btn-primary" type="button"><i class="fas fa-search"></i>Buscar</button>
-                                    </div>
-                                </div>
-                              </div>
-                            
-                                <div class="col">
-                                  <label class="text-primary text-capitalize">presione el boton</label><br>
-                                  <button class="btn btn-danger" type="button" onclick="generarpdflistaprofesor()"><i class="fas fa-print"></i>imprimir</button>
-                                </div>  
                                 <div class="col text-right">
-                                  <a href="{{url('opciones-reportesecre')}}" class="btn btn-sm btn-success" >
-                                  <i class="fas fa-plus-circle"></i>
-                                  regresar</a>
-                              </div>  
+                                  <button class="btn btn-danger btn-sm" type="button" onclick="generarpdflistaprofesor()"><i class="fas fa-print"></i>imprimir</button>
+                                  <a href="{{url('opciones-reportesecre')}}" class="btn btn-sm btn-success text-capitalize" >
+                                      <i class="fas fa-plus-circle"></i>
+                                      regresar</a>
+                                </div>  
                       </div>
                       <div class="row">
                         <div class="col">

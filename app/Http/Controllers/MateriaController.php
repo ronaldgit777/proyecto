@@ -12,6 +12,12 @@ class MateriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function  buscarmaterias(Request $request)
+    {   
+       $buscarma2 = $request->input('buscarma');
+       $resultadoconsulta = materia::obtenerlistamaterias($buscarma2);
+       return response()->json($resultadoconsulta); 
+    }
     public function index()
     {
         $datos['materias']=materia::paginate(7);

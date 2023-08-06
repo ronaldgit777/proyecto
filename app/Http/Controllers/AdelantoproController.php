@@ -14,13 +14,39 @@ class AdelantoproController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+    public function  adelantodispopro(Request $request)
+    {   
+        $profesorid2 = $request->input('profesor_id');
+       // $monto2 = $request->input('monto');
+        $resultado = 0;
+        $sueldopro =profesor::obtenerSueldo($profesorid2);
+        $fechaActual = Carbon::now();
+        $diastrabajados = $fechaActual->day;
+        $maxadelantomes= ($sueldopro/30)*$diastrabajados;
+        $totaladelanto = adelantopro::obteneradelanto($profesorid2);//
+        $resultado = $maxadelantomes-$totaladelanto ;
+       // return  $resultado; 
+        return response()->json($resultado);       
+    }
+    public function  obtenerfechainicioproadere(Request $request)
+    {   
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $profesorid2 = $request->input('profesorid');
+       $monto11 = $request->input('monto1');
+       $monto22 = $request->input('monto2');
+       $ordenaradepro2 = $request->input('ordenaradepro');
+       $mayorymenoradepro2 = $request->input('mayorymenoradepro');
+       $resultadoconsulta = adelantopro::obteneradeprodesdefechainiciore($fechaini,$fechafin,$profesorid2,$monto11,$monto22,$ordenaradepro2,$mayorymenoradepro2);   
+       return response()->json($resultadoconsulta);        
+    }
     public function  obtenerfechainicioproade(Request $request)
     {   
        $fechaini = $request->input('fechainicio');
        $fechafin = $request->input('fechafinal');
        $buscarpro2 = $request->input('buscarpro');
-       $resultadoconsulta = adelantopro::obteneradeprodesdefechainicio($fechaini,$fechafin,$buscarpro2);
-           
+       $resultadoconsulta = adelantopro::obteneradeprodesdefechainicio($fechaini,$fechafin,$buscarpro2);   
        return response()->json($resultadoconsulta);        
     }
     public function validaradelanto(Request $request)
@@ -42,7 +68,16 @@ class AdelantoproController extends Controller
        // return  $resultado; 
         return response()->json($resultado);
     }
-
+    
+    public function reporadepro()
+    {
+        $adelantopros=adelantopro::all();
+        $profesors=profesor::all();
+        // return profesor::with('sueldopro')->get(); 
+         //$datos['sueldopros']=sueldopro::paginate(7);
+         return view('adelantopro.reporadepro',compact('adelantopros','profesors'));
+    }
+    
     public function index()
     {
         $adelantopros=adelantopro::all();

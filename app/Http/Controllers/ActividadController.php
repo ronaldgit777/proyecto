@@ -12,6 +12,12 @@ class ActividadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function  buscaractividades(Request $request)
+    {   
+       $buscarac2 = $request->input('buscarac');
+       $resultadoconsulta = actividad::obtenerlistaactividades($buscarac2);
+       return response()->json($resultadoconsulta); 
+    }
     public function index()
     {
         $actividads['actividads']=actividad::paginate(7);

@@ -12,6 +12,12 @@ class PeriodoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function  buscarperiodos(Request $request)
+    {   
+       $buscarpe2 = $request->input('buscarpe');
+       $resultadoconsulta = periodo::obtenerlistaperiodos($buscarpe2);
+       return response()->json($resultadoconsulta); 
+    }
     public function index()
     {
         $datos['periodos']=periodo::paginate(7);

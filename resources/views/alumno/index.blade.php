@@ -5,7 +5,7 @@
     <div class="card-header border-0">
       <div class="row align-items-center">
             <div class="col">
-              <h3 class="mb-0">LISTA DE PAGOS DE ALUMNOS
+              <h3 class="mb-0">LISTA DE ALUMNOS
                   <i class="far fa-calendar-alt  text-blue"></i>
               </h3>
               <div class="row">
@@ -19,7 +19,7 @@
                           <input type="date" name="fechafinal" id="fechafinal" class="form-control">
                           <span class="text-muted">hasta</span>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col">
                         <label class="text-primary text-capitalize">Buscar</label>
                         <div class="input-group">
                           <input type="text" name="buscar" id="buscar" class="form-control" placeholder="Ingrese término de búsqueda">
@@ -28,21 +28,9 @@
                             </div>  -->
                         </div>
                       </div>
-                      <div class="col">
-                        <label class="text-primary text-capitalize"></label><br>
-                        <button class="btn btn-danger" type="button"><i class="fas fa-print"></i>imprimir</button>
-                      </div>  
-                      
-                      <div class="col">
-                          <label class="text-primary text-capitalize"></label> 
-                          <a href="{{url('alumno/create')}}" class="btn  btn-primary text-capitalize" >
-                              <i class="fas fa-plus-circle"></i>
-                              agregar nuevo alumno</a>
-                      </div>
                       <div class="col text-right">
-                          <a href="{{url('home')}}" class="btn btn-sm btn-success" >
-                              <i class="fas fa-plus-circle"></i>
-                              regresar</a>
+                        <button class="btn btn-danger" type="button"><i class="fas fa-print"></i>imprimir</button>
+                        <a href="{{url('alumno/create')}}" class="btn  btn-primary text-capitalize" > <i class="fas fa-plus-circle"></i> agregar nuevo alumno</a>
                     </div>  
               </div>
           </div>
@@ -99,7 +87,6 @@
    </div>
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
    <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
-      <!-- Link to pdfmake font files -->
    <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
    <script>
     $(document).ready(function() {
@@ -117,7 +104,6 @@
             var fecha_fin = $('#fechafinal').val();
             var buscar = $('#buscar').val();  
             generartabla(fecha_ini,fecha_fin,buscar);      
-         
         });
         function generartabla(fecha_ini,fecha_fin,buscar) {
               $.ajax({
@@ -131,12 +117,9 @@
                         _token: '{{ csrf_token() }}' // Agregar el token CSRF
                     },
                     success: function(response) {
-                        
-                  
                         // Limpiar el campo de selección de periodos
                         $('#tabla_alu').empty();
                       // profesorreporte=[];
-  
                         $.each(response, function(key, value) {
                             // alert(value.id)
                             $('#tabla_alu').append(
