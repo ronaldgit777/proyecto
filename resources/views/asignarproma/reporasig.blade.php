@@ -18,7 +18,6 @@
                               <span class="text-muted">hasta</span>
                           </div>
                           <div class="col">
-                            
                             <label class="text-primary text-capitalize">profesores</label>
                               <select type="text" name="profesor_id" id="profesor_id" class="form-control" >
                                 <option selected  value="">seleccione el profesor</option>
@@ -75,11 +74,8 @@
                                 </div>
                             </div>
                           </div>
-                            <div class="col">
-                              <label class="text-primary text-capitalize">presione el boton</label><br>
-                              <button class="btn btn-danger" type="button" onclick="generarpdflistaprofesor()"><i class="fas fa-print"></i>imprimir</button>
-                            </div>  
                             <div class="col text-right">
+                              <button class="btn btn-danger btn-sm" type="button" onclick="generarpdflistaprofesor()"><i class="fas fa-print"></i>imprimir</button>
                               <a href="{{url('reporopciones')}}" class="btn btn-sm btn-success" >
                               <i class="fas fa-plus-circle"></i>
                               regresar</a>

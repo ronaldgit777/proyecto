@@ -105,7 +105,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="{{ url('/notas') }}">
+              <a class="nav-link " href="{{ url('/nota') }}">
                 <i class="fas fa-calculator text-success"></i>notas
               </a>
             </li>

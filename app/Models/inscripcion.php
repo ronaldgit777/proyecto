@@ -46,8 +46,6 @@ class inscripcion extends Model
                         ->orWhere('aulas.aula', 'like', "%$buscarin2%");
                 });
             })   
-             // ->select('profesors.*', 'users.email', 'users.role')
-            //  ->get();
             ->select(
                 'inscripcions.*','fechadeinscripcion',
                 'profesors.nombre as profesor_nombre',
@@ -76,12 +74,68 @@ class inscripcion extends Model
                 'inscripcions.*','fechadeinscripcion',
                 'profesors.nombre as profesor_nombre',
                 'alumnos.nombre as alumno_nombre',
+                'alumnos.apellidopaterno as alumno_apellidopaterno',
+                'alumnos.apellidomaterno as alumno_apellidomaterno',
                 'materias.materia as materia_nombre',
                 'materias.costo as materia_costo',
                 'periodos.periodo as periodo_nombre',
                 'aulas.aula as aula_nombre'
             )
             ->get();
+    }
+    public static function obtenerfecchainicioinscripcionreporte($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,$alumnoid2,$ordenarins2,$mayorymenorins2,$alumnoidpa2,$alumnoidma2)
+    {      
+        // Ejemplo de obtención del sueldo del profesor
+       // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
+        $consulta = self::
+              when($fechaini, function ($query, $fechaini) {
+                  return $query->where('inscripcions.fechadeinscripcion', '>=', $fechaini);
+              })
+              ->when($fechafin, function ($query, $fechafin) {
+                  return $query->where('inscripcions.fechadeinscripcion', '<=', $fechafin);
+              })   
+              ->join('alumnos', 'inscripcions.alumno_id', '=', 'alumnos.id')
+              ->join('asignarpromas', 'inscripcions.asignarproma_id', '=', 'asignarpromas.id')
+              ->join('profesors', 'asignarpromas.profesor_id', '=', 'profesors.id')
+              ->join('materias', 'asignarpromas.materia_id', '=', 'materias.id')
+              ->join('periodos', 'asignarpromas.periodo_id', '=', 'periodos.id')
+              ->join('aulas', 'asignarpromas.aula_id', '=', 'aulas.id')
+
+              ->when($profesorid2, function ($query, $profesorid2) {
+                return $query->where('profesors.id',$profesorid2);
+                })
+            ->when($materiaid2, function ($query, $materiaid2) {
+                return $query->where('materias.id',$materiaid2);
+                })
+            ->when($periodoid2, function ($query, $periodoid2) {
+                return $query->where('periodos.id',$periodoid2);
+                })
+            ->when($aulaid2, function ($query, $aulaid2) {
+                return $query->where('aulas.id',$aulaid2);
+                }) 
+            ->when($alumnoid2, function ($query, $alumnoid2) {
+            return $query->where('alumnos.id',$alumnoid2);
+            }) 
+            ->when($alumnoidpa2, function ($query, $alumnoidpa2) {
+                return $query->where('alumnos.id',$alumnoidpa2);
+                }) 
+                ->when($alumnoidma2, function ($query, $alumnoidma2) {
+                    return $query->where('alumnos.id',$alumnoidma2);
+                    }) 
+            ->select(
+                'inscripcions.*','fechadeinscripcion',
+                'profesors.nombre as profesor_nombre',
+               'alumnos.nombre as alumno_nombre', 'alumnos.apellidopaterno as alumno_apellidopaterno', 'alumnos.apellidomaterno as alumno_apellidomaterno',
+                'materias.materia as materia_nombre',
+                 'materias.costo as materia_costo',
+                'periodos.periodo as periodo_nombre',
+                'aulas.aula as aula_nombre'
+            );
+            if (!empty($ordenarins2) && !empty($mayorymenorins2)) {
+                $consulta->orderBy($ordenarins2, $mayorymenorins2);
+            }
+              return $consulta->get();       
+        //return $fechaini;
     }
  }
     

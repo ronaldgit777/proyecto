@@ -25,8 +25,9 @@ class AdelantosecreController extends Controller
         $maxadelantomes= ($sueldosecre/30)*$diastrabajados;
         $totaladelanto = adelantosecre::obteneradelantosecre($secretariaid2);
         $resultado = $maxadelantomes-$totaladelanto ;
-       // return  $resultado; 
-        return response()->json($resultado);       
+        $resultado1 = round($resultado, 1);
+        // return  $resultado; 
+         return response()->json($resultado1);        
     }
     public function  obtenerfechainiciosecreadere(Request $request)
     {   

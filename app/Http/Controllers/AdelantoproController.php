@@ -26,8 +26,9 @@ class AdelantoproController extends Controller
         $maxadelantomes= ($sueldopro/30)*$diastrabajados;
         $totaladelanto = adelantopro::obteneradelanto($profesorid2);//
         $resultado = $maxadelantomes-$totaladelanto ;
+        $resultado1 = round($resultado, 1);
        // return  $resultado; 
-        return response()->json($resultado);       
+        return response()->json($resultado1);       
     }
     public function  obtenerfechainicioproadere(Request $request)
     {   

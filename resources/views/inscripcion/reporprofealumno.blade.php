@@ -20,18 +20,108 @@
                             <span class="text-muted">hasta</span>
                         </div>
                         <div class="col">
-                          <label class="text-primary text-capitalize">Buscar</label>
-                          <div class="input-group">
-                            <input type="text" name="buscar" id="buscar" class="form-control" placeholder="Ingrese término de búsqueda">
-                             <!--  <div class="input-group-append">
-                                <button class="btn btn-primary" type="button"><i class="fas fa-search"></i>Buscar</button>
-                              </div>  -->
+                            <label class="text-primary text-capitalize">profesores</label>
+                              <select type="text" name="profesor_id" id="profesor_id" class="form-control" >
+                                <option selected  value="">seleccione el profesor</option>
+                                @foreach ($profesors as $profesor)
+                                <option value="{{ $profesor->id }}">{{ $profesor->nombre}}</option>
+                                @endforeach
+                            </select> 
+                            {{-- <input type="text" name="profesor_id" id="profesor_id" class="form-control" > --}}
                           </div>
+                          <div class="col">
+                            <label class="text-primary text-capitalize">materia</label>
+                            <select type="text" name="materia_id" id="materia_id" class="form-control" >
+                              <option selected value="">seleccione la materia</option>
+                              @foreach ($materias as $materia)
+                              <option value="{{ $materia->id }}">{{ $materia->materia}}</option>
+                              @endforeach
+                          </select>
+                          {{-- <input type="text" name="materia_id" id="materia_id" class="form-control" > --}}
+                          </div>
+                          <div class="col">
+                            <label class="text-primary text-capitalize">aula</label>
+                            <select type="text" name="aula_id" id="aula_id" class="form-control" >
+                              <option selected  value="">seleccione el aula</option>
+                              @foreach ($aulas as $aula)
+                              <option value="{{ $aula->id }}">{{ $aula->aula }}</option>
+                              @endforeach
+                          </select>
+                          {{-- <input type="text" name="aula_id" id="aula_id" class="form-control" > --}}
+                          </div>
+                          <div class="col">
+                            <label class="text-primary text-capitalize">periodo</label>
+                            <select type="text" name="periodo_id" id="periodo_id" class="form-control" >
+                              <option selected  value="">seleccione el periodo</option>
+                              @foreach ($periodos as $periodo)
+                              <option value="{{ $periodo->id }}">{{ $periodo->periodo }}</option>
+                              @endforeach
+                          </select>
                         </div>
                         <div class="col text-right">
-                          <button class="btn btn-danger" type="button"><i class="fas fa-print"></i>imprimir</button>
-                          <a href="{{url('inscripcion/create')}}" class="btn  btn-primary text-capitalize" > <i class="fas fa-plus-circle"></i> agregar nueva inscripcion</a>
-                      </div>  
+                            <button class="btn btn-danger btn-sm" type="button" onclick="generarpdflistaprofesor()"><i class="fas fa-print"></i>imprimir</button>
+                            <a href="{{url('reporopciones')}}" class="btn btn-sm btn-success" >
+                            <i class="fas fa-plus-circle"></i>
+                            regresar</a>
+                        </div>  
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="text-primary text-capitalize">nombre_alumno</label>
+                        <select type="text" name="alumno_id" id="alumno_id" class="form-control" >
+                          <option selected  value="">seleccione el nombre del alumno</option>
+                          @foreach ($alumnos as $alumno)
+                          <option value="{{ $alumno->id }}">{{ $alumno->nombre }}</option>
+                          @endforeach
+                      </select>
+                    </div>
+                     <div class="col">
+                        <label class="text-primary text-capitalize">apepaterno_alumno</label>
+                        <select type="text" name="alumnopa" id="alumnopa" class="form-control" >
+                          <option selected  value="">seleccione el nombre del alumno</option>
+                          @foreach ($alumnos as $alumno)
+                          <option value="{{ $alumno->id }}">{{ $alumno->apellidopaterno }}</option>
+                          @endforeach
+                      </select>
+                    </div>
+                    <div class="col">
+                        <label class="text-primary text-capitalize">apematerno_alumno</label>
+                        <select type="text" name="alumnoma" id="alumnoma" class="form-control" >
+                          <option selected  value="">seleccione el nombre del alumno</option>
+                          @foreach ($alumnos as $alumno)
+                          <option value="{{ $alumno->id }}">{{ $alumno->apellidomaterno }}</option>
+                          @endforeach
+                      </select>
+                    </div> 
+                    <div class="col">
+                        <label class="text-primary text-capitalize">estado</label>
+                          <select type="text" name="estado" id="estado" class="form-control">
+                            <option selected  value="">seleccione el estado</option>
+                            <option value="activo">activo</option> 
+                            <option value="inactivo">inactivo</option> 
+                            </select>
+                      </div>
+                    <div class="col">
+                        <label class="text-primary text-capitalize">ordenar</label>
+                        <div class="input-group">
+                          <select type="text" name="ordenar" id="ordenar" class="form-control">
+                            <option value="profesor_nombre">profesor</option> 
+                            <option value="materia_nombre">materia</option> 
+                            <option value="aula_nombre">aula</option> 
+                            <option value="periodo_nombre">periodo</option> 
+                            <option value="alumno_nombre">nombre_alumno</option> 
+                            <option value="alumno_apellidopaterno">nombre_pa</option> 
+                            <option value="alumno_apellidomaterno">nombre_ma</option> 
+                       
+                            </select>
+                            <div class="input-group-append">
+                              <select type="text" name="mayorymenor" id="mayorymenor" class="form-control">
+                                <option value="desc">desc</option> 
+                                <option value="asc">asc</option> 
+                                </select>
+                            </div>
+                        </div>
+                      </div>
                 </div>
             </div>
         </div>
@@ -49,6 +139,8 @@
                                     <th>periodo</th>
                                     <th>aula</th>
                                     <th>alumno_id</th>
+                                    <th>alumno_pa</th>
+                                    <th>alumno_ma</th>
                                     <th>estado</th>
                                     <th>acciones</th>
                                 </tr>
@@ -67,6 +159,8 @@
                                     <td>{{ $inscripcion->periodo_nombre}}</td>
                                     <td>{{ $inscripcion->aula_nombre}}</td>
                                     <td>{{ $inscripcion->alumno_nombre}}</td>
+                                    <td>{{ $inscripcion->alumno_apellidopaterno}}</td>
+                                    <td>{{ $inscripcion->alumno_apellidomaterno}}</td>
                                     <td>{{ $inscripcion->estado }}</td>
                                     <td> <a href="{{ url('/inscripcion/'.$inscripcion->id.'/show') }}" method="post" class="btn btn-sm btn-danger">
                                         <i class="far fa-eye"></i></a>
@@ -80,5 +174,103 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
    <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
-
+   <script>
+    $(document).ready(function() {
+  
+        $('#fechainicio').on('change', function() {
+  
+            var fecha_ini = $(this).val(); 
+            var fecha_fin = $('#fechafinal').val();
+            var profesorid = $('#profesor_id').val();
+            var materiaid = $('#materia_id').val();
+            var periodoid = $('#periodo_id').val();
+            var aulaid = $('#aula_id').val(); 
+            var alumnoid = $('#alumno_id').val();  var alumnoidpa = $('#alumnopa').val(); var alumnoidma = $('#alumnoma').val(); 
+            var ordenar = $('#ordenar').val();
+            var mayorymenor = $('#mayorymenor').val();
+            generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,alumnoid,ordenar,mayorymenor,alumnoidpa,alumnoidma);   
+           // alert(profesorid)   
+        });
+        function generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,alumnoid,ordenar,mayorymenor,alumnoidpa,alumnoidma) {
+              $.ajax({
+                    url: '{{ url("obtener-fechainicioinscripcionesreporte") }}', // Ruta a tu controlador Laravel
+                    type: 'POST',
+                    data: {
+                        fechainicio: fecha_ini, //lo de blanco es la llave q tienes para q se capture la variable
+                        fechafinal: fecha_fin,
+                        profesorid: profesorid,// Enviar el ID del aula seleccionada
+                        materiaid: materiaid,
+                        periodoid: periodoid,
+                        aulaid: aulaid,
+                        alumnoid: alumnoid,  alumnoidpa:alumnoidpa,     alumnoidma:alumnoidma,
+                        ordenarins:ordenar,
+                        mayorymenorins:mayorymenor,
+                      // profesor_id: profesorId,
+                        _token: '{{ csrf_token() }}' // Agregar el token CSRF
+                    },
+                    success: function(response) {
+                        // Limpiar el campo de selección de periodos
+                        $('#tabla_ins').empty();
+                      // profesorreporte=[];
+                        $.each(response, function(key, value) {
+                            // alert(value.id)
+                            $('#tabla_ins').append(
+                                '<tr>'+
+                                // ' <td>'+value.id+'</td>'+
+                                    '<td>'+value.fechadeinscripcion+'</td>'+
+                                    '<td>'+value.asignarproma_id+'</td>'+
+                                    ' <td>'+value.profesor_nombre+'</td>'+
+                                    ' <td>'+value.materia_nombre+'</td>'+
+                                    ' <td>'+value.materia_costo+'</td>'+
+                                    ' <td>'+value.periodo_nombre+'</td>'+
+                                    ' <td>'+value.aula_nombre+'</td>'+
+                                    ' <td>'+value.alumno_nombre+'</td>'+
+                                    ' <td>'+value.alumno_apellidopaterno+'</td>'+
+                                    ' <td>'+value.alumno_apellidomaterno+'</td>'+
+                                    ' <td>'+value.estado+'</td>'+
+                                   // ' <td>'+value.role+'</td>'+
+                                    ' <td>'+
+                                      '<a href="/proyecto/public/inscripcion/' + value.id + '/show" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
+                                    ' </td>'+
+                                ' </tr>'
+                            );
+                            //alert(value.id);
+                           // profesorreporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
+                           // $('#miadelanto').find('td').css('border', '1px solid black');
+                        });
+                    }
+                });
+        }
+        $('#fechafinal').on('change', function() {
+           $('#fechainicio').trigger('change');
+        });
+        $('#profesor_id').on('change', function() {
+           $('#fechainicio').trigger('change');
+        });
+        $('#materia_id').on('change', function() {
+           $('#fechainicio').trigger('change');
+        });
+        $('#periodo_id').on('change', function() {
+           $('#fechainicio').trigger('change');
+        });
+        $('#aula_id').on('change', function() {
+           $('#fechainicio').trigger('change');
+        });
+        $('#alumno_id').on('change', function() {
+           $('#fechainicio').trigger('change');
+        });
+        $('#alumnoma').on('change', function() {
+           $('#fechainicio').trigger('change');
+        });
+        $('#alumnopa').on('change', function() {
+           $('#fechainicio').trigger('change');
+        });
+        $('#ordenar').on('change', function() {
+           $('#fechainicio').trigger('change');
+        });
+        $('#mayorymenor').on('change', function() {
+           $('#fechainicio').trigger('change');
+        });
+    });
+  </script>
 @endsection

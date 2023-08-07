@@ -8,6 +8,7 @@ use App\Http\Controllers\AdelantoproController;
 use App\Http\Controllers\AdelantosecreController;
 use App\Http\Controllers\InscripcionController;
 use App\Http\Controllers\MateriaController;
+use App\Http\Controllers\NotaController;
 use App\Http\Controllers\PeriodoController;
 use App\Http\Controllers\ProfesorController;
 use App\Http\Controllers\SecretariaController;
@@ -48,6 +49,8 @@ Route::get('/', function () {
 
         //route::get('/',[ProfesorController::class,'index'])->name('home');
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+        route::resource('nota',NotaController::class)->middleware('auth');   
         //periodos
         route::resource('periodo',PeriodoController::class)->middleware('auth');
         Route::post('/buscar-periodos',[App\Http\Controllers\PeriodoController::class, 'buscarperiodos'])->name('buscar-periodos'); //lista de aulas
@@ -69,10 +72,14 @@ Route::get('/', function () {
         Route::post('/buscar-actividades',[App\Http\Controllers\ActividadController::class, 'buscaractividades'])->name('buscar-actividades'); //lista de aulas
         //inscripciones
         route::resource('inscripcion',InscripcionController::class)->middleware('auth');
+
         Route::post('/obtener-fechainicioinscripciones',[App\Http\Controllers\InscripcionController::class, 'buscarfechainicioinscripciones'])->name('obtener-fechainicioinscripciones'); //lista de aulas
+
         Route::post('/obtener-materiasdelprofesorid',[App\Http\Controllers\AsignarpromaController::class, 'obtenermateriasdelprofesorid'])->name('obtener-materiasdelprofesorid');
         Route::post('/obtener-periodosmateriaprofesor',[App\Http\Controllers\AsignarpromaController::class, 'obtenerperiodosmateriaprofesor'])->name('obtener-periodosmateriaprofesor');
         Route::post('/obtener-aulaperiodosmateriaprofesor',[App\Http\Controllers\AsignarpromaController::class, 'obteneraulaperiodosmateriaprofesor'])->name('obtener-aulaperiodosmateriaprofesor');
+
+        Route::post('/obtener-fechainicioinscripcionesreporte',[App\Http\Controllers\InscripcionController::class, 'buscarfechainicioinscripcionesreporte'])->name('obtener-fechainicioinscripcionesreporte');
 
         Route::get('/reporprofealumno',[App\Http\Controllers\InscripcionController::class, 'index2'])->name('reporprofealumno');
         
