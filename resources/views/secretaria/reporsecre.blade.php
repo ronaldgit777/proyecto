@@ -57,7 +57,10 @@
                         </div>
                         <div class="col">
                           <label class="text-primary text-capitalize">estado</label>
-                          <input type="text" name="estado" id="estado" class="form-control">
+                          <select type="text" name="estado" id="estado" class="form-control">
+                            <option value="activo">activo</option> 
+                            <option value="inactivo">inactivo</option> 
+                            </select>
                         </div>
                         <div class="col">
                           <label class="text-primary text-capitalize">sueldo -desde</label>

@@ -19,9 +19,17 @@
                             </div>  -->
                         </div>
                       </div>
+                      <div class="col">
+                        <label class="text-primary text-capitalize">estado</label>
+                        <select type="text" name="estado" id="estado" class="form-control">
+                          <option selected  value="">ambos</option>
+                          <option value="activo">activo</option> 
+                          <option value="inactivo">inactivo</option> 
+                          </select>
+                      </div>
                       <div class="col text-right">
-                        <button class="btn btn-danger" type="button"><i class="fas fa-print"></i>imprimir</button>
-                        <a href="{{url('aula/create')}}" class="btn  btn-primary text-capitalize" >
+                        <button class="btn btn-sm  btn-danger" type="button"><i class="fas fa-print"></i>imprimir</button>
+                        <a href="{{url('aula/create')}}" class="btn btn-sm btn-primary text-capitalize" >
                             <i class="fas fa-plus-circle"></i>
                             agregar nueva aula</a>
                     </div>  

@@ -98,7 +98,7 @@ class profesor extends Model
       
       return $fechaingreso;
   }
-  public static function obtenerprofesoresdesdefechainicio2($fechaini,$rutaImagenBase,$fechafin,$buscarpro2)
+  public static function obtenerprofesoresdesdefechainicio2($fechaini,$rutaImagenBase,$fechafin,$buscarpro2,$estadopro2)
   {      
       // Ejemplo de obtención del sueldo del profesor
      // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
@@ -109,6 +109,9 @@ class profesor extends Model
             ->when($fechafin, function ($query, $fechafin) {
                 return $query->where('profesors.fechadeingreso', '<=', $fechafin);
             })  
+            ->when($estadopro2, function ($query, $estadopro2) {
+                return $query->where('profesors.estado', '=', $estadopro2);
+            }) 
             ->when($buscarpro2, function ($query, $buscarpro2) {
                 return $query->where(function ($query) use ($buscarpro2) {
                     $query->where('ci', 'like', "%$buscarpro2%")
@@ -121,16 +124,18 @@ class profesor extends Model
                         ->orWhere('sueldo', 'like', "%$buscarpro2%");
                 });
             })  
+          
               
            // ->select('profesors.*', 'users.email', 'users.role')
           //  ->get();
-          ->select('profesors.*', 'users.email', 'users.role')
+          ->select('profesors.*', 'users.email', 'users.role','profesors.estado')
 
           
           ->selectRaw("CONCAT('$rutaImagenBase', profesors.imagen) as ruta_imagen")
           ->get();
       //return $fechaini;
   }
+
 
 }
 

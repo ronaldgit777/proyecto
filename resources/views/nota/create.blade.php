@@ -13,11 +13,12 @@
                     <a href="{{url('nota/')}}" class="btn btn-sm btn-success">
                         <i class="fas fa-undo"></i>
                         regresar</a>
+                      
                 </div>
                 </div>
             </div>
         <?php $fcha = date("Y-m-d"); ?>
-    <form method="post" action="{{ url('/inscripcion')}}" enctype="multipart/form-data">
+    <form method="post" action="{{ url('/nota')}}" enctype="multipart/form-data">
      @csrf   
      <input type="text"  id="asignarproma_id"  name="asignarproma_id" class="d-none"  value=""  readonly> 
         <div class="row p-3 mb-2  text-white">
@@ -31,7 +32,7 @@
                                         <label class="text text-capitalize">fecha de nota</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input class="form-control" placeholder="fechadenota" type="date" name="fechadenota"  value="<?php echo $fcha; ?>" >
+                                        <input class="form-control" placeholder="fechadenota" type="date" name="fechadenota"   id="fechadenota" value="<?php echo $fcha; ?>" >
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +44,7 @@
                                     </div>
                                     <div class="col-8 col-md-9">
                                        
-                                        <select type="text"  id="actividad_id" class="form-control" required>
+                                        <select type="text"  id="actividad_id"  name="actividad_id" class="form-control" required>
                                             <option selected disabled value="">seleccione la actividad</option>
                                             @foreach ($actividads as $actividad)
                                             <option value="{{ $actividad->id }}">{{$actividad->actividad}}</option>
@@ -59,7 +60,7 @@
                                         <label class="text text-capitalize">materia </label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <select type="text"  id="materia_id" class="form-control" required >
+                                        <select type="text"  id="materia_id" name="materia_id"  class="form-control" required >
                                             <option selected disabled value="">seleccione la materia</option>
                                             @foreach ($materias as $materia)
                                             <option value="{{ $materia->id }}">{{ $materia->materia}}</option>
@@ -75,7 +76,7 @@
                                         <label class="text text-capitalize">nota </label>
                                     </div>
                                     <div class="col-8 col-md-9">    
-                                        <input class="form-control" placeholder="ingrese la nota" type="text" name="nota"  required >
+                                        <input class="form-control" placeholder="ingrese la nota" type="text" name="nota"  id="nota"  required >
                                     </div>
                                 </div>
                             </div>
@@ -86,10 +87,10 @@
                                         <label class="text text-capitalize">alumno</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <select type="text" name="alumno_id" id="alumno_id" class="form-control" required>
+                                        <select type="text" name="alumno_id" id="alumno_id" class="form-control" required disabled>
                                             <option selected disabled value="">seleccione el alumno</option>
                                             @foreach ($alumnos as $alumno)
-                                            <option value="{{ $alumno->id }}">{{ $alumno->nombre."-".$alumno->apellidopaterno }}</option>
+                                            <option value="{{ $alumno->id }}">{{ $alumno->nombre."-".$alumno->apellidopaterno."-".$alumno->apellidomaterno }}</option>
                                             @endforeach
                                         </select> 
                                     </div>
@@ -102,10 +103,11 @@
                                         <label class="text text-capitalize">estado </label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <select type="text" name="estado" id="estado" class="form-control" required>
+                                        {{-- <select type="text" name="estado" id="estado" class="form-control" required>
                                             <option value="activo">activo</option> 
                                             <option value="inactivo">inactivo</option> 
-                                            </select><br>
+                                            </select><br> --}}
+                                            <input type="text" name="estado" id="estado" class="form-control" required value="activo" disabled> <br>
                                     </div>
                                 </div>
                             </div>
@@ -117,9 +119,11 @@
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <center><input type="submit" value="guardar datos" class="btn btn-primary"></center>
+                                          
                                     </div>
                                 </div>
                             </div>
+                           
                     </div>
                 </div>
             </div>
@@ -127,4 +131,50 @@
     </form>
 </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+   <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
+   <script>
+    $(document).ready(function() {
+  
+        $('#materia_id').on('change', function() {
+  
+            var materiaid = $(this).val(); 
+           // var materiaid = $('#materia_id').val();
+            generartabla(materiaid);   
+           // alert(profesorid)   
+        });
+        function generartabla(materiaid) {
+        //  alert(alumnoidma)
+              $.ajax({
+                    url: '{{ url("obtener-listaalumnosinscritos") }}', // Ruta a tu controlador Laravel
+                    type: 'POST',
+                    data: {
+                        materiaid: materiaid,
+                      // profesor_id: profesorId,
+                        _token: '{{ csrf_token() }}' // Agregar el token CSRF
+                    },
+                    success: function(response) {
+                        // Limpiar el campo de selección de periodos
+                        $('#alumno_id').empty();
+                      // profesorreporte=[];
+                        $.each(response, function(key, value) {
+                            // alert(value.id)
+                            $('#alumno_id').append(
+                             '<option value="' + value.id + '">' + value.nombre +' '+ value.apellidopaterno+' '+ value.apellidomaterno+'</option>'
+                            );
+                            //alert(value.id);
+                           // profesorreporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
+                           // $('#miadelanto').find('td').css('border', '1px solid black');
+                        });
+                        $("#alumno_id").prop("disabled", false); 
+                    }
+                });
+        }
+        $('#fechafinal').on('change', function() {
+           $('#fechainicio').trigger('change');
+        });
+    });
+  </script>
 @endsection

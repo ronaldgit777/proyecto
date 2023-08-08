@@ -17,9 +17,11 @@
                 </div>
             </div>
         <?php $fcha = date("Y-m-d"); ?>
+       
     <form method="post" action="{{ url('/inscripcion')}}" enctype="multipart/form-data">
      @csrf   
      <input type="text"  id="asignarproma_id"  name="asignarproma_id" class="d-none"  value=""  readonly> 
+     
         <div class="row p-3 mb-2  text-white">
             <div class="col-12"> 
                 <div class="m-portlet__body m-portlet--primary" data-portlet="true" m-portlet="true">
@@ -43,7 +45,7 @@
                                     </div>
                                     <div class="col-8 col-md-9">
                                        
-                                        <select type="text"  id="profesor_id" class="form-control" required>
+                                        <select type="text"  id="profesor_id"  class="form-control" required>
                                             <option selected disabled value="">seleccione el profesor</option>
                                             @foreach ($asignarpromas as $asignarproma)
                                             <option value="{{ $asignarproma->profesor_id }}">{{$asignarproma->profesor->nombre}}</option>
@@ -135,10 +137,11 @@
                                         <label class="text text-capitalize">estado </label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <select type="text" name="estado" id="estado" class="form-control" required>
+                                        {{-- <select type="text" name="estado" id="estado" class="form-control" required>
                                             <option value="activo">activo</option> 
                                             <option value="inactivo">inactivo</option> 
-                                            </select><br>
+                                            </select><br> --}}
+                                            <input type="text" name="estado" id="estado" class="form-control" required value="activo" disabled> <br>
                                     </div>
                                 </div>
                             </div>
@@ -150,6 +153,23 @@
                                     </div>
                                     <div class="col-8 col-md-9">
                                         <center><input type="submit" value="guardar datos" class="btn btn-primary"></center>
+                                          
+                                    </div>
+                                </div>
+                            </div>
+                                                              
+                            <div class="col-12 col-sm-12 col-md-6">
+                                <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
+                                    <div class="col-4 col-md-3">
+                                        <label class="text text-capitalize">mensajse </label>
+                                    </div>
+                                    <div class="col-8 col-md-9">
+                                        @if(session('error'))
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert" id="mensaje">
+                                            El registro ya existe.
+                                        </div>
+                                        @endif
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -161,13 +181,47 @@
 </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+@if(session('profesor_id'))
+    <script>
+         $(document).ready(function() {
+	var selectElement = document.getElementById('profesor_id');
+    var selectElement2 = document.getElementById('alumno_id');
+
+	var valueToSelect = '{{ session('profesor_id') }}';// Valor a buscar y seleccionar
+
+	for (var i = 0; i < selectElement.options.length; i++) {
+    	var option = selectElement.options[i];
+    
+    		if (option.value === valueToSelect) {
+        	option.selected = true; 
+        	break; // Terminar el bucle una vez que se encuentra la opción
+    		}
+	}
+
+    var valueToSelect2 = '{{ session('alumno_id') }}';// Valor a buscar y seleccionar
+
+	for (var i = 0; i < selectElement2.options.length; i++) {
+    	var option = selectElement2.options[i];
+    
+    		if (option.value === valueToSelect2) {
+        	option.selected = true; 
+        	break; // Terminar el bucle una vez que se encuentra la opción
+    		}
+	}
+});
+    </script>
+@endif
+
 <script>
+
+
     $(document).ready(function() {
 
         $('#profesor_id').on('change', function() {
 
             var profesorid = $(this).val(); // Obtener el valor del aula seleccionada
             // Realizar la solicitud Ajax
+            $('#mensaje').addClass('d-none');
             $.ajax({
                 url: '{{ url("obtener-materiasdelprofesorid") }}', // Ruta a tu controlador Laravel
                 type: 'POST',

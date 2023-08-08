@@ -68,15 +68,15 @@
                       <div class="bottom-row">
                         <div class="box">
                           <img src="imag/pagoprofesor.png" alt="Imagen 4">
-                          <a href="/reporasig">sueldos pagados profesores</a>
+                          <a  href="{{ url('/reporsupro') }}">sueldos pagados profesores</a>
                         </div>
                         <div class="box">
                           <img src="imag/alumnosprofe.jpg" alt="Imagen 5">
                           <a  href="{{ url('/reporprofealumno') }}">profesores su lista de alumnos</a>
                         </div>
                         <div class="box">
-                          <img src="imagen6.jpg" alt="nose">
-                          <a href="#">noce</a>
+                          <img src="imag/notaprofesor.png"  alt="nose">
+                          <a href="#">profesores su lista de notas</a>
                         </div>
                         
           </div>

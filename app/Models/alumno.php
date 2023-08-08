@@ -9,8 +9,34 @@ class alumno extends Model
 {
     protected $table = "alumnos";
    
+
+    public function notas()
+    {
+        return $this->hasMany(nota::class,'materia_id','id');
+    }
    //public $timestamps=false;
    //protected $primarykey ='id';
+   public static function obtenerno(){
+    return self::
+    select('nombre')
+    ->distinct()
+    ->get();// Retorna una colección de apellidos paternos únicos de todos los alumnos
+    }
+    public static function obtenerapellidospa(){
+        //return self::distinct()->pluck('apellidopaterno'); 
+        return self::
+        select('alumnos.apellidopaterno')
+        ->distinct()
+        ->get();
+    }
+    public static function obtenerapellidosma(){
+      //  return self::distinct()->pluck('apellidomaterno');
+        return self::
+        select('apellidomaterno')
+        ->distinct()
+        ->get();
+    }
+
    public static function obtenerfecchainicioalumnoslista($fechaini,$rutaImagenBase,$fechafin,$buscaralu2)
    {      
        // Ejemplo de obtención del sueldo del profesor

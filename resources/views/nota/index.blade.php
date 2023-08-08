@@ -5,7 +5,7 @@
     <div class="card-header border-0">
         <div class="row align-items-center">
               <div class="col">
-                <h3 class="mb-0">LISTA DE INSCRIPCIONES
+                <h3 class="mb-0">LISTA DE NOTAS
                     <i class="far fa-calendar-alt  text-blue"></i>
                 </h3>
                 <div class="row">
@@ -28,9 +28,17 @@
                               </div>  -->
                           </div>
                         </div>
+                        <div class="col">
+                            <label class="text-primary text-capitalize">estado</label>
+                            <select type="text" name="estado" id="estado" class="form-control">
+                              <option selected  value="">ambos</option>
+                              <option value="activo">activo</option> 
+                              <option value="inactivo">inactivo</option> 
+                              </select>
+                          </div>
                         <div class="col text-right">
-                          <button class="btn btn-danger" type="button"><i class="fas fa-print"></i>imprimir</button>
-                          <a href="{{url('nota/create')}}" class="btn  btn-primary text-capitalize" > <i class="fas fa-plus-circle"></i> agregar nueva nota</a>
+                          <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button>
+                          <a href="{{url('nota/create')}}" class="btn btn-sm btn-primary text-capitalize" > <i class="fas fa-plus-circle"></i> agregar nueva nota</a>
                       </div>  
                 </div>
             </div>
@@ -55,11 +63,11 @@
                                 <tr>
                                     {{-- <td>{{ $inscripcion->id }}</td> --}}
                                 <!--  <td> /* $inscripcion->asignarproma->materia->materia."--".$inscripcion->asignarproma->profesor->user->name}} */</td>-->
-                              
+                           
                                     <td>{{ $nota->fechadenota}}</td>
-                                    <td>{{ $nota->actividad_id}}</td>
-                                    <td>{{ $nota->alumno_id}}</td>
-                                    <td>{{ $nota->materia_id}}</td>
+                                    <td>{{ $nota->actividad_id."-".$nota->actividad->actividad }}</td>
+                                    <td>{{ $nota->alumno_id."-".$nota->alumno->nombre }}</td>
+                                    <td>{{ $nota->materia_id."-".$nota->materia->materia }}</td>
                                     <td>{{ $nota->nota}}</td>
                                     <td>{{ $nota->estado}}</td>
                                     <td> <a href="{{ url('/nota/'.$nota->id.'/show') }}" method="post" class="btn btn-sm btn-danger">

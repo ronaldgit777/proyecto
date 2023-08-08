@@ -51,11 +51,12 @@
                                         <label class="text text-capitalize">estado</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                            <select type="text" name="estado" id="estado" class="form-control" required>
+                                            {{-- <select type="text" name="estado" id="estado" class="form-control" required>
                                                 <option selected disabled value="">seleccione el estado</option>
                                             <option value="activo">activo</option> 
                                             <option value="inactivo">inactivo</option> 
-                                            </select><br>
+                                            </select><br> --}}
+                                            <input type="text" name="estado" id="estado" class="form-control" required value="activo" disabled> <br>
                                     </div>
                                 </div>
                             </div>

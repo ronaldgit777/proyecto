@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\actividad;
 use App\Models\nota;
-use App\Models\turno;
-use App\Models\User;
-use App\Models\asignarproma;
 use App\Models\alumno;
 use App\Models\periodo;
 use App\Models\aula;
@@ -23,10 +20,13 @@ class NotaController extends Controller
      */
     public function index()
     {
-        $notas=nota::all();
+        $notas=nota::all(); 
+        $alumnos=alumno::all();
+        $materias =materia::all();
+        $actividads =actividad::all();
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);
-         return view('nota.index',compact('notas'));   
+         return view('nota.index',compact('notas','alumnos','materias','actividads'));   
     }
 
     /**a
@@ -36,7 +36,7 @@ class NotaController extends Controller
      */
     public function create()
     {
-       $asignarpromas = asignarproma::where('estado', 'activo');
+       //$asignarpromas = asignarproma::where('estado', 'activo');
       //  ->select('profesor_id')
         //->distinct()
         //->get();
@@ -44,10 +44,8 @@ class NotaController extends Controller
         //$profesors =profesor::has('asignarproma');
         $profesors =profesor::all();
         $actividads =actividad::all();
-        $materias =materia::all();
-        $aulas =aula::all();
-        $periodos =periodo::all();  
-        return view('nota.create', compact('asignarpromas','alumnos','profesors','materias', 'aulas', 'periodos','actividads'));
+        $materias =materia::obtenermateriasasignadas();
+        return view('nota.create', compact('alumnos','profesors','materias','actividads'));
     }
 
     /**
@@ -57,6 +55,19 @@ class NotaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+    {
+       
+        nota::insert([
+            'fechadenota' => $request->input('fechadenota'),
+            'actividad_id' => $request->input('actividad_id'),
+            'materia_id' =>$request->input('materia_id'),
+            'alumno_id' => $request->input('alumno_id'),
+            'nota' => $request->input('nota'),
+            'estado' => $request->input('estado'),
+        ]);
+        return redirect('nota');
+    } 
+    public function store2(Request $request)
     {
         //
     }

@@ -23,7 +23,8 @@ class ProfesorController extends Controller
        $fechaini = $request->input('fechainicio');
        $fechafin = $request->input('fechafinal');
        $buscarpro2 = $request->input('buscarpro');
-       $resultadoconsulta = profesor::obtenerprofesoresdesdefechainicio2($fechaini,$rutaImagenBase,$fechafin,$buscarpro2);
+       $estadopro2 = $request->input('estadopro');
+       $resultadoconsulta = profesor::obtenerprofesoresdesdefechainicio2($fechaini,$rutaImagenBase,$fechafin,$buscarpro2,$estadopro2);
            
        return response()->json($resultadoconsulta);        
     }

@@ -19,7 +19,15 @@
                                     <input type="date" name="fechafinal" id="fechafinal" class="form-control">
                                     <span class="text-muted">hasta</span>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col">
+                                  <label class="text-primary text-capitalize">estado</label>
+                                  <select type="text" name="estado" id="estado" class="form-control">
+                                    <option selected  value="">ambos</option>
+                                    <option value="pendiente">pendiente</option> 
+                                    <option value="pagado">pagado</option> 
+                                    </select>
+                                </div>
+                                <div class="col">
                                   <label class="text-primary text-capitalize">Buscar</label>
                                   <div class="input-group">
                                     <input type="text" name="buscar" id="buscar" class="form-control" placeholder="Ingrese término de búsqueda">
@@ -28,21 +36,11 @@
                                       </div>  -->
                                   </div>
                                 </div>
-                                <div class="col">
-                                  <label class="text-primary text-capitalize"></label><br>
-                                  <button class="btn btn-danger" type="button"><i class="fas fa-print"></i>imprimir</button>
-                                </div>  
-                                
-                                <div class="col">
-                                    <label class="text-primary text-capitalize"></label> 
-                                    <a href="{{url('adelantosecre/create')}}" class="btn  btn-primary text-capitalize" >
-                                        <i class="fas fa-plus-circle"></i>
-                                        agregar nuevo adelanto</a>
-                                </div>
                                 <div class="col text-right">
-                                    <a href="{{url('home')}}" class="btn btn-sm btn-success" >
-                                        <i class="fas fa-plus-circle"></i>
-                                        regresar</a>
+                                  <button class="btn btn-danger  btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button>
+                                  <a href="{{url('adelantosecre/create')}}" class="btn  btn-sm btn-primary text-capitalize" >
+                                    <i class="fas fa-plus-circle"></i>
+                                    agregar nuevo adelanto</a>
                               </div>  
                         </div>
                     </div>

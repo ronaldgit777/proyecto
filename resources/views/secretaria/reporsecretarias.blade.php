@@ -54,7 +54,7 @@
                         </div>
                         <div class="box">
                           <img src="imag/pagoprofesor.png" alt="Imagen 3">
-                          <a href="#">sueldos secretarias</a>
+                          <a  href="{{ url('/reporsusecre') }}">sueldos secretarias</a>
                         </div>
                       </div>
                       <div class="bottom-row">

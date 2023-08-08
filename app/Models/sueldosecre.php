@@ -8,7 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class sueldosecre extends Model
 {
     protected $table = "sueldosecres";
-   
+    protected $fillable = [
+        'secretaria_id', 
+        'totaldescuento',
+        'totalpago',
+        'totaldescuento',
+        'observacion',
+        'mesdepago',
+        'fechadesueldo'
+    ];
     public function secretaria()
     {
         return $this->belongsTo(secretaria::class,'secretaria_id');
@@ -37,4 +45,46 @@ class sueldosecre extends Model
             ->select('sueldosecres.*', 'secretarias.nombre', 'secretarias.sueldo')
             ->get();
     }  
+    public static function obtenersusecredesdefechainiciore($fechaini,$fechafin,$secretariaid2,
+    $sueldomin2,$sueldomax2,$todesmin2,$todesmax2,$topamin2,$topamax2,$ordenarsusecre2,$mayorymenorsusecre2)
+    {      
+       // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
+       $consulta = self::join('secretarias', 'sueldosecres.secretaria_id', '=', 'secretarias.id')  
+
+             ->when($fechaini, function ($query, $fechaini) {
+                  return $query->where('sueldosecres.fechadesueldo', '>=', $fechaini);
+              })
+              ->when($fechafin, function ($query, $fechafin) {
+                  return $query->where('sueldosecres.fechadesueldo', '<=', $fechafin);
+              })  
+             // ->where('profesors.id', $profesorid2) 
+                ->when($secretariaid2, function ($query, $secretariaid2) {
+                return $query->where('secretarias.id',$secretariaid2);
+                })
+                ->when($sueldomin2, function ($query, $sueldomin2) {
+                    return $query->where('secretarias.sueldo', '>=', $sueldomin2);
+                })
+                ->when($sueldomax2, function ($query, $sueldomax2) {
+                    return $query->where('secretarias.sueldo', '<=', $sueldomax2);
+                }) 
+                ->when($todesmin2, function ($query, $todesmin2) {
+                    return $query->where('sueldosecres.totaldescuento', '>=', $todesmin2);
+                })
+                ->when($todesmax2, function ($query, $todesmax2) {
+                    return $query->where('sueldosecres.totaldescuento', '<=', $todesmax2);
+                }) 
+                ->when($topamin2, function ($query, $topamin2) {
+                    return $query->where('sueldosecres.totalpago', '>=', $topamin2);
+                })
+                ->when($topamax2, function ($query, $topamax2) {
+                    return $query->where('sueldosecres.totalpago', '<=', $topamax2);
+                }) 
+
+            ->select('sueldosecres.*','fechadesueldo',
+            'secretarias.nombre as nombre_secretaria','sueldo');
+            if (!empty($ordenarsusecre2) && !empty($mayorymenorsusecre2)) {
+                $consulta->orderBy($ordenarsusecre2, $mayorymenorsusecre2);
+            }
+            return $consulta->get();  
+    }
 }

@@ -19,15 +19,7 @@
                                                     <input type="date" name="fechafinal" id="fechafinal" class="form-control">
                                                     <span class="text-muted">hasta</span>
                                                 </div>
-                                                <div class="col">
-                                                    <label class="text-primary text-capitalize">profesores</label>
-                                                    <select type="text" name="profesor_id" id="profesor_id" class="form-control" >
-                                                      <option selected  value="">seleccione el profesor</option>
-                                                      @foreach ($profesors as $profesor)
-                                                      <option value="{{ $profesor->id }}">{{ $profesor->nombre}}</option>
-                                                      @endforeach
-                                                    </select>
-                                                </div>
+                                               
                                                 <div class="col">
                                                   <label class="text-primary text-capitalize">monto</label>
                                                   <input type="numeric" name="monto1" id="monto1" class="form-control">
@@ -38,29 +30,49 @@
                                                 <input type="numeric" name="monto2" id="monto2" class="form-control">
                                                 <span class="text-muted">hasta</span>
                                               </div>
-                                                    <div class="col">
-                                                      <label class="text-primary text-capitalize">ordenar</label>
-                                                      <div class="input-group">
-                                                          <select type="text" name="ordenar" id="ordenar" class="form-control">
-                                                            <option value="fechaadelantopro">fecha</option> 
-                                                            <option value="nombre_profesor">nombre_profesor</option> 
-                                                            <option value="monto">monto</option> 
-                                                            <option value="observacion">observacion</option> 
-                                                          </select>
-                                                          <div class="input-group-append">
-                                                            <select type="text" name="mayorymenor" id="mayorymenor" class="form-control">
-                                                              <option value="desc">desc</option> 
-                                                              <option value="asc">asc</option> 
-                                                              </select>
-                                                          </div>
-                                                      </div>
-                                                    </div>
+                                                   
                                                 <div class="col text-right">
                                                   <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button>
                                                     <a href="{{url('reporopciones')}}" class="btn btn-sm btn-success" >
                                                         <i class="fas fa-plus-circle"></i>
                                                         regresar</a>
                                               </div>  
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                              <label class="text-primary text-capitalize">profesores</label>
+                                              <select type="text" name="profesor_id" id="profesor_id" class="form-control" >
+                                                <option selected  value="">seleccione el profesor</option>
+                                                @foreach ($profesors as $profesor)
+                                                <option value="{{ $profesor->id }}">{{ $profesor->nombre." ".$profesor->apellidopaterno." ".$profesor->apellidomaterno}}</option>
+                                                @endforeach
+                                              </select>
+                                          </div>
+                                          <div class="col">
+                                            <label class="text-primary text-capitalize">estado</label>
+                                            <select type="text" name="observacionss" id="observacion" class="form-control">
+                                              <option selected  value="">ambos</option>
+                                              <option value="pendiente">pendiente</option> 
+                                              <option value="pagado">pagado</option> 
+                                              </select>
+                                          </div>
+                                          <div class="col">
+                                            <label class="text-primary text-capitalize">ordenar</label>
+                                            <div class="input-group">
+                                                <select type="text" name="ordenar" id="ordenar" class="form-control">
+                                                  <option value="fechaadelantopro">fecha</option> 
+                                                  <option value="nombre_profesor">nombre_profesor</option> 
+                                                  <option value="monto">monto</option> 
+                                                  <option value="observacion">observacion</option> 
+                                                </select>
+                                                <div class="input-group-append">
+                                                  <select type="text" name="mayorymenor" id="mayorymenor" class="form-control">
+                                                    <option value="desc">desc</option> 
+                                                    <option value="asc">asc</option> 
+                                                    </select>
+                                                </div>
+                                            </div>
+                                          </div>
                                         </div>
                                     </div>
                             </div>

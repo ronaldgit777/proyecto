@@ -20,6 +20,14 @@
                                     <input type="date" name="fechafinal" id="fechafinal" class="form-control">
                                     <span class="text-muted">hasta</span>
                                 </div>
+                                <div class="col">
+                                  <label class="text-primary text-capitalize">estado</label>
+                                  <select type="text" name="estado" id="estado" class="form-control">
+                                    <option selected  value="">ambos</option>
+                                    <option value="activo">activo</option> 
+                                    <option value="inactivo">inactivo</option> 
+                                    </select>
+                                </div>
                                 <div class="col-md-4">
                                   <label class="text-primary text-capitalize">Buscar</label>
                                   <div class="input-group">
@@ -29,14 +37,8 @@
                                       </div>  -->
                                   </div>
                                 </div>
-                                <div class="col">
-                                  <label class="text-primary text-capitalize">presione el boton</label><br>
-                                  <button class="btn btn-danger" type="button"><i class="fas fa-print"></i>imprimir</button>
-                                </div>  
                                 <div class="col text-right">
-                                  <a href="{{url('home')}}" class="btn btn-sm btn-success" >
-                                  <i class="fas fa-plus-circle"></i>
-                                  regresar</a>
+                                  <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button>
                               </div>  
                         </div>
                     </div>
@@ -56,7 +58,7 @@
                 <th scope="col">celular</th>
                 <th scope="col">direccion</th>
                 <th scope="col">correo</th>
-                {{-- <th scope="col">estado</th> --}}
+                <th scope="col">estado</th>
                 <th scope="col">imagen</th>
                 {{-- <th scope="col">sueldo</th> --}}
                 <th scope="col">acciones</th>
@@ -64,7 +66,7 @@
             </thead>
             <tbody id="tabla_profe2">
               @foreach ($profesors as $profesor)
-                        <tr>s
+                        <tr>
                             {{-- <td scope="row">{{ $profesor->id }}</td> --}}
                             <td>{{ $profesor->fechadeingreso }}</td>
                             <td>{{ $profesor->ci }}</td>
@@ -74,7 +76,7 @@
                             <td>{{ $profesor->celular }}</td>
                             <td>{{ $profesor->direccion }}</td>
                             <td>{{ $profesor->user->email }}</td>
-                            {{-- <td>{{ $profesor->estado }}</td> --}}
+                            <td>{{ $profesor->estado }}</td>
                             <td>
                             <img src="{{ asset('storage').'/'.$profesor->imagen}}" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid">
                             </td>
@@ -168,10 +170,11 @@
       $('#fechainicio').on('change', function() {
           var fecha_ini = $(this).val(); 
           var fecha_fin = $('#fechafinal').val();
-          var buscar = $('#buscar').val();  
-          generartabla(fecha_ini,fecha_fin,buscar);      
+          var buscar = $('#buscar').val(); 
+          var estado = $('#estado').val();   
+          generartabla(fecha_ini,fecha_fin,buscar,estado);      
       });
-      function generartabla(fecha_ini,fecha_fin,buscar) {
+      function generartabla(fecha_ini,fecha_fin,buscar,estado) {
             $.ajax({
                   url: '{{ url("obtener-fechainicio2") }}', // Ruta a tu controlador Laravel
                   type: 'POST',
@@ -179,6 +182,7 @@
                       fechainicio: fecha_ini, //lo de blanco es la llave q tienes para q se capture la variable
                       fechafinal: fecha_fin,
                       buscarpro: buscar,// Enviar el ID del aula seleccionada
+                      estadopro:estado,
                     // profesor_id: profesorId,
                       _token: '{{ csrf_token() }}' // Agregar el token CSRF
                   },
@@ -200,7 +204,7 @@
                                   ' <td>'+value.celular+'</td>'+
                                   ' <td>'+value.direccion+'</td>'+
                                   ' <td>'+value.email+'</td>'+
-                                  // ' <td>'+value.estado+'</td>'+
+                                   ' <td>'+value.estado+'</td>'+
                                   ' <td><img src="'+value.ruta_imagen+'" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid"></td>'+
                                   ' <td>'+value.sueldo+'</td>'+
                                  // ' <td>'+value.role+'</td>'+
@@ -221,6 +225,10 @@
          $('#fechainicio').trigger('change');
       });
       $('#buscar').on('input', function() {
+       // alert($(this).val())
+         $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
+      });
+      $('#estado').on('change', function() {
        // alert($(this).val())
          $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
       });

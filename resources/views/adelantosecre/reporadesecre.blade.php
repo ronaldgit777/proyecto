@@ -19,15 +19,7 @@
                                                     <input type="date" name="fechafinal" id="fechafinal" class="form-control">
                                                     <span class="text-muted">hasta</span>
                                                 </div>
-                                                <div class="col">
-                                                    <label class="text-primary text-capitalize">profesores</label>
-                                                    <select type="text" name="secretaria_id" id="secretaria_id" class="form-control" >
-                                                      <option selected  value="">seleccione el </option>
-                                                      @foreach ($secretarias as $secretaria)
-                                                      <option value="{{ $secretaria->id }}">{{ $secretaria->nombre}}</option>
-                                                      @endforeach
-                                                    </select>s
-                                                </div>
+                                            
                                                 <div class="col">
                                                   <label class="text-primary text-capitalize">monto</label>
                                                   <input type="numeric" name="monto1" id="monto1" class="form-control">
@@ -38,6 +30,32 @@
                                                 <input type="numeric" name="monto2" id="monto2" class="form-control">
                                                 <span class="text-muted">hasta</span>
                                             </div>
+                                            
+                                                <div class="col text-right">
+                                                  <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button>
+                                                    <a href="{{url('opciones-reportesecre')}}" class="btn btn-sm btn-success" >
+                                                        <i class="fas fa-plus-circle"></i>
+                                                        regresar</a>
+                                              </div>  
+                                        </div>s
+                                        <div class="row">
+                                          <div class="col">
+                                            <label class="text-primary text-capitalize">secretaria</label>
+                                            <select type="text" name="secretaria_id" id="secretaria_id" class="form-control" >
+                                              <option selected  value="">seleccione a la secretaria </option>
+                                              @foreach ($secretarias as $secretaria)
+                                              <option value="{{ $secretaria->id }}">{{ $secretaria->nombre." ".$secretaria->apellidopaterno." ".$secretaria->apellidomaterno}}</option>
+                                              @endforeach
+                                            </select>s
+                                        </div>
+                                          <div class="col">
+                                            <label class="text-primary text-capitalize">estado</label>
+                                            <select type="text" name="observacionss" id="observacion" class="form-control">
+                                              <option selected  value="">ambos</option>
+                                              <option value="pendiente">pendiente</option> 
+                                              <option value="pagado">pagado</option> 
+                                              </select>
+                                          </div>
                                             <div class="col">
                                               <label class="text-primary text-capitalize">ordenar</label>
                                               <div class="input-group">
@@ -54,12 +72,6 @@
                                                   </div>
                                               </div>
                                             </div>
-                                                <div class="col text-right">
-                                                  <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button>
-                                                    <a href="{{url('reporopciones')}}" class="btn btn-sm btn-success" >
-                                                        <i class="fas fa-plus-circle"></i>
-                                                        regresar</a>
-                                              </div>  
                                         </div>
                                     </div>
                             </div>

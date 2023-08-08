@@ -15,6 +15,24 @@ class SueldosecreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+ 
+    public function  obtenerfechainiciosecresureporte(Request $request)
+    {   
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $secretariaid2 = $request->input('secretariaid');
+       $sueldomin2 = $request->input('sueldomin');
+       $sueldomax2 = $request->input('sueldomax');
+       $todesmin2 = $request->input('todesmin');
+       $todesmax2 = $request->input('todesmax');
+       $topamin2 = $request->input('topamin');
+       $topamax2 = $request->input('topamax');
+       $ordenarsusecre2 = $request->input('ordenarsusecre');
+       $mayorymenorsusecre2 = $request->input('mayorymenorsusecre');
+       $resultadoconsulta = sueldosecre::obtenersusecredesdefechainiciore($fechaini,$fechafin,$secretariaid2,
+       $sueldomin2,$sueldomax2,$todesmin2,$todesmax2,$topamin2,$topamax2,$ordenarsusecre2,$mayorymenorsusecre2);   
+       return response()->json($resultadoconsulta);        
+    }
     public function  obtenerfechainiciosusecre(Request $request)
     {   
        $fechaini = $request->input('fechainicio');
@@ -23,6 +41,14 @@ class SueldosecreController extends Controller
        $resultadoconsulta = sueldosecre::obtenersueldoprodesdefechainicio($fechaini,$fechafin,$buscarpro2);
            
        return response()->json($resultadoconsulta);        
+    }
+    public function reporsusecre()
+    {
+        $sueldosecres=sueldosecre::all();
+        $secretarias=secretaria::all();
+        // return profesor::with('sueldopro')->get(); 
+         //$datos['sueldopros']=sueldopro::paginate(7);
+         return view('sueldosecre.reporsusecre',compact('sueldosecres','secretarias'));
     }
     public function index()
     {

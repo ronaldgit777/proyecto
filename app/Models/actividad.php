@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class actividad extends Model
 {
     protected $table = "actividads";
+
+    public function notas()
+    {
+        return $this->hasMany(nota::class,'materia_id','id');
+    }
     
         public static function obtenerlistaactividades($buscarac2)
         {      

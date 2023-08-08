@@ -33,7 +33,7 @@
                                         <select type="text" name="secretaria_id" id="secretaria_id" class="form-control" required>
                                             <option selected disabled value="">seleccione a la secretaria</option>
                                             @foreach ($secretarias as $secretaria)
-                                            <option value="{{ $secretaria->id }}">{{ $secretaria->nombre."-SUELDO : ".$secretaria->sueldo }}</option>
+                                            <option value="{{ $secretaria->id }}">{{ $secretaria->nombre." ".$secretaria->apellidopaterno." ".$secretaria->apellidomaterno}}</option>
                                             @endforeach
                                         </select>
                                     </div>

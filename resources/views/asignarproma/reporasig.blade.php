@@ -22,7 +22,7 @@
                               <select type="text" name="profesor_id" id="profesor_id" class="form-control" >
                                 <option selected  value="">seleccione el profesor</option>
                                 @foreach ($profesors as $profesor)
-                                <option value="{{ $profesor->id }}">{{ $profesor->nombre}}</option>
+                                <option value="{{ $profesor->id }}">{{ $profesor->nombre." ".$profesor->apellidopaterno." ".$profesor->apellidomaterno}}</option>
                                 @endforeach
                             </select> 
                             {{-- <input type="text" name="profesor_id" id="profesor_id" class="form-control" > --}}
@@ -34,45 +34,8 @@
                               @foreach ($materias as $materia)
                               <option value="{{ $materia->id }}">{{ $materia->materia}}</option>
                               @endforeach
-                          </select>
+                            </select>
                           {{-- <input type="text" name="materia_id" id="materia_id" class="form-control" > --}}
-                          </div>
-                          <div class="col">
-                            <label class="text-primary text-capitalize">aula</label>
-                            <select type="text" name="aula_id" id="aula_id" class="form-control" >
-                              <option selected  value="">seleccione el aula</option>
-                              @foreach ($aulas as $aula)
-                              <option value="{{ $aula->id }}">{{ $aula->aula }}</option>
-                              @endforeach
-                          </select>
-                          {{-- <input type="text" name="aula_id" id="aula_id" class="form-control" > --}}
-                          </div>
-                          <div class="col">
-                            <label class="text-primary text-capitalize">periodo</label>
-                            <select type="text" name="periodo_id" id="periodo_id" class="form-control" >
-                              <option selected  value="">seleccione el periodo</option>
-                              @foreach ($periodos as $periodo)
-                              <option value="{{ $periodo->id }}">{{ $periodo->periodo }}</option>
-                              @endforeach
-                          </select>
-                          {{-- <input type="text" name="periodo_id" id="periodo_id" class="form-control" > --}}
-                          </div>
-                          <div class="col">
-                            <label class="text-primary text-capitalize">ordenar</label>
-                            <div class="input-group">
-                                    <select type="text" name="ordenar" id="ordenar" class="form-control">
-                                      <option value="profesor_nombre">profesor</option> 
-                                      <option value="materia_nombre">materia</option> 
-                                      <option value="aula_nombre">aula</option> 
-                                      <option value="periodo_nombre">periodo</option> 
-                                    </select>
-                                <div class="input-group-append">
-                                  <select type="text" name="mayorymenor" id="mayorymenor" class="form-control">
-                                    <option value="desc">desc</option> 
-                                    <option value="asc">asc</option> 
-                                    </select>
-                                </div>
-                            </div>
                           </div>
                             <div class="col text-right">
                               <button class="btn btn-danger btn-sm" type="button" onclick="generarpdflistaprofesor()"><i class="fas fa-print"></i>imprimir</button>
@@ -80,6 +43,53 @@
                               <i class="fas fa-plus-circle"></i>
                               regresar</a>
                           </div>  
+                  </div>
+                  <div class="row">
+                      <div class="col">
+                        <label class="text-primary text-capitalize">aula</label>
+                        <select type="text" name="aula_id" id="aula_id" class="form-control" >
+                          <option selected  value="">seleccione el aula</option>
+                          @foreach ($aulas as $aula)
+                          <option value="{{ $aula->id }}">{{ $aula->aula }}</option>
+                          @endforeach
+                      </select>
+                      {{-- <input type="text" name="aula_id" id="aula_id" class="form-control" > --}}
+                      </div>
+                      <div class="col">
+                        <label class="text-primary text-capitalize">periodo</label>
+                        <select type="text" name="periodo_id" id="periodo_id" class="form-control" >
+                          <option selected  value="">seleccione el periodo</option>
+                          @foreach ($periodos as $periodo)
+                          <option value="{{ $periodo->id }}">{{ $periodo->periodo }}</option>
+                          @endforeach
+                      </select>
+                      {{-- <input type="text" name="periodo_id" id="periodo_id" class="form-control" > --}}
+                      </div>
+                      <div class="col">
+                        <label class="text-primary text-capitalize">estado</label>
+                        <select type="text" name="observacionss" id="observacion" class="form-control">
+                          <option selected  value="">ambos</option>
+                          <option value="pendiente">pendiente</option> 
+                          <option value="pagado">pagado</option> 
+                          </select>
+                      </div>
+                      <div class="col">
+                        <label class="text-primary text-capitalize">ordenar</label>
+                        <div class="input-group">
+                                <select type="text" name="ordenar" id="ordenar" class="form-control">
+                                  <option value="profesor_nombre">profesor</option> 
+                                  <option value="materia_nombre">materia</option> 
+                                  <option value="aula_nombre">aula</option> 
+                                  <option value="periodo_nombre">periodo</option> 
+                                </select>
+                            <div class="input-group-append">
+                              <select type="text" name="mayorymenor" id="mayorymenor" class="form-control">
+                                <option value="desc">desc</option> 
+                                <option value="asc">asc</option> 
+                                </select>
+                            </div>
+                        </div>
+                      </div>
                   </div>
             </div>
         </div>

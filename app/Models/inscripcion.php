@@ -18,6 +18,10 @@ class inscripcion extends Model
     {
         return $this->belongsTo(alumno::class,'alumno_id');
     }
+
+
+
+
     public static function obtenerfecchainicioinscripcion($fechaini,$fechafin,$buscarin2)
     {      
         // Ejemplo de obtención del sueldo del profesor
@@ -114,13 +118,13 @@ class inscripcion extends Model
                 return $query->where('aulas.id',$aulaid2);
                 }) 
             ->when($alumnoid2, function ($query, $alumnoid2) {
-            return $query->where('alumnos.id',$alumnoid2);
+            return $query->where('alumnos.nombre',$alumnoid2);
             }) 
             ->when($alumnoidpa2, function ($query, $alumnoidpa2) {
-                return $query->where('alumnos.id',$alumnoidpa2);
+                return $query->where('alumnos.apellidopaterno',$alumnoidpa2);
                 }) 
                 ->when($alumnoidma2, function ($query, $alumnoidma2) {
-                    return $query->where('alumnos.id',$alumnoidma2);
+                    return $query->where('alumnos.apellidomaterno',$alumnoidma2);
                     }) 
             ->select(
                 'inscripcions.*','fechadeinscripcion',
@@ -136,6 +140,38 @@ class inscripcion extends Model
             }
               return $consulta->get();       
         //return $fechaini;
+    }
+    
+    public static function obtenerlistaalumnosinscritos($materiaid2)
+    {
+        return static
+        ::
+        join('asignarpromas', 'inscripcions.asignarproma_id', '=', 'asignarpromas.id')
+
+
+
+        ->where('asignarpromas.materia_id',$materiaid2 )
+        
+        ->join('alumnos', 'inscripcions.alumno_id', '=', 'alumnos.id')
+
+
+            ->select(
+                'alumnos.*'
+            )
+            ->get();
+    }
+    
+    public static function verificarregistroins($fechadeinscripcion, $asignarproma_id, $alumno_id , $estado)
+    {
+        return self::
+        where('inscripcions.fechadeinscripcion',$fechadeinscripcion )
+        ->where('inscripcions.asignarproma_id',$asignarproma_id )
+        ->where('inscripcions.alumno_id',$alumno_id )
+        ->where('inscripcions.estado',$estado )// Cambia 'campo2' por el nombre real del campo
+            ->first();
+
+
+
     }
  }
     

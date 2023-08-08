@@ -42,6 +42,47 @@ class sueldopro extends Model
             ->select('sueldopros.*', 'profesors.nombre', 'profesors.sueldo')
             ->get();
     }  
-    
+    public static function obtenersuprodesdefechainiciore($fechaini,$fechafin,$profesorid2,
+    $sueldomin2,$sueldomax2,$todesmin2,$todesmax2,$topamin2,$topamax2,$ordenarsupro2,$mayorymenorsupro2)
+    {      
+       // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
+       $consulta = self::join('profesors', 'sueldopros.profesor_id', '=', 'profesors.id')  
+  
+             ->when($fechaini, function ($query, $fechaini) {
+                  return $query->where('sueldopros.fechadesueldo', '>=', $fechaini);
+              })
+              ->when($fechafin, function ($query, $fechafin) {
+                  return $query->where('sueldopros.fechadesueldo', '<=', $fechafin);
+              })  
+             // ->where('profesors.id', $profesorid2) 
+                ->when($profesorid2, function ($query, $profesorid2) {
+                return $query->where('profesors.id',$profesorid2);
+                })
+                ->when($sueldomin2, function ($query, $sueldomin2) {
+                    return $query->where('profesors.sueldo', '>=', $sueldomin2);
+                })
+                ->when($sueldomax2, function ($query, $sueldomax2) {
+                    return $query->where('profesors.sueldo', '<=', $sueldomax2);
+                }) 
+                ->when($todesmin2, function ($query, $todesmin2) {
+                    return $query->where('sueldopros.totaldescuento', '>=', $todesmin2);
+                })
+                ->when($todesmax2, function ($query, $todesmax2) {
+                    return $query->where('sueldopros.totaldescuento', '<=', $todesmax2);
+                }) 
+                ->when($topamin2, function ($query, $topamin2) {
+                    return $query->where('sueldopros.totalpago', '>=', $topamin2);
+                })
+                ->when($topamax2, function ($query, $topamax2) {
+                    return $query->where('sueldopros.totalpago', '<=', $topamax2);
+                }) 
+  
+            ->select('sueldopros.*','fechadesueldo',
+            'profesors.nombre as nombre_profesor','sueldo');
+            if (!empty($ordenarsupro2) && !empty($mayorymenorsupro2)) {
+                $consulta->orderBy($ordenarsupro2, $mayorymenorsupro2);
+            }
+            return $consulta->get();  
+    }
 }
    

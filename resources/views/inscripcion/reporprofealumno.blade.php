@@ -24,7 +24,7 @@
                               <select type="text" name="profesor_id" id="profesor_id" class="form-control" >
                                 <option selected  value="">seleccione el profesor</option>
                                 @foreach ($profesors as $profesor)
-                                <option value="{{ $profesor->id }}">{{ $profesor->nombre}}</option>
+                                <option value="{{ $profesor->id }}">{{ $profesor->nombre." ".$profesor->apellidopaterno." ".$profesor->apellidomaterno}}</option>
                                 @endforeach
                             </select> 
                             {{-- <input type="text" name="profesor_id" id="profesor_id" class="form-control" > --}}
@@ -70,17 +70,17 @@
                         <label class="text-primary text-capitalize">nombre_alumno</label>
                         <select type="text" name="alumno_id" id="alumno_id" class="form-control" >
                           <option selected  value="">seleccione el nombre del alumno</option>
-                          @foreach ($alumnos as $alumno)
-                          <option value="{{ $alumno->id }}">{{ $alumno->nombre }}</option>
+                          @foreach ($alumnosapeno as $alumnonom)
+                          <option value="{{ $alumnonom->nombre }}">{{ $alumnonom->nombre }}</option>
                           @endforeach
                       </select>
                     </div>
                      <div class="col">
                         <label class="text-primary text-capitalize">apepaterno_alumno</label>
                         <select type="text" name="alumnopa" id="alumnopa" class="form-control" >
-                          <option selected  value="">seleccione el nombre del alumno</option>
-                          @foreach ($alumnos as $alumno)
-                          <option value="{{ $alumno->id }}">{{ $alumno->apellidopaterno }}</option>
+                          <option selected  value="">seleccione el apellidopaterno</option>
+                          @foreach ($alumnosapepa as $alumnopa)
+                          <option value="{{ $alumnopa->apellidopaterno }}">{{ $alumnopa->apellidopaterno }}</option>
                           @endforeach
                       </select>
                     </div>
@@ -88,8 +88,8 @@
                         <label class="text-primary text-capitalize">apematerno_alumno</label>
                         <select type="text" name="alumnoma" id="alumnoma" class="form-control" >
                           <option selected  value="">seleccione el nombre del alumno</option>
-                          @foreach ($alumnos as $alumno)
-                          <option value="{{ $alumno->id }}">{{ $alumno->apellidomaterno }}</option>
+                          @foreach ($alumnosapema as $alumnoma)
+                          <option value="{{ $alumnoma->apellidomaterno }}">{{ $alumnoma->apellidomaterno }}</option>
                           @endforeach
                       </select>
                     </div> 
@@ -192,6 +192,7 @@
            // alert(profesorid)   
         });
         function generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,alumnoid,ordenar,mayorymenor,alumnoidpa,alumnoidma) {
+        //  alert(alumnoidma)
               $.ajax({
                     url: '{{ url("obtener-fechainicioinscripcionesreporte") }}', // Ruta a tu controlador Laravel
                     type: 'POST',

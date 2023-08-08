@@ -20,6 +20,14 @@ class InscripcionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+    public function  listaalumnosinscritos(Request $request)
+    {   
+       
+       $materiaid2 = $request->input('materiaid');
+       $resultadoconsulta = inscripcion::obtenerlistaalumnosinscritos($materiaid2);
+       return response()->json($resultadoconsulta); 
+    }
     public function  buscarfechainicioinscripcionesreporte(Request $request)
     {   
        $fechaini = $request->input('fechainicio');
@@ -28,7 +36,7 @@ class InscripcionController extends Controller
        $materiaid2 = $request->input('materiaid');
        $periodoid2 = $request->input('periodoid');
        $aulaid2 = $request->input('aulaid');
-       $alumnoid2 = $request->input('alumnoid');  $alumnoidpa2 = $request->input('alumnoidpa');  $alumnoidma2 = $request->input('alumnoida');
+       $alumnoid2 = $request->input('alumnoid');  $alumnoidpa2 = $request->input('alumnoidpa');  $alumnoidma2 = $request->input('alumnoidma');
        $ordenarins2 = $request->input('ordenarins');
        $mayorymenorins2 = $request->input('mayorymenorins');
        $resultadoconsulta = inscripcion::obtenerfecchainicioinscripcionreporte($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,$alumnoid2,$ordenarins2,$mayorymenorins2,$alumnoidpa2,$alumnoidma2);
@@ -47,13 +55,16 @@ class InscripcionController extends Controller
         $inscripcions=inscripcion::obtenerdatosde3tabla();//reusando de del mode inscripcion 
         $profesors = profesor::all();
         $alumnos =alumno::all();
+        $alumnosapeno=alumno::obtenerno();
+        $alumnosapepa=alumno::obtenerapellidospa();
+        $alumnosapema=alumno::obtenerapellidosma();
         $materias =materia::all();
         $aulas =aula::all();
         $periodos =periodo::all();
         $asignarpromas =asignarproma::all();
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);
-         return view('inscripcion.reporprofealumno',compact('inscripcions','profesors','materias','aulas','periodos','alumnos','asignarpromas'));
+         return view('inscripcion.reporprofealumno',compact('inscripcions','profesors','materias','aulas','periodos','alumnos','asignarpromas','alumnosapeno','alumnosapepa','alumnosapema'));
     }
     public function index()
     {
@@ -94,6 +105,27 @@ class InscripcionController extends Controller
     public function store(Request $request)
     {
         $datosinscripcion=request()->except('_token');
+
+        $fechadeinscripcion = $request->input('fechadeinscripcion');
+        $asignarproma_id = $request->input('asignarproma_id');
+
+        $profesoridva= $request->input('profesor_id');
+        $alumnoidva=$request->input('alumno_id');
+
+        $alumno_id = $request->input('alumno_id');
+        $estado = $request->input('estado');
+        
+        $existeregistro =inscripcion::verificarregistroins($fechadeinscripcion, $asignarproma_id, $alumno_id , $estado);
+        if ($existeregistro) {
+            return redirect('inscripcion/create')->with('error', 'El registro ya existe.')//hasta ahi la validacion
+            ->with([
+                'mensaje' => 'Registro insertado exitosamente.',//envio de datos q ya estaban
+                'profesor_id'  => $profesoridva,
+                'alumno_id'  => $alumnoidva
+
+            ]);
+           
+        }
         inscripcion::insert($datosinscripcion);
         //return response()->json($datosprofesor);
         return redirect('inscripcion');

@@ -15,6 +15,23 @@ class SueldoproController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function  obtenerfechainicioprosureporte(Request $request)
+    {   
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $profesorid2 = $request->input('profesorid');
+       $sueldomin2 = $request->input('sueldomin');
+       $sueldomax2 = $request->input('sueldomax');
+       $todesmin2 = $request->input('todesmin');
+       $todesmax2 = $request->input('todesmax');
+       $topamin2 = $request->input('topamin');
+       $topamax2 = $request->input('topamax');
+       $ordenarsupro2 = $request->input('ordenarsupro');
+       $mayorymenorsupro2 = $request->input('mayorymenorsupro');
+       $resultadoconsulta = sueldopro::obtenersuprodesdefechainiciore($fechaini,$fechafin,$profesorid2,
+       $sueldomin2,$sueldomax2,$todesmin2,$todesmax2,$topamin2,$topamax2,$ordenarsupro2,$mayorymenorsupro2);   
+       return response()->json($resultadoconsulta);        
+    }
     public function  obtenerfechainiciosupro(Request $request)
     {   
        $fechaini = $request->input('fechainicio');
@@ -23,6 +40,14 @@ class SueldoproController extends Controller
        $resultadoconsulta = sueldopro::obtenersueldoprodesdefechainicio($fechaini,$fechafin,$buscarpro2);
            
        return response()->json($resultadoconsulta);        
+    }
+    public function reporsupro()
+    {
+        $sueldopros=sueldopro::all();
+        $profesors=profesor::all();
+        // return profesor::with('sueldopro')->get(); 
+         //$datos['sueldopros']=sueldopro::paginate(7);
+         return view('sueldopro.reporsupro',compact('sueldopros','profesors'));
     }
     public function index()
     {

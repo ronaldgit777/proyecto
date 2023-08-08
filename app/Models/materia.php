@@ -15,6 +15,11 @@ class materia extends Model
     {
         return $this->hasMany(asignarproma::class,'materia_id','id');
     }
+    public function notas()
+    {
+        return $this->hasMany(nota::class,'materia_id','id');
+    }
+
     public static function obtenerlistamaterias($buscarma2)
     {      
         // Ejemplo de obtención del sueldo del profesor
@@ -33,5 +38,20 @@ class materia extends Model
             ->select('materias.*')
             ->get();
         //return $fechaini;
+    }
+  
+    public static function obtenermateriasasignadas()
+    {      
+       // return self::with('asignarpromas')->has('asignarpromas')->get();
+       return self::whereIn('id', function ($query) {   //busca una seleccion
+            $query->select('materia_id')
+            ->where('asignarpromas.estado','activo')
+                ->from('asignarpromas')
+                    ->whereIn('id', function ($subquery) {
+                        $subquery->select('asignarproma_id')
+                            ->from('inscripcions');
+                    });
+        })->get();
+    
     }
 }
