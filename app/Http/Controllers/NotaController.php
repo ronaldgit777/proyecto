@@ -7,8 +7,10 @@ use App\Models\nota;
 use App\Models\alumno;
 use App\Models\periodo;
 use App\Models\aula;
+use App\Models\User;
 use App\Models\materia;
 use App\Models\profesor;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class NotaController extends Controller
@@ -18,9 +20,85 @@ class NotaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function  obtenernotasdelalumnoid(Request $request)
+    {   
+        // $rutaImagenBase = asset('storage').'/';
+       $alumnoid2 = $request->input('alumnoid');
+       $materiaid2 = $request->input('materiaid');
+      // $profesorid2 = $request->input('profesorid');
+      // $userid=auth()->user()->id;
+       $resultadoconsulta = nota::obtenernotaalumnoiduser($materiaid2,$alumnoid2);
+       return response()->json($resultadoconsulta); 
+    }
+    public function notasproreporte()
+    {   
+       $userid=auth()->user()->id;
+       $alumnos =alumno
+       ::join('inscripcions','inscripcions.alumno_id','=','alumnos.id')
+        ->join('asignarpromas','inscripcions.asignarproma_id','=','asignarpromas.id')
+        -> join('materias','asignarpromas.materia_id','=','materias.id')
+        -> join('aulas','asignarpromas.aula_id','=','aulas.id')
+        -> join('periodos','asignarpromas.periodo_id','=','periodos.id')  
+        ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('alumnos.*','materias.*','aulas.*','periodos.*',
+        DB::raw('ROUND((SELECT AVG(nota) FROM notas 
+        WHERE notas.alumno_id = alumnos.id and notas.materia_id = materias.id), 1) 
+        as promedio_notas')
+        )
+        ->where('profesors.user_id','=',$userid)
+        ->get();  
+        $materias =materia::obtenermateriapro($userid);
+        $aulas =aula::obteneraulapro($userid);
+       $periodos =periodo::obtenerperiodopro($userid);
+        $usuario=user::all();
+        
+       // $alumnos=alumno::all();
+        // return profesor::with('sueldopro')->get(); 
+         //$datos['sueldopros']=sueldopro::paginate(7);
+         return view('nota.notasproreporte',compact('alumnos','materias','aulas','periodos','usuario'   ));
+         
+    }
+    public function  obtenerfechainicionotareporte(Request $request)
+    {   
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $profesorid2 = $request->input('profesorid');
+       $alumnoid2 = $request->input('alumnoid');
+       $materiaid2 = $request->input('materiaid');
+       $estado2 = $request->input('estado');
+       $actividadid2 = $request->input('actividadid');
+       $notamin2 = $request->input('notamin');
+       $notamax = $request->input('notamax');
+       $ordenarnot2 = $request->input('ordenarnot');
+       $mayorymenornot2 = $request->input('mayorymenornot');
+       $resultadoconsulta = nota::obtenernotafechainiciore($fechaini,$fechafin,$profesorid2,$alumnoid2,$materiaid2,$estado2,$actividadid2,$notamin2,$notamax,$ordenarnot2,$mayorymenornot2);   
+       return response()->json($resultadoconsulta);        
+    }
+    public function repornota()
+    {   $profesors =profesor::all();
+        $notas=nota::obtenerdatosde3tablaas();
+        $alumnos=alumno::all();
+        $materias =materia::all();
+        $actividads =actividad::all();
+        // return profesor::with('sueldopro')->get(); 
+         //$datos['sueldopros']=sueldopro::paginate(7);
+         return view('nota.repornota',compact('notas','alumnos','materias','actividads','profesors'));   
+    }
+    public function  obtenerfechainicionota(Request $request)
+    {   
+       //$rutaImagenBase = asset('storage').'/';
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $buscarpro2 = $request->input('buscarpro');
+       $estadopro2 = $request->input('estadopro');
+       $resultadoconsulta = nota::obtenernotadesdefechainicio($fechaini,$fechafin,$buscarpro2,$estadopro2);
+           
+       return response()->json($resultadoconsulta);        
+    }
     public function index()
     {
-        $notas=nota::all(); 
+        $notas=nota::obtenerdatosde3tablaas();
         $alumnos=alumno::all();
         $materias =materia::all();
         $actividads =actividad::all();
@@ -47,7 +125,30 @@ class NotaController extends Controller
         $materias =materia::obtenermateriasasignadas();
         return view('nota.create', compact('alumnos','profesors','materias','actividads'));
     }
-
+    public function notamodalcrear(Request $request)
+    {
+        nota::insert([
+            'fechadenota' => $request->input('fechadenota'),
+            'actividad_id' => $request->input('actividad_id'),
+            'materia_id' =>$request->input('materia_id'),
+            'alumno_id' => $request->input('alumno_id'),
+            'nota' => $request->input('nota'),
+            'estado' => $request->input('estado'),
+        ]);
+        return redirect('alumpro');
+    }
+    public function notamodal(Request $request)
+    {
+        nota::insert([
+            'fechadenota' => $request->input('fechadenota'),
+            'actividad_id' => $request->input('actividad_id'),
+            'materia_id' =>$request->input('materia_id'),
+            'alumno_id' => $request->input('alumno_id'),
+            'nota' => $request->input('nota'),
+            'estado' => $request->input('estado'),
+        ]);
+        return redirect('alumpro');
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -91,7 +192,7 @@ class NotaController extends Controller
      */
     public function edit(nota $nota)
     {
-        //
+        
     }
 
     /**

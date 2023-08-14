@@ -268,6 +268,7 @@
                         emailpro:email,
                         estadopro:estado,
                         sueldominpro:sueldomin,
+                        sueldomaxpro:sueldomax,
                         ordenarpro:ordenar,
                         mayorymenorpro:mayorymenor,
                       // profesor_id: profesorId,

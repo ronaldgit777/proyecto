@@ -173,6 +173,48 @@ class inscripcion extends Model
 
 
     }
+    public static function obtenerfecchainicioalumnoslistaprofe($fechaini,$rutaImagenBase,$fechafin,$buscaralu2,$userid,$materiaid2)
+   {      
+       // Ejemplo de obtención del sueldo del profesor
+      // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
+       return self::join('alumnos','inscripcions.alumno_id','=','alumnos.id')
+            ->join('asignarpromas','inscripcions.asignarproma_id','=','asignarpromas.id')
+            ->join('materias','asignarpromas.materia_id','=','materias.id')
+            ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+            ->join('users','users.id','=','profesors.user_id')
+
+            ->when($fechaini, function ($query, $fechaini) {
+                 return $query->where('alumnos.fechadeingreso', '>=', $fechaini);
+             })
+             ->when($fechafin, function ($query, $fechafin) {
+                 return $query->where('alumnos.fechadeingreso', '<=', $fechafin);
+             })  
+             ->when($materiaid2, function ($query, $materiaid2) {
+                return $query->where('materias.id', '=', $materiaid2);
+            })  
+             
+             ->where('profesors.user_id','=',$userid)
+             ->when($buscaralu2, function ($query, $buscaralu2) {
+                 return $query->where(function ($query) use ($buscaralu2) {
+                     $query->where('alumnos.ci', 'like', "%$buscaralu2%")
+                         ->orWhere('alumnos.nombre', 'like', "%$buscaralu2%")
+                         ->orWhere('alumnos.apellidopaterno', 'like', "%$buscaralu2%")
+                         ->orWhere('alumnos.apellidomaterno', 'like', "%$buscaralu2%")
+                         ->orWhere('alumnos.celular', 'like', "%$buscaralu2%")
+                         ->orWhere('alumnos.direccion', 'like', "%$buscaralu2%")
+                         ->orWhere('alumnos.correo', 'like', "%$buscaralu2%")
+                         ->orWhere('alumnos.estado', 'like', "%$buscaralu2%")
+                         ->orWhere('materias.materia', 'like', "%$buscaralu2%");
+                 });
+             })  
+            // ->select('profesors.*', 'users.email', 'users.role')
+           //  ->get();
+             ->select('alumnos.*','materias.materia as nombre_materia','materias.id as materiaid')
+      
+           ->selectRaw("CONCAT('$rutaImagenBase', alumnos.imagen) as ruta_imagen")
+           ->get();
+       //return $fechaini;
+   }
  }
     
 

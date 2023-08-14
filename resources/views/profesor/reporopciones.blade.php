@@ -76,7 +76,7 @@
                         </div>
                         <div class="box">
                           <img src="imag/notaprofesor.png"  alt="nose">
-                          <a href="#">profesores su lista de notas</a>
+                          <a  href="{{ url('/repornota') }}">profesores su lista de notas</a>
                         </div>
                         
           </div>

@@ -19,7 +19,17 @@ class periodo extends Model
         
         return $periodosDisponibles;
     }*/
-
+    public static function obtenerperiodopro($userid)
+    {
+        return static::join('asignarpromas','periodos.id','=','asignarpromas.periodo_id')
+        ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('periodos.*')
+        ->where('profesors.user_id','=',$userid)
+        ->where('asignarpromas.estado','activo')
+     //  ->asignarpromas()
+         ->get();  
+    }
     public static function obtenerPeriodosDisponibles($aulaId, $profesorId)
     {
         $periodosAula = Asignarproma::where('aula_id', $aulaId)->pluck('periodo_id');  

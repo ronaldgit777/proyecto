@@ -42,4 +42,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function obtenernombreusuario($userid){
+        return static::join('profesors','users.id','=','profesors.user_id')
+
+        ->select('users.*','profesors.*')
+        ->where('profesors.user_id','=',$userid)
+     //  ->asignarpromas()
+         ->get();  
+    }
 }

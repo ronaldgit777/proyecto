@@ -36,7 +36,7 @@
                               @endforeach
                             </select>
                           {{-- <input type="text" name="materia_id" id="materia_id" class="form-control" > --}}
-                          </div>
+                          </div>a
                             <div class="col text-right">
                               <button class="btn btn-danger btn-sm" type="button" onclick="generarpdflistaprofesor()"><i class="fas fa-print"></i>imprimir</button>
                               <a href="{{url('reporopciones')}}" class="btn btn-sm btn-success" >
@@ -69,8 +69,8 @@
                         <label class="text-primary text-capitalize">estado</label>
                         <select type="text" name="observacionss" id="observacion" class="form-control">
                           <option selected  value="">ambos</option>
-                          <option value="pendiente">pendiente</option> 
-                          <option value="pagado">pagado</option> 
+                          <option value="activo">activo</option> 
+                          <option value="inactivo">inactivo</option> 
                           </select>
                       </div>
                       <div class="col">

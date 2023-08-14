@@ -20,7 +20,17 @@ class InscripcionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+    public function  obtenerfechainicioalumnosprofe(Request $request)
+    {   
+       $rutaImagenBase = asset('storage').'/';
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $buscaralu2 = $request->input('buscaralu');
+       $materiaid2 = $request->input('materiaid');
+       $userid=auth()->user()->id;
+       $resultadoconsulta = inscripcion::obtenerfecchainicioalumnoslistaprofe($fechaini,$rutaImagenBase,$fechafin,$buscaralu2,$userid,$materiaid2);
+       return response()->json($resultadoconsulta); 
+    }
     public function  listaalumnosinscritos(Request $request)
     {   
        

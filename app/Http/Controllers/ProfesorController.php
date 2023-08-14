@@ -70,7 +70,8 @@ class ProfesorController extends Controller
     }
     public function index()
     {   
-        $profesors=profesor::all();
+       $profesors=profesor::paginate(4);
+      //  $profesors=profesor::all();
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);
          return view('profesor.index',compact('profesors'));    

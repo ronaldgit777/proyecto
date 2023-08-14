@@ -11,8 +11,9 @@ class actividad extends Model
 
     public function notas()
     {
-        return $this->hasMany(nota::class,'materia_id','id');
+        return $this->hasMany(nota::class,'actividad_id','id');
     }
+    
     
         public static function obtenerlistaactividades($buscarac2)
         {      
@@ -33,4 +34,5 @@ class actividad extends Model
                 ->get();
             //return $fechaini;
         }
+       
 }

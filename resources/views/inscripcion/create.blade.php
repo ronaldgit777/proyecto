@@ -41,16 +41,16 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text text-capitalize">profesoress </label>
+                                        <label class="text text-capitalize">alumno </label>
                                     </div>
                                     <div class="col-8 col-md-9">
                                        
-                                        <select type="text"  id="profesor_id"  class="form-control" required>
-                                            <option selected disabled value="">seleccione el profesor</option>
-                                            @foreach ($asignarpromas as $asignarproma)
-                                            <option value="{{ $asignarproma->profesor_id }}">{{$asignarproma->profesor->nombre}}</option>
+                                        <select type="text" name="alumno_id" id="alumno_id" class="form-control" required>
+                                            <option selected disabled value="">seleccione el alumno</option>
+                                            @foreach ($alumnos as $alumno)
+                                            <option value="{{ $alumno->id }}">{{ $alumno->nombre."-".$alumno->apellidopaterno }}</option>
                                             @endforeach
-                                        </select>
+                                        </select> 
                                     </div>
                                 </div>
                             </div>
@@ -58,15 +58,15 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text text-capitalize">materia </label>
+                                        <label class="text text-capitalize">profesores </label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <select type="text"  id="materia_id" class="form-control" required disabled>
-                                            <option selected disabled value="">seleccione la materia</option>
-                                            @foreach ($materias as $materia)
-                                            <option value="{{ $materia->id }}">{{ $materia->materia}}</option>
-                                            @endforeach
-                                        </select>
+                                    <select type="text"  id="profesor_id"  class="form-control" required disabled>
+                                        <option selected disabled value="">seleccione el profesor</option>
+                                        @foreach ($asignarpromas as $asignarproma)
+                                        <option value="{{ $asignarproma->profesor_id }}">{{$asignarproma->profesor->nombre}}</option>
+                                        @endforeach
+                                    </select>
                                     </div>
                                 </div>
                             </div>
@@ -74,25 +74,32 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text text-capitalize">periodo </label>
+                                        <label class="text text-capitalize">materia </label>
                                     </div>
-                                    <div class="col-8 col-md-9">    
-                                        <select type="text"  id="periodo_id" class="form-control" required disabled>
-                                            <option selected disabled value="">seleccione el periodo</option>
-                                            @foreach ($periodos as $periodo)
-                                            <option value="{{ $periodo->id }}">{{ $periodo->periodo }}</option>
+                                    <div class="col-8 col-md-9">   
+                                        <select type="text"  id="materia_id" class="form-control" required disabled>
+                                            <option selected disabled value="">seleccione la materia</option>
+                                            @foreach ($materias as $materia)
+                                            <option value="{{ $materia->id }}">{{ $materia->materia}}</option>
                                             @endforeach
                                         </select>
+                                      
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text text-capitalize">costo </label>
+                                        <label class="text text-capitalize">periodo </label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text"  id="costomateria"  class="form-control"  value=""  readonly> 
+                                      
+                                        <select type="text"  id="periodo_id" class="form-control" required disabled>
+                                            <option selected disabled value="">seleccione el periodo</option>
+                                            @foreach ($periodos as $periodo)
+                                            <option value="{{ $periodo->id }}">{{ $periodo->periodo }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -118,15 +125,10 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text text-capitalize">alumno</label>
+                                        <label class="text text-capitalize">costo</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <select type="text" name="alumno_id" id="alumno_id" class="form-control" required>
-                                            <option selected disabled value="">seleccione el alumno</option>
-                                            @foreach ($alumnos as $alumno)
-                                            <option value="{{ $alumno->id }}">{{ $alumno->nombre."-".$alumno->apellidopaterno }}</option>
-                                            @endforeach
-                                        </select> 
+                                        <input type="text"  id="costomateria"  class="form-control"  value=""  readonly> 
                                     </div>
                                 </div>
                             </div>
@@ -141,7 +143,7 @@
                                             <option value="activo">activo</option> 
                                             <option value="inactivo">inactivo</option> 
                                             </select><br> --}}
-                                            <input type="text" name="estado" id="estado" class="form-control" required value="activo" disabled> <br>
+                                            <input type="text" name="estado" id="estado" class="form-control" required value="activo" readonly> <br>
                                     </div>
                                 </div>
                             </div>
@@ -152,7 +154,7 @@
                                         <label class="text text-capitalize"></label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <center><input type="submit" value="guardar datos" class="btn btn-primary"></center>
+                                        <center><input type="submit" value="guardar datos" class="btn btn-primary" id="bo" disabled></center>
                                           
                                     </div>
                                 </div>
@@ -216,10 +218,56 @@
 
 
     $(document).ready(function() {
+                $('#alumno_id').on('change', function() {
 
+                var alumnoid = $(this).val(); // Obtener el valor del aula seleccionada
+                // Realizar la solicitud Ajax
+                $('#mensaje').addClass('d-none');
+                $.ajax({
+                    url: '{{ url("obtener-profesoresid") }}', // Ruta a tu controlador Laravel
+                    type: 'POST',
+                    data: {
+                        alumnoid: alumnoid,
+                        _token: '{{ csrf_token() }}' // Agregar el token CSRF
+                    },
+                    success: function(response) {
+                        // Limpiar el campo de selección de periodos
+                        
+                        if(response!=''){
+                            alert(response)
+                        
+                        $("#profesor_id").prop("disabled", false); 
+                        $('#profesor_id').empty();
+                        $("#bo").prop("disabled", false); 
+                       
+                        // Agregar las opciones de periodos según la respuesta del servidor
+                        $.each(response, function(key, value) {
+                          
+                            $('#profesor_id').append(
+                                '<option value="' + value.id + '">' + value.nombre +'-'+ value.apellidopaterno+'-'+ value.apellidomaterno+'</option>'
+                            );
+                        });
+
+                        $('#profesor_id').trigger('change');
+                        }
+                        else{
+                            $("#profesor_id").prop("disabled", true);  $('#profesor_id').empty();$('#profesor_id').append($('<option>', { value: '', text: 'seleccione el profesor'}));
+                                $("#materia_id").prop("disabled", true);  $('#materia_id').empty();$('#materia_id').append($('<option>', { value: '', text: 'seleccione la materia'}));
+                                    $("#periodo_id").prop("disabled", true);  $('#periodo_id').empty();$('#periodo_id').append($('<option>', { value: '', text: 'seleccione el periodo'}));  
+                                        $("#aula_id").prop("disabled", true);  $('#aula_id').val(''); 
+                                        $("#costomateria").prop("disabled", true);  $('#costomateria').val('');  $("#bo").prop("disabled", true); 
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                    console.error('Error en la solicitud:', error);
+                    }
+
+                });
+                });
         $('#profesor_id').on('change', function() {
 
             var profesorid = $(this).val(); // Obtener el valor del aula seleccionada
+            var alumnoid = $('#alumno_id').val(); 
             // Realizar la solicitud Ajax
             $('#mensaje').addClass('d-none');
             $.ajax({
@@ -227,6 +275,7 @@
                 type: 'POST',
                 data: {
                     profesorid: profesorid,
+                    alumnoid: alumnoid,
                     _token: '{{ csrf_token() }}' // Agregar el token CSRF
                 },
                 success: function(response) {

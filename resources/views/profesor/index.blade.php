@@ -37,8 +37,8 @@
                                       </div>  -->
                                   </div>
                                 </div>
-                                <div class="col text-right">
-                                  <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button>
+                                <div class="col text-right">s
+                                  <button class="btn btn-danger btn-sm" type="button" onclick="generarpdflistaprofesor()"><i class="fas fa-print" ></i>imprimir</button>
                               </div>  
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                 <th scope="col">correo</th>
                 <th scope="col">estado</th>
                 <th scope="col">imagen</th>
-                {{-- <th scope="col">sueldo</th> --}}
+                <th scope="col">sueldo</th>
                 <th scope="col">acciones</th>
               </tr>
             </thead>
@@ -93,6 +93,7 @@
                         @endforeach
             </tbody>
           </table>
+         {{ $profesors->links() }}
         </div>
    </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
@@ -189,7 +190,7 @@
                   success: function(response) {
                       // Limpiar el campo de selección de periodos
                       $('#tabla_profe2').empty();
-                      profesorreporte=[];
+                    //  profesorreporte=[];
 
                       $.each(response, function(key, value) {
                           // alert(value.id)
@@ -215,7 +216,7 @@
                               ' </tr>'
                           );
                           //alert(value.id);
-                          profesorreporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
+                         // profesorreporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
                          // $('#miadelanto').find('td').css('border', '1px solid black');
                       });
                   }

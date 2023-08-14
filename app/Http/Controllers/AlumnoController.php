@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\actividad;
 use App\Models\alumno;
 use App\Models\asignarproma;
 use App\Models\profesor;
 use App\Models\materia;
 use App\Models\aula;
+use App\Models\nota;
 use App\Models\periodo;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,8 +26,10 @@ class AlumnoController extends Controller
     INNER JOIN asignarpromas ON inscripcions.asignarproma_id = asignarpromas.id 
     INNER JOIN profesors ON profesors.id = asignarpromas.profesor_id
     where profesors.id =20*/
+   
     public function  obtenerfechainicioalumnos(Request $request)
     {   
+        
        $rutaImagenBase = asset('storage').'/';
        $fechaini = $request->input('fechainicio');
        $fechafin = $request->input('fechafinal');
@@ -33,22 +37,52 @@ class AlumnoController extends Controller
        $resultadoconsulta = alumno::obtenerfecchainicioalumnoslista($fechaini,$rutaImagenBase,$fechafin,$buscaralu2);
        return response()->json($resultadoconsulta); 
     }
-     public function index2()
+    public function index2()
+    {   
+       $userid=auth()->user()->id;
+       $alumnos =alumno
+       ::join('inscripcions','inscripcions.alumno_id','=','alumnos.id')
+        ->join('asignarpromas','inscripcions.asignarproma_id','=','asignarpromas.id')
+        ->join('materias','asignarpromas.materia_id','=','materias.id')
+        ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('alumnos.*','materias.materia as nombre_materia','materias.id as materiaid')
+        ->where('profesors.user_id','=',$userid)
+        ->get();  
+        $materias =materia::obtenermateriapro($userid);
+        $aulas =aula::all();
+        $periodos =periodo::all();
+        $actividads =actividad::all();
+        $usuario=user::obtenernombreusuario($userid);
+        $notas=nota::all();
+       // $alumnos=alumno::all();
+        // return profesor::with('sueldopro')->get(); 
+         //$datos['sueldopros']=sueldopro::paginate(7);
+         return view('alumno.alumpro',compact('alumnos','materias','aulas','periodos','actividads','usuario','userid','notas'));
+         
+    }
+     public function alumproreporte()
      {   
         $userid=auth()->user()->id;
         $alumnos =alumno
         ::join('inscripcions','inscripcions.alumno_id','=','alumnos.id')
          ->join('asignarpromas','inscripcions.asignarproma_id','=','asignarpromas.id')
+         -> join('materias','asignarpromas.materia_id','=','materias.id')
+         -> join('aulas','asignarpromas.aula_id','=','aulas.id')
+         -> join('periodos','asignarpromas.periodo_id','=','periodos.id')  
          ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
          ->join('users','users.id','=','profesors.user_id')
-         ->select('alumnos.*')
+         ->select('alumnos.*','materias.*','aulas.*','periodos.*')
          ->where('profesors.user_id','=',$userid)
-         //  ->asignarpromas()
          ->get();  
+         $materias =materia::obtenermateriapro($userid);
+         $aulas =aula::obteneraulapro($userid);
+        $periodos =periodo::obtenerperiodopro($userid);
+         $usuario=user::all();
         // $alumnos=alumno::all();
          // return profesor::with('sueldopro')->get(); 
           //$datos['sueldopros']=sueldopro::paginate(7);
-          return view('alumno.alumpro',compact('alumnos'));
+          return view('alumno.alumproreporte',compact('alumnos','materias','aulas','periodos','usuario'));
           
      }
     public function index()
@@ -94,9 +128,10 @@ class AlumnoController extends Controller
      * @param  \App\Models\alumno  $alumno
      * @return \Illuminate\Http\Response
      */
-    public function show(alumno $alumno)
+    public function show($id)
     {
-        //
+        $alumno=alumno::findOrFail($id);
+        return view('alumno.show',compact('alumno'));
     }
 
     /**

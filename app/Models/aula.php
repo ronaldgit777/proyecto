@@ -28,4 +28,16 @@ class aula extends Model
             ->get();
         //return $fechaini;
     }
+    public static function obteneraulapro($userid)
+    {
+        return static::join('asignarpromas','aulas.id','=','asignarpromas.aula_id')
+        ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('aulas.*')
+        ->where('profesors.user_id','=',$userid)
+        ->where('asignarpromas.estado','activo')
+     //  ->asignarpromas()
+         ->distinct()
+         ->get();  
+    }
 }

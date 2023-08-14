@@ -19,6 +19,42 @@ class AsignarpromaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function  buscarfechainicionotasprofeuser(Request $request)
+    {   
+        // $rutaImagenBase = asset('storage').'/';
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $profesorid2 = $request->input('profesorid');
+       $materiaid2 = $request->input('materiaid');
+       $periodoid2 = $request->input('periodoid');
+       $aulaid2 = $request->input('aulaid');
+       $alumno_nombre2 = $request->input('alumno_nombre');
+       $alumno_apepa2 = $request->input('alumno_apepa');
+       $alumno_apema2 = $request->input('alumno_apema');
+       $promin2 = $request->input('promin');
+       $promax2 = $request->input('promax');
+       $ordenarasig2 = $request->input('ordenarasig');
+       $mayorymenorasig2 = $request->input('mayorymenorasig');
+       $userid=auth()->user()->id;
+       $resultadoconsulta = asignarproma::obtenerfecchainicionotasprofeuser($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,
+       $alumno_nombre2,$alumno_apepa2, $alumno_apema2 ,$promin2 ,$promax2,$ordenarasig2, $mayorymenorasig2,$userid);
+       return response()->json($resultadoconsulta); 
+    }
+    public function  buscarfechainicioasigprofeuser(Request $request)
+    {   
+        // $rutaImagenBase = asset('storage').'/';
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $profesorid2 = $request->input('profesorid');
+       $materiaid2 = $request->input('materiaid');
+       $periodoid2 = $request->input('periodoid');
+       $aulaid2 = $request->input('aulaid');
+       $ordenarasig2 = $request->input('ordenarasig');
+       $mayorymenorasig2 = $request->input('mayorymenorasig');
+       $userid=auth()->user()->id;
+       $resultadoconsulta = asignarproma::obtenerfecchainicioasigprofeuser($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,$ordenarasig2, $mayorymenorasig2,$userid);
+       return response()->json($resultadoconsulta); 
+    }
     public function  buscarfechainicioasignacionesre(Request $request)
     {   
        $fechaini = $request->input('fechainicio');
@@ -58,12 +94,18 @@ class AsignarpromaController extends Controller
     public function obtenermateriasdelprofesorid(Request $request)
     {  
        $profesorid2 = $request->input('profesorid');
-       $resultadoconsulta = asignarproma::obtenermateriaprofesorid($profesorid2);
+       $alumnoid2 = $request->input('alumnoid');
+       $resultadoconsulta = asignarproma::obtenermateriaprofesorid($profesorid2, $alumnoid2);
+       return response()->json($resultadoconsulta); 
+    }
+    public function obtenerprofesoresid(Request $request)
+    {  
+       $alumnoid2 = $request->input('alumnoid');
+       $resultadoconsulta = asignarproma::obtenerprofesores($alumnoid2);
        return response()->json($resultadoconsulta); 
     }
     public function reporasig()
     {  
-       
         $profesors = profesor::all();
         $alumnos =alumno::all();
         $materias =materia::all();
@@ -81,17 +123,14 @@ class AsignarpromaController extends Controller
 
        // $asignarpromas=asignarproma::where('asignarpromas.profesor_id', '=' ,'profesors.id')->get();
        $userid=auth()->user()->id;
-       $asignarpromas =asignarproma
+       $asignarpromas =asignarproma::obtenerasignarcionpro($userid);
         //join('asignarpromas','asignarpromas.profesor_id','=','profesors.id')
-        ::join('profesors','asignarpromas.profesor_id','=','profesors.id')
-        ->join('users','users.id','=','profesors.user_id')
-        ->select('asignarpromas.*','profesors.*')
-        ->where('profesors.user_id','=',$userid)
-        //  ->asignarpromas()
-        ->get();    
+        $materias =materia::obtenermateriapro($userid);
+        $aulas =aula::obteneraulapro($userid);
+        $periodos =periodo::obtenerperiodopro($userid);
         //$asignarpromas=asignarproma::all();
         //return view('auth.registroEmpleado');
-        return view('asignarproma.asigpro',compact('asignarpromas'));
+        return view('asignarproma.asigpro',compact('asignarpromas','materias','aulas','periodos'));
     }
     public function index()
     {   //$asignarpromas=asignarproma::where('estado', 'activo')->get();

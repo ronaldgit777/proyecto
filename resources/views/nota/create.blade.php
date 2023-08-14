@@ -107,7 +107,7 @@
                                             <option value="activo">activo</option> 
                                             <option value="inactivo">inactivo</option> 
                                             </select><br> --}}
-                                            <input type="text" name="estado" id="estado" class="form-control" required value="activo" disabled> <br>
+                                            <input type="text" name="estado" id="estado" class="form-control" required value="activo" readonly> <br>
                                     </div>
                                 </div>
                             </div>

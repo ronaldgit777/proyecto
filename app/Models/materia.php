@@ -54,4 +54,15 @@ class materia extends Model
         })->get();
     
     }
+    public static function obtenermateriapro($userid)
+    {
+        return static::join('asignarpromas','materias.id','=','asignarpromas.materia_id')
+        ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('materias.*')
+        ->where('profesors.user_id','=',$userid)
+        ->where('asignarpromas.estado','activo')
+     //  ->asignarpromas()
+         ->get();  
+    }
 }

@@ -182,18 +182,34 @@
             </form>
         </li>
      </ul>
-    <hr class="my-3">
-    <!-- Heading -->
-    <h6 class="navbar-heading text-muted">reportes</h6>
-    <!-- Navigation -->
-    <ul class="navbar-nav mb-md-3">
-      <li class="nav-item">
-        <a class="nav-link nav-link-icon" href="{{url('registroEmpleado')}}">
-          <i class="ni ni-circle-08"></i>
-          <span class="nav-link-inner--text">reportes</span>
-        </a>
-      </li>
-    </ul>
+     <hr class="my-3">
+     <!-- Heading -->
+     <h6 class="navbar-heading text-muted">reportes</h6>
+     <!-- Navigation -->
+     <ul class="navbar-nav mb-md-3">
+           <li class="nav-item">
+             <a class="nav-link active" href="#navbar-examples2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples2">
+                 <i class="	far fa-sticky-note text-info" style="color: #f4645f;"></i>
+                 <span class="nav-link-text" style="color: #124ad88e;">{{ __('REPORTES') }}</span>
+             </a>
+
+             <div class="collapse show" id="navbar-examples2">
+                 <ul class="nav nav-sm flex-column">
+                     <li class="nav-item">
+                      <a class="nav-link nav-link-icon" href="{{url('/alumproreporte')}}">
+                        <i class="ni ni-circle-08"></i>
+                        <span class="nav-link-inner--text">reporte de alumnos</span>
+                      </a>
+                     </li> 
+                     <li class="nav-item">
+                       <a class="nav-link " href="{{ url('/notasproreporte') }}">
+                         <i class="fas fa-chalkboard-teacher text-blue"></i> reporte de notas de los alumnos
+                       </a>
+                   </li>
+                 </ul>
+             </div>
+       </li>
+     </ul>
 @endif 
   <!-- Divider -->
 
