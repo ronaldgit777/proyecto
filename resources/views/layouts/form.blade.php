@@ -18,14 +18,14 @@
   <link href="{{asset('css/argon-dashboard.css?v=1.1.2')}}" rel="stylesheet" />
 </head>
 
-<body class="bg-default">
+<body class="bg-primary">
   <div class="main-content">
     <!-- Navbar -->
     <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
       <div class="container px-4">
-        <a class="navbar-brand" href="{{url('/')}}">
+        {{-- <a class="navbar-brand" href="{{url('/')}}">
           <img src="{{asset('img/brand/white.png')}}"  />
-        </a>
+        </a> --}}
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -48,24 +48,24 @@
           </div>
           <!-- Navbar items -->
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a class="nav-link nav-link-icon" href="{{route('register')}}">
-              
+              gola
                 <span class="nav-link-inner--text"></span>
               </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
-              <a class="nav-link nav-link-icon" href="{{route('login')}}">
+              {{-- <a class="nav-link nav-link-icon" href="{{route('login')}}">
                 <i class="ni ni-key-25"></i>
                 <span class="nav-link-inner--text">iniciar seciion</span>
               </a>
-            </li>
+            </li> --}}
           </ul>
         </div>
       </div>
     </nav>
     <!-- Header -->
-    <div class="header bg-gradient-primary py-6 py-lg-7">
+    <div class="header bg-primary py-6 py-lg-7">
       <div class="container">
         <div class="header-body text-center mb-7">
           <div class="row justify-content-center">
@@ -75,16 +75,16 @@
           </div>
         </div>
       </div>
-      <div class="separator separator-bottom separator-skew zindex-100">
+      {{-- <div class="separator separator-bottom separator-skew zindex-100">
         <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
           <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
         </svg>
-      </div>
+      </div> --}}
     </div>
     @yield('content')
      <!-- footer -->
     <footer class="py-5 ">
-      <div class="container">
+      {{-- <div class="container">
         <div class="row align-items-center justify-content-xl-between">
           <div class="col-xl-6">
             <div class="copyright text-center text-xl-left text-muted">
@@ -99,7 +99,7 @@
             </ul>
           </div>
         </div>
-      </div>
+      </div> --}}
     </footer>
   </div>
   <!--   Core   -->
@@ -112,13 +112,13 @@
   <!--   Argon JS   -->
   <script src="{{asset('js/argon-dashboard.min.js?v=1.1.2')}}"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-  <script>
+  {{-- <script>
     window.TrackJS &&
       TrackJS.install({
         token: "ee6fab19c5a04ac1a32a645abde4613a",
         application: "argon-dashboard-free"
       });
-  </script>
+  </script> --}}
 </body>
 
 </html>

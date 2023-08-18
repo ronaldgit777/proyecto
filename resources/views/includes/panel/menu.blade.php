@@ -195,6 +195,12 @@
 
              <div class="collapse show" id="navbar-examples2">
                  <ul class="nav nav-sm flex-column">
+                  <li class="nav-item">
+                    <a class="nav-link nav-link-icon" href="{{url('/reporte-asigproreporte')}}">
+                      <i class="ni ni-circle-08"></i>
+                      <span class="nav-link-inner--text">reporte de asignaciones</span>
+                    </a>
+                   </li> 
                      <li class="nav-item">
                       <a class="nav-link nav-link-icon" href="{{url('/alumproreporte')}}">
                         <i class="ni ni-circle-08"></i>

@@ -265,6 +265,19 @@ class asignarproma extends Model
             ->get();
     }
 
+    public static function obtenerasignarcionproreporte($userid)
+    {
+        return static::join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        -> join('materias','asignarpromas.materia_id','=','materias.id')
+        -> join('aulas','asignarpromas.aula_id','=','aulas.id')
+        -> join('periodos','asignarpromas.periodo_id','=','periodos.id')  
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('asignarpromas.*','asignarpromas.estado','profesors.nombre','profesors.user_id','materias.materia as nombre_materia','aulas.aula as nombre_aula','periodos.periodo as nombre_periodo')
+        ->where('profesors.user_id','=',$userid)
+      //->where('asignarpromas.estado','activo')//que muestre asignacioen activas del profesor
+     //  ->asignarpromas()
+         ->get();  
+    }
     public static function obtenerasignarcionpro($userid)
     {
         return static::join('profesors','asignarpromas.profesor_id','=','profesors.id')
@@ -274,12 +287,12 @@ class asignarproma extends Model
         ->join('users','users.id','=','profesors.user_id')
         ->select('asignarpromas.*','asignarpromas.estado','profesors.nombre','profesors.user_id','materias.materia as nombre_materia','aulas.aula as nombre_aula','periodos.periodo as nombre_periodo')
         ->where('profesors.user_id','=',$userid)
-      ->where('asignarpromas.estado','activo')//que muestre asignacioen activas
+      ->where('asignarpromas.estado','activo')//que muestre asignacioen activas del profesor
      //  ->asignarpromas()
          ->get();  
     }
 
-    public static function obtenerfecchainicioasigprofeuser($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,$ordenarasig2, $mayorymenorasig2,$userid)
+    public static function obtenerfecchainicioalumnoprofeuserreporte($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,$ordenarasig2, $mayorymenorasig2,$userid)
     {      
         // Ejemplo de obtención del sueldo del profesor
        // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
@@ -320,6 +333,76 @@ class asignarproma extends Model
             if (!empty($ordenarasig2) && !empty($mayorymenorasig2)) {
                 $consulta->orderBy($ordenarasig2, $mayorymenorasig2);
             }
+            //->selectRaw("CONCAT('$rutaImagenBase', alumnos.imagen) as ruta_imagen");
+              return $consulta->get();  //return $fechaini;
+    }
+    public static function obtenerfecchainicioasigprofeuser($fechaini,$fechafin,$estadoasig2,$userid)
+    {      
+        // Ejemplo de obtención del sueldo del profesor
+       // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
+        $consulta = self::join('inscripcions','asignarpromas.id','=','inscripcions.asignarproma_id')
+                ->join('alumnos','inscripcions.alumno_id','=','alumnos.id')
+              ->join('profesors', 'asignarpromas.profesor_id', '=', 'profesors.id')
+              ->join('materias', 'asignarpromas.materia_id', '=', 'materias.id')
+              ->join('periodos', 'asignarpromas.periodo_id', '=', 'periodos.id')
+              ->join('aulas', 'asignarpromas.aula_id', '=', 'aulas.id')
+              ->join('users','users.id','=','profesors.user_id')
+              ->when($fechaini, function ($query, $fechaini) {
+                  return $query->where('asignarpromas.fechadeasignacion', '>=', $fechaini);
+              })
+              ->when($fechafin, function ($query, $fechafin) {
+                  return $query->where('asignarpromas.fechadeasignacion', '<=', $fechafin);
+              })   
+            ->when($estadoasig2, function ($query, $estadoasig2) {
+                return $query->where('asignarpromas.estado', '=', $estadoasig2);
+            }) 
+            ->where('profesors.user_id','=',$userid)
+             // ->select('profesors.*', 'users.email', 'users.role')
+            //  ->get();6
+            ->select(
+                'alumnos.*',
+                 'asignarpromas.*','fechadeasignacion','asignarpromas.estado',  
+                'profesors.nombre as profesor_nombre',
+                'materias.materia as materia_nombre',
+                'materias.costo as materia_costo',
+                'periodos.periodo as periodo_nombre',
+                'aulas.aula as aula_nombre'
+            );
+            //->selectRaw("CONCAT('$rutaImagenBase', alumnos.imagen) as ruta_imagen");
+              return $consulta->get();  //return $fechaini;
+    }
+    public static function obtenerfecchainicioasigprofeuserreporte($fechaini,$fechafin,$estadoasig2,$userid)
+    {      
+        // Ejemplo de obtención del sueldo del profesor
+       // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
+        $consulta = self::join('inscripcions','asignarpromas.id','=','inscripcions.asignarproma_id')
+                ->join('alumnos','inscripcions.alumno_id','=','alumnos.id')
+              ->join('profesors', 'asignarpromas.profesor_id', '=', 'profesors.id')
+              ->join('materias', 'asignarpromas.materia_id', '=', 'materias.id')
+              ->join('periodos', 'asignarpromas.periodo_id', '=', 'periodos.id')
+              ->join('aulas', 'asignarpromas.aula_id', '=', 'aulas.id')
+              ->join('users','users.id','=','profesors.user_id')
+              ->when($fechaini, function ($query, $fechaini) {
+                  return $query->where('asignarpromas.fechadeasignacion', '>=', $fechaini);
+              })
+              ->when($fechafin, function ($query, $fechafin) {
+                  return $query->where('asignarpromas.fechadeasignacion', '<=', $fechafin);
+              })   
+            ->when($estadoasig2, function ($query, $estadoasig2) {
+                return $query->where('asignarpromas.estado', '=', $estadoasig2);
+            }) 
+            ->where('profesors.user_id','=',$userid)
+             // ->select('profesors.*', 'users.email', 'users.role')
+            //  ->get();6
+            ->select(
+                'alumnos.*',
+                 'asignarpromas.*','fechadeasignacion','asignarpromas.estado',  
+                'profesors.nombre as profesor_nombre',
+                'materias.materia as materia_nombre',
+                'materias.costo as materia_costo',
+                'periodos.periodo as periodo_nombre',
+                'aulas.aula as aula_nombre'
+            );
             //->selectRaw("CONCAT('$rutaImagenBase', alumnos.imagen) as ruta_imagen");
               return $consulta->get();  //return $fechaini;
     }

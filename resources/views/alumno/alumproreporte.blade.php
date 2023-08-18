@@ -170,7 +170,7 @@
         });
         function generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,ordenar,mayorymenor) {
               $.ajax({
-                    url: '{{ url("obtener-fechainicioasigprofe") }}', // Ruta a tu controlador Laravel
+                    url: '{{ url("obtener-fechainicioalumnoprofereporte") }}', // Ruta a tu controlador Laravel
                     type: 'POST',
                     data: {
                         fechainicio: fecha_ini, //lo de blanco es la llave q tienes para q se capture la variable

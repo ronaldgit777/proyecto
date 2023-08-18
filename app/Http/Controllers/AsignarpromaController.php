@@ -40,7 +40,7 @@ class AsignarpromaController extends Controller
        $alumno_nombre2,$alumno_apepa2, $alumno_apema2 ,$promin2 ,$promax2,$ordenarasig2, $mayorymenorasig2,$userid);
        return response()->json($resultadoconsulta); 
     }
-    public function  buscarfechainicioasigprofeuser(Request $request)
+    public function  buscarfechainicioalumnoprofeuserreporte(Request $request)
     {   
         // $rutaImagenBase = asset('storage').'/';
        $fechaini = $request->input('fechainicio');
@@ -52,7 +52,27 @@ class AsignarpromaController extends Controller
        $ordenarasig2 = $request->input('ordenarasig');
        $mayorymenorasig2 = $request->input('mayorymenorasig');
        $userid=auth()->user()->id;
-       $resultadoconsulta = asignarproma::obtenerfecchainicioasigprofeuser($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,$ordenarasig2, $mayorymenorasig2,$userid);
+       $resultadoconsulta = asignarproma::obtenerfecchainicioalumnoprofeuserreporte($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,$ordenarasig2, $mayorymenorasig2,$userid);
+       return response()->json($resultadoconsulta); 
+    }
+    public function  buscarfechainicioasigprofeuserreporte(Request $request)
+    {   
+        // $rutaImagenBase = asset('storage').'/';
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $estadoasig2 = $request->input('estadoasig');
+       $userid=auth()->user()->id;
+       $resultadoconsulta = asignarproma::obtenerfecchainicioasigprofeuserreporte($fechaini,$fechafin,$estadoasig2,$userid);
+       return response()->json($resultadoconsulta); 
+    }
+    public function  buscarfechainicioasigprofeuser(Request $request)
+    {   
+        // $rutaImagenBase = asset('storage').'/';
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $estadoasig2 = $request->input('estadoasig');
+       $userid=auth()->user()->id;
+       $resultadoconsulta = asignarproma::obtenerfecchainicioasigprofeuser($fechaini,$fechafin,$estadoasig2,$userid);
        return response()->json($resultadoconsulta); 
     }
     public function  buscarfechainicioasignacionesre(Request $request)
@@ -116,12 +136,23 @@ class AsignarpromaController extends Controller
         $asignarpromas =asignarproma::obtenerdatosde3tabla();
         return view('asignarproma.reporasig',compact('asignarpromas','profesors','materias','aulas','periodos'));
     }
-     
+    public function reporteasigproreporte()
+    {
+       //s SELECT * FROM `asignarpromas` WHERE asignarpromas.profesor_id = 13
+       // $asignarpromas=asignarproma::where('asignarpromas.profesor_id', '=' ,'profesors.id')->get();
+       $userid=auth()->user()->id;
+       $asignarpromas =asignarproma::obtenerasignarcionproreporte($userid);
+        //join('asignarpromas','asignarpromas.profesor_id','=','profesors.id')
+        $materias =materia::obtenermateriapro($userid);
+        $aulas =aula::obteneraulapro($userid);
+        $periodos =periodo::obtenerperiodopro($userid);
+        //$asignarpromas=asignarproma::all();
+        //return view('auth.registroEmpleado');
+        return view('asignarproma.asigproreporte',compact('asignarpromas','materias','aulas','periodos'));
+    }
     public function index2()
     {
-          
        //s SELECT * FROM `asignarpromas` WHERE asignarpromas.profesor_id = 13
-
        // $asignarpromas=asignarproma::where('asignarpromas.profesor_id', '=' ,'profesors.id')->get();
        $userid=auth()->user()->id;
        $asignarpromas =asignarproma::obtenerasignarcionpro($userid);

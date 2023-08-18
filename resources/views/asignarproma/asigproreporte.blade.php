@@ -5,7 +5,7 @@
          <div class="card-header border-0">
                 <div class="row align-items-center">
                       <div class="col">
-                        <h3 class="mb-0">LISTA DE ASIGNACIONES</h3>
+                        <h3 class="mb-0">LISTA DE ASIGNACIONES REPORTE</h3>
                         <div class="row">
                                 <div class="col">
                                     <label class="text-primary text-capitalize">fecha de inicioA</label>
@@ -16,6 +16,14 @@
                                     <label class="text-primary text-capitalize">fecha de final</label>
                                     <input type="date" name="fechafinal" id="fechafinal" class="form-control">
                                     <span class="text-muted">hasta</span>
+                                </div>
+                                <div class="col">
+                                  <label class="text-primary text-capitalize">estado</label>
+                                  <select type="text" name="estado" id="estado" class="form-control">
+                                    <option value="">ambos</option>
+                                    <option value="activo">activo</option> 
+                                    <option value="inactivo">inactivo</option> 
+                                    </select> 
                                 </div>
                                 <div class="col text-right">
                                   <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button>
@@ -90,7 +98,7 @@
         });
         function generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,estado) {
               $.ajax({
-                    url: '{{ url("obtener-fechainicioasigprofeuser") }}', // Ruta a tu controlador Laravel
+                    url: '{{ url("obtener-fechainicioasigprofereporte") }}', // Ruta a tu controlador Laravel
                     type: 'POST',
                     data: {
                         fechainicio: fecha_ini, //lo de blanco es la llave q tienes para q se capture la variable

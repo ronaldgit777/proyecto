@@ -66,7 +66,7 @@ Route::get('/', function () {
         route::resource('alumno',AlumnoController::class)->middleware('auth');
         Route::post('/obtener-fechainicioalumnos',[App\Http\Controllers\AlumnoController::class, 'obtenerfechainicioalumnos'])->name('obtener-fechainicioalumnos'); //lista de alumnos
         Route::post('/obtener-fechainicioalumnosprofe',[App\Http\Controllers\InscripcionController::class, 'obtenerfechainicioalumnosprofe'])->name('obtener-fechainicioalumnosprofe');
-       
+        
         Route::get('/alumproreporte',[App\Http\Controllers\AlumnoController::class, 'alumproreporte'])->name('alumproreporte'); //lista de alumnos reporte
         Route::get('/notasproreporte',[App\Http\Controllers\NotaController::class, 'notasproreporte'])->name('notasproreporte'); //lista de alumnos
         Route::post('/obtener-fechainicionotaprofe',[App\Http\Controllers\AsignarpromaController::class, 'buscarfechainicionotasprofeuser'])->name('obtener-fechainicionotaprofe'); 
@@ -85,7 +85,7 @@ Route::get('/', function () {
         route::resource('inscripcion',InscripcionController::class)->middleware('auth');
         Route::post('/obtener-fechainicioinscripciones',[App\Http\Controllers\InscripcionController::class, 'buscarfechainicioinscripciones'])->name('obtener-fechainicioinscripciones'); //lista de aulas
         Route::post('/obtener-materiasdelprofesorid',[App\Http\Controllers\AsignarpromaController::class, 'obtenermateriasdelprofesorid'])->name('obtener-materiasdelprofesorid');
-
+        
         Route::post('/obtener-profesoresid',[App\Http\Controllers\AsignarpromaController::class, 'obtenerprofesoresid'])->name('obtener-profesoresid');
         
         Route::post('/obtener-periodosmateriaprofesor',[App\Http\Controllers\AsignarpromaController::class, 'obtenerperiodosmateriaprofesor'])->name('obtener-periodosmateriaprofesor');
@@ -99,6 +99,7 @@ Route::get('/', function () {
         //profesor asignaciones
         Route::get('/asigpro', [App\Http\Controllers\AsignarpromaController::class, 'index2'])->name('index2')->middleware('auth');
         Route::post('/asigpro', [App\Http\Controllers\AsignarpromaController::class, 'index2'])->name('index2')->middleware('auth');
+        Route::get('/reporte-asigproreporte', [App\Http\Controllers\AsignarpromaController::class, 'reporteasigproreporte'])->name('reporte-asigproreporte')->middleware('auth');//reporte de asisg profe user
         //profesor alumnos
         Route::get('/alumpro', [App\Http\Controllers\AlumnoController::class, 'index2'])->name('index2')->middleware('auth');
         Route::post('/alumpro', [App\Http\Controllers\AlumnoController::class, 'index2'])->name('index2')->middleware('auth');
@@ -139,7 +140,10 @@ Route::get('/', function () {
         Route::get('/reporsupro', [App\Http\Controllers\SueldoproController::class, 'reporsupro'])->name('reporsupro')->middleware('auth');//ruta
         Route::post('/obtener-fechainicioasigre',[App\Http\Controllers\AsignarpromaController::class, 'buscarfechainicioasignacionesre'])->name('obtener-fechainicioasigre'); //buscar de asignaciones
 
-        Route::post('/obtener-fechainicioasigprofe',[App\Http\Controllers\AsignarpromaController::class, 'buscarfechainicioasigprofeuser'])->name('obtener-fechainicioasigprofe'); 
+        Route::post('/obtener-fechainicioalumnoprofereporte',[App\Http\Controllers\AsignarpromaController::class, 'buscarfechainicioalumnoprofeuserreporte'])->name('obtener-fechainicioalumnoprofereporte'); //alumnos reporte profe user
+
+        Route::post('/obtener-fechainicioasigprofeuser',[App\Http\Controllers\AsignarpromaController::class, 'buscarfechainicioasigprofeuser'])->name('obtener-fechainicioasigprofeuser'); //asignaciones profesor user
+        Route::post('/obtener-fechainicioasigprofereporte',[App\Http\Controllers\AsignarpromaController::class, 'buscarfechainicioasigprofeuserreporte'])->name('obtener-fechainicioasigprofereporte'); //asignaciones reporte profe user
 
        Route::post('/obtener-fechainicioprosureporte',[App\Http\Controllers\SueldoproController::class, 'obtenerfechainicioprosureporte'])->name('obtener-fechainicioprosureporte');//repor 
         //secretarias

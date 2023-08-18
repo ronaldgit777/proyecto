@@ -19,7 +19,7 @@
                 </div>
             @else 
                 <div class="text-center text-muted mb-4">
-                    <small>ingresa tus credenciales para ingresar al sistema</small>
+                    <small>Ingrese los siguientes datos para iniciar session</small>
                 </div>
             @endif
 
@@ -39,14 +39,14 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                   </div>
-                  <input class="form-control" placeholder="Password" type="password" name="password" required autocomplete="current-password">
+                  <input class="form-control" placeholder="contraseña" type="password" name="password" required autocomplete="current-password">
                 </div>
               </div>
               <div class="custom-control custom-control-alternative custom-checkbox">
-                <input class="custom-control-input" id=" remember" name="remember" type="checkbox"  {{ old('remember') ? 'checked' : '' }}>
+                {{-- <input class="custom-control-input" id=" remember" name="remember" type="checkbox"  {{ old('remember') ? 'checked' : '' }}>
                 <label class="custom-control-label" for=" remember">
                   <span class="text-muted">recordar secion</span>
-                </label>
+                </label> --}}
               </div>
               <div class="text-center">
                 <button type="submit" class="btn btn-primary my-4">empezar</button>
@@ -56,10 +56,10 @@
         </div>
         <div class="row mt-3">
           <div class="col-6">
-            <a href="{{ route('password.request') }}" class="text-light" ><small>olvidadste password?</small></a>
+            <a href="{{ route('password.request') }}" class="text-light" ><small>olvidadste tu contraseña?</small></a>
           </div>
           <div class="col-6 text-right">
-            <a href="{{ route('register') }}" class="text-light"><small>crear cuenta neuva</small></a>
+            {{-- <a href="{{ route('register') }}" class="text-light"><small>crear cuenta neuva</small></a> --}}
           </div>
         </div>
       </div>
