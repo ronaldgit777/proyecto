@@ -5,7 +5,7 @@
     <div class="card-header border-0">
       <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="mb-0">LISTA DE DATOS REPORTE SECRETARIAS</h3>
+                    <h3 class="mb-0">LISTA DE DATOS REPORTE ALUMNOS</h3>
                       <div class="row">
                               <div class="col">
                                   <label class="text-primary text-capitalize">fecha de inicio</label>
@@ -35,10 +35,10 @@
                               </div>
                                 <div class="col text-right">
                                   <button class="btn btn-danger btn-sm" type="button" onclick="generarpdflistaprofesor()"><i class="fas fa-print"></i>imprimir</button>
-                                  <a href="{{url('opciones-reportesecre')}}" class="btn btn-sm btn-success text-capitalize" >
-                                      <i class="fas fa-plus-circle"></i>
-                                      regresar</a>
-                                </div>  
+                                  <a href="{{url('opciones-reportealumno')}}" class="btn btn-sm btn-success" >
+                                  <i class="fas fa-plus-circle"></i>
+                                  regresar</a>
+                              </div>  
                       </div>
                       <div class="row">
                         <div class="col">
@@ -63,7 +63,7 @@
                             <option value="inactivo">inactivo</option> 
                             </select>
                         </div>
-                        <div class="col">s
+                        <div class="col">
                           <label class="text-primary text-capitalize">sueldo -desde</label>
                           <input type="text" name="sueldomin" id="sueldomin" class="form-control">
                           <span class="text-muted">minimo</span>
@@ -101,55 +101,58 @@
                 </div>
       </div>
     </div>
-        <style>
-      .img-custom {
-        width: 50px;
-        height: 50px;
-      }
-        </style>
-        <div class="table-responsive">
-          <!-- Projects table -->
-          <table id="tabla" class="table align-items-center table-flush" >
-            <thead class="thead-light">
-              <tr>
-                <th scope="col" data-column="id" class="sortable">id</th>
-                <th scope="col" data-column="fechadeingreso" class="sortable">fechadeingreso</th>
-                <th scope="col" data-column="ci" class="sortable">ci</th>
-                <th scope="col" data-column="nombre" class="sortable">nombre</th>
-                <th scope="col" data-column="apellidopaterno" class="sortable">apellidopaterno</th>
-                <th scope="col" data-column="apellidomaterno" class="sortable">apellidomaterno</th>
-                <th scope="col" data-column="celular" class="sortable">celular</th>
-                <th scope="col" data-column="direccion" class="sortable">direccion</th>
-                <th scope="col" data-column="correo" class="sortable">correo</th>
-                <th scope="col" data-column="estado" class="sortable">estado</th>
-                <th scope="col">imagen</th>
-                <th scope="col" data-column="sueldo" class="sortable">sueldo</th>
-                <th scope="col">rol</th>
-              </tr>
-            </thead>
-            <tbody id="tabla_profe">
-              @foreach ($secretarias as $secretaria)
-                        <tr>
-                            <td scope="row">{{ $secretaria->id }}</td>
-                            <td>{{ $secretaria->fechadeingreso }}</td>
-                            <td>{{ $secretaria->ci }}</td>
-                            <td>{{ $secretaria->nombre }}</td>
-                            <td>{{ $secretaria->apellidopaterno }}</td>
-                            <td>{{ $secretaria->apellidomaterno }}</td>
-                            <td>{{ $secretaria->celular }}</td>
-                            <td>{{ $secretaria->direccion }}</td>
-                            <td>{{ $secretaria->user->email }}</td>
-                            <td>{{ $secretaria->estado }}</td>
-                            <td>secretaria
-                            <img src="{{ asset('storage').'/'.$secretaria->imagen}}" alt="" class="img-thumbnail img-fluid img-custom">
-                            </td>
-                            <td>{{ $secretaria->sueldo }}</td>
-                            <td>{{ $secretaria->user->role }}</td>
-                        </tr>
-                        @endforeach
-            </tbody>
-          </table>
-        </div>
+  <style>
+ .img-custom {
+  width: 50px;
+  height: 50px;
+}
+  </style>
+  <div class="table-responsive">
+    <!-- Projects table -->
+    <table id="tabla" class="table align-items-center table-flush" >
+      <thead class="thead-light">
+        <tr>
+          {{-- <th scope="col" data-column="id" class="sortable">id</th> --}}
+          <th scope="col" data-column="fechadeingreso" class="sortable">fechadeingreso</th>
+          <th scope="col" data-column="ci" class="sortable">ci</th>
+          <th scope="col" data-column="nombre" class="sortable">nombre</th>
+          <th scope="col" data-column="apellidopaterno" class="sortable">apellidopaterno</th>
+          <th scope="col" data-column="apellidomaterno" class="sortable">apellidomaterno</th>
+          <th scope="col" data-column="celular" class="sortable">celular</th>
+          <th scope="col" data-column="direccion" class="sortable">direccion</th>
+     
+          <th scope="col" data-column="estado" class="sortable">estado</th>
+          <th scope="col">imagen</th>
+          
+        </tr>
+      </thead>
+      <tbody id="tabla_alu">
+        @foreach ($alumnos as $alumno)
+                  <tr>
+                      {{-- <td scope="row">{{ $alumno->id }}</td> --}}
+                      <td>{{ $alumno->fechadeingreso }}</td>
+                      <td>{{ $alumno->ci }}</td>
+                      <td>{{ $alumno->nombre }}</td>
+                      <td>{{ $alumno->apellidopaterno }}</td>
+                      <td>{{ $alumno->apellidomaterno }}</td>
+                      <td>{{ $alumno->celular }}</td>
+                      <td>{{ $alumno->direccion }}</td>
+                      {{-- <td>{{ $profesor->user->email }}</td> --}}
+                      <td>{{ $alumno->estado }}</td>
+                      <td>
+                      <img src="{{ asset('storage').'/'.$alumno->imagen}}" alt="" class="img-thumbnail img-fluid img-custom">
+
+
+                      </td>
+                      {{-- <td>{{ $profesor->sueldo }}</td>
+                      <td>{{ $profesor->user->role }}</td> --}}
+                  </tr>
+                  @endforeach
+      </tbody>
+    </table>
+    ---
+    
+  </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
@@ -157,31 +160,31 @@
 <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
 
 <script>
-    var secreprosData = {!! json_encode($secretarias) !!};
-    var secretariareporte =  {!! json_encode($secretarias) !!};
+    var profeprosData = {!! json_encode($alumnos) !!};
+    var profesorreporte =  {!! json_encode($alumnos) !!};
     function encontrarListaPorId(idLista) {
-      return secreprosData.find(item => item.id === idLista);
+      return profeprosData.find(item => item.id === idLista);
     }
     function generarpdflistaprofesor() {
     // Construir el contenido del reporte utilizando los datos de adelantoprosData
     const filas = [];
     filas.push(['#', 'fechadeingreso', 'ci', 'nombre', 'apellidopaterno','apellidomaterno','celular','direccion','email','estado','imagen','sueldo','role']);
-    for (let i = 0; i < secretariareporte.length; i++) {
-      const secretaria = secretariareporte[i];
-      const id = secretaria.id;
-      const fechadeingreso = secretaria.fechadeingreso;
-      const ci = secretaria.ci;
-      const nombre = secretaria.nombre;
-      const apellidopaterno = secretaria.apellidopaterno;
-      const apellidomaterno = secretaria.apellidomaterno;
-      const celular = secretaria.celular;
-      const direccion = secretaria.direccion;
-      const user_id = secretaria.user_id + "-" + secretaria.user.email;
-      const estado = secretaria.estado;
-      const imagen = secretaria.imagen;
+    for (let i = 0; i < profesorreporte.length; i++) {
+      const profesor = profesorreporte[i];
+      const id = profesor.id;
+      const fechadeingreso = profesor.fechadeingreso;
+      const ci = profesor.ci;
+      const nombre = profesor.nombre;
+      const apellidopaterno = profesor.apellidopaterno;
+      const apellidomaterno = profesor.apellidomaterno;
+      const celular = profesor.celular;
+      const direccion = profesor.direccion;
+      const user_id = profesor.user_id + "-" + profesor.user.email;
+      const estado = profesor.estado;
+      const imagen = profesor.imagen;
     //  {  image: 'myImageDictionary/image1.jpg' }
-      const sueldo = secretaria.sueldo;
-      const role = secretaria.user.role;
+      const sueldo = profesor.sueldo;
+      const role = profesor.user.role;
       filas.push([id, fechadeingreso, ci, nombre, apellidopaterno, apellidomaterno,celular,direccion,user_id,estado,imagen,sueldo,role]);
     }
    
@@ -213,7 +216,7 @@
     };
 
     // Generar el documento PDF
-    pdfMake.createPdf(docDefinition).download('reporte_secretarias.pdf');
+    pdfMake.createPdf(docDefinition).download('reporte_profesores.pdf');
   }
 </script>
 
@@ -252,22 +255,23 @@
 
         function generartabla(fecha_ini,fecha_fin,ci,nombre,apellidopaterno,apellidomaterno,celular,direccion,email,estado,sueldomin,sueldomax,ordenar,mayorymenor) {
               $.ajax({
-                    url: '{{ url("obtener-fechainiciosecre") }}', // Ruta a tu controlador Laravel
+                    url: '{{ url("obtener-fechainicioreporalu") }}', // Ruta a tu controlador Laravel
                     type: 'POST',
                     data: {
                         fechainicio: fecha_ini, //lo de blanco es la llave q tienes para q se capture la variable
                         fechafinal: fecha_fin,
-                        cisecre: ci,// Enviar el ID del aula seleccionada
-                        nombresecre:nombre,
-                        apellidopaternosecre:apellidopaterno,
-                        apellidomaternosecre:apellidomaterno,
-                        celularsecre:celular,
-                        direccionsecre:direccion,
-                        emailsecre:email,
-                        estadosecre:estado,
-                        sueldominsecre:sueldomin,
-                        ordenarsecre:ordenar,
-                        mayorymenorsecre:mayorymenor,
+                        cipro: ci,// Enviar el ID del aula seleccionada
+                        nombrepro:nombre,
+                        apellidopaternopro:apellidopaterno,
+                        apellidomaternopro:apellidomaterno,
+                        celularpro:celular,
+                        direccionpro:direccion,
+                        emailpro:email,
+                        estadopro:estado,
+                        sueldominpro:sueldomin,
+                        sueldomaxpro:sueldomax,
+                        ordenarpro:ordenar,
+                        mayorymenorpro:mayorymenor,
                       // profesor_id: profesorId,
                         _token: '{{ csrf_token() }}' // Agregar el token CSRF
                     },
@@ -275,14 +279,14 @@
                         
                   
                         // Limpiar el campo de selección de periodos
-                        $('#tabla_profe').empty();
-                        secretariareporte=[];
+                        $('#tabla_alu').empty();
+                        //profesorreporte=[];
 
                         $.each(response, function(key, value) {
                             // alert(value.id)
-                            $('#tabla_profe').append(
+                            $('#tabla_alu').append(
                                 '<tr>'+
-                                ' <td>'+value.id+'</td>'+
+                                // ' <td>'+value.id+'</td>'+
                                     '<td>'+value.fechadeingreso+'</td>'+
                                     ' <td>'+value.ci+'</td>'+
                                     ' <td>'+value.nombre+'</td>'+
@@ -290,15 +294,15 @@
                                     ' <td>'+value.apellidomaterno+'</td>'+
                                     ' <td>'+value.celular+'</td>'+
                                     ' <td>'+value.direccion+'</td>'+
-                                    ' <td>'+value.email+'</td>'+
+                                    // ' <td>'+value.email+'</td>'+
                                     ' <td>'+value.estado+'</td>'+
                                     ' <td><img src="'+value.ruta_imagen+'" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid"></td>'+
-                                    ' <td>'+value.sueldo+'</td>'+
-                                    ' <td>'+value.role+'</td>'+
+                                    // ' <td>'+value.sueldo+'</td>'+
+                                    // ' <td>'+value.role+'</td>'+
                                 ' </tr>'
                             );
                             //alert(value.id);
-                            secretariareporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
+                           // profesorreporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
                           //  $('#miadelanto').find('td').css('border', '1px solid black');
                         });
                     }
@@ -331,7 +335,7 @@
         $('#email').on('input', function() {
            $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
         });
-        $('#estado').on('input', function() {
+        $('#estado').on('change', function() {
            $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
         });
         $('#sueldomin').on('input', function() {

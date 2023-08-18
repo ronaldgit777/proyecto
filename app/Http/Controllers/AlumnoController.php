@@ -34,13 +34,15 @@ class AlumnoController extends Controller
        $fechaini = $request->input('fechainicio');
        $fechafin = $request->input('fechafinal');
        $buscaralu2 = $request->input('buscaralu');
-       $resultadoconsulta = alumno::obtenerfecchainicioalumnoslista($fechaini,$rutaImagenBase,$fechafin,$buscaralu2);
+       $estadopro2 = $request->input('estadopro');
+       $resultadoconsulta = alumno::obtenerfecchainicioalumnoslista($fechaini,$rutaImagenBase,$fechafin,$buscaralu2, $estadopro2 );
        return response()->json($resultadoconsulta); 
     }
     public function index2()
     {   
        $userid=auth()->user()->id;
        $alumnos =alumno
+       //::all();
        ::join('inscripcions','inscripcions.alumno_id','=','alumnos.id')
         ->join('asignarpromas','inscripcions.asignarproma_id','=','asignarpromas.id')
         ->join('materias','asignarpromas.materia_id','=','materias.id')
@@ -48,6 +50,7 @@ class AlumnoController extends Controller
         ->join('users','users.id','=','profesors.user_id')
         ->select('alumnos.*','materias.materia as nombre_materia','materias.id as materiaid')
         ->where('profesors.user_id','=',$userid)
+        ->where('asignarpromas.estado','=','activo')
         ->get();  
         $materias =materia::obtenermateriapro($userid);
         $aulas =aula::all();
@@ -83,6 +86,45 @@ class AlumnoController extends Controller
          // return profesor::with('sueldopro')->get(); 
           //$datos['sueldopros']=sueldopro::paginate(7);
           return view('alumno.alumproreporte',compact('alumnos','materias','aulas','periodos','usuario'));
+          
+     }
+     public function opcionesreportealumno()
+     {
+         $alumnos=alumno::all();
+         // return profesor::with('sueldopro')->get(); 
+          //$datos['sueldopros']=sueldopro::paginate(7);
+          return view('alumno.reporopcionesalu',compact('alumnos'));
+          
+     }
+     public function  obtenerfechainicioreporalu(Request $request)
+     {   
+        $rutaImagenBase = asset('storage').'/';
+        $fechaini = $request->input('fechainicio');
+        $fechafin = $request->input('fechafinal');
+        $cipro2 = $request->input('cipro');
+        $nombrepro2 = $request->input('nombrepro');
+        $apellidopaternopro2 = $request->input('apellidopaternopro');
+        $apellidomaternopro2 = $request->input('apellidomaternopro');
+        $celularpro2 = $request->input('celularpro');
+        $direccionpro2 = $request->input('direccionpro');
+        $emailpro2 = $request->input('emailpro');
+        $estadopro2 = $request->input('estadopro');
+        $sueldominpro2 = $request->input('sueldominpro');
+        $sueldomaxpro2 = $request->input('sueldomaxpro');
+        $ordenarpro2 = $request->input('ordenarpro');
+         $mayorymenorpro2 = $request->input('mayorymenorpro');
+        $resultadoconsulta = alumno::obteneralumnosdesdefechainicio($fechaini,$rutaImagenBase,$fechafin,
+        $cipro2,$nombrepro2,$apellidopaternopro2,$apellidomaternopro2,$celularpro2,$direccionpro2,$emailpro2,$estadopro2,
+        $sueldominpro2,$sueldomaxpro2, $ordenarpro2, $mayorymenorpro2);
+            
+        return response()->json($resultadoconsulta);        
+     }
+     public function reporalu()
+     {
+         $alumnos=alumno::all();
+         // return profesor::with('sueldopro')->get(); 
+          //$datos['sueldopros']=sueldopro::paginate(7);
+          return view('alumno.reporalu',compact('alumnos'));
           
      }
     public function index()

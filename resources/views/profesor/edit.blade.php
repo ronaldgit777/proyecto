@@ -100,7 +100,7 @@
                                         <label class="text-primary text-capitalize">correo</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="correo" id="correo" class="form-control" value="{{ $profesor->correo }}"><br>
+                                        <input type="text" name="" id="" class="form-control" value="{{ $profesor->correo }}"><br>
                                     </div>
                                 </div>
                             </div>

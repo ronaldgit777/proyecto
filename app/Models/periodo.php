@@ -26,14 +26,16 @@ class periodo extends Model
         ->join('users','users.id','=','profesors.user_id')
         ->select('periodos.*')
         ->where('profesors.user_id','=',$userid)
-        ->where('asignarpromas.estado','activo')
+       // ->where('asignarpromas.estado','activo')
      //  ->asignarpromas()
          ->get();  
     }
     public static function obtenerPeriodosDisponibles($aulaId, $profesorId)
     {
-        $periodosAula = Asignarproma::where('aula_id', $aulaId)->pluck('periodo_id');  
-        $periodosProfesor = Asignarproma::where('profesor_id', $profesorId)->pluck('periodo_id'); 
+        $periodosAula = Asignarproma::where('aula_id', $aulaId)->where('estado','activo')
+        ->pluck('periodo_id');  
+        $periodosProfesor = Asignarproma::where('profesor_id', $profesorId)->where('estado','activo')
+        ->pluck('periodo_id'); 
 
         $periodosUsados = $periodosAula->merge($periodosProfesor); 
 
@@ -41,7 +43,8 @@ class periodo extends Model
         
         return $periodosDisponibles;
     }
-    public static function obtenerlistaperiodos($buscarpe2)
+
+    public static function obtenerlistaperiodos($buscarpe2, $estadopro2)
     {      
         // Ejemplo de obtención del sueldo del profesor
        // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
@@ -53,7 +56,9 @@ class periodo extends Model
                           ;
                   });
               })  
-                
+              ->when($estadopro2, function ($query, $estadopro2) {
+                return $query->where('periodos.estado', '=', $estadopro2);
+            }) 
              // ->select('profesors.*', 'users.email', 'users.role')
             //  ->get();
             ->select('periodos.*')

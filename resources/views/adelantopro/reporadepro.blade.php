@@ -50,7 +50,7 @@
                                           </div>
                                           <div class="col">
                                             <label class="text-primary text-capitalize">estado</label>
-                                            <select type="text" name="observacionss" id="observacion" class="form-control">
+                                            <select type="text" name="estado" id="estado" class="form-control">
                                               <option selected  value="">ambos</option>
                                               <option value="pendiente">pendiente</option> 
                                               <option value="pagado">pagado</option> 
@@ -122,12 +122,13 @@
           var profesorid = $('#profesor_id').val();  
           var monto1 = $('#monto1').val(); 
           var monto2 = $('#monto2').val(); 
+          var estado = $('#estado').val(); 
           var ordenaradepro = $('#ordenar').val();
             var mayorymenoradepro = $('#mayorymenor').val();
-          generartabla(fecha_ini,fecha_fin,profesorid,monto1,monto2,ordenaradepro,mayorymenoradepro);      
+          generartabla(fecha_ini,fecha_fin,profesorid,monto1,monto2,estado,ordenaradepro,mayorymenoradepro);      
        
       });
-      function generartabla(fecha_ini,fecha_fin,profesorid,monto1,monto2,ordenaradepro,mayorymenoradepro) {
+      function generartabla(fecha_ini,fecha_fin,profesorid,monto1,monto2,estado,ordenaradepro,mayorymenoradepro) {
             $.ajax({
                  url: '{{ url("obtener-fechainicioproadereporte") }}', // Ruta a tu controlador Laravel
                   type: 'POST',
@@ -137,6 +138,7 @@
                       profesorid: profesorid,// Enviar el ID del aula seleccionada
                       monto1: monto1,
                       monto2: monto2,
+                      estadosecre:estado,
                       ordenaradepro:ordenaradepro,
                         mayorymenoradepro:mayorymenoradepro,
                     // profesor_id: profesorId,
@@ -187,6 +189,9 @@
        // alert($(this).val())
          $('#fechainicio').trigger('change');
       });
+      $('#estado').on('change', function() {
+           $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
+        });
       $('#ordenar').on('change', function() {
            $('#fechainicio').trigger('change');
         });

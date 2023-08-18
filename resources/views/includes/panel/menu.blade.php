@@ -143,7 +143,7 @@
                           </a>
                       </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="{{ url('/reporalumnos') }}">
+                            <a class="nav-link " href="{{ url('/opciones-reportealumno') }}">
                               <i class="fas fa-user-graduate"></i>alumnos
                             </a>
                         </li>

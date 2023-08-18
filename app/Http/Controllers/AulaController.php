@@ -17,7 +17,8 @@ class AulaController extends Controller
     public function  buscaraulas(Request $request)
     {   
        $buscaraula2 = $request->input('buscaraula');
-       $resultadoconsulta = aula::obtenerlistaaulas($buscaraula2);
+       $estadopro2 = $request->input('estadopro');
+       $resultadoconsulta = aula::obtenerlistaaulas($buscaraula2,$estadopro2);
        return response()->json($resultadoconsulta); 
     }
     public function index()

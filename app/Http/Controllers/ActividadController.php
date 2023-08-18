@@ -15,7 +15,8 @@ class ActividadController extends Controller
     public function  buscaractividades(Request $request)
     {   
        $buscarac2 = $request->input('buscarac');
-       $resultadoconsulta = actividad::obtenerlistaactividades($buscarac2);
+       $estadopro2 = $request->input('estadopro');
+       $resultadoconsulta = actividad::obtenerlistaactividades($buscarac2,$estadopro2 );
        return response()->json($resultadoconsulta); 
     }
     public function index()

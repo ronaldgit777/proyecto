@@ -71,15 +71,17 @@
  $(document).ready(function() {
      $('#buscar').on('input', function() {
          var buscar = $(this).val(); 
-         generartabla(buscar);      
+         var estado = $('#estado').val(); 
+         generartabla(buscar,estado);      
       
      });
-     function generartabla(buscar) {
+     function generartabla(buscar,estado) {
            $.ajax({
                  url: '{{ url("buscar-periodos") }}', // Ruta a tu controlador Laravel
                  type: 'POST',
                  data: {
                      buscarpe: buscar,// Enviar el ID del aula seleccionada
+                     estadopro:estado,
                      _token: '{{ csrf_token() }}' // Agregar el token CSRF
                  },
                  success: function(response) {
@@ -107,6 +109,10 @@
                  }
              });
      }
+     $('#estado').on('change', function() {
+          // alert($(this).val())
+            $('#buscar').trigger('input');
+          });
  });
 </script>
 @endsection

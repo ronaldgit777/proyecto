@@ -73,7 +73,8 @@ class AsignarpromaController extends Controller
        $fechaini = $request->input('fechainicio');
        $fechafin = $request->input('fechafinal');
        $buscaras2 = $request->input('buscaras');
-       $resultadoconsulta = asignarproma::obtenerfecchainicioasignaciones($fechaini,$fechafin,$buscaras2);
+       $estadopro2 = $request->input('estadopro');
+       $resultadoconsulta = asignarproma::obtenerfecchainicioasignaciones($fechaini,$fechafin,$buscaras2,  $estadopro2 );
        return response()->json($resultadoconsulta); 
     }
     public function obteneraulaperiodosmateriaprofesor(Request $request)
@@ -198,9 +199,16 @@ class AsignarpromaController extends Controller
      * @param  \App\Models\asignarproma  $asignarproma
      * @return \Illuminate\Http\Response
      */
-    public function edit(asignarproma $asignarproma)
+    public function edit($id)
     {
-        //
+        $asignarproma=asignarproma::findOrFail($id);
+        $materia=materia::all();
+        $profesor=profesor::all();
+        $aula=aula::all();
+        $periodo=periodo::all();
+        //$sueldopro=sueldopro::get()->where('$id','=','12');
+        return view('asignarproma.edit',compact('asignarproma','materia','profesor','aula','periodo'));
+        
     }
 
     /**
@@ -210,9 +218,14 @@ class AsignarpromaController extends Controller
      * @param  \App\Models\asignarproma  $asignarproma
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, asignarproma $asignarproma)
+    public function update(Request $request, $id)
     {
-        //
+        $datosasig=request()->except(['_token','_method']);
+        asignarproma::where('id','=',$id)->update($datosasig);
+        $asignarproma=asignarproma::findOrFail($id);
+        //return view('asignarproma.edit',compact('asignarproma'));
+        return redirect('asignarproma');
+        
     }
 
     /** 

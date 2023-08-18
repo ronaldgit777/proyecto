@@ -90,7 +90,7 @@ class secretaria extends Model
       
       return $fechaingreso;
   }
-  public static function obtenersecretariasdesdefechainicio2($fechaini,$rutaImagenBase,$fechafin,$buscarpro2)
+  public static function obtenersecretariasdesdefechainicio2($fechaini,$rutaImagenBase,$fechafin,$buscarpro2,$estadosecre2)
   {      
       // Ejemplo de obtención del sueldo del profesor
      // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
@@ -101,6 +101,9 @@ class secretaria extends Model
             ->when($fechafin, function ($query, $fechafin) {
                 return $query->where('secretarias.fechadeingreso', '<=', $fechafin);
             })  
+            ->when($estadosecre2, function ($query, $estadosecre2) {
+                return $query->where('secretarias.estado', '=', $estadosecre2);
+            }) 
             ->when($buscarpro2, function ($query, $buscarpro2) {
                 return $query->where(function ($query) use ($buscarpro2) {
                     $query->where('ci', 'like', "%$buscarpro2%")

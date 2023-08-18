@@ -47,9 +47,10 @@ class InscripcionController extends Controller
        $periodoid2 = $request->input('periodoid');
        $aulaid2 = $request->input('aulaid');
        $alumnoid2 = $request->input('alumnoid');  $alumnoidpa2 = $request->input('alumnoidpa');  $alumnoidma2 = $request->input('alumnoidma');
+       $estadosecre2 = $request->input('estadosecre');
        $ordenarins2 = $request->input('ordenarins');
        $mayorymenorins2 = $request->input('mayorymenorins');
-       $resultadoconsulta = inscripcion::obtenerfecchainicioinscripcionreporte($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,$alumnoid2,$ordenarins2,$mayorymenorins2,$alumnoidpa2,$alumnoidma2);
+       $resultadoconsulta = inscripcion::obtenerfecchainicioinscripcionreporte($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,$alumnoid2,$ordenarins2,$mayorymenorins2,$alumnoidpa2,$alumnoidma2,$estadosecre2);
        return response()->json($resultadoconsulta); 
     }
     public function  buscarfechainicioinscripciones(Request $request)
@@ -57,7 +58,8 @@ class InscripcionController extends Controller
        $fechaini = $request->input('fechainicio');
        $fechafin = $request->input('fechafinal');
        $buscarin2 = $request->input('buscarin');
-       $resultadoconsulta = inscripcion::obtenerfecchainicioinscripcion($fechaini,$fechafin,$buscarin2);
+       $estadopro2 = $request->input('estadopro');
+       $resultadoconsulta = inscripcion::obtenerfecchainicioinscripcion($fechaini,$fechafin,$buscarin2,$estadopro2 );
        return response()->json($resultadoconsulta); 
     }
     public function index2()

@@ -35,7 +35,7 @@ class adelantopro extends Model
 
         return $adelantopro;
     }
-    public static function obteneradeprodesdefechainicio($fechaini,$fechafin,$buscarpro2)
+    public static function obteneradeprodesdefechainicio($fechaini,$fechafin,$buscarpro2, $estadopro2 )
     {      
         // Ejemplo de obtención del sueldo del profesor
        // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
@@ -46,6 +46,9 @@ class adelantopro extends Model
               ->when($fechafin, function ($query, $fechafin) {
                   return $query->where('adelantopros.fechaadelantopro', '<=', $fechafin);
               })  
+              ->when($estadopro2, function ($query, $estadopro2) {
+                return $query->where('adelantopros.estadoade', '=', $estadopro2);
+            }) 
               ->when($buscarpro2, function ($query, $buscarpro2) {
                   return $query->where(function ($query) use ($buscarpro2) {
                       $query->where('monto', 'like', "%$buscarpro2%")
@@ -61,7 +64,7 @@ class adelantopro extends Model
             ->get();
         //return $fechaini;
     }
-    public static function obteneradeprodesdefechainiciore($fechaini,$fechafin,$profesorid2,$monto11,$monto22,$ordenaradepro2,$mayorymenoradepro2)
+    public static function obteneradeprodesdefechainiciore($fechaini,$fechafin,$profesorid2,$monto11,$monto22, $estadosecre2,$ordenaradepro2,$mayorymenoradepro2)
     {      
         // Ejemplo de obtención del sueldo del profesor
        // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
@@ -86,6 +89,9 @@ class adelantopro extends Model
                     return $query->where('adelantopros.monto', '<=', $monto22);
                 })  
 
+                ->when($estadosecre2, function ($query, $estadosecre2) {
+                    return $query->where('adelantopros.estadoade', '=', $estadosecre2);
+                }) 
             ->select('adelantopros.*','fechaadelantopro', 
             'profesors.nombre as nombre_profesor');
             if (!empty($ordenaradepro2) && !empty($mayorymenoradepro2)) {

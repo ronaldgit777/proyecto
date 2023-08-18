@@ -57,7 +57,11 @@
                         </div>
                         <div class="col">
                           <label class="text-primary text-capitalize">estado</label>
-                          <input type="text" name="estado" id="estado" class="form-control">
+                          <select type="text" name="estado" id="estado" class="form-control">
+                            <option value="">ambos</option> 
+                            <option value="activo">activo</option> 
+                            <option value="inactivo">inactivo</option> 
+                            </select>
                         </div>
                         <div class="col">
                           <label class="text-primary text-capitalize">sueldo -desde</label>
@@ -334,7 +338,7 @@
         $('#email').on('input', function() {
            $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
         });
-        $('#estado').on('input', function() {
+        $('#estado').on('change', function() {
            $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
         });
         $('#sueldomin').on('input', function() {

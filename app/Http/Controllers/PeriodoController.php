@@ -15,7 +15,8 @@ class PeriodoController extends Controller
     public function  buscarperiodos(Request $request)
     {   
        $buscarpe2 = $request->input('buscarpe');
-       $resultadoconsulta = periodo::obtenerlistaperiodos($buscarpe2);
+       $estadopro2 = $request->input('estadopro');
+       $resultadoconsulta = periodo::obtenerlistaperiodos($buscarpe2, $estadopro2);
        return response()->json($resultadoconsulta); 
     }
     public function index()

@@ -37,7 +37,7 @@
                               </select>
                           </div>
                         <div class="col text-right">
-                          <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button>
+                          {{-- <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button> --}}
                           <a href="{{url('nota/create')}}" class="btn btn-sm btn-primary text-capitalize" > <i class="fas fa-plus-circle"></i> agregar nueva nota</a>
                       </div>  
                 </div>

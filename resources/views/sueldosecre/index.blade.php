@@ -19,14 +19,14 @@
                                 <input type="date" name="fechafinal" id="fechafinal" class="form-control">
                                 <span class="text-muted">hasta</span>
                             </div>
-                            <div class="col">
+                            {{-- <div class="col">
                                 <label class="text-primary text-capitalize">estado</label>
                                 <select type="text" name="estado" id="estado" class="form-control">
                                   <option selected  value="">ambos</option>
                                   <option value="pendiente">pendiente</option> 
                                   <option value="pagado">pagado</option> 
                                   </select>
-                              </div>
+                              </div> --}}
                             <div class="col">
                                 <label class="text-primary text-capitalize">Buscar</label>
                                 <div class="input-group">
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                             <div class="col text-right">
-                                <button class="btn  btn-sm btn-danger" type="button"><i class="fas fa-print"></i>imprimir</button>
+                                {{-- <button class="btn  btn-sm btn-danger" type="button"><i class="fas fa-print"></i>imprimir</button> --}}
                                 <a href="{{url('sueldosecre/create')}}" class="btn  btn-sm btn-primary text-capitalize" >
                                     <i class="fas fa-plus-circle"></i>
                                     agregar nuevo pago</a>

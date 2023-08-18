@@ -19,7 +19,8 @@ class SecretariaController extends Controller
        $fechaini = $request->input('fechainicio');
        $fechafin = $request->input('fechafinal');
        $buscarsecre2 = $request->input('buscarsecre');
-       $resultadoconsulta = secretaria::obtenersecretariasdesdefechainicio2($fechaini,$rutaImagenBase,$fechafin,$buscarsecre2);
+       $estadosecre2 = $request->input('estadosecre');
+       $resultadoconsulta = secretaria::obtenersecretariasdesdefechainicio2($fechaini,$rutaImagenBase,$fechafin,$buscarsecre2, $estadosecre2 );
            
        return response()->json($resultadoconsulta);        
     }

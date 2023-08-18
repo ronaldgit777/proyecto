@@ -186,12 +186,13 @@
             var periodoid = $('#periodo_id').val();
             var aulaid = $('#aula_id').val(); 
             var alumnoid = $('#alumno_id').val();  var alumnoidpa = $('#alumnopa').val(); var alumnoidma = $('#alumnoma').val(); 
+            var estado = $('#estado').val(); 
             var ordenar = $('#ordenar').val();
             var mayorymenor = $('#mayorymenor').val();
-            generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,alumnoid,ordenar,mayorymenor,alumnoidpa,alumnoidma);   
+            generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,alumnoid,ordenar,mayorymenor,alumnoidpa,alumnoidma,estado);   
            // alert(profesorid)   
         });
-        function generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,alumnoid,ordenar,mayorymenor,alumnoidpa,alumnoidma) {
+        function generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,alumnoid,ordenar,mayorymenor,alumnoidpa,alumnoidma,estado) {
         //  alert(alumnoidma)
               $.ajax({
                     url: '{{ url("obtener-fechainicioinscripcionesreporte") }}', // Ruta a tu controlador Laravel
@@ -204,6 +205,7 @@
                         periodoid: periodoid,
                         aulaid: aulaid,
                         alumnoid: alumnoid,  alumnoidpa:alumnoidpa,     alumnoidma:alumnoidma,
+                        estadosecre:estado,
                         ordenarins:ordenar,
                         mayorymenorins:mayorymenor,
                       // profesor_id: profesorId,
@@ -265,6 +267,9 @@
         });
         $('#alumnopa').on('change', function() {
            $('#fechainicio').trigger('change');
+        });
+        $('#estado').on('change', function() {
+           $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
         });
         $('#ordenar').on('change', function() {
            $('#fechainicio').trigger('change');

@@ -17,36 +17,14 @@
                                     <input type="date" name="fechafinal" id="fechafinal" class="form-control">
                                     <span class="text-muted">hasta</span>
                                 </div>
-                                <div class="col">
-                                    <label class="text-primary text-capitalize">materia</label>
-                                    <select type="text" name="materia_id" id="materia_id" class="form-control" >
-                                      <option selected value="">seleccione la materia</option>
-                                      @foreach ($materias as $materia)
-                                      <option value="{{ $materia->id }}">{{ $materia->materia}}</option>
-                                      @endforeach
-                                    </select>
-                                  {{-- <input type="text" name="materia_id" id="materia_id" class="form-control" > --}}
-                                  </div>
-                                  <div class="col">
-                                    <label class="text-primary text-capitalize">aula</label>
-                                    <select type="text" name="aula_id" id="aula_id" class="form-control" >
-                                      <option selected  value="">seleccione el aula</option>
-                                      @foreach ($aulas as $aula)
-                                      <option value="{{ $aula->id }}">{{ $aula->aula }}</option>
-                                      @endforeach
-                                  </select>
-                                  {{-- <input type="text" name="aula_id" id="aula_id" class="form-control" > --}}
-                                  </div>
-                                  <div class="col">
-                                    <label class="text-primary text-capitalize">periodo</label>
-                                    <select type="text" name="periodo_id" id="periodo_id" class="form-control" >
-                                      <option selected  value="">seleccione el periodo</option>
-                                      @foreach ($periodos as $periodo)
-                                      <option value="{{ $periodo->id }}">{{ $periodo->periodo }}</option>
-                                      @endforeach
-                                  </select>
-                                  {{-- <input type="text" name="periodo_id" id="periodo_id" class="form-control" > --}}
-                                  </div>
+                                {{-- <div class="col">
+                                  <label class="text-primary text-capitalize">estado</label>
+                                  <select type="text" name="estado" id="estado" class="form-control">
+                                    <option selected  value="">ambos</option>
+                                    <option value="activo">activo</option> 
+                                    <option value="inactivo">inactivo</option> 
+                                    </select> 
+                                </div>--}}
                                 <div class="col">
                                   <label class="text-primary text-capitalize">Buscar</label>
                                   <div class="input-group">
@@ -55,12 +33,9 @@
                                         <button class="btn btn-primary" type="button"><i class="fas fa-search"></i>Buscar</button>
                                       </div>  -->
                                   </div>
-                                </div>S
-                                <div class="col">
-                                    <label class="text-primary text-capitalize"></label><br>
-                                    <button class="btn btn-danger" type="button"><i class="fas fa-print"></i>imprimir</button>
-                                  </div>  
+                                </div>
                                 <div class="col text-right">
+                                  <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button>
                                   <a href="{{url('home')}}" class="btn btn-sm btn-success" >
                                   <i class="fas fa-plus-circle"></i>
                                   regresar</a>
@@ -88,7 +63,8 @@
                                 <tr>
                                     <td>{{ $asignarproma->id }}</td>
                                     <td>{{ $asignarproma->fechadeasignacion }}</td>
-                                    <td>{{ $asignarproma->profesor->nombre."-".$asignarproma->profesor->apellidopaterno }}</td>
+                                    <td>{{ $asignarproma->nombre."-".$asignarproma->profesor->apellidopaterno }}</td>
+                                    {{-- <td>{{ $asignarproma->profesor->nombre."-".$asignarproma->profesor->apellidopaterno }}</td> --}}
                                     <td>{{ $asignarproma->nombre_materia}}</td>
                                     <td>{{ $asignarproma->nombre_aula }}</td>
                                     <td>{{ $asignarproma->nombre_periodo }}</td>

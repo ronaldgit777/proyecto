@@ -20,7 +20,7 @@ class materia extends Model
         return $this->hasMany(nota::class,'materia_id','id');
     }
 
-    public static function obtenerlistamaterias($buscarma2)
+    public static function obtenerlistamaterias($buscarma2,$estadopro2 )
     {      
         // Ejemplo de obtención del sueldo del profesor
        // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
@@ -32,6 +32,9 @@ class materia extends Model
                           ;
                   });
               })  
+              ->when($estadopro2, function ($query, $estadopro2) {
+                return $query->where('materias.estado', '=', $estadopro2);
+            }) 
                 
              // ->select('profesors.*', 'users.email', 'users.role')
             //  ->get();
@@ -61,7 +64,7 @@ class materia extends Model
         ->join('users','users.id','=','profesors.user_id')
         ->select('materias.*')
         ->where('profesors.user_id','=',$userid)
-        ->where('asignarpromas.estado','activo')
+        //->where('asignarpromas.estado','activo')//mostrando todas las asignaciones activas
      //  ->asignarpromas()
          ->get();  
     }

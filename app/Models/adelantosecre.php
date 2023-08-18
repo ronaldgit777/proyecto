@@ -36,7 +36,7 @@ class adelantosecre extends Model
 
         return $adelantosecre;
     }
-    public static function obteneradesecredesdefechainicio($fechaini,$fechafin,$buscarpro2)
+    public static function obteneradesecredesdefechainicio($fechaini,$fechafin,$buscarpro2,$estadopro2)
     {      
         // Ejemplo de obtención del sueldo del profesor
        // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
@@ -47,6 +47,9 @@ class adelantosecre extends Model
               ->when($fechafin, function ($query, $fechafin) {
                   return $query->where('adelantosecres.fechaadelantosecre', '<=', $fechafin);
               })  
+              ->when($estadopro2, function ($query, $estadopro2) {
+                return $query->where('adelantosecres.estadoade', '=', $estadopro2);
+            }) 
               ->when($buscarpro2, function ($query, $buscarpro2) {
                   return $query->where(function ($query) use ($buscarpro2) {
                       $query->where('monto', 'like', "%$buscarpro2%")
@@ -89,7 +92,7 @@ class adelantosecre extends Model
         //return $fechaini;
     }   
 
-    public static function obteneradesecredesdefechainiciore($fechaini,$fechafin,$secretariaid2,$monto11,$monto22,$ordenaradepro2,$mayorymenoradepro2)
+    public static function obteneradesecredesdefechainiciore($fechaini,$fechafin,$secretariaid2,$monto11,$monto22,$estadosecre2,$ordenaradepro2,$mayorymenoradepro2)
     {      
         // Ejemplo de obtención del sueldo del profesor
        // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
@@ -101,7 +104,6 @@ class adelantosecre extends Model
               ->when($fechafin, function ($query, $fechafin) {
                   return $query->where('adelantosecres.fechaadelantosecre', '<=', $fechafin);
               })  
-              
              // ->where('profesors.id', $profesorid2) 
                 ->when($secretariaid2, function ($query, $secretariaid2) {
                 return $query->where('secretarias.id',$secretariaid2);
@@ -113,6 +115,9 @@ class adelantosecre extends Model
                 ->when($monto22, function ($query, $monto22) {
                     return $query->where('adelantosecres.monto', '<=', $monto22);
                 })  
+                ->when($estadosecre2, function ($query, $estadosecre2) {
+                    return $query->where('adelantosecres.estadoade', '=', $estadosecre2);
+                }) 
 
             ->select('adelantosecres.*','fechaadelantosecre', 
             'secretarias.nombre as nombre_secretaria');

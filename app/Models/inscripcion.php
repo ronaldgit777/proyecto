@@ -22,7 +22,7 @@ class inscripcion extends Model
 
 
 
-    public static function obtenerfecchainicioinscripcion($fechaini,$fechafin,$buscarin2)
+    public static function obtenerfecchainicioinscripcion($fechaini,$fechafin,$buscarin2,$estadopro2 )
     {      
         // Ejemplo de obtención del sueldo del profesor
        // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
@@ -33,6 +33,9 @@ class inscripcion extends Model
               ->when($fechafin, function ($query, $fechafin) {
                   return $query->where('inscripcions.fechadeinscripcion', '<=', $fechafin);
               })   
+              ->when($estadopro2, function ($query, $estadopro2) {
+                return $query->where('inscripcions.estado', '=', $estadopro2);
+            }) 
               ->join('asignarpromas', 'inscripcions.asignarproma_id', '=', 'asignarpromas.id')
               ->join('profesors', 'asignarpromas.profesor_id', '=', 'profesors.id')
               ->join('alumnos', 'inscripcions.alumno_id', '=', 'alumnos.id')
@@ -87,7 +90,7 @@ class inscripcion extends Model
             )
             ->get();
     }
-    public static function obtenerfecchainicioinscripcionreporte($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,$alumnoid2,$ordenarins2,$mayorymenorins2,$alumnoidpa2,$alumnoidma2)
+    public static function obtenerfecchainicioinscripcionreporte($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,$alumnoid2,$ordenarins2,$mayorymenorins2,$alumnoidpa2,$alumnoidma2,$estadosecre2)
     {      
         // Ejemplo de obtención del sueldo del profesor
        // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
@@ -123,9 +126,12 @@ class inscripcion extends Model
             ->when($alumnoidpa2, function ($query, $alumnoidpa2) {
                 return $query->where('alumnos.apellidopaterno',$alumnoidpa2);
                 }) 
-                ->when($alumnoidma2, function ($query, $alumnoidma2) {
-                    return $query->where('alumnos.apellidomaterno',$alumnoidma2);
-                    }) 
+            ->when($alumnoidma2, function ($query, $alumnoidma2) {
+                return $query->where('alumnos.apellidomaterno',$alumnoidma2);
+                }) 
+            ->when($estadosecre2, function ($query, $estadosecre2) {
+                return $query->where('alumnos.estado', '=', $estadosecre2);
+            }) 
             ->select(
                 'inscripcions.*','fechadeinscripcion',
                 'profesors.nombre as profesor_nombre',

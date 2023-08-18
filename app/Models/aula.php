@@ -9,7 +9,7 @@ class aula extends Model
 {
     protected $table = "aulas";
 
-    public static function obtenerlistaaulas($buscaraula2)
+    public static function obtenerlistaaulas($buscaraula2,$estadopro2)
     {      
         // Ejemplo de obtención del sueldo del profesor
        // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
@@ -21,6 +21,9 @@ class aula extends Model
                           ;
                   });
               })  
+                ->when($estadopro2, function ($query, $estadopro2) {
+                    return $query->where('aulas.estado', '=', $estadopro2);
+                }) 
                 
              // ->select('profesors.*', 'users.email', 'users.role')
             //  ->get();
@@ -35,7 +38,7 @@ class aula extends Model
         ->join('users','users.id','=','profesors.user_id')
         ->select('aulas.*')
         ->where('profesors.user_id','=',$userid)
-        ->where('asignarpromas.estado','activo')
+     //   ->where('asignarpromas.estado','activo')
      //  ->asignarpromas()
          ->distinct()
          ->get();  

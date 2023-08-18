@@ -35,7 +35,7 @@
                                     </select>
                                 </div>
                                 <div class="col text-right">
-                                  <button class="btn btn-danger  btn-sm " type="button"><i class="fas fa-print"></i>imprimir</button>
+                                  {{-- <button class="btn btn-danger  btn-sm " type="button"><i class="fas fa-print"></i>imprimir</button> --}}
                                   <a href="{{url('asignarproma/create')}}" class="btn btn-sm btn-primary text-capitalize" >
                                     <i class="fas fa-plus-circle"></i>
                                     agregar nueva asignacion</a>
@@ -102,9 +102,10 @@
             var fecha_ini = $(this).val(); 
             var fecha_fin = $('#fechafinal').val();
             var buscar = $('#buscar').val();  
-            generartabla(fecha_ini,fecha_fin,buscar);      
+            var estado = $('#estado').val();  
+            generartabla(fecha_ini,fecha_fin,buscar,estado);      
         });
-        function generartabla(fecha_ini,fecha_fin,buscar) {
+        function generartabla(fecha_ini,fecha_fin,buscar,estado) {
               $.ajax({
                     url: '{{ url("obtener-fechainicioasig") }}', // Ruta a tu controlador Laravel
                     type: 'POST',
@@ -112,6 +113,7 @@
                         fechainicio: fecha_ini, //lo de blanco es la llave q tienes para q se capture la variable
                         fechafinal: fecha_fin,
                         buscaras: buscar,// Enviar el ID del aula seleccionada
+                        estadopro:estado,
                       // profesor_id: profesorId,
                         _token: '{{ csrf_token() }}' // Agregar el token CSRF
                     },
@@ -152,6 +154,10 @@
          // alert($(this).val())
            $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
         });
+        $('#estado').on('change', function() {
+          // alert($(this).val())
+            $('#fechafinal').trigger('change');
+          });
     });
   </script>
 @endsection

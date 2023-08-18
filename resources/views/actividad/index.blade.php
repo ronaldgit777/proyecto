@@ -27,7 +27,7 @@
                               </select>
                           </div>
                         <div class="col text-right">
-                          <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button>
+                          {{-- <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button> --}}
                           <a href="{{url('actividad/create')}}" class="btn btn-sm btn-primary text-capitalize" >
                               <i class="fas fa-plus-circle"></i>
                               agregar nueva actividad</a>
@@ -72,15 +72,17 @@
   
      $('#buscar').on('input', function() {
          var buscar = $(this).val(); 
-         generartabla(buscar);      
+         var estado = $('#estado').val(); 
+         generartabla(buscar,estado);      
       
      });
-     function generartabla(buscar) {
+     function generartabla(buscar,estado) {
            $.ajax({
                  url: '{{ url("buscar-actividades") }}', // Ruta a tu controlador Laravel
                  type: 'POST',
                  data: {
                      buscarac: buscar,// Enviar el ID del aula seleccionada
+                     estadopro:estado,
                      _token: '{{ csrf_token() }}' // Agregar el token CSRF
                  },
                  success: function(response) {
@@ -108,6 +110,10 @@
                  }
              });
      }
+     $('#estado').on('change', function() {
+          // alert($(this).val())
+            $('#buscar').trigger('input');
+          });
  });
 </script>
 @endsection

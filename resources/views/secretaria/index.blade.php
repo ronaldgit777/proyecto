@@ -35,7 +35,7 @@
                             </div>
                           </div>
                           <div class="col text-right">
-                            <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button>
+                            {{-- <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button> --}}
                         </div>  
                   </div>
               </div>
@@ -55,9 +55,9 @@
                 <th scope="col">celular</th>
                 <th scope="col">direccion</th>
                 <th scope="col">correo</th>
-                {{-- <th scope="col">estado</th> --}}
+                <th scope="col">estado</th>
                 <th scope="col">imagen</th>
-                {{-- <th scope="col">sueldo</th> --}}
+                <th scope="col">sueldo</th>
                 {{-- <th scope="col">rol</th> --}}
                 <th scope="col">acciones</th>
               </tr>
@@ -74,11 +74,11 @@
                             <td>{{ $secretaria->celular }}</td>
                             <td>{{ $secretaria->direccion }}</td>
                             <td>{{ $secretaria->user->email }}</td>
-                            {{-- <td>{{ $secretaria->estado }}</td> --}}
+                            <td>{{ $secretaria->estado }}</td>
                             <td>
                             <img src="{{ asset('storage').'/'.$secretaria->imagen}}" alt=""  width="50px" height="50px" class="img-thumbnail img-fluid">
                             </td>
-                            {{-- <td>{{ $secretaria->sueldo }}</td> --}}
+                            <td>{{ $secretaria->sueldo }}</td>
                             {{-- <td>{{ $secretaria->user->role }}</td> --}}
                             <td>
                             <a href="{{ url('/secretaria/'.$secretaria->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
@@ -115,10 +115,11 @@
           var fecha_ini = $(this).val(); 
           var fecha_fin = $('#fechafinal').val();
           var buscar = $('#buscar').val();  
-          generartabla(fecha_ini,fecha_fin,buscar);      
+          var estado = $('#estado').val();  
+          generartabla(fecha_ini,fecha_fin,buscar,estado);        
        
       });
-      function generartabla(fecha_ini,fecha_fin,buscar) {
+      function generartabla(fecha_ini,fecha_fin,buscar,estado) {
             $.ajax({
                   url: '{{ url("obtener-fechainiciosecre2") }}', // Ruta a tu controlador Laravel
                   type: 'POST',
@@ -126,6 +127,7 @@
                       fechainicio: fecha_ini, //lo de blanco es la llave q tienes para q se capture la variable
                       fechafinal: fecha_fin,
                       buscarsecre: buscar,// Enviar el ID del aula seleccionada
+                      estadosecre:estado,
                     // profesor_id: profesorId,
                       _token: '{{ csrf_token() }}' // Agregar el token CSRF
                   },
@@ -149,9 +151,9 @@
                                   ' <td>'+value.celular+'</td>'+
                                   ' <td>'+value.direccion+'</td>'+
                                   ' <td>'+value.email+'</td>'+
-                                  // ' <td>'+value.estado+'</td>'+
+                                  ' <td>'+value.estado+'</td>'+
                                   ' <td><img src="'+value.ruta_imagen+'" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid"></td>'+
-                                  //' <td>'+value.sueldo+'</td>'+
+                                  ' <td>'+value.sueldo+'</td>'+
                                  // ' <td>'+value.role+'</td>'+
                                   ' <td>'+
                                     '<a href="/proyecto/public/secretaria/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
@@ -170,6 +172,10 @@
          $('#fechainicio').trigger('change');
       });
       $('#buscar').on('input', function() {
+       // alert($(this).val())
+         $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
+      });
+      $('#estado').on('change', function() {
        // alert($(this).val())
          $('#fechainicio').trigger('change');$(this).css('border', '3px solid #0000ff');
       });

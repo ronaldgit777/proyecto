@@ -48,8 +48,44 @@ class alumno extends Model
         ->distinct()
         ->get();
     }
-
-   public static function obtenerfecchainicioalumnoslista($fechaini,$rutaImagenBase,$fechafin,$buscaralu2)
+    
+    public static function obteneralumnosdesdefechainicio($fechaini,$rutaImagenBase,$fechafin,$cipro2,$nombrepro2,
+    $apellidopaternopro2,$apellidomaternopro2,$celularpro2,$direccionpro2,$emailpro2,$estadopro2,$sueldominpro2,$sueldomaxpro2
+    ,$ordenarpro2, $mayorymenorpro2)
+    {      
+        // Ejemplo de obtención del sueldo del profesor
+       // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
+        $consulta = self::select('alumnos.*')
+             -> when($fechaini, function ($query, $fechaini) {
+                  return $query->where('alumnos.fechadeingreso', '>=', $fechaini);
+              })
+              ->when($fechafin, function ($query, $fechafin) {
+                  return $query->where('alumnos.fechadeingreso', '<=', $fechafin);
+              })  
+              ->where('alumnos.ci', 'like', "%$cipro2%") 
+              ->where('alumnos.nombre', 'like', "%$nombrepro2%")->where('alumnos.apellidopaterno', 'like', "%$apellidopaternopro2%")
+              ->where('alumnos.apellidomaterno', 'like', "%$apellidomaternopro2%")  ->where('alumnos.celular', 'like', "%$celularpro2%")  
+              ->where('alumnos.direccion', 'like', "%$direccionpro2%")
+              //->where('users.email', 'like', "%$emailpro2%")  
+              ->where('alumnos.estado', 'like', "%$estadopro2%") 
+            //   ->when($sueldominpro2, function ($query, $sueldominpro2) {
+            //       return $query->where('profesors.sueldo', '>=', $sueldominpro2);
+            //   })
+            //   ->when($sueldomaxpro2, function ($query, $sueldomaxpro2) {
+            //       return $query->where('profesors.sueldo', '<=', $sueldomaxpro2);
+            //   })      
+             // ->select('profesors.*', 'users.email', 'users.role')
+            //  ->get();
+            ->select('alumnos.*')
+            ->selectRaw("CONCAT('$rutaImagenBase', alumnos.imagen) as ruta_imagen");
+              // Verificar si ambas variables tienen valor
+              if (!empty($ordenarpro2) && !empty($mayorymenorpro2)) {
+                  $consulta->orderBy($ordenarpro2, $mayorymenorpro2);
+              }
+              return $consulta->get();       
+        //return $fechaini;
+    }
+   public static function obtenerfecchainicioalumnoslista($fechaini,$rutaImagenBase,$fechafin,$buscaralu2, $estadopro2 )
    {      
        // Ejemplo de obtención del sueldo del profesor
       // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
@@ -60,6 +96,9 @@ class alumno extends Model
              ->when($fechafin, function ($query, $fechafin) {
                  return $query->where('alumnos.fechadeingreso', '<=', $fechafin);
              })  
+             ->when($estadopro2, function ($query, $estadopro2) {
+                return $query->where('alumnos.estado', '=', $estadopro2);
+            }) 
              ->when($buscaralu2, function ($query, $buscaralu2) {
                  return $query->where(function ($query) use ($buscaralu2) {
                      $query->where('ci', 'like', "%$buscaralu2%")

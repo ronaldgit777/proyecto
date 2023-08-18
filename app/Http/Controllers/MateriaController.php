@@ -15,7 +15,8 @@ class MateriaController extends Controller
     public function  buscarmaterias(Request $request)
     {   
        $buscarma2 = $request->input('buscarma');
-       $resultadoconsulta = materia::obtenerlistamaterias($buscarma2);
+       $estadopro2 = $request->input('estadopro');
+       $resultadoconsulta = materia::obtenerlistamaterias($buscarma2,$estadopro2 );
        return response()->json($resultadoconsulta); 
     }
     public function index()

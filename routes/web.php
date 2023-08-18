@@ -49,7 +49,7 @@ Route::get('/', function () {
 
         //route::get('/',[ProfesorController::class,'index'])->name('home');
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-        
+     
       
         Route::post('/notamodal',[App\Http\Controllers\NotaController::class, 'notamodal'])->name('notamodal'); //lista de aulas
         Route::post('/obtener-listaalumnosinscritos',[App\Http\Controllers\InscripcionController::class, 'listaalumnosinscritos'])->name('obtener-listaalumnosinscritos'); //lista de aulas
@@ -72,6 +72,8 @@ Route::get('/', function () {
         Route::post('/obtener-fechainicionotaprofe',[App\Http\Controllers\AsignarpromaController::class, 'buscarfechainicionotasprofeuser'])->name('obtener-fechainicionotaprofe'); 
         
         Route::post('/obtener-notasdelalumnoid',[App\Http\Controllers\NotaController::class, 'obtenernotasdelalumnoid'])->name('obtener-notasdelalumnoid'); //buscar de asignaciones
+        Route::post('/obtener-editarnota',[App\Http\Controllers\NotaController::class, 'obtenereeditarnota'])->name('obtener-editarnota'); //edita nota
+        Route::post('/obtener-eliminarnotaid',[App\Http\Controllers\NotaController::class, 'obtenereliminarnotaid'])->name('obtener-eliminarnotaid'); //edita nota
         //asignaciones
         route::resource('asignarproma',AsignarpromaController::class)->middleware('auth');
         Route::post('/obtener-periodos', [App\Http\Controllers\AsignarpromaController::class, 'obtenerPeriodos'])->name('obtener-periodos');
@@ -107,7 +109,7 @@ Route::get('/', function () {
 
         Route::post('/obtener-sueldoprofesor', [App\Http\Controllers\SueldoproController::class, 'obtenerSueldoProfesor'])->name('obtener-sueldoprofesor');
         Route::post('/obtener-SumatoriaAdelantos', [App\Http\Controllers\AdelantoproController::class, 'obtenersumatoriaadelantosProfesor'])->name('obtener-SumatoriaAdelantos');
-
+        
         Route::post('/obtener-adelantopro', [App\Http\Controllers\SueldoproController::class, 'obtenerlistaproid'])->name('obtener-adelantopro');
 
         Route::post('/obtener-mesessaldopro', [App\Http\Controllers\SueldoproController::class, 'mesessaldopro'])->name('obtener-mesessaldopro');
@@ -123,7 +125,10 @@ Route::get('/', function () {
 
         Route::post('/obtener-fechainicioproade',[App\Http\Controllers\AdelantoproController::class, 'obtenerfechainicioproade'])->name('obtener-fechainicioproade');//index ade pro
 
-    
+        Route::get('/opciones-reportealumno', [App\Http\Controllers\AlumnoController::class, 'opcionesreportealumno'])->name('opciones-reportealumno')->middleware('auth');
+        Route::get('/repor-alu', [App\Http\Controllers\AlumnoController::class, 'reporalu'])->name('repor-alu')->middleware('auth');
+        Route::post('/obtener-fechainicioreporalu',[App\Http\Controllers\AlumnoController::class, 'obtenerfechainicioreporalu'])->name('obtener-fechainicioreporalu'); 
+
         Route::post('/obtener-fechainicioproadereporte',[App\Http\Controllers\AdelantoproController::class, 'obtenerfechainicioproadere'])->name('obtener-fechainicioproadereporte');//repor adelanto pro
         Route::post('/obtener-fechainiciosupro',[App\Http\Controllers\SueldoproController::class, 'obtenerfechainiciosupro'])->name('obtener-fechainiciosupro');
         //reportes profesor

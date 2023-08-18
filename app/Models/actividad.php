@@ -15,7 +15,7 @@ class actividad extends Model
     }
     
     
-        public static function obtenerlistaactividades($buscarac2)
+        public static function obtenerlistaactividades($buscarac2,$estadopro2 )
         {      
             // Ejemplo de obtención del sueldo del profesor
            // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
@@ -27,6 +27,9 @@ class actividad extends Model
                               ;
                       });
                   })  
+                  ->when($estadopro2, function ($query, $estadopro2) {
+                    return $query->where('actividads.estado', '=', $estadopro2);
+                }) 
                     
                  // ->select('profesors.*', 'users.email', 'users.role')
                 //  ->get();

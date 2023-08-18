@@ -135,7 +135,7 @@ class asignarproma extends Model
         ->select('materias.costo as costo_ma', 'aulas.aula as aula_nombre','asignarpromas.id as asig_id')
         ->get();
     }
-    public static function obtenerfecchainicioasignaciones($fechaini,$fechafin,$buscaras2)
+    public static function obtenerfecchainicioasignaciones($fechaini,$fechafin,$buscaras2, $estadopro2 )
     {      
         // Ejemplo de obtención del sueldo del profesor
        // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
@@ -146,6 +146,9 @@ class asignarproma extends Model
               ->when($fechafin, function ($query, $fechafin) {
                   return $query->where('asignarpromas.fechadeasignacion', '<=', $fechafin);
               })   
+              ->when($estadopro2, function ($query, $estadopro2) {
+                return $query->where('asignarpromas.estado', '=', $estadopro2);
+            }) 
               ->join('profesors', 'asignarpromas.profesor_id', '=', 'profesors.id')
               ->join('materias', 'asignarpromas.materia_id', '=', 'materias.id')
               ->join('periodos', 'asignarpromas.periodo_id', '=', 'periodos.id')
@@ -174,8 +177,11 @@ class asignarproma extends Model
     }
     public static function obtenerdatosde3tablaas()
     {
-        return static::where('asignarpromas.estado', 'activo')
-            ->join('profesors', 'asignarpromas.profesor_id', '=', 'profesors.id')
+        return static
+        ::
+        //where('asignarpromas.estado', 'activo')
+            //->
+            join('profesors', 'asignarpromas.profesor_id', '=', 'profesors.id')
             ->join('materias', 'asignarpromas.materia_id', '=', 'materias.id')
             ->join('periodos', 'asignarpromas.periodo_id', '=', 'periodos.id')
             ->join('aulas', 'asignarpromas.aula_id', '=', 'aulas.id')
@@ -266,8 +272,9 @@ class asignarproma extends Model
         -> join('aulas','asignarpromas.aula_id','=','aulas.id')
         -> join('periodos','asignarpromas.periodo_id','=','periodos.id')  
         ->join('users','users.id','=','profesors.user_id')
-        ->select('asignarpromas.*','profesors.*','materias.materia as nombre_materia','aulas.aula as nombre_aula','periodos.periodo as nombre_periodo')
+        ->select('asignarpromas.*','asignarpromas.estado','profesors.nombre','profesors.user_id','materias.materia as nombre_materia','aulas.aula as nombre_aula','periodos.periodo as nombre_periodo')
         ->where('profesors.user_id','=',$userid)
+      ->where('asignarpromas.estado','activo')//que muestre asignacioen activas
      //  ->asignarpromas()
          ->get();  
     }

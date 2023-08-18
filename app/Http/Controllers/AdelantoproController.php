@@ -37,9 +37,10 @@ class AdelantoproController extends Controller
        $profesorid2 = $request->input('profesorid');
        $monto11 = $request->input('monto1');
        $monto22 = $request->input('monto2');
+       $estadosecre2 = $request->input('estadosecre');
        $ordenaradepro2 = $request->input('ordenaradepro');
        $mayorymenoradepro2 = $request->input('mayorymenoradepro');
-       $resultadoconsulta = adelantopro::obteneradeprodesdefechainiciore($fechaini,$fechafin,$profesorid2,$monto11,$monto22,$ordenaradepro2,$mayorymenoradepro2);   
+       $resultadoconsulta = adelantopro::obteneradeprodesdefechainiciore($fechaini,$fechafin,$profesorid2,$monto11,$monto22, $estadosecre2,$ordenaradepro2,$mayorymenoradepro2);   
        return response()->json($resultadoconsulta);        
     }
     public function  obtenerfechainicioproade(Request $request)
@@ -47,7 +48,8 @@ class AdelantoproController extends Controller
        $fechaini = $request->input('fechainicio');
        $fechafin = $request->input('fechafinal');
        $buscarpro2 = $request->input('buscarpro');
-       $resultadoconsulta = adelantopro::obteneradeprodesdefechainicio($fechaini,$fechafin,$buscarpro2);   
+       $estadopro2 = $request->input('estadopro');
+       $resultadoconsulta = adelantopro::obteneradeprodesdefechainicio($fechaini,$fechafin,$buscarpro2, $estadopro2 );   
        return response()->json($resultadoconsulta);        
     }
     public function validaradelanto(Request $request)

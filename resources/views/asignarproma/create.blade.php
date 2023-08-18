@@ -30,17 +30,18 @@
                                     <select type="text" name="profesor_id" id="profesor_id" class="form-control">
                                         @php
                                         $maximoPeriodos = $periodos->count();
-                                    @endphp
-
-                                        @foreach ($profesors as $profesor)
-                                        @php
-                                            $contpro = $asignarpromas->where('profesor_id', $profesor->id)->count();
                                         @endphp
 
-                                        @if ($contpro < $maximoPeriodos)
-                                        <option value="{{ $profesor->id }}">{{ $profesor->nombre." ".$profesor->apellidopaterno." ".$profesor->apellidomaterno}}</option>
-                                        @endif
-                                    @endforeach
+                                        @foreach ($profesors as $profesor)
+                                            @php
+                                                $contpro = $asignarpromas->where('profesor_id', $profesor->id)->where('estado','activo')
+                                                ->count();
+                                            @endphp
+
+                                            @if ($contpro < $maximoPeriodos)
+                                            <option value="{{ $profesor->id }}">{{ $profesor->nombre." ".$profesor->apellidopaterno." ".$profesor->apellidomaterno}}</option>
+                                            @endif
+                                        @endforeach
                                     </select><br>
                                 </div>
                             </div>
@@ -74,7 +75,8 @@
 
                                     @foreach ($aulas as $aula)
                                         @php
-                                            $contAula = $asignarpromas->where('aula_id', $aula->id)->count();
+                                            $contAula = $asignarpromas->where('aula_id', $aula->id)->where('estado','activo')
+                                            ->count();
                                         @endphp
 
                                         @if ($contAula < $maximoPeriodos)
@@ -178,30 +180,30 @@
         });
 
         $('#profesor_id').on('change', function() {
+            $('#aula_id').trigger('change');
+        // var profesorId = $(this).val(); // Obtener el valor del profesor seleccionado
+        // var aulaId = $('#aula_id').val();
+        // // Realizar la solicitud Ajax
+        // $.ajax({
+        //     url: '{{ url("obtener-periodos") }}', // Ruta a tu controlador Laravel
+        //     type: 'POST',
+        //     data: {
+        //         aula_id: aulaId, // Enviar el ID del aula seleccionada
+        //         profesor_id: profesorId,
+        //         _token: '{{ csrf_token() }}' // Agregar el token CSRF
+        //     },
+        //     success: function(response) {
+        //         // Limpiar el campo de selección de periodos
+        //         $('#periodo_id').empty();
 
-        var profesorId = $(this).val(); // Obtener el valor del profesor seleccionado
-        var aulaId = $('#aula_id').val();
-        // Realizar la solicitud Ajax
-        $.ajax({
-            url: '{{ url("obtener-periodos") }}', // Ruta a tu controlador Laravel
-            type: 'POST',
-            data: {
-                aula_id: aulaId, // Enviar el ID del aula seleccionada
-                profesor_id: profesorId,
-                _token: '{{ csrf_token() }}' // Agregar el token CSRF
-            },
-            success: function(response) {
-                // Limpiar el campo de selección de periodos
-                $('#periodo_id').empty();
-
-                // Agregar las opciones de periodos según la respuesta del servidor
-                $.each(response, function(key, value) {
-                    $('#periodo_id').append(
-                        '<option value="' + value.id + '">' + value.periodo + '</option>'
-                    );
-                });
-            }
-        });
+        //         // Agregar las opciones de periodos según la respuesta del servidor
+        //         $.each(response, function(key, value) {
+        //             $('#periodo_id').append(
+        //                 '<option value="' + value.id + '">' + value.periodo + '</option>'
+        //             );
+        //         });
+        //     }
+        // });
         });
         // Simular el evento change al cargar la página
         $('#aula_id').trigger('change');

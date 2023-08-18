@@ -163,4 +163,32 @@ class nota extends Model
             //->selectRaw("CONCAT('$rutaImagenBase', alumnos.imagen) as ruta_imagen");
               return $consulta->get();  //return $fechaini;
     }
+    public static function enviarnotaeditada($notaid2,$nota2)
+    {      
+        // Ejemplo de obtención del sueldo del profesor
+       // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
+       $registro = nota::find($notaid2);
+       if ($registro) {
+           $registro->nota = $nota2;
+           $registro->save();
+
+           return response()->json(['success' => true]);
+       } else {
+           return response()->json(['success' => false, 'message' => 'Registro no encontrado']);
+       }
+    }
+    public static function enviarnotaeliminada($notaid2)
+    {      
+        // Ejemplo de obtención del sueldo del profesor
+       // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
+       $registro = nota::find($notaid2);
+       if ($registro) {
+          // $registro->nota = $nota2;
+           $registro->delete();
+
+           return response()->json(['success' => true]);
+       } else {
+           return response()->json(['success' => false, 'message' => 'Registro no encontrado']);
+       }
+    }
 }

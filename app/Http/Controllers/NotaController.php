@@ -20,6 +20,25 @@ class NotaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function  obtenereliminarnotaid(Request $request)
+    {   
+        // $rutaImagenBase = asset('storage').'/';
+       $notaid2 = $request->input('notaid');
+      // $profesorid2 = $request->input('profesorid');
+      // $userid=auth()->user()->id;
+       $resultadoconsulta = nota::enviarnotaeliminada($notaid2);
+       return response()->json($resultadoconsulta); 
+    }
+    public function  obtenereeditarnota(Request $request)
+    {   
+        // $rutaImagenBase = asset('storage').'/';
+       $notaid2 = $request->input('notaid');
+       $nota2 = $request->input('nota');
+      // $profesorid2 = $request->input('profesorid');
+      // $userid=auth()->user()->id;
+       $resultadoconsulta = nota::enviarnotaeditada($notaid2,$nota2);
+       return response()->json($resultadoconsulta); 
+    }
     public function  obtenernotasdelalumnoid(Request $request)
     {   
         // $rutaImagenBase = asset('storage').'/';

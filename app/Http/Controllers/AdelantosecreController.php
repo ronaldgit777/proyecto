@@ -36,9 +36,10 @@ class AdelantosecreController extends Controller
        $secretariaid2 = $request->input('secretariaid');
        $monto11 = $request->input('monto1');
        $monto22 = $request->input('monto2');
+       $estadosecre2 = $request->input('estadosecre');
        $ordenaradepro2 = $request->input('ordenaradepro');
        $mayorymenoradepro2 = $request->input('mayorymenoradepro');
-       $resultadoconsulta = adelantosecre::obteneradesecredesdefechainiciore($fechaini,$fechafin,$secretariaid2,$monto11,$monto22,$ordenaradepro2,$mayorymenoradepro2);   
+       $resultadoconsulta = adelantosecre::obteneradesecredesdefechainiciore($fechaini,$fechafin,$secretariaid2,$monto11,$monto22,$estadosecre2,$ordenaradepro2,$mayorymenoradepro2);   
        return response()->json($resultadoconsulta);        
     }
     
@@ -47,7 +48,8 @@ class AdelantosecreController extends Controller
        $fechaini = $request->input('fechainicio');
        $fechafin = $request->input('fechafinal');
        $buscarpro2 = $request->input('buscarpro');
-       $resultadoconsulta = adelantosecre::obteneradesecredesdefechainicio($fechaini,$fechafin,$buscarpro2);
+       $estadopro2 = $request->input('estadopro');
+       $resultadoconsulta = adelantosecre::obteneradesecredesdefechainicio($fechaini,$fechafin,$buscarpro2,$estadopro2);
            
        return response()->json($resultadoconsulta);        
     }
