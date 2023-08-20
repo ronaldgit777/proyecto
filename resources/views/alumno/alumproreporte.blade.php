@@ -57,7 +57,7 @@
                 </div>
                 <div class="col">
                   <label class="text-primary text-capitalize">estado</label>
-                  <select type="text" name="observacionss" id="observacion" class="form-control">
+                  <select type="text" name="estado" id="estado" class="form-control">
                     <option selected  value="">ambos</option>
                     <option value="activo">activo</option> 
                     <option value="inactivo">inactivo</option> 
@@ -122,7 +122,7 @@
                             <td>{{ $alumno->costo }}</td>
                             <td>{{ $alumno->periodo }}</td>
                             <td>{{ $alumno->aula }}</td>
-                            <td>{{ $alumno->estado }}</td>
+                            <td>{{ $alumno->asignarpromas_estado }}</td>
                             <td>
                             <img src="{{ asset('storage').'/'.$alumno->imagen}}" alt=""  width="50px" height="50px"  class="img-thumbnail img-fluid">
                             </td>
@@ -161,13 +161,14 @@
             var materiaid = $('#materia_id').val();
             var periodoid = $('#periodo_id').val();
             var aulaid = $('#aula_id').val();  
+            var estado = $('#estado').val();  
             var ordenar = $('#ordenar').val();
             var mayorymenor = $('#mayorymenor').val();
-            //alert(materiaid)
-            generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,ordenar,mayorymenor); 
+            //alert(estado)
+            generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,estado,ordenar,mayorymenor); 
            
         });
-        function generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,ordenar,mayorymenor) {
+        function generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,estado,ordenar,mayorymenor) {
               $.ajax({
                     url: '{{ url("obtener-fechainicioalumnoprofereporte") }}', // Ruta a tu controlador Laravel
                     type: 'POST',
@@ -178,6 +179,7 @@
                         materiaid: materiaid,
                         periodoid: periodoid,
                         aulaid: aulaid,
+                        estado: estado,
                         ordenarasig:ordenar,
                         mayorymenorasig:mayorymenor,
                       // profesor_id: profesorId,
@@ -204,7 +206,7 @@
                                     ' <td>'+value.materia_costo+'</td>'+
                                     ' <td>'+value.periodo_nombre+'</td>'+
                                     ' <td>'+value.aula_nombre+'</td>'+
-                                    ' <td>'+value.estado+'</td>'+
+                                    ' <td>'+value.asignarpromas_estado+'</td>'+
                                     ' <td><img src="'+imagen+value.imagen+'" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid"></td>'+
                                    // ' <td>'+value.role+'</td>'+
                                     ' <td>'+
@@ -233,6 +235,9 @@
            $('#fechainicio').trigger('change');
         });
         $('#aula_id').on('change', function() {
+           $('#fechainicio').trigger('change');
+        });
+        $('#estado').on('change', function() {
            $('#fechainicio').trigger('change');
         });
         $('#ordenar').on('change', function() {

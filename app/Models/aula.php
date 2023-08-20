@@ -43,4 +43,25 @@ class aula extends Model
          ->distinct()
          ->get();  
     }
+  
+    public static function obteneraulasDisponibles( $profesorId)
+    {
+        $periodosNoAsignados = Periodo::whereNotIn('id', function ($query) use ($profesorId) {
+            $query->select('periodo_id')
+                ->from('asignarpromas')
+                ->where('estado', 'activo')
+                ->where('profesor_id', $profesorId);
+        })
+        ->pluck('id');
+        $aulasNoAsignadas = Aula::whereNotIn('id', function ($query) use ($profesorId, $periodosNoAsignados) {
+            $query->select('aula_id')
+                ->from('asignarpromas')
+                ->where('estado', 'activo')
+                ->whereIn('periodo_id', $periodosNoAsignados);
+                //->where('profesor_id', $profesorId);
+        })
+        ->get();
+    
+        return $aulasNoAsignadas;
+    }
 }

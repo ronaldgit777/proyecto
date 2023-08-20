@@ -76,12 +76,13 @@ class AlumnoController extends Controller
          -> join('periodos','asignarpromas.periodo_id','=','periodos.id')  
          ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
          ->join('users','users.id','=','profesors.user_id')
-         ->select('alumnos.*','materias.*','aulas.*','periodos.*')
+         ->select('alumnos.*','materias.*','aulas.*','periodos.*','asignarpromas.estado as asignarpromas_estado')
          ->where('profesors.user_id','=',$userid)
          ->get();  
          $materias =materia::obtenermateriapro($userid);
          $aulas =aula::obteneraulapro($userid);
         $periodos =periodo::obtenerperiodopro($userid);
+
          $usuario=user::all();
         // $alumnos=alumno::all();
          // return profesor::with('sueldopro')->get(); 

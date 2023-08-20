@@ -5,7 +5,7 @@
     <div class="card-header border-0">
       <div class="row align-items-center">
             <div class="col">
-              <h3 class="mb-0">LISTA DE PROMEDIOS DE LOS ALUMNOS REPORTE  <label> <?php echo auth()->user()->email; ?></label></h3>
+              <h3 class="mb-0">LISTA DE PROMEDIOS DE LOS ALUMNOS REPORTE  <label> {{ $usuario[0]->nombre.'-'.$usuario[0]->apellidopaterno.'-'.$usuario[0]->apellidomaterno }} </label></h3>
               <div class="row">
                       <div class="col">
                           <label class="text-primary text-capitalize">fecha de inicioA</label>
@@ -183,14 +183,16 @@
                             {{-- <td>{{ $alumno->costo }}</td> --}}
                             <td>{{ $alumno->periodo }}</td>
                             <td>{{ $alumno->aula }}</td>
-                            <td>{{ $alumno->estado }}</td>
+                            <td>{{ $alumno->asignarpromas_estado }}</td>
                             <td>
                             <img src="{{ asset('storage').'/'.$alumno->imagen}}" alt=""  width="50px" height="50px"  class="img-thumbnail img-fluid">
                             </td>
                             <td>
                               
-                            <a href="{{ url('/alumno/'.$alumno->id.'/edit') }}" method="post" class="btn btn-sm btn-success">
-                              <i class="far fa-file-alt"></i></a>
+                           
+                              <button onclick="cargaridnotas('{{ $alumno->alumnoid }}','{{ $alumno->materiaid }}','{{ $alumno->nombre }}','{{ $alumno->apellidopaterno }}','{{ $alumno->apellidomaterno }}','{{ $alumno->materia }}')" 
+                                data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info"> 
+                                <i class="far fa-file-alt"></i></button>
                             {{-- <a href="{{ url('/alumno/'.$alumno->id.'/') }}" method="post" class="btn btn-sm btn-danger">
                               <i class="far fa-eye"></i></a>     
                               <a href="{{ url('/alumno/'.$alumno->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
@@ -331,6 +333,158 @@
         $('#mayorymenor').on('change', function() {
            $('#fechainicio').trigger('change');
         });
+
     });
+    function redondearAUnDecimal(numero) {
+            return Math.round(numero * 10) / 10;
+            }
+    function cargaridnotas(alumnoid,materiaid,nombre,apellidopaterno,apellidomaterno,nombre_materia) {
+            $('#alumno1').val(nombre+' '+apellidopaterno+' '+apellidomaterno);
+            $('#materia1').val(nombre_materia);
+        // alert(alumnoid+'-'+materiaid)
+    $.ajax({
+                url: '{{ url("obtener-notasdelalumnoid") }}', // Ruta a tu controlador Laravel
+                type: 'POST',
+                data: {
+                    alumnoid: alumnoid,
+                    materiaid: materiaid,
+                    
+                    // profesor_id: profesorId,
+                    _token: '{{ csrf_token() }}' // Agregar el token CSRF
+                },
+                success: function(response) {
+                    
+                  
+                    // Limpiar el campo de selección de periodos
+                    $('#tabla_nota').empty();
+                    // profesorreporte=[];
+                    var sumanota =0;var connota=0;
+                    $.each(response, function(key, value) {
+                        // alert(value.id)
+                        $('#tabla_nota').append(
+                            '<tr id="nota'+value.id+'">'+
+                            // ' <td>'+value.id+'</td>'+
+                                '<td>'+value.fechadenota+'</td>'+
+                                '<td>'+value.nombre_actividad+'</td>'+
+                                ' <td >'+value.nota+'</td>'+ 
+                             
+                            ' </tr>'
+                        );
+                        //alert(value.id);
+                        // profesorreporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
+                        // $('#miadelanto').find('td').css('border', '1px solid black');
+                        sumanota=sumanota+value.nota; connota++;
+                    });
+                    $('#sumanota').val(sumanota);
+                    $('#cannota').val(connota);
+                    $('#promedio').val(redondearAUnDecimal(sumanota/connota));
+
+                    $('.cambionota').on('input', function() {
+                       // Obtener el contenido actual
+                        var contenido = $(this).text();
+                        
+                        // Eliminar caracteres no numéricos
+                        var numeros = contenido.replace(/[^0-9.]/g, '');
+                        
+                        // Actualizar el contenido editable con solo números
+                        $(this).text(numeros);
+                        var siguienteFila = $(this).closest('td').next();
+                        var botonDeshabilitado = siguienteFila.find('button[disabled]');
+                        botonDeshabilitado.prop('disabled', false);
+                    });
+                },
+
+                // error: function (xhr, status, error) {
+                // console.error('Error en la solicitud:', error);
+                // }
+     });
+        
+        
+     }
   </script>
 @endsection
+<!--empeiza el modal-->
+<div class="modal fade " id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg " role="document">
+      <div class="modal-content p-3 mb-2 bg-info">
+           <div class="modal-body ">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                <div class="card shadow p-3 mb-2 ">
+                {{-- <div class="card shadow p-3 mb-2 bg-info"> ESE BG-INFO PONE COLOR TRANS--}}
+                           <div class="card-header border-0">
+                                  <div class="row align-items-center">
+                                      <div class="col">
+                                        <h3 class="mb-0">LISTA DE NOTAS</h3>
+                                        <div class="row">
+                                              <div class="col">
+                                              <input type="text" name="sumanota" id="sumanota" class="form-control" placeholder="suma notas" disabled>
+                                              <snap class="text-sm">SUMA DE NOTAS</snap>
+                                              </div>
+                                              <div class="col">
+                                              <input type="text" name="cannota" id="cannota" class="form-control" placeholder="can-notas" disabled>
+                                              <snap class="text-sm">CANTIDAD DE NOTAS</snap>
+                                              </div>
+                                              <div class="col">
+                                                  <input type="text" name="promedio" id="promedio" class="form-control" placeholder="promedio" disabled>
+                                                  <snap class="text-sm">promedio</snap>
+                                              </div>   
+                                              <div class="col">
+                                                  <button class="btn btn-danger" type="button"><i class="fas fa-print"></i>imprimir</button>
+                                              </div>
+                                          </div>
+                                          <div class="row">
+                                              <div class="col">
+                                                  <input type="text" name="alumno1" id="alumno1" class="form-control" placeholder="suma notas"  disabled>
+                                                  <snap class="text-sm">alumno</snap>
+                                                  </div>
+                                                  <div class="col">
+                                                  <input type="text" name="profesor1" id="profesor1" class="form-control" 
+                                                  value=" {{ $usuario[0]->nombre.'-'.$usuario[0]->apellidopaterno.'-'.$usuario[0]->apellidomaterno }}" disabled>
+                                                  <snap class="text-sm">profesor</snap>
+                                                  </div>
+                                                  <div class="col">
+                                                      <input type="text" name="materia1" id="materia1" class="form-control" placeholder="promedio" disabled>
+                                                      <snap class="text-sm">materia</snap>
+                                                  </div>   
+                                          </div>
+                                      </div>
+                                </div>
+                            </div>
+                            <div  class="table-responsive">
+                              <table class="table align-items-center table-flush">
+                                          <thead class="thead-light">
+                                      <tr>
+                                          {{-- <th>#</th> --}}
+                                          <th>fechadenota</th>
+                                          <th>actividad_id</th>
+                                          <th>nota</th>
+                                          {{-- <th>estado</th> --}}
+                                      </tr>
+                                  </thead>
+                                  <tbody id="tabla_nota">
+                                      {{-- @foreach ($notas as $nota)
+                                      <tr>
+                                          <td>{{ $nota->fechadenota}}</td>
+                                          <td>{{ $nota->actividad_nombre}}</td>
+                                          <td>{{ $nota->nota}}</td>
+                                          <td>{{ $nota->estado}}</td>
+                                         
+                                      </tr>
+                                      @endforeach --}}
+                                  </tbody>
+                              </table>
+                          </div> 
+                              <div class="col-12 col-sm-12 col-md-6">
+                                  <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
+                                      <div class="col-12 col-md-12 " >
+                                      </div>
+                                  </div>
+                              </div>
+               </div>
+          </div>
+      </div>
+  </div>
+</div>
+    <!--filaliza el modal-->

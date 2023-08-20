@@ -60,17 +60,18 @@ class NotaController extends Controller
         -> join('periodos','asignarpromas.periodo_id','=','periodos.id')  
         ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
         ->join('users','users.id','=','profesors.user_id')
-        ->select('alumnos.*','materias.*','aulas.*','periodos.*',
+        ->select('alumnos.*','alumnos.id as alumnoid','materias.id as materiaid','materias.materia','aulas.*','periodos.*','asignarpromas.estado as asignarpromas_estado',
+        'profesors.nombre as profesor_nombre','profesors.apellidomaterno as profesor_apellidomaterno','profesors.apellidopaterno as profesor_apellidopaterno',
         DB::raw('ROUND((SELECT AVG(nota) FROM notas 
         WHERE notas.alumno_id = alumnos.id and notas.materia_id = materias.id), 1) 
         as promedio_notas')
         )
-        ->where('profesors.user_id','=',$userid)
+        //->where('profesors.user_id','=',$userid)
         ->get();  
         $materias =materia::obtenermateriapro($userid);
         $aulas =aula::obteneraulapro($userid);
        $periodos =periodo::obtenerperiodopro($userid);
-        $usuario=user::all();
+       $usuario=user::obtenernombreusuario($userid);
         
        // $alumnos=alumno::all();
         // return profesor::with('sueldopro')->get(); 
@@ -89,7 +90,8 @@ class NotaController extends Controller
         -> join('periodos','asignarpromas.periodo_id','=','periodos.id')  
         ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
         ->join('users','users.id','=','profesors.user_id')
-        ->select('alumnos.*','materias.*','aulas.*','periodos.*',
+        ->select('alumnos.*','alumnos.id as alumnoid','materias.id as materiaid','materias.materia','aulas.*','periodos.*','asignarpromas.estado as asignarpromas_estado',
+        'profesors.nombre as profesor_nombre','profesors.apellidomaterno as profesor_apellidomaterno','profesors.apellidopaterno as profesor_apellidopaterno',
         DB::raw('ROUND((SELECT AVG(nota) FROM notas 
         WHERE notas.alumno_id = alumnos.id and notas.materia_id = materias.id), 1) 
         as promedio_notas')

@@ -180,33 +180,34 @@
         });
 
         $('#profesor_id').on('change', function() {
-            $('#aula_id').trigger('change');
-        // var profesorId = $(this).val(); // Obtener el valor del profesor seleccionado
-        // var aulaId = $('#aula_id').val();
-        // // Realizar la solicitud Ajax
-        // $.ajax({
-        //     url: '{{ url("obtener-periodos") }}', // Ruta a tu controlador Laravel
-        //     type: 'POST',
-        //     data: {
-        //         aula_id: aulaId, // Enviar el ID del aula seleccionada
-        //         profesor_id: profesorId,
-        //         _token: '{{ csrf_token() }}' // Agregar el token CSRF
-        //     },
-        //     success: function(response) {
-        //         // Limpiar el campo de selección de periodos
-        //         $('#periodo_id').empty();
+         
+            var profesorId = $(this).val(); // Obtener el valor del profesor seleccionado
+           // var aulaId = $('#aula_id').val();
+            // Realizar la solicitud Ajax
+            $.ajax({
+                url: '{{ url("obtener-aulas") }}', // Ruta a tu controlador Laravel
+                type: 'POST',
+                data: {
+                   // aula_id: aulaId, // Enviar el ID del aula seleccionada
+                    profesor_id: profesorId,
+                    _token: '{{ csrf_token() }}' // Agregar el token CSRF
+                },
+                success: function(response) {
+                    // Limpiar el campo de selección de periodos
+                    $('#aula_id').empty();
 
-        //         // Agregar las opciones de periodos según la respuesta del servidor
-        //         $.each(response, function(key, value) {
-        //             $('#periodo_id').append(
-        //                 '<option value="' + value.id + '">' + value.periodo + '</option>'
-        //             );
-        //         });
-        //     }
-        // });
+                    // Agregar las opciones de periodos según la respuesta del servidor
+                    $.each(response, function(key, value) {
+                        $('#aula_id').append(
+                            '<option value="' + value.id + '">' + value.aula + '</option>'
+                        );
+                    });
+                    $('#aula_id').trigger('change');
+                }
+            });
         });
         // Simular el evento change al cargar la página
-        $('#aula_id').trigger('change');
+        $('#profesor_id').trigger('change');
     });
 </script>
 @endsection

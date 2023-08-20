@@ -30,6 +30,7 @@ class periodo extends Model
      //  ->asignarpromas()
          ->get();  
     }
+    
     public static function obtenerPeriodosDisponibles($aulaId, $profesorId)
     {
         $periodosAula = Asignarproma::where('aula_id', $aulaId)->where('estado','activo')
@@ -43,6 +44,7 @@ class periodo extends Model
         
         return $periodosDisponibles;
     }
+    
 
     public static function obtenerlistaperiodos($buscarpe2, $estadopro2)
     {      
