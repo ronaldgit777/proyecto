@@ -38,6 +38,21 @@ class InscripcionController extends Controller
        $resultadoconsulta = inscripcion::obtenerlistaalumnosinscritos($materiaid2);
        return response()->json($resultadoconsulta); 
     }
+    public function  buscarfechainicioinscripcionesreportesecre(Request $request)
+    {   
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $profesorid2 = $request->input('profesorid');
+       $materiaid2 = $request->input('materiaid');
+       $periodoid2 = $request->input('periodoid');
+       $aulaid2 = $request->input('aulaid');
+       $alumnoid2 = $request->input('alumnoid');  $alumnoidpa2 = $request->input('alumnoidpa');  $alumnoidma2 = $request->input('alumnoidma');
+       $estadosecre2 = $request->input('estadosecre');
+       $ordenarins2 = $request->input('ordenarins');
+       $mayorymenorins2 = $request->input('mayorymenorins');
+       $resultadoconsulta = inscripcion::obtenerfecchainicioinscripcionreportesecre($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,$alumnoid2,$ordenarins2,$mayorymenorins2,$alumnoidpa2,$alumnoidma2,$estadosecre2);
+       return response()->json($resultadoconsulta); 
+    }
     public function  buscarfechainicioinscripcionesreporte(Request $request)
     {   
        $fechaini = $request->input('fechainicio');
@@ -61,6 +76,22 @@ class InscripcionController extends Controller
        $estadopro2 = $request->input('estadopro');
        $resultadoconsulta = inscripcion::obtenerfecchainicioinscripcion($fechaini,$fechafin,$buscarin2,$estadopro2 );
        return response()->json($resultadoconsulta); 
+    }
+    public function index2secre()
+    {
+        $inscripcions=inscripcion::obtenerdatosde3tabla();//reusando de del mode inscripcion 
+        $profesors = profesor::all();
+        $alumnos =alumno::all();
+        $alumnosapeno=alumno::obtenerno();
+        $alumnosapepa=alumno::obtenerapellidospa();
+        $alumnosapema=alumno::obtenerapellidosma();
+        $materias =materia::all();
+        $aulas =aula::all();
+        $periodos =periodo::all();
+        $asignarpromas =asignarproma::all();
+        // return profesor::with('sueldopro')->get(); 
+         //$datos['sueldopros']=sueldopro::paginate(7);
+         return view('inscripcion.reporprofealumnosecre',compact('inscripcions','profesors','materias','aulas','periodos','alumnos','asignarpromas','alumnosapeno','alumnosapepa','alumnosapema'));
     }
     public function index2()
     {
@@ -149,9 +180,17 @@ class InscripcionController extends Controller
      * @param  \App\Models\inscripcion  $inscripcion
      * @return \Illuminate\Http\Response
      */
-    public function show(inscripcion $inscripcion)
-    {
-        //
+    public function show($id)
+    {   
+        $inscripcion=inscripcion::findOrFail($id);
+        $alumno=alumno::all();
+        $asignarproma=asignarproma::all();
+        $user=user::all();
+        $materia=materia::all();
+        $profesor=profesor::all();
+        $aula=aula::all();
+        $periodo=periodo::all();
+        return view('inscripcion.show',compact('inscripcion','alumno','asignarproma','user','materia','profesor','aula','periodo'));
     }
 
     /**

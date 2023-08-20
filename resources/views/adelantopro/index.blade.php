@@ -69,12 +69,13 @@
                                     <td>{{ $adelantopro->estadoade }}</td>
                                     <td>{{ $adelantopro->observacion }}</td>
                                     <td>{{ $adelantopro->profesor_id ."-".$adelantopro->profesor->nombre}}</td>
-                                    <td> <a href="{{ url('/adelantopro/'.$adelantopro->id.'/show') }}" method="post">ver</a>
+                                    <td> <a href="{{ url('/adelantopro/'.$adelantopro->id.'/show') }}" method="post" class="btn btn-sm btn-danger"><i class="fas fa-print" ></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        {{ $adelantopros->links() }}
                     </div>
 </div>
 
@@ -128,7 +129,7 @@
                                   '<td>'+value.profesor_id+"-"+value.nombre_profesor+'</td>'+
                                   ' <td>'+
                                     // '<a href="/proyecto/public/profesor/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
-                                    '<a href="/proyecto/public/profesor/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
+                                    '<a href="/proyecto/public/profesor/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="fas fa-print"></i></a>'+
                                   ' </td>'+
                               ' </tr>'
                           );

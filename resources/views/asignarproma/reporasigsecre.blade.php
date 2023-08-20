@@ -5,7 +5,7 @@
     <div class="card-header border-0">
         <div class="row align-items-center">
             <div class="col">
-                <h3 class="mb-0">LISTA DE ASIGNACIONES REPORTE PROFESORES</h3>
+                <h3 class="mb-0">LISTA DE ASIGNACIONES REPORTE PROFESORES-rol secretaria</h3>
                   <div class="row">
                           <div class="col">
                               <label class="text-primary text-capitalize">fecha de inicio</label>
@@ -39,9 +39,9 @@
                           </div>a
                             <div class="col text-right">
                               <button class="btn btn-danger btn-sm" type="button" onclick="generarpdflistaprofesor()"><i class="fas fa-print"></i>imprimir</button>
-                              <a href="{{url('reporopciones')}}" class="btn btn-sm btn-success" >
+                              {{-- <a href="{{url('reporopciones')}}" class="btn btn-sm btn-success" >
                               <i class="fas fa-plus-circle"></i>
-                              regresar</a>
+                              regresar</a> --}}
                           </div>  
                   </div>
                   <div class="row">
@@ -159,7 +159,7 @@
         });
         function generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,estado,ordenar,mayorymenor) {
               $.ajax({
-                    url: '{{ url("obtener-fechainicioasigre") }}', // Ruta a tu controlador Laravel
+                    url: '{{ url("obtener-fechainicioasigresecre") }}', // Ruta a tu controlador Laravel
                     type: 'POST',
                     data: {
                         fechainicio: fecha_ini, //lo de blanco es la llave q tienes para q se capture la variable

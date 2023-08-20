@@ -70,7 +70,7 @@ class ProfesorController extends Controller
     }
     public function index()
     {   
-       $profesors=profesor::paginate(4);
+       $profesors=profesor::paginate(5);
       //  $profesors=profesor::all();
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);
@@ -113,7 +113,8 @@ class ProfesorController extends Controller
     public function show($id)
     {
         $profesor=profesor::findOrFail($id);
-        return view('profesor.show',compact('profesor'));
+        $user=user::all();
+        return view('profesor.show',compact('profesor','user'));
     }
 
     /**
@@ -129,7 +130,6 @@ class ProfesorController extends Controller
         return view('profesor.edit',compact('profesor'));
     }
 
-  
 
     /**
      * Update the specified resource in storage.
@@ -148,7 +148,8 @@ class ProfesorController extends Controller
         }
         profesor::where('id','=',$id)->update($datosprofesor);
         $profesor=profesor::findOrFail($id);
-        return view('profesor.edit',compact('profesor'));
+       // return view('profesor.edit',compact('profesor'));
+       return redirect('profesor');
     }
 
     /**

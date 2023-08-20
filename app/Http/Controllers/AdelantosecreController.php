@@ -82,7 +82,7 @@ class AdelantosecreController extends Controller
     }
     public function index()
     {
-        $adelantosecres=adelantosecre::all();
+        $adelantosecres=adelantosecre::paginate(4);
         $secretarias=secretaria::all();
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);

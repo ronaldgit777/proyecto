@@ -23,7 +23,7 @@ class AulaController extends Controller
     }
     public function index()
     {
-        $datos['aulas']=aula::paginate(7);
+        $datos['aulas']=aula::paginate(4);
         return view('aula.index',$datos);
     }
 

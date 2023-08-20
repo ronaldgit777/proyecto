@@ -27,14 +27,6 @@
                                                       @endforeach
                                                     </select>
                                                 </div>
-                                                <div class="col">
-                                                  <label class="text-primary text-capitalize">observacion</label>
-                                                  <select type="text" name="observacion" id="observacion" class="form-control">
-                                                    <option selected  value="">todas las observaciones</option>
-                                                    <option value="pendiente">pendiente</option> 
-                                                    <option value="pagado">pagado</option> 
-                                                    </select>
-                                                </div>
                                                     <div class="col">
                                                       <label class="text-primary text-capitalize">ordenar</label>
                                                       <div class="input-group">

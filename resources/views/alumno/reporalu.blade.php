@@ -120,7 +120,7 @@
           <th scope="col" data-column="apellidomaterno" class="sortable">apellidomaterno</th>
           <th scope="col" data-column="celular" class="sortable">celular</th>
           <th scope="col" data-column="direccion" class="sortable">direccion</th>
-     
+          <th scope="col" data-column="direccion" class="sortable">correo</th>
           <th scope="col" data-column="estado" class="sortable">estado</th>
           <th scope="col">imagen</th>
           
@@ -137,6 +137,7 @@
                       <td>{{ $alumno->apellidomaterno }}</td>
                       <td>{{ $alumno->celular }}</td>
                       <td>{{ $alumno->direccion }}</td>
+                      <td>{{ $alumno->correo }}</td>
                       {{-- <td>{{ $profesor->user->email }}</td> --}}
                       <td>{{ $alumno->estado }}</td>
                       <td>
@@ -294,7 +295,7 @@
                                     ' <td>'+value.apellidomaterno+'</td>'+
                                     ' <td>'+value.celular+'</td>'+
                                     ' <td>'+value.direccion+'</td>'+
-                                    // ' <td>'+value.email+'</td>'+
+                                     ' <td>'+value.correo+'</td>'+
                                     ' <td>'+value.estado+'</td>'+
                                     ' <td><img src="'+value.ruta_imagen+'" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid"></td>'+
                                     // ' <td>'+value.sueldo+'</td>'+

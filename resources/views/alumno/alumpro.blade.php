@@ -90,17 +90,17 @@
                             </td>
                             <td>
                                
-                            <button onclick="cargarid('{{ $alumno->id }}','{{ $alumno->materiaid }}')" data-toggle="modal" data-target="#myModal2"  id="bo" class="btn btn-sm btn-primary"> 
+                            <button onclick="cargarid('{{ $alumno->id }}','{{ $alumno->materiaid }}')" data-toggle="modal" data-target="#myModal2"  id="bo" class="btn btn-sm btn-success"> 
                             <i class="far fa-file-alt"></i></button>
 
                             <button onclick="cargaridnotas('{{ $alumno->id }}','{{ $alumno->materiaid }}','{{ $alumno->nombre }}','{{ $alumno->apellidopaterno }}','{{ $alumno->apellidomaterno }}','{{ $alumno->nombre_materia }}')" 
-                                data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-primary"> 
-                                <i class="far fa-file-alt">promedio</i></button>
+                                data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info"> 
+                                <i class="far fa-file-alt"></i></button>
 
                             <a href="{{ url('/alumno/'.$alumno->id.'/') }}" method="post" class="btn btn-sm btn-danger">
                               <i class="far fa-eye"></i></a>     
-                              <a href="{{ url('/alumno/'.$alumno->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
-                                <i class="fas fa-edit"></i></a>         
+                              {{-- <a href="{{ url('/alumno/'.$alumno->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
+                                <i class="fas fa-edit"></i></a>          --}}
                             </td>
                         </tr>
                         @endforeach
@@ -350,8 +350,11 @@
                                     ' <td><img src="'+value.ruta_imagen+'" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid"></td>'+
                                     // ' <td>'+value.role+'</td>'+
                                     ' <td>'+
-    '<button onclick="cargarid('+{{ $alumno->id }}+','+{{ $alumno->materiaid }}+')" data-toggle="modal" data-target="#myModal2" id="bo" class="btn btn-sm btn-primary"> <i class="far fa-file-alt"></i></button>' +
-                                        '<a href="/proyecto/public/alumno/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
+    '<button onclick="cargarid('+{{ $alumno->id }}+','+{{ $alumno->materiaid }}+')" data-toggle="modal" data-target="#myModal2" id="bo" class="btn btn-sm btn-success"> <i class="far fa-file-alt"></i></button>' +
+
+//    '<button onclick="cargaridnotas('+{{ $alumno->id }}+','+{{ $alumno->materiaid }}+','+{{ $alumno->nombre }}+','+{{ $alumno->apellidopaterno }}+','+{{ $alumno->apellidomaterno }}+','+{{ $alumno->nombre_materia }}')"  data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info">  <i class="far fa-file-alt"></i></button>'+
+
+                                        // '<a href="/proyecto/public/alumno/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
                                         '<a href="/proyecto/public/alumno/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
                                     ' </td>'+
                                 ' </tr>'

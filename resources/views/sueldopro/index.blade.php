@@ -6,7 +6,7 @@
             <div class="row align-items-center">
                   <div class="col">
                     <h3 class="mb-0">LISTA DE PAGOS DE LOS PROFESORES
-                        <i class="far fa-calendar-alt  text-blue"></i> 2
+                        <i class="far fa-calendar-alt  text-blue"></i> 
                     </h3>
                     <div class="row">
                             <div class="col">
@@ -72,6 +72,7 @@
                 @endforeach
             </tbody>
           </table>
+          {{ $sueldopros->links() }}
         </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 

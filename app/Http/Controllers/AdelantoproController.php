@@ -83,7 +83,7 @@ class AdelantoproController extends Controller
     
     public function index()
     {
-        $adelantopros=adelantopro::all();
+        $adelantopros=adelantopro::paginate(4);
         $profesors=profesor::all();
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);

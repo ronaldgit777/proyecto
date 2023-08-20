@@ -89,6 +89,7 @@
                                     </div>
                                     <div class="col-8 col-md-9">
                                             <select type="text" name="estado" id="estado" class="form-control" required>
+                                            <option   selected disabled value="">selccione una opcion</option> 
                                             <option value="activo">activo</option> 
                                             <option value="inactivo">inactivo</option> 
                                             </select><br>

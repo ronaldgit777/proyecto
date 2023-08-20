@@ -69,12 +69,13 @@
                         <td>{{ $adelantosecre->estadoade }}</td>
                         <td>{{ $adelantosecre->observacion }}</td>
                         <td>{{ $adelantosecre->secretaria_id ."-".$adelantosecre->secretaria->nombre}}</td>
-                        <td> <a href="{{ url('/adelantosecre/'.$adelantosecre->id.'/show') }}" method="post">ver</a>
+                        <td> <a href="{{ url('/adelantosecre/'.$adelantosecre->id.'/show') }}" method="post"class="btn btn-sm btn-danger"><i class="fas fa-print" ></i></a>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
                 </table>
+                {{ $adelantosecres->links() }}
             </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -130,7 +131,7 @@
                                   '<td>'+value.secretaria_id+"-"+value.nombre_secretaria+'</td>'+
                                   ' <td>'+
                                     // '<a href="/proyecto/public/profesor/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
-                                    '<a href="/proyecto/public/secretaria/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
+                                    '<a href="/proyecto/public/secretaria/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="fas fa-print"></i></a>'+
                                   ' </td>'+
                               ' </tr>'
                           );

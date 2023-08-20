@@ -74,10 +74,10 @@
                           <img src="imag/alumnosprofe.jpg" alt="Imagen 5">
                           <a  href="{{ url('/reporprofealumno') }}">profesores su lista de alumnos</a>
                         </div>
-                        <div class="box">
+                        {{-- <div class="box">
                           <img src="imag/notaprofesor.png"  alt="nose">
                           <a  href="{{ url('/repornota') }}">profesores su lista de notas</a>
-                        </div>
+                        </div> --}}
                         
           </div>
      

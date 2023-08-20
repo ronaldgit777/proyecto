@@ -13,6 +13,7 @@ use App\Models\periodo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 
 class AlumnoController extends Controller
@@ -96,6 +97,29 @@ class AlumnoController extends Controller
           return view('alumno.reporopcionesalu',compact('alumnos'));
           
      }
+     public function  obtenerfechainicioreporalusecre(Request $request)
+     {   
+        $rutaImagenBase = asset('storage').'/';
+        $fechaini = $request->input('fechainicio');
+        $fechafin = $request->input('fechafinal');
+        $cipro2 = $request->input('cipro');
+        $nombrepro2 = $request->input('nombrepro');
+        $apellidopaternopro2 = $request->input('apellidopaternopro');
+        $apellidomaternopro2 = $request->input('apellidomaternopro');
+        $celularpro2 = $request->input('celularpro');
+        $direccionpro2 = $request->input('direccionpro');
+        $emailpro2 = $request->input('emailpro');
+        $estadopro2 = $request->input('estadopro');
+        $sueldominpro2 = $request->input('sueldominpro');
+        $sueldomaxpro2 = $request->input('sueldomaxpro');
+        $ordenarpro2 = $request->input('ordenarpro');
+         $mayorymenorpro2 = $request->input('mayorymenorpro');
+        $resultadoconsulta = alumno::obteneralumnosdesdefechainiciosecre($fechaini,$rutaImagenBase,$fechafin,
+        $cipro2,$nombrepro2,$apellidopaternopro2,$apellidomaternopro2,$celularpro2,$direccionpro2,$emailpro2,$estadopro2,
+        $sueldominpro2,$sueldomaxpro2, $ordenarpro2, $mayorymenorpro2);
+            
+        return response()->json($resultadoconsulta);        
+     }
      public function  obtenerfechainicioreporalu(Request $request)
      {   
         $rutaImagenBase = asset('storage').'/';
@@ -119,6 +143,14 @@ class AlumnoController extends Controller
             
         return response()->json($resultadoconsulta);        
      }
+     public function reporalusecre()
+     {
+         $alumnos=alumno::all();
+         // return profesor::with('sueldopro')->get(); 
+          //$datos['sueldopros']=sueldopro::paginate(7);
+          return view('alumno.reporalusecre',compact('alumnos'));
+          
+     }
      public function reporalu()
      {
          $alumnos=alumno::all();
@@ -129,7 +161,7 @@ class AlumnoController extends Controller
      }
     public function index()
     {
-        $alumnos=alumno::all();
+        $alumnos=alumno::paginate(4);
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);
          return view('alumno.index',compact('alumnos'));
@@ -182,9 +214,11 @@ class AlumnoController extends Controller
      * @param  \App\Models\alumno  $alumno
      * @return \Illuminate\Http\Response
      */
-    public function edit(alumno $alumno)
+    public function edit($id)
     {
-        //
+        $alumno=alumno::findOrFail($id);
+        //$sueldopro=sueldopro::get()->where('$id','=','12');
+        return view('alumno.edit',compact('alumno'));
     }
 
     /**
@@ -194,9 +228,18 @@ class AlumnoController extends Controller
      * @param  \App\Models\alumno  $alumno
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, alumno $alumno)
+    public function update(Request $request,$id)
     {
-        //
+        $datosalumno=request()->except(['_token','_method']);
+        if($request->hasFile('imagen')){
+            $alumno=alumno::findOrFail($id);
+            storage::delete('public/'.$alumno->imagen);
+            $datosalumno['imagen']=$request->file('imagen')->store('uploads','public');
+        }
+        alumno::where('id','=',$id)->update($datosalumno);
+        $alumno=alumno::findOrFail($id);
+       // return view('alumno.edit',compact('alumno'));
+        return redirect('alumno');
     }
 
     /**

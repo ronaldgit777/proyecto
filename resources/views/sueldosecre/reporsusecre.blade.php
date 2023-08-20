@@ -27,14 +27,14 @@
                                                       @endforeach
                                                     </select>
                                                 </div>
-                                                <div class="col">
+                                                {{-- <div class="col">
                                                   <label class="text-primary text-capitalize">observacion</label>
                                                   <select type="text" name="observacionss" id="observacion" class="form-control">
                                                     <option selected  value="">todas las observaciones</option>
                                                     <option value="pendiente">pendiente</option> 
                                                     <option value="pagado">pagado</option> 
                                                     </select>
-                                                </div>s
+                                                </div>s --}}
                                                     <div class="col">
                                                       <label class="text-primary text-capitalize">ordenar</label>
                                                       <div class="input-group">
@@ -44,7 +44,7 @@
                                                             <option value="sueldo">sueldo</option> 
                                                             <option value="totaldescuento">totaldescuento</option> 
                                                             <option value="totalpago">totalpago</option> 
-                                                            <option value="nombre_secretaria">nombre_profesor</option> 
+                                                            <option value="nombre_secretaria">profesor</option> 
                                                           </select>
                                                           <div class="input-group-append">
                                                             <select type="text" name="mayorymenor" id="mayorymenor" class="form-control">
@@ -113,7 +113,7 @@
                                     <td>{{ $sueldosecre->totaldescuento }}</td>
                                     <td>{{ $sueldosecre->totalpago }}</td>
                                     <td>{{ $sueldosecre->observacion }}</td>
-                                    <td>{{ $sueldosecre->secretaria->nombre }}</td>
+                                    <td>{{ $sueldosecre->secretaria->nombre." ".$sueldosecre->secretaria->apellidopaterno." ".$sueldosecre->secretaria->apellidomaterno}}</td>
                                     <td> <a href="{{ url('/sueldosecre/'.$sueldosecre->id.'/show') }}" method="post"  class="btn btn-sm btn-danger"><i class="fas fa-print" ></i>
                                       </a>
                                     </td>           
@@ -185,10 +185,10 @@
                                   ' <td>'+value.totaldescuento+'</td>'+
                                   ' <td>'+value.totalpago+'</td>'+
                                   ' <td>'+value.observacion+'</td>'+  
-                                  '<td>'+value.nombre_secretaria+'</td>'+
+                                  '<td>'+value.nombre_secretaria+' '+value.apellidopaterno+' '+value.apellidomaterno+'</td>'+
                                   ' <td>'+
                                     // '<a href="/proyecto/public/profesor/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
-                                    '<a href="/proyecto/public/secretaria/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
+                                    '<a href="/proyecto/public/secretaria/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="fas fa-print"></i></a>'+
                                   ' </td>'+
                               ' </tr>'
                           );

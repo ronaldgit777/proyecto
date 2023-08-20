@@ -120,7 +120,7 @@ class adelantosecre extends Model
                 }) 
 
             ->select('adelantosecres.*','fechaadelantosecre', 
-            'secretarias.nombre as nombre_secretaria');
+            'secretarias.nombre as nombre_secretaria','secretarias.*');
             if (!empty($ordenaradepro2) && !empty($mayorymenoradepro2)) {
                 $consulta->orderBy($ordenaradepro2, $mayorymenoradepro2);
             }

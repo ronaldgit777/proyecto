@@ -21,7 +21,7 @@ class MateriaController extends Controller
     }
     public function index()
     {
-        $datos['materias']=materia::paginate(7);
+        $datos['materias']=materia::paginate(4);
         return view('materia.index',$datos);
     }
 

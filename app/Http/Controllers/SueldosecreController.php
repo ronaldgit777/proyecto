@@ -52,7 +52,7 @@ class SueldosecreController extends Controller
     }
     public function index()
     {
-        $sueldosecres=sueldosecre::all();
+        $sueldosecres=sueldosecre::paginate(4);
         $secretarias=secretaria::all();
        // return profesor::with('sueldopro')->get(); 
         //$datos['sueldopros']=sueldopro::paginate(7);

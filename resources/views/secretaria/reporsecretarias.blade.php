@@ -57,7 +57,7 @@
                           <a  href="{{ url('/reporsusecre') }}">sueldos secretarias</a>
                         </div>
                       </div>
-                      <div class="bottom-row">
+                      {{-- <div class="bottom-row">
                         <div class="box">
                           <img src="imag/pagoprofesor.png" alt="Imagen 4">
                           <a href="/"></a>
@@ -70,7 +70,7 @@
                           <img src="imagen6.jpg" alt="nose">
                           <a href="#"></a>
                         </div>
-                       </div>
+                       </div> --}}
            </div>
   </div>    
 @endsection

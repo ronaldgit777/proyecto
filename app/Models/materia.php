@@ -68,4 +68,15 @@ class materia extends Model
      //  ->asignarpromas()
          ->get();  
     }
+    public static function obtenermateriasecre()
+    {
+        return static::join('asignarpromas','materias.id','=','asignarpromas.materia_id')
+        ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('materias.*')
+        //->where('secretarias.user_id','=',$userid)
+        //->where('asignarpromas.estado','activo')//mostrando todas las asignaciones activas
+     //  ->asignarpromas()
+         ->get();  
+    }
 }

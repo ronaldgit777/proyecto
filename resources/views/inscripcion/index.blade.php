@@ -76,13 +76,14 @@
                                     <td>{{ $inscripcion->aula_nombre}}</td>
                                     <td>{{ $inscripcion->alumno_nombre}}</td>
                                     <td>{{ $inscripcion->estado }}</td>
-                                    <td> <a href="{{ url('/inscripcion/'.$inscripcion->id.'/show') }}" method="post" class="btn btn-sm btn-danger">
+                                    <td> <a href="{{ url('/inscripcion/'.$inscripcion->id.'/') }}" method="post" class="btn btn-sm btn-danger">
                                         <i class="far fa-eye"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        {{-- {{ $inscripcions->links() }} --}}
                     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 

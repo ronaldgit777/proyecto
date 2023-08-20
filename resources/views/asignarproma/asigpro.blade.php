@@ -18,7 +18,7 @@
                                     <span class="text-muted">hasta</span>
                                 </div>
                                 <div class="col text-right">
-                                  <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button>
+                                  {{-- <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button> --}}
                                   <a href="{{url('home')}}" class="btn btn-sm btn-success" >
                                   <i class="fas fa-plus-circle"></i>
                                   regresar</a>

@@ -55,8 +55,8 @@
                                     <td>
                                         <a href="{{ url('/periodo/'.$periodo->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
                                             <i class="fas fa-edit"></i></a>
-                                          <a href="{{ url('/periodo/'.$periodo->id.'/') }}" method="post" class="btn btn-sm btn-danger">
-                                            <i class="far fa-eye"></i></a> 
+                                          {{-- <a href="{{ url('/periodo/'.$periodo->id.'/') }}" method="post" class="btn btn-sm btn-danger">
+                                            <i class="far fa-eye"></i></a>  --}}
                                     </td>
                                 </tr>
                                 @endforeach
@@ -98,7 +98,7 @@
                                 // ' <td>'+value.role+'</td>'+
                                  ' <td>'+
                                    '<a href="/proyecto/public/periodo/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
-                                   '<a href="/proyecto/public/periodo/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
+                                //    '<a href="/proyecto/public/periodo/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
                                  ' </td>'+
                              ' </tr>'
                          );

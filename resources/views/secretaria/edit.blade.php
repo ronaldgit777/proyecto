@@ -7,16 +7,16 @@
     <div class="card-header border-0">
         <div class="row align-items-center">
           <div class="col">
-            <h3 class="mb-0">EDITAR PROFESOR</h3>
+            <h3 class="mb-0">EDITAR SECRETARIA</h3>
           </div>
           <div class="col text-right">
-            <a href="{{url('profesor/')}}" class="btn btn-sm btn-success">
+            <a href="{{url('secretaria/')}}" class="btn btn-sm btn-success">
                 <i class="fas fa-undo"></i>
                 regresar</a>
           </div>
         </div>
       </div>
-<form method="post" action="{{ url('/profesor/'.$profesor->id)}}" enctype="multipart/form-data">
+<form method="post" action="{{ url('/secretaria/'.$secretaria->id)}}" enctype="multipart/form-data">
     @csrf    
     {{ method_field('PATCH')}} 
         <div class="row p-3 mb-2 " >
@@ -44,33 +44,33 @@
                                     </div>
                                 </div>
                             </div> --}}
-                            {{-- <div class="col-12 col-sm-12 col-md-6">
+                            <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">nombre</label>
+                                        <label class="text-primary text-capitalize">contraseña</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="nombre" id="nombre" class="form-control" " value="{{ $profesor->nombre }}"> <br>
+                                        <input type="text" name="" id="" class="form-control" " value="{{ $secretaria->user->password }}"> <br>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
-                                        <label class="text-primary text-capitalize">apellido paterno</label>
+                                        <label class="text-primary text-capitalize">constraseña nueva</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="apellidopaterno" id="apellidopaterno" class="form-control" value="{{ $profesor->apellidopaterno }}"> <br>
+                                        <input type="text" name="" id="password" class="form-control" value="{{ $secretaria->apellidopaterno }}" > <br>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
                                         <label class="text-primary text-capitalize">sueldo</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="sueldo" id="sueldo" class="form-control" value="{{ $profesor->sueldo }}">
+                                        <input type="text" name="sueldo" id="sueldo" class="form-control" value="{{ $secretaria->sueldo }}" required>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                                         <label class="text-primary text-capitalize">celular</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="celular" id="celular" class="form-control"  value="{{ $profesor->celular }}"> <br>
+                                        <input type="text" name="celular" id="celular" class="form-control"  value="{{ $secretaria->celular }}" required> <br>
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                                         <label class="text-primary text-capitalize">direccion</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="direccion" id="direccion" class="form-control" value="{{ $profesor->direccion }}"> <br>
+                                        <input type="text" name="direccion" id="direccion" class="form-control" value="{{ $secretaria->direccion }}" required> <br>
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +100,7 @@
                                         <label class="text-primary text-capitalize">correo</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="" id="" class="form-control" value="{{ $profesor->correo }}"><br>
+                                        <input type="text" name="" id="" class="form-control" value="{{ $secretaria->user->email }}" required><br>
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +110,7 @@
                                         <label class="text-primary text-capitalize">estado</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <select type="text" name="estado" id="estado" class="form-control"  value="{{ $profesor->estado }}">
+                                        <select type="text" name="estado" id="estado" class="form-control"  value="{{ $secretaria->estado }}">
                                             <option value="activo">activo</option>
                                             <option value="inactivo">inactivo</option>
                                         </select><br>
@@ -121,10 +121,10 @@
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
                                         <label class="text-primary text-capitalize">imagen</label>
-                                        <img src="{{asset('storage').'/'.$profesor->imagen }}" alt=""  width="50px" class="img-thumbnail img-fluid" >
+                                        <img src="{{asset('storage').'/'.$secretaria->imagen }}" alt=""  width="50px" class="img-thumbnail img-fluid" >
                                     </div>
                                     <div class="col-8 col-md-9">
-                                     <input type="file" name="imagen" id="imagen" class="form-control" value="{{ $profesor->imagen }}">
+                                     <input type="file" name="imagen" id="imagen" class="form-control" value="{{ $secretaria->imagen }}" >
                                     </div>
                                 </div>
                             </div>
@@ -141,7 +141,7 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-12 col-md-12 " >
-                                    <center><input type="submit" value="editar profesor" class="btn btn-primary btn-sm"></center>
+                                    <center><input type="submit" value="editar secretaria" class="btn btn-primary btn-sm"></center>
                                     </div>
                                 </div>
                             </div>
@@ -154,4 +154,3 @@
 
 </div>
 @endsection
-

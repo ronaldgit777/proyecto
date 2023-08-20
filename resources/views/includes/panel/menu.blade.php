@@ -99,16 +99,12 @@
                 <i class="far fa-map"></i>inscripcion
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link " href="{{ url('/actividad') }}">
-                <i class="fas fa-table"></i>actividad
-              </a>
-            </li>
-            <li class="nav-item">
+          
+            {{-- <li class="nav-item">
               <a class="nav-link " href="{{ url('/nota') }}">
                 <i class="fas fa-calculator text-success"></i>notas
               </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
               <a class="nav-link" href="{{route('logout')}}"
                 onclick="event.preventDefault(); document.getElementById('formlogout').submit();">
@@ -154,11 +150,95 @@
         </ul>
    <!-- secretaria -->
  @elseif(auth()->user()->role == 'secretaria')
+ <ul class="navbar-nav  ">
 
+<li class="nav-item">
+  <a class="nav-link " href="{{ url('/profesor') }}">
+    <i class="fas fa-chalkboard-teacher text-success"></i> profesores
+  </a>      
+</li>
+<li class="nav-item">
+<a class="nav-link " href="{{ url('/asignarproma') }}">
+  <i class="fas fa-chalkboard-teacher text-blue"></i>asignar materia
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link " href="{{ url('/alumno') }}">
+  <i class="fas fa-user-graduate"></i>alumnos
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link " href="{{ url('/inscripcion') }}">
+  <i class="far fa-map"></i>inscripcion
+</a>
+</li>
+
+{{-- <li class="nav-item">
+<a class="nav-link " href="{{ url('/nota') }}">
+  <i class="fas fa-calculator text-success"></i>notas
+</a>
+</li> --}}
+<li class="nav-item">
+<a class="nav-link" href="{{route('logout')}}"
+  onclick="event.preventDefault(); document.getElementById('formlogout').submit();">
+  <i class="fas fa-sign-in-alt"></i> cerrar secion
+</a>
+<form action="{{route('logout')}}" method="POST" style="display: none" id="formlogout" >
+  @csrf
+  </form>
+</li>
+</ul>
+<hr class="my-3">
+<!-- Heading -->
+<h6 class="navbar-heading text-muted">reportes</h6>
+<!-- Navigation -->
+<ul class="navbar-nav mb-md-3">
+<li class="nav-item">
+  <a class="nav-link active" href="#navbar-examples2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples2">
+      <i class="	far fa-sticky-note text-info" style="color: #f4645f;"></i>
+      <span class="nav-link-text" style="color: #124ad88e;">{{ __('REPORTES') }}</span>
+  </a>
+
+  <div class="collapse show" id="navbar-examples2">
+      <ul class="nav nav-sm flex-column">
+        {{-- <li class="nav-item">
+          <a class="nav-link " href="{{ url('/repor-pro') }}">
+            <i class="fas fa-university text-info"></i>lista de los profesores
+          </a>
+        </li>  --}}
+          <li class="nav-item">
+            <a class="nav-link " href="{{ url('/reporasigsecre') }}">
+              <i class="fas fa-university text-info"></i>asignaciones de los profesores
+            </a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link " href="{{ url('/reporprofealumnosecre') }}">
+              <i class="fas fa-chalkboard-teacher text-blue"></i> los profesores con sus alumnos
+            </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="{{ url('/repor-alusecre') }}">
+            <i class="fas fa-user-graduate"></i>lista de los alumnos
+          </a>
+      </li>
+          <li class="nav-item">
+              <a class="nav-link " href="{{ url('/notassecrereporte') }}">
+                <i class="fas fa-user-graduate"></i>notas de los alumnos con sus profesores
+              </a>
+          </li>
+        
+      </ul>
+  </div>
+</li>
+</ul>
     <!-- profesor -->
       @else
       <ul class="navbar-nav ">
-          
+        <li class="nav-item">
+          <a class="nav-link " href="{{ url('/actividad') }}">
+            <i class="fas fa-table"></i>actividad
+          </a>
+        </li>
            <li class="nav-item">
             <a class="nav-link " href="{{ url('/asigpro') }}">
             <i class="fas fa-bed text-warning"></i>

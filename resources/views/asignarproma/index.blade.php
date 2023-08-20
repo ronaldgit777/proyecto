@@ -82,6 +82,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                           {{-- {{ $inscripcions->links() }} --}}
                     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
@@ -135,8 +136,8 @@
                                     ' <td>'+value.estado+'</td>'+
                                    // ' <td>'+value.role+'</td>'+
                                     ' <td>'+
-                                       '<a href="/proyecto/public/asignacion/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
-                                      '<a href="/proyecto/public/asignacion/' + value.id + '/show" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
+                                       '<a href="/proyecto/public/asignarproma/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
+                                      '<a href="/proyecto/public/asignarproma/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
                                     ' </td>'+
                                 ' </tr>'
                             );

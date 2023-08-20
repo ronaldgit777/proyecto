@@ -56,13 +56,14 @@
                       <td>
                       <a href="{{ url('/aula/'.$aula->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
                         <i class="fas fa-edit"></i></a>
-                      <a href="{{ url('/aula/'.$aula->id.'/') }}" method="post" class="btn btn-sm btn-danger">
-                        <i class="far fa-eye"></i></a> 
+                      {{-- <a href="{{ url('/aula/'.$aula->id.'/') }}" method="post" class="btn btn-sm btn-danger">
+                        <i class="far fa-eye"></i></a>  --}}
                       </td>
                   </tr>
                   @endforeach
               </tbody>
             </table>
+            {{ $aulas->links() }}
         </div>
    </div>
 </div>
@@ -101,7 +102,7 @@
                                 // ' <td>'+value.role+'</td>'+
                                  ' <td>'+
                                    '<a href="/proyecto/public/aula/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
-                                   '<a href="/proyecto/public/aula/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
+                                  //  '<a href="/proyecto/public/aula/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
                                  ' </td>'+
                              ' </tr>'
                          );

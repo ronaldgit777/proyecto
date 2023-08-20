@@ -5,7 +5,7 @@
     <div class="card-header border-0">
       <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="mb-0">LISTA DE DATOS REPORTE PROFESORES</h3>
+                    <h3 class="mb-0">LISTA DE DATOS REPORTE ALUMNOS-rol secretaria</h3>
                       <div class="row">
                               <div class="col">
                                   <label class="text-primary text-capitalize">fecha de inicio</label>
@@ -35,9 +35,9 @@
                               </div>
                                 <div class="col text-right">
                                   <button class="btn btn-danger btn-sm" type="button" onclick="generarpdflistaprofesor()"><i class="fas fa-print"></i>imprimir</button>
-                                  <a href="{{url('reporopciones')}}" class="btn btn-sm btn-success" >
+                                  {{-- <a href="{{url('opciones-reportealumno')}}" class="btn btn-sm btn-success" >
                                   <i class="fas fa-plus-circle"></i>
-                                  regresar</a>
+                                  regresar</a> --}}
                               </div>  
                       </div>
                       <div class="row">
@@ -112,7 +112,7 @@
     <table id="tabla" class="table align-items-center table-flush" >
       <thead class="thead-light">
         <tr>
-          <th scope="col" data-column="id" class="sortable">id</th>
+          {{-- <th scope="col" data-column="id" class="sortable">id</th> --}}
           <th scope="col" data-column="fechadeingreso" class="sortable">fechadeingreso</th>
           <th scope="col" data-column="ci" class="sortable">ci</th>
           <th scope="col" data-column="nombre" class="sortable">nombre</th>
@@ -120,33 +120,33 @@
           <th scope="col" data-column="apellidomaterno" class="sortable">apellidomaterno</th>
           <th scope="col" data-column="celular" class="sortable">celular</th>
           <th scope="col" data-column="direccion" class="sortable">direccion</th>
-          <th scope="col" data-column="correo" class="sortable">correo</th>
+          <th scope="col" data-column="direccion" class="sortable">correo</th>
           <th scope="col" data-column="estado" class="sortable">estado</th>
           <th scope="col">imagen</th>
-          <th scope="col" data-column="sueldo" class="sortable">sueldo</th>
-          <th scope="col">rol</th>
+          
         </tr>
       </thead>
-      <tbody id="tabla_profe">
-        @foreach ($profesors as $profesor)
+      <tbody id="tabla_alu">
+        @foreach ($alumnos as $alumno)
                   <tr>
-                      <td scope="row">{{ $profesor->id }}</td>
-                      <td>{{ $profesor->fechadeingreso }}</td>
-                      <td>{{ $profesor->ci }}</td>
-                      <td>{{ $profesor->nombre }}</td>
-                      <td>{{ $profesor->apellidopaterno }}</td>
-                      <td>{{ $profesor->apellidomaterno }}</td>
-                      <td>{{ $profesor->celular }}</td>
-                      <td>{{ $profesor->direccion }}</td>
-                      <td>{{ $profesor->user->email }}</td>
-                      <td>{{ $profesor->estado }}</td>
+                      {{-- <td scope="row">{{ $alumno->id }}</td> --}}
+                      <td>{{ $alumno->fechadeingreso }}</td>
+                      <td>{{ $alumno->ci }}</td>
+                      <td>{{ $alumno->nombre }}</td>
+                      <td>{{ $alumno->apellidopaterno }}</td>
+                      <td>{{ $alumno->apellidomaterno }}</td>
+                      <td>{{ $alumno->celular }}</td>
+                      <td>{{ $alumno->direccion }}</td>
+                      <td>{{ $alumno->correo }}</td>
+                      {{-- <td>{{ $profesor->user->email }}</td> --}}
+                      <td>{{ $alumno->estado }}</td>
                       <td>
-                      <img src="{{ asset('storage').'/'.$profesor->imagen}}" alt="" class="img-thumbnail img-fluid img-custom">
+                      <img src="{{ asset('storage').'/'.$alumno->imagen}}" alt="" class="img-thumbnail img-fluid img-custom">
 
 
                       </td>
-                      <td>{{ $profesor->sueldo }}</td>
-                      <td>{{ $profesor->user->role }}</td>
+                      {{-- <td>{{ $profesor->sueldo }}</td>
+                      <td>{{ $profesor->user->role }}</td> --}}
                   </tr>
                   @endforeach
       </tbody>
@@ -160,11 +160,9 @@
 <!-- Link to pdfmake font files -->
 <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
 
-<script></script> 
-
 <script>
-    var profeprosData = {!! json_encode($profesors) !!};
-    var profesorreporte =  {!! json_encode($profesors) !!};
+    var profeprosData = {!! json_encode($alumnos) !!};
+    var profesorreporte =  {!! json_encode($alumnos) !!};
     function encontrarListaPorId(idLista) {
       return profeprosData.find(item => item.id === idLista);
     }
@@ -258,7 +256,7 @@
 
         function generartabla(fecha_ini,fecha_fin,ci,nombre,apellidopaterno,apellidomaterno,celular,direccion,email,estado,sueldomin,sueldomax,ordenar,mayorymenor) {
               $.ajax({
-                    url: '{{ url("obtener-fechainicio") }}', // Ruta a tu controlador Laravel
+                    url: '{{ url("obtener-fechainicioreporalusecre") }}', // Ruta a tu controlador Laravel
                     type: 'POST',
                     data: {
                         fechainicio: fecha_ini, //lo de blanco es la llave q tienes para q se capture la variable
@@ -282,14 +280,14 @@
                         
                   
                         // Limpiar el campo de selección de periodos
-                        $('#tabla_profe').empty();
-                      //  profesorreporte=[];
+                        $('#tabla_alu').empty();
+                        //profesorreporte=[];
 
                         $.each(response, function(key, value) {
                             // alert(value.id)
-                            $('#tabla_profe').append(
+                            $('#tabla_alu').append(
                                 '<tr>'+
-                                ' <td>'+value.id+'</td>'+
+                                // ' <td>'+value.id+'</td>'+
                                     '<td>'+value.fechadeingreso+'</td>'+
                                     ' <td>'+value.ci+'</td>'+
                                     ' <td>'+value.nombre+'</td>'+
@@ -297,11 +295,11 @@
                                     ' <td>'+value.apellidomaterno+'</td>'+
                                     ' <td>'+value.celular+'</td>'+
                                     ' <td>'+value.direccion+'</td>'+
-                                    ' <td>'+value.email+'</td>'+
+                                     ' <td>'+value.correo+'</td>'+
                                     ' <td>'+value.estado+'</td>'+
                                     ' <td><img src="'+value.ruta_imagen+'" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid"></td>'+
-                                    ' <td>'+value.sueldo+'</td>'+
-                                    ' <td>'+value.role+'</td>'+
+                                    // ' <td>'+value.sueldo+'</td>'+
+                                    // ' <td>'+value.role+'</td>'+
                                 ' </tr>'
                             );
                             //alert(value.id);

@@ -39,14 +39,14 @@
                                               </div>  
                                         </div>
                                         <div class="row">
-                                          <div class="col">
+                                          <div class="col">s
                                             <label class="text-primary text-capitalize">secretaria</label>
                                             <select type="text" name="secretaria_id" id="secretaria_id" class="form-control" >
                                               <option selected  value="">seleccione a la secretaria </option>
                                               @foreach ($secretarias as $secretaria)
                                               <option value="{{ $secretaria->id }}">{{ $secretaria->nombre." ".$secretaria->apellidopaterno." ".$secretaria->apellidomaterno}}</option>
                                               @endforeach
-                                            </select>s
+                                            </select>
                                         </div>
                                           <div class="col">
                                             <label class="text-primary text-capitalize">estado</label>
@@ -60,6 +60,7 @@
                                               <label class="text-primary text-capitalize">ordenar</label>
                                               <div class="input-group">
                                                       <select type="text" name="ordenar" id="ordenar" class="form-control">
+                                                        <option value="fechaadelantosecre">fechaadelantosecre</option> 
                                                         <option value="nombre_secretaria">nombre_secretaria</option> 
                                                         <option value="monto">monto</option> 
                                                         <option value="observacion">observacion</option> 
@@ -98,10 +99,10 @@
                                     <td>{{ $adelantosecre->monto }}</td>
                                     <td>{{ $adelantosecre->estadoade }}</td>
                                     <td>{{ $adelantosecre->observacion }}</td>
-                                    <td>{{ $adelantosecre->secretaria_id."-".$adelantosecre->secretaria->nombre}}</td>
-                                    <td> <a href="{{ url('/adelantosecre/'.$adelantosecre->id.'/show') }}" method="post" class="btn btn-sm btn-danger"><i class="far fa-eye"></i></a>
+                                    <td>{{ $adelantosecre->secretaria->nombre." ".$adelantosecre->secretaria->apellidopaterno." ".$adelantosecre->secretaria->apellidomaterno}}</td>
+                                    <td> <a href="{{ url('/adelantosecre/'.$adelantosecre->id.'/show') }}" method="post" class="btn btn-sm btn-danger"><i class="fas fa-print"></i></a>
                                     </td>
-                                </tr>
+                                </tr>s
                                 @endforeach
                             </tbody>
                         </table>
@@ -160,10 +161,10 @@
                                     ' <td>'+value.monto+'</td>'+
                                     ' <td>'+value.estadoade+'</td>'+
                                     ' <td>'+value.observacion+'</td>'+
-                                    '<td>'+value.nombre_secretaria+'</td>'+
+                                    '<td>'+value.nombre_secretaria+' '+value.apellidopaterno+' '+value.apellidomaterno+'</td>'+
                                     ' <td>'+
                                       // '<a href="/proyecto/public/profesor/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
-                                      '<a href="/proyecto/public/secretaria/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
+                                      '<a href="/proyecto/public/secretaria/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="fas fa-print"></i></a>'+
                                     ' </td>'+
                                 ' </tr>'
                             );

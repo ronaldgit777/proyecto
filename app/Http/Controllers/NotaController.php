@@ -78,6 +78,35 @@ class NotaController extends Controller
          return view('nota.notasproreporte',compact('alumnos','materias','aulas','periodos','usuario'   ));
          
     }
+    public function notasreporte()
+    {   
+       $userid=auth()->user()->id;
+       $alumnos =alumno
+       ::join('inscripcions','inscripcions.alumno_id','=','alumnos.id')
+        ->join('asignarpromas','inscripcions.asignarproma_id','=','asignarpromas.id')
+        -> join('materias','asignarpromas.materia_id','=','materias.id')
+        -> join('aulas','asignarpromas.aula_id','=','aulas.id')
+        -> join('periodos','asignarpromas.periodo_id','=','periodos.id')  
+        ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('alumnos.*','materias.*','aulas.*','periodos.*',
+        DB::raw('ROUND((SELECT AVG(nota) FROM notas 
+        WHERE notas.alumno_id = alumnos.id and notas.materia_id = materias.id), 1) 
+        as promedio_notas')
+        )
+        //->where('profesors.user_id','=',$userid)
+        ->get();  
+        $materias =materia::all();
+        $aulas =aula::all();
+       $periodos =periodo::all();
+        $usuario=user::all();
+        
+       // $alumnos=alumno::all();
+        // return profesor::with('sueldopro')->get(); 
+         //$datos['sueldopros']=sueldopro::paginate(7);
+         return view('nota.notasreporte',compact('alumnos','materias','aulas','periodos','usuario'   ));
+         
+    }
     public function  obtenerfechainicionotareporte(Request $request)
     {   
        $fechaini = $request->input('fechainicio');

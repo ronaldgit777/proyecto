@@ -195,7 +195,7 @@ class asignarproma extends Model
             )
             ->get();
     }
-    public static function obtenerfecchainicioasignacionesre($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,$ordenarasig2, $mayorymenorasig2 )
+    public static function obtenerfecchainicioasignacionesresecre($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,$estadoasig2 ,$ordenarasig2, $mayorymenorasig2 )
     {      
         // Ejemplo de obtención del sueldo del profesor
        // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
@@ -225,6 +225,61 @@ class asignarproma extends Model
             ->when($aulaid2, function ($query, $aulaid2) {
                 return $query->where('aulas.id',$aulaid2);
                 }) 
+                ->when($estadoasig2, function ($query, $estadoasig2) {
+                    return $query->where('asignarpromas.estado',$estadoasig2);
+                    }) 
+            ->select(
+                'asignarpromas.*','fechadeasignacion',
+                'profesors.nombre as profesor_nombre',
+                'materias.materia as materia_nombre',
+                'materias.costo as materia_costo',
+                'periodos.periodo as periodo_nombre',
+                'aulas.aula as aula_nombre'
+            );
+            //aqui tienes q poenr en la vista los opciones del seelc de ordenar m tiene q ser lo q buscas
+            if (!empty($ordenarasig2) && !empty($mayorymenorasig2)) {
+                $consulta->orderBy($ordenarasig2, $mayorymenorasig2);
+            }
+              return $consulta->get();  //return $fechaini;
+              
+             /* ->where('profesors.id', 'like', "%$profesorid2%") 
+              ->where('materias.id', 'like', "%$materiaid2%") 
+              ->where('periodos.id', 'like', "%$periodoid2%") 
+              ->where('aulas.id', 'like', "%$aulaid2%") */
+    }
+    public static function obtenerfecchainicioasignacionesre($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,$estadoasig2 ,$ordenarasig2, $mayorymenorasig2 )
+    {      
+        // Ejemplo de obtención del sueldo del profesor
+       // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
+        $consulta = self::
+       
+             when($fechaini, function ($query, $fechaini) {
+                  return $query->where('asignarpromas.fechadeasignacion', '>=', $fechaini);
+              })
+              ->when($fechafin, function ($query, $fechafin) {
+                  return $query->where('asignarpromas.fechadeasignacion', '<=', $fechafin);
+              })   
+             // ->where('asignarpromas.estado', 'activo')
+            ->join('profesors', 'asignarpromas.profesor_id', '=', 'profesors.id')
+              ->join('periodos', 'asignarpromas.periodo_id', '=', 'periodos.id')
+              ->join('materias', 'asignarpromas.materia_id', '=', 'materias.id')
+              ->join('aulas', 'asignarpromas.aula_id', '=', 'aulas.id')
+
+            ->when($profesorid2, function ($query, $profesorid2) {
+                return $query->where('profesors.id',$profesorid2);
+                })
+            ->when($materiaid2, function ($query, $materiaid2) {
+                return $query->where('materias.id',$materiaid2);
+                })
+            ->when($periodoid2, function ($query, $periodoid2) {
+                return $query->where('periodos.id',$periodoid2);
+                })
+            ->when($aulaid2, function ($query, $aulaid2) {
+                return $query->where('aulas.id',$aulaid2);
+                }) 
+                ->when($estadoasig2, function ($query, $estadoasig2) {
+                    return $query->where('asignarpromas.estado',$estadoasig2);
+                    }) 
             ->select(
                 'asignarpromas.*','fechadeasignacion',
                 'profesors.nombre as profesor_nombre',
@@ -272,9 +327,9 @@ class asignarproma extends Model
         -> join('aulas','asignarpromas.aula_id','=','aulas.id')
         -> join('periodos','asignarpromas.periodo_id','=','periodos.id')  
         ->join('users','users.id','=','profesors.user_id')
-        ->select('asignarpromas.*','asignarpromas.estado','profesors.nombre','profesors.user_id','materias.materia as nombre_materia','aulas.aula as nombre_aula','periodos.periodo as nombre_periodo')
+        ->select('asignarpromas.*','profesors.nombre','profesors.user_id','materias.materia as nombre_materia','aulas.aula as nombre_aula','periodos.periodo as nombre_periodo')
         ->where('profesors.user_id','=',$userid)
-      //->where('asignarpromas.estado','activo')//que muestre asignacioen activas del profesor
+     // ->where('asignarpromas.estado','activo')//que muestre asignacioen activas del profesor
      //  ->asignarpromas()
          ->get();  
     }
@@ -291,7 +346,6 @@ class asignarproma extends Model
      //  ->asignarpromas()
          ->get();  
     }
-
     public static function obtenerfecchainicioalumnoprofeuserreporte($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,$ordenarasig2, $mayorymenorasig2,$userid)
     {      
         // Ejemplo de obtención del sueldo del profesor
@@ -371,8 +425,8 @@ class asignarproma extends Model
             //->selectRaw("CONCAT('$rutaImagenBase', alumnos.imagen) as ruta_imagen");
               return $consulta->get();  //return $fechaini;
     }
-    public static function obtenerfecchainicioasigprofeuserreporte($fechaini,$fechafin,$estadoasig2,$userid)
-    {      
+    public static function obtenerfecchainicioasigprofeuserreporte($fechaini,$fechafin,$materiaid2,$periodoid2,$aulaid2, $estadoasig2,$userid)
+    {    
         // Ejemplo de obtención del sueldo del profesor
        // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
         $consulta = self::join('inscripcions','asignarpromas.id','=','inscripcions.asignarproma_id')
@@ -388,6 +442,15 @@ class asignarproma extends Model
               ->when($fechafin, function ($query, $fechafin) {
                   return $query->where('asignarpromas.fechadeasignacion', '<=', $fechafin);
               })   
+              ->when($materiaid2, function ($query, $materiaid2) {
+                return $query->where('materias.id', '=', $materiaid2);
+            })   
+            ->when($periodoid2, function ($query, $periodoid2) {
+                return $query->where('periodos.id', '=', $periodoid2);
+            }) 
+            ->when($aulaid2, function ($query, $aulaid2) {
+                return $query->where('aulas.id', '=', $aulaid2);
+            }) 
             ->when($estadoasig2, function ($query, $estadoasig2) {
                 return $query->where('asignarpromas.estado', '=', $estadoasig2);
             }) 
@@ -396,7 +459,7 @@ class asignarproma extends Model
             //  ->get();6
             ->select(
                 'alumnos.*',
-                 'asignarpromas.*','fechadeasignacion','asignarpromas.estado',  
+                 'asignarpromas.*','fechadeasignacion','asignarpromas.estado as nombre_estado',  
                 'profesors.nombre as profesor_nombre',
                 'materias.materia as materia_nombre',
                 'materias.costo as materia_costo',
@@ -455,6 +518,70 @@ class asignarproma extends Model
                 DB::raw('ROUND((SELECT AVG(nota) FROM notas 
                 WHERE notas.alumno_id = alumnos.id and notas.materia_id = materias.id), 1) 
                 as promedio_notas')
+            )
+            ->when($promin2, function ($query, $promin2) {
+                return $query->having('promedio_notas', '>=', $promin2);
+            })
+            ->when($promax2, function ($query, $promax2) {
+                return $query->having('promedio_notas', '<=', $promax2);
+            })  ;
+            if (!empty($ordenarasig2) && !empty($mayorymenorasig2)) {
+                $consulta->orderBy($ordenarasig2, $mayorymenorasig2);
+            }
+            //->selectRaw("CONCAT('$rutaImagenBase', alumnos.imagen) as ruta_imagen");
+              return $consulta->get();  //return $fechaini;s
+    }
+
+    public static function obtenerfecchainicionotassecreuser($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2, 
+    $alumno_nombre2,$alumno_apepa2, $alumno_apema2 ,$promin2 ,$promax2, $ordenarasig2, $mayorymenorasig2,$userid)
+    {      
+        // Ejemplo de obtención del sueldo del profesor
+       // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
+        $consulta = self::join('inscripcions','asignarpromas.id','=','inscripcions.asignarproma_id')
+                ->join('alumnos','inscripcions.alumno_id','=','alumnos.id')
+              ->join('profesors', 'asignarpromas.profesor_id', '=', 'profesors.id')
+              ->join('materias', 'asignarpromas.materia_id', '=', 'materias.id')
+              ->join('periodos', 'asignarpromas.periodo_id', '=', 'periodos.id')
+              ->join('aulas', 'asignarpromas.aula_id', '=', 'aulas.id')
+             ->join('profesors','users.id','=','profesors.user_id')
+              ->when($fechaini, function ($query, $fechaini) {
+                  return $query->where('alumnos.fechadeingreso', '>=', $fechaini);
+              })
+              ->when($fechafin, function ($query, $fechafin) {
+                  return $query->where('alumnos.fechadeingreso', '<=', $fechafin);
+              })   
+              ->when($materiaid2, function ($query, $materiaid2) {
+                return $query->where('materias.id', '=', $materiaid2);
+            })   
+            ->when($periodoid2, function ($query, $periodoid2) {
+                return $query->where('periodos.id', '=', $periodoid2);
+            }) 
+            ->when($aulaid2, function ($query, $aulaid2) {
+                return $query->where('aulas.id', '=', $aulaid2);
+            }) 
+            ->when($alumno_nombre2, function ($query, $alumno_nombre2) {
+                return $query->where('alumnos.nombre', '=', $alumno_nombre2);
+            }) 
+            ->when($alumno_apepa2, function ($query, $alumno_apepa2) {
+                return $query->where('alumnos.apellidopaterno', '=', $alumno_apepa2);
+            }) 
+            ->when($alumno_apema2, function ($query, $alumno_apema2) {
+                return $query->where('alumnos.apellidomaterno', '=', $alumno_apema2);
+            }) 
+           // ->where('secretarias.user_id','=',$userid)
+            //->with(['promedioNotas'])
+            ->select(
+                'alumnos.*',
+                // 'asignarpromas.*','fechadeasignacion',
+                'secretarias.nombre as profesor_nombre',
+                'materias.materia as materia_nombre',
+                'materias.costo as materia_costo',
+                'periodos.periodo as periodo_nombre',
+                'aulas.aula as aula_nombre',
+                DB::raw('ROUND((SELECT AVG(nota) FROM notas 
+                WHERE notas.alumno_id = alumnos.id and notas.materia_id = materias.id), 1) 
+                as promedio_notas'
+                )
             )
             ->when($promin2, function ($query, $promin2) {
                 return $query->having('promedio_notas', '>=', $promin2);

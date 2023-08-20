@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\secretaria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SecretariaController extends Controller
 {
@@ -64,7 +65,7 @@ class SecretariaController extends Controller
      }
     public function index()
     {
-        $secretarias=secretaria::all();
+        $secretarias=secretaria::paginate(5);
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);
          return view('secretaria.index',compact('secretarias'));
@@ -103,9 +104,11 @@ class SecretariaController extends Controller
      * @param  \App\Models\secretaria  $secretaria
      * @return \Illuminate\Http\Response
      */
-    public function show(secretaria $secretaria)
+    public function show($id)
     {
-        //
+        $secretaria=secretaria::findOrFail($id);
+        $user=user::all();
+        return view('secretaria.show',compact('secretaria','user'));
     }
 
     /**
@@ -114,9 +117,12 @@ class SecretariaController extends Controller
      * @param  \App\Models\secretaria  $secretaria
      * @return \Illuminate\Http\Response
      */
-    public function edit(secretaria $secretaria)
+    public function edit($id)
     {
-        //
+        $secretaria=secretaria::findOrFail($id);
+        $user=user::join('secretarias','users.secretaria_id','=',$id);
+        //$sueldopro=sueldopro::get()->where('$id','=','12');
+        return view('secretaria.edit',compact('secretaria','user'));
     }
 
     /**
@@ -126,9 +132,18 @@ class SecretariaController extends Controller
      * @param  \App\Models\secretaria  $secretaria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, secretaria $secretaria)
+    public function update(Request $request, $id)
     {
-        //
+        $datossecretaria=request()->except(['_token','_method']);
+        if($request->hasFile('imagen')){
+            $secretaria=secretaria::findOrFail($id);
+            storage::delete('public/'.$secretaria->imagen);
+            $datossecretaria['imagen']=$request->file('imagen')->store('uploads','public');
+        }
+        secretaria::where('id','=',$id)->update($datossecretaria);
+        $secretaria=secretaria::findOrFail($id);
+       // return view('profesor.edit',compact('profesor'));
+       return redirect('secretaria');
     }
 
     /**
