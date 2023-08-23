@@ -208,6 +208,11 @@ class AlumnoController extends Controller
         $alumno=alumno::findOrFail($id);
         return view('alumno.show',compact('alumno'));
     }
+    public function show2alu($id)
+    {
+        $alumno=alumno::findOrFail($id);
+        return view('alumno.show2',compact('alumno'));
+    }
 
     /**
      * Show the form for editing the specified resource.

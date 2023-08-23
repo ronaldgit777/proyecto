@@ -15,7 +15,8 @@
                 </div>
                 </div>
             </div>
-    <form method="post" action="{{ url('/materia')}}" enctype="multipart/form-data">
+
+        <form method="post" action="{{ url('/materia/'.$materia->id)}}" enctype="multipart/form-data">
      @csrf   
      {{ method_field('PATCH')}} 
         <div class="row p-3 mb-2  text-white"   >

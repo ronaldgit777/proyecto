@@ -153,7 +153,7 @@
  <ul class="navbar-nav  ">
 
 <li class="nav-item">
-  <a class="nav-link " href="{{ url('/profesor') }}">
+  <a class="nav-link " href="{{ url('/indexsecre') }}">
     <i class="fas fa-chalkboard-teacher text-success"></i> profesores
   </a>      
 </li>
@@ -222,7 +222,7 @@
           </a>
       </li>
           <li class="nav-item">
-              <a class="nav-link " href="{{ url('/notassecrereporte') }}">
+              <a class="nav-link " href="{{ url('/notasreportesecre') }}">
                 <i class="fas fa-user-graduate"></i>notas de los alumnos con sus profesores
               </a>
           </li>

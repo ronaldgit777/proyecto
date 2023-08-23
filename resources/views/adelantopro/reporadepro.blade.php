@@ -26,7 +26,7 @@
                                                   <span class="text-muted">desde</span>
                                               </div>
                                               <div class="col">
-                                                <label class="text-primary text-capitalize">s</label>
+                                                <label class="text-primary text-capitalize"></label>
                                                 <input type="numeric" name="monto2" id="monto2" class="form-control">
                                                 <span class="text-muted">hasta</span>
                                               </div>
@@ -61,7 +61,7 @@
                                             <div class="input-group">
                                                 <select type="text" name="ordenar" id="ordenar" class="form-control">
                                                   <option value="fechaadelantopro">fecha</option> 
-                                                  <option value="nombre_profesor">nombre_profesor</option> 
+                                                  <option value="nombre_profesor">profesor</option> 
                                                   <option value="monto">monto</option> 
                                                   <option value="observacion">observacion</option> 
                                                 </select>
@@ -88,7 +88,7 @@
                                     <th>estado</th>
                                     <th>observacion</th>
                                     <th>profesor_id</th>
-                                    <th>acciones</th>
+                                    {{-- <th>acciones</th> --}}
                                 </tr>
                             </thead>
                             <tbody  id="tabla_profeade">
@@ -100,8 +100,8 @@
                                     <td>{{ $adelantopro->estadoade }}</td>
                                     <td>{{ $adelantopro->observacion }}</td>
                                     <td>{{ $adelantopro->profesor_id ."-".$adelantopro->profesor->nombre}}</td>
-                                    <td> <a href="{{ url('/adelantopro/'.$adelantopro->id.'/show') }}" method="post" class="btn btn-sm btn-danger"><i class="far fa-eye"></i></a>
-                                    </td>
+                                    {{-- <td> <a href="{{ url('/adelantopro/'.$adelantopro->id.'/show') }}" method="post" class="btn btn-sm btn-danger"><i class="far fa-eye"></i></a>
+                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -161,10 +161,10 @@
                                   ' <td>'+value.estadoade+'</td>'+
                                   ' <td>'+value.observacion+'</td>'+
                                   '<td>'+value.nombre_profesor+'</td>'+
-                                  ' <td>'+
-                                    // '<a href="/proyecto/public/profesor/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
-                                    '<a href="/proyecto/public/profesor/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
-                                  ' </td>'+
+                                  // ' <td>'+
+                                  //   // '<a href="/proyecto/public/profesor/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
+                                  //   //'<a href="/proyecto/public/profesor/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
+                                  // ' </td>'+
                               ' </tr>'
                           );
                           //alert(value.id);

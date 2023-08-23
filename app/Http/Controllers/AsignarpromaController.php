@@ -40,6 +40,28 @@ class AsignarpromaController extends Controller
        $alumno_nombre2,$alumno_apepa2, $alumno_apema2 ,$promin2 ,$promax2,$ordenarasig2, $mayorymenorasig2,$userid);
        return response()->json($resultadoconsulta); 
     }
+    public function  buscarfechainicionotassecreuserrol(Request $request)
+    {   
+        // $rutaImagenBase = asset('storage').'/';
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       //$profesorid2 = $request->input('profesorid');
+       $materiaid2 = $request->input('materiaid');
+       $periodoid2 = $request->input('periodoid');
+       $aulaid2 = $request->input('aulaid');
+       $alumno_nombre2 = $request->input('alumno_nombre');
+       $alumno_apepa2 = $request->input('alumno_apepa');
+       $alumno_apema2 = $request->input('alumno_apema');
+       $promin2 = $request->input('promin');
+       $promax2 = $request->input('promax');
+       $estado2 = $request->input('estado');
+       $ordenarasig2 = $request->input('ordenarasig');
+       $mayorymenorasig2 = $request->input('mayorymenorasig');
+       $userid=auth()->user()->id;
+       $resultadoconsulta = asignarproma::obtenerfecchainicionotassecreuserrol($fechaini,$fechafin,$materiaid2,$periodoid2,$aulaid2,
+       $alumno_nombre2,$alumno_apepa2, $alumno_apema2 ,$promin2 ,$promax2,$estado2,$ordenarasig2, $mayorymenorasig2,$userid);
+       return response()->json($resultadoconsulta); 
+    }
     public function  buscarfechainicionotasprofeuser(Request $request)
     {   
         // $rutaImagenBase = asset('storage').'/';
@@ -54,11 +76,12 @@ class AsignarpromaController extends Controller
        $alumno_apema2 = $request->input('alumno_apema');
        $promin2 = $request->input('promin');
        $promax2 = $request->input('promax');
+       $estado2 = $request->input('estado');
        $ordenarasig2 = $request->input('ordenarasig');
        $mayorymenorasig2 = $request->input('mayorymenorasig');
        $userid=auth()->user()->id;
        $resultadoconsulta = asignarproma::obtenerfecchainicionotasprofeuser($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,
-       $alumno_nombre2,$alumno_apepa2, $alumno_apema2 ,$promin2 ,$promax2,$ordenarasig2, $mayorymenorasig2,$userid);
+       $alumno_nombre2,$alumno_apepa2, $alumno_apema2 ,$promin2 ,$promax2,$estado2,$ordenarasig2, $mayorymenorasig2,$userid);
        return response()->json($resultadoconsulta); 
     }
     public function  buscarfechainicioalumnoprofeuserreporte(Request $request)
@@ -71,10 +94,13 @@ class AsignarpromaController extends Controller
        $periodoid2 = $request->input('periodoid');
        $aulaid2 = $request->input('aulaid');
        $estado2 = $request->input('estado');
+       $alumno_nombre2 = $request->input('alumno_nombre');
+       $alumno_apepa2 = $request->input('alumno_apepa');
+       $alumno_apema2 = $request->input('alumno_apema');
        $ordenarasig2 = $request->input('ordenarasig');
        $mayorymenorasig2 = $request->input('mayorymenorasig');
        $userid=auth()->user()->id;
-       $resultadoconsulta = asignarproma::obtenerfecchainicioalumnoprofeuserreporte($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,$estado2 ,$ordenarasig2, $mayorymenorasig2,$userid);
+       $resultadoconsulta = asignarproma::obtenerfecchainicioalumnoprofeuserreporte($fechaini,$fechafin,$profesorid2,$materiaid2,$periodoid2,$aulaid2,$estado2, $alumno_nombre2,$alumno_apepa2, $alumno_apema2 ,$ordenarasig2,$mayorymenorasig2,$userid);
        return response()->json($resultadoconsulta); 
     }
     public function  buscarfechainicioasigprofeuserreporte(Request $request)
@@ -163,7 +189,8 @@ class AsignarpromaController extends Controller
     public function obtenerprofesoresid(Request $request)
     {  
        $alumnoid2 = $request->input('alumnoid');
-       $resultadoconsulta = asignarproma::obtenerprofesores($alumnoid2);
+      // $resultadoconsulta = asignarproma::obtenerprofesores($alumnoid2);
+       $resultadoconsulta = profesor::all();
        return response()->json($resultadoconsulta); 
     }
     public function reporasigsecre()
@@ -352,7 +379,8 @@ class AsignarpromaController extends Controller
         //$aulaId = $request->input('aula_id');
         $profesorId = $request->input('profesor_id');
         
-        $aulasDisponibles = aula::obteneraulasDisponibles($profesorId);
+       // $aulasDisponibles = aula::obteneraulasDisponibles($profesorId);
+        $aulasDisponibles = aula::all();
             
         return response()->json($aulasDisponibles);
     }

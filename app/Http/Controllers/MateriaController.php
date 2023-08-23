@@ -86,7 +86,8 @@ class MateriaController extends Controller
         $datosmateria=request()->except(['_token','_method']);
         materia::where('id','=',$id)->update($datosmateria);
         $materia=materia::findOrFail($id);
-        return view('materia.edit',compact('materia'));
+        //return view('materia.edit',compact('materia'));
+        return redirect('materia');
     }
 
     /**

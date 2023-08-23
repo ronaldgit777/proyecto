@@ -6,7 +6,7 @@
                             <div class="row align-items-center">
                                       <div class="col">
                                         <h3 class="mb-0">REPORTE LISTA DE LOS SUELDOS PAGADOS DE LA SECRETARIA
-                                            <i class="far fa-calendar-alt  text-blue"></i> S
+                                            <i class="far fa-calendar-alt  text-blue"></i> 
                                         </h3>
                                         <div class="row">
                                                 <div class="col">
@@ -44,7 +44,7 @@
                                                             <option value="sueldo">sueldo</option> 
                                                             <option value="totaldescuento">totaldescuento</option> 
                                                             <option value="totalpago">totalpago</option> 
-                                                            <option value="nombre_secretaria">profesor</option> 
+                                                            <option value="nombre_secretaria">secretaria</option> 
                                                           </select>
                                                           <div class="input-group-append">
                                                             <select type="text" name="mayorymenor" id="mayorymenor" class="form-control">

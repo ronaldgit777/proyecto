@@ -86,8 +86,10 @@ class AulaController extends Controller
     {
         $datosaula=request()->except(['_token','_method']);
         aula::where('id','=',$id)->update($datosaula);
-        $profesor=aula::findOrFail($id);
-        return view('aula.edit',compact('aula'));
+        $aula=aula::findOrFail($id);
+      //  return view('aula.edit',compact('aula'));
+        return redirect('aula');
+      
     }
 
     /**

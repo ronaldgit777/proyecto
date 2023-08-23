@@ -36,7 +36,7 @@
                                                             <option value="sueldo">sueldo</option> 
                                                             <option value="totaldescuento">totaldescuento</option> 
                                                             <option value="totalpago">totalpago</option> 
-                                                            <option value="nombre_profesor">nombre_profesor</option> 
+                                                            <option value="nombre_profesor">profesor</option> 
                                                           </select>
                                                           <div class="input-group-append">
                                                             <select type="text" name="mayorymenor" id="mayorymenor" class="form-control">
@@ -106,10 +106,11 @@
                                     <td>{{ $sueldopro->totalpago }}</td>
                                     <td>{{ $sueldopro->observacion }}</td>
                                     <td>{{ $sueldopro->profesor->nombre }}</td>
-                                    <td> <a href="{{ url('/sueldopro/'.$sueldopro->id.'/show') }}" method="post"  class="btn btn-sm btn-danger"><i class="fas fa-print" ></i>
+                                    <td> 
+                                      <a href="{{ url('/sueldopro/'.$sueldopro->id.'/show') }}" method="post"  class="btn btn-sm btn-danger"><i class="fas fa-print" ></i>
                                       </a>
                                     </td>           
-                                    </td>
+                                    
                                 </tr>
                                 @endforeach
                             </tbody>

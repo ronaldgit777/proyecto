@@ -202,39 +202,70 @@
 </script>
 
 <script>
-    function generarpdfadelanto(){
-     
-        var fechaadelantopro =    $('#fechaadelantopro').val();
-        var monto = $('#monto').val();
-        var observacion = $('#observacion').val();
-        var profesor_id = $('#profesor_id option:selected').text();
-        const docDefinition = {
-        content: [
-          { text: "Reporte de adelanto", style: "header" },
-          {
-            table: {
-              
-              headers: ["fecha de adelanto:", "monto", "observacion", "profesor_id"],
-              body: [
-                ["fecha de adelanto:", "monto", "observacion", "profesor_id"],
-                [fechaadelantopro,monto,observacion,profesor_id]
-              ],
-            },
-          },
-          /*
-          { text: 'fecha de adelanto:'+ fechaadelantopro},
-          { text: 'monto:'+ monto},
-          { text: 'observacion:'+ observacion},
-          { text: 'profesor_id:'+ profesor_id},*/
-        ],
-        styles: {
-          header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] },
-          subheader: { fontSize: 14, bold: true, margin: [0, 0, 0, 5] },
-        },
+function generarpdfadelanto() {
+  var currentDate = new Date();
+  var formattedDate = currentDate.toISOString().slice(0, 10);
+
+  var fechaadelantopro = $('#fechaadelantopro').val();
+  var monto = $('#monto').val();
+  var observacion = $('#observacion').val();
+  var profesor_id = $('#profesor_id option:selected').text();
+  var monto_con_sufijo = monto + " bs";
+
+  const docDefinition = {
+    header: {
+      text: "Instituto TEL C",
+      alignment: "left",
+      margin: [40, 10, 10, 20],
+    },
+    footer: function(currentPage, pageCount) {
+      return {
+        text: "direccion:av san martin entre uruguay - Página " + currentPage.toString() + " de " + pageCount,
+        alignment: "left",
+         margin: [40, 10, 10, 20],
       };
-           // Generar el documento PDF
-           pdfMake.createPdf(docDefinition).download("reporteadelanto.pdf");
-    }
+    },
+    content: [
+      {
+        text: "Reporte de Adelanto",
+        style: "header",
+      },
+      {
+        text: "Fecha: " + formattedDate,
+        alignment: "right",
+        margin: [0, 0, 0, 10],
+      },
+      {
+        table: {
+          widths: ["auto", "auto", "*", "auto"],
+          body: [
+            ["Fecha de Adelanto", "Monto", "Observación", "Profesor"],
+            [fechaadelantopro, monto_con_sufijo, observacion, profesor_id],
+          ],
+        },
+      },
+    ],
+    styles: {
+      header: {
+        fontSize: 18,
+        bold: true,
+        alignment: "center",
+        margin: [0, 0, 0, 10],
+      },
+    },
+    defaultStyle: {
+      fontSize: 12,
+      margin: [0, 5],
+    },
+    pageMargins: [40, 80, 40, 60],
+  };
+
+  pdfMake.createPdf(docDefinition).download(
+    "reporteadelanto_" + profesor_id + "_" + formattedDate + ".pdf"
+  );
+}
+
+
 </script>
 
     <!--empeiza el modal-->

@@ -49,7 +49,7 @@
                         </div>
                         <div class="col">
                           <label class="text-primary text-capitalize">estado</label>
-                          <select type="text" name="observacionss" id="observacion" class="form-control">
+                          <select type="text" name="estado" id="estado" class="form-control">
                             <option selected  value="">ambos</option>
                             <option value="activo">activo</option> 
                             <option value="inactivo">inactivo</option> 
@@ -227,16 +227,17 @@
             var aulaid = $('#aula_id').val();  
             var alumno_nombre = $('#alumno_nombre').val();
             var alumno_apepa = $('#alumno_apepa').val();
-            var alumno_apema = $('#alumno_apema').val();promin
+            var alumno_apema = $('#alumno_apema').val();
             var promin = $('#promin').val();
             var promax = $('#promax').val();
+            var estado = $('#estado').val();  
             var ordenar = $('#ordenar').val();
             var mayorymenor = $('#mayorymenor').val();
             //alert(promin)
-            generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,alumno_nombre,alumno_apepa,alumno_apema,promin,promax,ordenar,mayorymenor); 
+            generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,alumno_nombre,alumno_apepa,alumno_apema,promin,promax,estado,ordenar,mayorymenor); 
            
         });
-        function generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,alumno_nombre,alumno_apepa,alumno_apema,promin,promax,ordenar,mayorymenor) {
+        function generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,alumno_nombre,alumno_apepa,alumno_apema,promin,promax,estado,ordenar,mayorymenor) {
               $.ajax({
                     url: '{{ url("obtener-fechainicionotaprofe") }}', // Ruta a tu controlador Laravel
                     type: 'POST',
@@ -252,6 +253,7 @@
                         alumno_apema:alumno_apema,
                         promin:promin,
                         promax:promax,
+                        estado: estado,
                         ordenarasig:ordenar,
                         mayorymenorasig:mayorymenor,
                       // profesor_id: profesorId,
@@ -281,12 +283,14 @@
                                     ' <td>'+promedio+'</td>'+
                                     ' <td>'+value.periodo_nombre+'</td>'+
                                     ' <td>'+value.aula_nombre+'</td>'+
-                                    ' <td>'+value.estado+'</td>'+
+                                    ' <td>'+value.nombre_estado+'</td>'+
                                     ' <td><img src="'+imagen+value.imagen+'" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid"></td>'+
                                    // ' <td>'+value.role+'</td>'+
                                     ' <td>'+
-                                       '<a href="/proyecto/public/asignacion/' + value.id + '/edit" method="post" class="btn btn-sm btn-success"> <i class="far fa-file-alt"></i></a>' +
-                                      // '<a href="/proyecto/public/asignacion/' + value.id + '/show" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
+                                        '<a href="/proyecto/public/asignacion/' + value.id + '/edit" method="post" class="btn btn-sm btn-success"> <i class="far fa-file-alt"></i></a>' +
+//'<button onclick="cargaridnotas('+{{ $alumno->alumnoid }}+','+{{ $alumno->materiaid }}+','+{{ $alumno->nombre }}+','+{{ $alumno->apellidopaterno }}+','+{{ $alumno->apellidomaterno }}+','+{{ $alumno->materia }}+','+{{ $alumno->profesor_nombre }}+','+{{ $alumno->profesor_apellidopaterno }}+','+{{ $alumno->profesor_apellidomaterno }}+')"data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info"><i class="far fa-file-alt"></i></button>'+
+  
+//                                       // '<a href="/proyecto/public/asignacion/' + value.id + '/show" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
                                     ' </td>'+
                                 ' </tr>'
                             );
@@ -327,6 +331,9 @@
         $('#promax').on('input', function() {
            $('#fechainicio').trigger('change');
         });
+        $('#estado').on('change', function() {
+           $('#fechainicio').trigger('change');
+        });
         $('#ordenar').on('change', function() {
            $('#fechainicio').trigger('change');
         });
@@ -335,7 +342,7 @@
         });
 
     });
-    function redondearAUnDecimal(numero) {
+function redondearAUnDecimal(numero) {
             return Math.round(numero * 10) / 10;
             }
     function cargaridnotas(alumnoid,materiaid,nombre,apellidopaterno,apellidomaterno,nombre_materia) {
@@ -400,7 +407,7 @@
      });
         
         
-     }
+}
   </script>
 @endsection
 <!--empeiza el modal-->

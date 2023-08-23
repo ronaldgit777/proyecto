@@ -28,6 +28,17 @@ class ProfesorController extends Controller
            
        return response()->json($resultadoconsulta);        
     }
+    public function  obtenerfechainicio2secre(Request $request)
+    {   
+       $rutaImagenBase = asset('storage').'/';
+       $fechaini = $request->input('fechainicio');
+       $fechafin = $request->input('fechafinal');
+       $buscarpro2 = $request->input('buscarpro');
+       $estadopro2 = $request->input('estadopro');
+       $resultadoconsulta = profesor::obtenerprofesoresdesdefechainicio2secre($fechaini,$rutaImagenBase,$fechafin,$buscarpro2,$estadopro2);
+           
+       return response()->json($resultadoconsulta);        
+    }
 
     public function obtenermenorfechainicio()
     {   
@@ -62,7 +73,8 @@ class ProfesorController extends Controller
      public function reporpro()
      {   
          $profesors = Profesor::obtenerProfesoresConRutaImagen();
-         return view('profesor.reporpro', compact('profesors'));    
+         $user=user::all();
+                  return view('profesor.reporpro', compact('profesors','user'));    
      }
     public function opcionesreporte()
     {   
@@ -75,6 +87,14 @@ class ProfesorController extends Controller
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);
          return view('profesor.index',compact('profesors'));    
+    }
+    public function indexsecre()
+    {   
+       $profesors=profesor::paginate(5);
+      //  $profesors=profesor::all();
+        // return profesor::with('sueldopro')->get(); 
+         //$datos['sueldopros']=sueldopro::paginate(7);
+         return view('profesor.indexsecre',compact('profesors'));    
     }
 
     /**
@@ -116,7 +136,12 @@ class ProfesorController extends Controller
         $user=user::all();
         return view('profesor.show',compact('profesor','user'));
     }
-
+    public function show2($id)
+    {
+        $profesor=profesor::findOrFail($id);
+        $user=user::all();
+        return view('profesor.show2',compact('profesor','user'));
+    }
     /**
      * Show the form for editing the specified resource.
      *

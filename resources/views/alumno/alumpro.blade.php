@@ -97,11 +97,12 @@
                                 data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info"> 
                                 <i class="far fa-file-alt"></i></button>
 
-                            <a href="{{ url('/alumno/'.$alumno->id.'/') }}" method="post" class="btn btn-sm btn-danger">
+                            <a href="{{ url('/alumno/'.$alumno->id.'/show2alu') }}" method="post" class="btn btn-sm btn-danger">
                               <i class="far fa-eye"></i></a>     
                               {{-- <a href="{{ url('/alumno/'.$alumno->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
                                 <i class="fas fa-edit"></i></a>          --}}
                             </td>
+                            
                         </tr>
                         @endforeach
             </tbody>

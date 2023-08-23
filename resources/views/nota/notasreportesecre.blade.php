@@ -5,7 +5,7 @@
     <div class="card-header border-0">
       <div class="row align-items-center">
             <div class="col">
-              <h3 class="mb-0">LISTA DE PROMEDIOS DE LOS ALUMNOS REPORTE <label> <?php echo auth()->user()->email; ?></label></h3>
+              <h3 class="mb-0">LISTA DE PROMEDIOS DE LOS ALUMNOS REPORTE -rol secre<label> <?php echo auth()->user()->email; ?></label></h3>
               <div class="row">
                       <div class="col">
                           <label class="text-primary text-capitalize">fecha de inicioA</label>
@@ -49,7 +49,7 @@
                         </div>
                         <div class="col">
                           <label class="text-primary text-capitalize">estado</label>
-                          <select type="text" name="observacionss" id="observacion" class="form-control">
+                          <select type="text" name="estado" id="estado" class="form-control">
                             <option selected  value="">ambos</option>
                             <option value="activo">activo</option> 
                             <option value="inactivo">inactivo</option> 
@@ -124,7 +124,7 @@
                       <select type="text" name="ordenar" id="ordenar" class="form-control">
                         <option value="fechadeingreso">fechadeingreso</option> 
                         <option value="ci">ci</option> 
-                        <option value="nombre">nombre</option> 
+                        <option value="nombre_alumno">nombre</option> 
                         <option value="apellidopaterno">apellidopaterno</option> 
                         <option value="apellidomaterno">apellidomaterno</option> 
                         <option value="materias.materia">materias</option> 
@@ -229,17 +229,18 @@
             var alumno_apema = $('#alumno_apema').val();
             var promin = $('#promin').val();
             var promax = $('#promax').val();
+            var estado = $('#estado').val();
             var ordenar = $('#ordenar').val();
             var mayorymenor = $('#mayorymenor').val();
-
+alert(aulaid)
             //alert(fecha_ini+fecha_fin+materiaid+periodoid+aulaid+alumno_nombre+alumno_apepa+alumno_apema+promin+promax+ordenar+mayorymenor)
 
-            generartabla(fecha_ini,fecha_fin,materiaid,periodoid,aulaid,alumno_nombre,alumno_apepa,alumno_apema,promin,promax,ordenar,mayorymenor); 
+            generartabla(fecha_ini,fecha_fin,materiaid,periodoid,aulaid,alumno_nombre,alumno_apepa,alumno_apema,promin,promax,estado,ordenar,mayorymenor); 
            
         });
-        function generartabla(fecha_ini,fecha_fin,materiaid,periodoid,aulaid,alumno_nombre,alumno_apepa,alumno_apema,promin,promax,ordenar,mayorymenor) {
+        function generartabla(fecha_ini,fecha_fin,materiaid,periodoid,aulaid,alumno_nombre,alumno_apepa,alumno_apema,promin,promax,estado,ordenar,mayorymenor) {
               $.ajax({
-                    url: '{{ url("obtener-fechainicionotasecre") }}', // Ruta a tu controlador Laravel
+                    url: '{{ url("obtener-fechainicionotasecrerol") }}', // Ruta a tu controlador Laravel
                     type: 'POST',
                     data: {
                         fechainicio: fecha_ini, //lo de blanco es la llave q tienes para q se capture la variable
@@ -253,6 +254,7 @@
                         alumno_apema:alumno_apema,
                         promin:promin,
                         promax:promax,
+                        estado:estado,
                         ordenarasig:ordenar,
                         mayorymenorasig:mayorymenor,
                       // profesor_id: profesorId,
@@ -286,10 +288,10 @@
                                     ' <td><img src="'+imagen+value.imagen+'" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid"></td>'+
                                    // ' <td>'+value.role+'</td>'+
                                     ' <td>'+
-                                      // '<a href="/proyecto/public/asignacion/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i>hola</a>' +
- '<button onclick="cargaridnotas('+ value.id +','+ value.materiaid +',\''+ value.nombre +'\',\''+ value.apellidopaterno +'\',\''+ value.apellidomaterno +'\',\''+ value.materia_nombre +'\',\''+ value.profesor_nombre +'\',\''+ value.profesors_paterno +'\',\''+ value.profesor_materno +'\') " data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info"><i class="far fa-file-alt"></i></button>'+                                    
- ' </td>'+
- 
+                                       '<a href="/proyecto/public/asignacion/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i>hola</a>' +
+
+// '<button onclick="cargaridnotas('+{{ $alumno->alumnoid }}+','+{{ $alumno->materiaid }}+','+{{ $alumno->nombre }}+','+{{ $alumno->apellidopaterno }}+','+{{ $alumno->apellidomaterno }}+','+{{ $alumno->materia }}+','+{{ $alumno->profesor_nombre }}+','+{{ $alumno->profesor_apellidopaterno }}+','+{{ $alumno->profesor_apellidomaterno }}+')"data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info"><i class="far fa-file-alt"></i></button>'+
+//                                     ' </td>'+
                                 ' </tr>'
                             );
                             //alert(value.id);
@@ -329,11 +331,14 @@
         $('#promax').on('input', function() {
            $('#fechainicio').trigger('change');
         });
+        $('#estado').on('change', function() {
+           $('#fechainicio').trigger('change');
+        });
         $('#ordenar').on('change', function() {
            $('#fechainicio').trigger('change');
         });
         $('#mayorymenor').on('change', function() {
-           $('#fechainicio').trigger('change');s
+           $('#fechainicio').trigger('change');
         });
     });
     function redondearAUnDecimal(numero) {
@@ -345,7 +350,7 @@
             $('#materia1').val(nombre_materia);
         //alert(profesor_nombre+'-'+profesor_apellidopaterno)
     $.ajax({
-                url: '{{ url("obtener-notasdelalumnoidadmi") }}', // Ruta a tu controlador Laravel
+                url: '{{ url("obtener-notasdelalumnoidsecre") }}', // Ruta a tu controlador Laravel
                 type: 'POST',
                 data: {
                     alumnoid: alumnoid,
@@ -418,7 +423,7 @@
                            <div class="card-header border-0">
                                   <div class="row align-items-center">
                                       <div class="col">
-                                        <h3 class="mb-0">LISTA DE NOTAS</h3>
+                                        <h3 class="mb-0">LISTA DE NOTAS-rol secre</h3>
                                         <div class="row">
                                               <div class="col">
                                               <input type="text" name="sumanota" id="sumanota" class="form-control" placeholder="suma notas" disabled>

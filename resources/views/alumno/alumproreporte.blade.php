@@ -37,6 +37,16 @@
                         </select>
                         {{-- <input type="text" name="aula_id" id="aula_id" class="form-control" > --}}
                         </div>
+                        <div class="col">
+                          <label class="text-primary text-capitalize">periodo</label>
+                          <select type="text" name="periodo_id" id="periodo_id" class="form-control" >
+                            <option selected  value="">seleccione el periodo</option>
+                            @foreach ($periodos as $periodo)
+                            <option value="{{ $periodo->id }}">{{ $periodo->periodo }}</option>
+                            @endforeach
+                        </select>
+                        {{-- <input type="text" name="periodo_id" id="periodo_id" class="form-control" > --}}
+                        </div>
                       <div class="col text-right">
                         <button class="btn btn-danger  btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button>
                         <a href="{{url('home')}}" class="btn btn-sm btn-success" >
@@ -44,17 +54,58 @@
                         regresar</a>
                     </div>  
               </div>
+            
+
+                @php
+                $alumnosapeno = [];$alumnosapepa = [];$alumnosapema = [];
+              @endphp
+                 @foreach ($alumnos as $alumno)
+                  @if (!in_array($alumno->nombre,  $alumnosapeno))
+                            @php
+                            $alumnosapeno[] = $alumno->nombre;
+                            @endphp
+                  @endif
+                    @if (!in_array($alumno->apellidopaterno,  $alumnosapepa))
+                    @php
+                    $alumnosapepa[] = $alumno->apellidopaterno;
+                    @endphp
+                    @endif
+                        @if (!in_array($alumno->apellidomaterno,  $alumnosapema))
+                        @php
+                        $alumnosapema[] = $alumno->apellidomaterno;
+                        @endphp
+                        @endif
+                 @endforeach
               <div class="row">
                 <div class="col">
-                  <label class="text-primary text-capitalize">periodo</label>
-                  <select type="text" name="periodo_id" id="periodo_id" class="form-control" >
-                    <option selected  value="">seleccione el periodo</option>
-                    @foreach ($periodos as $periodo)
-                    <option value="{{ $periodo->id }}">{{ $periodo->periodo }}</option>
+                  <label class="text-primary text-capitalize">nombre_alumno</label>
+                  <select type="text" name="alumno_nombre" id="alumno_nombre" class="form-control" >
+                    <option selected  value="">seleccione el nombre del alumno</option>
+                    @foreach ($alumnosapeno as $alumnonom)
+                    <option value="{{ $alumnonom }}">{{ $alumnonom }}</option>
                     @endforeach
                 </select>
-                {{-- <input type="text" name="periodo_id" id="periodo_id" class="form-control" > --}}
-                </div>
+              </div>
+               <div class="col">
+                  <label class="text-primary text-capitalize">apepaterno_alumno</label>
+                  <select type="text" name="alumno_apepa" id="alumno_apepa" class="form-control" >
+                    <option selected  value="">seleccione el apellidopaterno</option>
+                    @foreach ($alumnosapepa as $alumnopa)
+                    <option value="{{ $alumnopa}}">{{ $alumnopa}}</option>
+                    @endforeach
+                </select>
+              </div>
+              <div class="col">
+                  <label class="text-primary text-capitalize">apematerno_alumno</label>
+                  <select type="text" name="alumno_apema" id="alumno_apema" class="form-control" >
+                    <option selected  value="">seleccione el nombre del alumno</option>
+                    @foreach ($alumnosapema as $alumnoma)
+                    <option value="{{ $alumnoma}}">{{ $alumnoma}}</option>
+                    @endforeach
+                </select>
+              </div> 
+
+         
                 <div class="col">
                   <label class="text-primary text-capitalize">estado</label>
                   <select type="text" name="estado" id="estado" class="form-control">
@@ -106,7 +157,7 @@
                 <th scope="col">aula</th>
                 <th scope="col">estado</th>
                 <th scope="col">imagen</th>
-                <th scope="col">acciones</th>
+                {{-- <th scope="col">acciones</th> --}}
               </tr>
             </thead>
             <tbody id="tabla_asigre">
@@ -126,14 +177,14 @@
                             <td>
                             <img src="{{ asset('storage').'/'.$alumno->imagen}}" alt=""  width="50px" height="50px"  class="img-thumbnail img-fluid">
                             </td>
-                            <td>
+                            {{-- <td>
                             <a href="{{ url('/alumno/'.$alumno->id.'/edit') }}" method="post" class="btn btn-sm btn-danger">
                               <i class="fas fa-print"></i></a>
                             {{-- <a href="{{ url('/alumno/'.$alumno->id.'/') }}" method="post" class="btn btn-sm btn-danger">
                               <i class="far fa-eye"></i></a>      --}}
                               {{-- <a href="{{ url('/alumno/'.$alumno->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
                                 <i class="fas fa-edit"></i></a>          --}}
-                            </td>
+                            </td> --}}
                         </tr>
                         @endforeach
             </tbody>
@@ -162,13 +213,16 @@
             var periodoid = $('#periodo_id').val();
             var aulaid = $('#aula_id').val();  
             var estado = $('#estado').val();  
+            var alumno_nombre = $('#alumno_nombre').val();
+            var alumno_apepa = $('#alumno_apepa').val();
+            var alumno_apema = $('#alumno_apema').val();
             var ordenar = $('#ordenar').val();
             var mayorymenor = $('#mayorymenor').val();
             //alert(estado)
-            generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,estado,ordenar,mayorymenor); 
+            generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,estado,alumno_nombre,alumno_apepa,alumno_apema,ordenar,mayorymenor); 
            
         });
-        function generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,estado,ordenar,mayorymenor) {
+        function generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,estado,alumno_nombre,alumno_apepa,alumno_apema,ordenar,mayorymenor) {
               $.ajax({
                     url: '{{ url("obtener-fechainicioalumnoprofereporte") }}', // Ruta a tu controlador Laravel
                     type: 'POST',
@@ -180,6 +234,9 @@
                         periodoid: periodoid,
                         aulaid: aulaid,
                         estado: estado,
+                        alumno_nombre:alumno_nombre,
+                        alumno_apepa:alumno_apepa,
+                        alumno_apema:alumno_apema,
                         ordenarasig:ordenar,
                         mayorymenorasig:mayorymenor,
                       // profesor_id: profesorId,
@@ -209,10 +266,10 @@
                                     ' <td>'+value.asignarpromas_estado+'</td>'+
                                     ' <td><img src="'+imagen+value.imagen+'" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid"></td>'+
                                    // ' <td>'+value.role+'</td>'+
-                                    ' <td>'+
-                                       '<a href="/proyecto/public/asignacion/' + value.id + '/edit" method="post" class="btn btn-sm btn-danger"> <i class="fas fa-print"></i></a>' +
-                                      // '<a href="/proyecto/public/asignacion/' + value.id + '/show" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
-                                    ' </td>'+
+                                    // ' <td>'+
+                                    //    '<a href="/proyecto/public/asignacion/' + value.id + '/edit" method="post" class="btn btn-sm btn-danger"> <i class="fas fa-print"></i></a>' +
+                                    //   // '<a href="/proyecto/public/asignacion/' + value.id + '/show" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
+                                    // ' </td>'+
                                 ' </tr>'
                             );
                             //alert(value.id);
@@ -238,6 +295,15 @@
            $('#fechainicio').trigger('change');
         });
         $('#estado').on('change', function() {
+           $('#fechainicio').trigger('change');
+        });
+        $('#alumno_nombre').on('change', function() {
+           $('#fechainicio').trigger('change');
+        });
+        $('#alumno_apepa').on('change', function() {
+           $('#fechainicio').trigger('change');
+        });
+        $('#alumno_apema').on('change', function() {
            $('#fechainicio').trigger('change');
         });
         $('#ordenar').on('change', function() {

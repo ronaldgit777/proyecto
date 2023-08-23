@@ -44,12 +44,12 @@
                         <div class="col">
                             <label class="text-primary text-capitalize">celular</label>
                             <input type="text" name="celular" id="celular" class="form-control" >
-                            <span class="text-muted">desde</span>
+                         
                         </div>
                         <div class="col">
                             <label class="text-primary text-capitalize">direccion</label>
                             <input type="text" name="direccion" id="direccion" class="form-control">
-                            <span class="text-muted">hasta</span>
+                         
                         </div>
                         <div class="col">
                           <label class="text-primary text-capitalize">email</label>
@@ -63,7 +63,7 @@
                             <option value="inactivo">inactivo</option> 
                             </select>
                         </div>
-                        <div class="col">
+                        {{-- <div class="col">
                           <label class="text-primary text-capitalize">sueldo -desde</label>
                           <input type="text" name="sueldomin" id="sueldomin" class="form-control">
                           <span class="text-muted">minimo</span>
@@ -72,7 +72,7 @@
                           <label class="text-primary text-capitalize">hasta</label>
                           <input type="text" name="sueldomax" id="sueldomax" class="form-control">
                           <span class="text-muted">maximo</span>
-                        </div>
+                        </div> --}}
                         <div class="col">
                           <label class="text-primary text-capitalize">ordenar</label>
                           <div class="input-group">
@@ -86,7 +86,7 @@
                               <option value="direccion">direccion</option> 
                               <option value="email">email</option> 
                               <option value="estado">estado</option> 
-                              <option value="sueldo">sueldo</option> 
+                              {{-- <option value="sueldo">sueldo</option>  --}}
                               </select>
                               <div class="input-group-append">
                                 <select type="text" name="mayorymenor" id="mayorymenor" class="form-control">

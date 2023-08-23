@@ -110,8 +110,8 @@
                             <option value="aula_nombre">aula</option> 
                             <option value="periodo_nombre">periodo</option> 
                             <option value="alumno_nombre">nombre_alumno</option> 
-                            <option value="alumno_apellidopaterno">nombre_pa</option> 
-                            <option value="alumno_apellidomaterno">nombre_ma</option> 
+                            <option value="alumno_apellidopaterno">apellido paterno_alumno</option> 
+                            <option value="alumno_apellidomaterno">apellido materno_alumno</option> 
                        
                             </select>
                             <div class="input-group-append">
@@ -142,7 +142,7 @@
                                     <th>alumno_pa</th>
                                     <th>alumno_ma</th>
                                     <th>estado</th>
-                                    <th>acciones</th>
+                                    {{-- <th>acciones</th> --}}
                                 </tr>
                             </thead>
                             <tbody id="tabla_ins">
@@ -162,9 +162,9 @@
                                     <td>{{ $inscripcion->alumno_apellidopaterno}}</td>
                                     <td>{{ $inscripcion->alumno_apellidomaterno}}</td>
                                     <td>{{ $inscripcion->estado }}</td>
-                                    <td> <a href="{{ url('/inscripcion/'.$inscripcion->id.'/show') }}" method="post" class="btn btn-sm btn-danger">
+                                    {{-- <td> <a href="{{ url('/inscripcion/'.$inscripcion->id.'/show') }}" method="post" class="btn btn-sm btn-danger">
                                         <i class="far fa-eye"></i></a>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -232,9 +232,9 @@
                                     ' <td>'+value.alumno_apellidomaterno+'</td>'+
                                     ' <td>'+value.estado+'</td>'+
                                    // ' <td>'+value.role+'</td>'+
-                                    ' <td>'+
-                                      '<a href="/proyecto/public/inscripcion/' + value.id + '/show" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
-                                    ' </td>'+
+                                    // ' <td>'+
+                                    //   '<a href="/proyecto/public/inscripcion/' + value.id + '/show" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
+                                    // ' </td>'+
                                 ' </tr>'
                             );
                             //alert(value.id);

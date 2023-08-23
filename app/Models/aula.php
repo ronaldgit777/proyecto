@@ -45,7 +45,7 @@ class aula extends Model
     }
   
     public static function obteneraulasDisponibles( $profesorId)
-    {
+    {//falta solucionar
         $periodosNoAsignados = Periodo::whereNotIn('id', function ($query) use ($profesorId) {
             $query->select('periodo_id')
                 ->from('asignarpromas')
@@ -57,7 +57,7 @@ class aula extends Model
             $query->select('aula_id')
                 ->from('asignarpromas')
                 ->where('estado', 'activo')
-                ->whereIn('periodo_id', $periodosNoAsignados);
+                ->where('periodo_id', 3);
                 //->where('profesor_id', $profesorId);
         })
         ->get();

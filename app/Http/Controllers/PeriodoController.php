@@ -80,12 +80,13 @@ class PeriodoController extends Controller
      * @param  \App\Models\periodo  $periodo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, periodo $id)
+    public function update(Request $request,$id)
     {
         $datosperiodo=request()->except(['_token','_method']);
         periodo::where('id','=',$id)->update($datosperiodo);
         $periodo=periodo::findOrFail($id);
-        return view('periodo.edit',compact('periodo'));
+       // return view('periodo.edit',compact('periodo'));
+        return redirect('periodo');
     }
 
     /**

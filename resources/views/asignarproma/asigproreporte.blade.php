@@ -5,7 +5,7 @@
          <div class="card-header border-0">
                 <div class="row align-items-center">
                       <div class="col">
-                        <h3 class="mb-0">LISTA DE ASIGNACIONES REPORTE</h3>
+                        <h3 class="mb-0">LISTA DE ASIGNACIONES REPORTE a</h3>
                         <div class="row">
                                 <div class="col">
                                     <label class="text-primary text-capitalize">fecha de inicioA</label>

@@ -79,4 +79,5 @@ class materia extends Model
      //  ->asignarpromas()
          ->get();  
     }
+    
 }

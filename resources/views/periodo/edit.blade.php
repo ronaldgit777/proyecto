@@ -15,8 +15,9 @@
                 </div>
                 </div>
             </div>
-        <form method="post" action="{{ url('/periodo')}}" enctype="multipart/form-data">
+    <form method="post" action="{{ url('/periodo/'.$periodo->id)}}" enctype="multipart/form-data">
         @csrf   
+        {{ method_field('PATCH')}} 
         <div class="row p-3 mb-2  text-white"   >
             <div class="col-12"> 
                 <div class="m-portlet__body m-portlet--primary" data-portlet="true" m-portlet="true">

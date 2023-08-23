@@ -29,7 +29,7 @@
                                           <label class="text-black text-capitalize">fecha de adelanto</label>
                                       </div>
                                         <div class="col-8 col-md-9">
-                                          <input class="form-control" placeholder="fechaadelantosecre" type="date" name="fechaadelantosecre"  value="<?php echo $fcha; ?>"  >
+                                          <input class="form-control" placeholder="fechaadelantopro" type="date" name="fechaadelantosecre"  value="<?php echo $fcha; ?>" id="fechaadelantosecre" >
                                         </div>
                                   </div>
                                 </div>
@@ -139,7 +139,7 @@
                                           <label class="text text-capitalize">observacion</label>
                                       </div>
                                         <div class="col-8 col-md-9">
-                                          <input class="form-control" placeholder="observacion" type="observacion" name="observacion" required autocomplete="observacion">
+                                          <input class="form-control" placeholder="observacion" type="observacion" name="observacion" required autocomplete="observacion" id="observacion" > 
                                         </div>
                                   </div>
                                 </div>
@@ -147,7 +147,7 @@
                                   <div class="col-12 col-sm-12 col-md-6">
                                       <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                           <div class="col-12 col-md-12 " >
-                                              <center><input type="submit" value="guardar datos" class="btn btn-primary" onclick="generarpdfadelanto()" disabled id="botonadelanto"></center>
+                                            <center><input type="submit" value="guardar datos" class="btn btn-primary" onclick="generarpdfadelanto()"  id="botonadelanto" disabled></center>
                                           </div>
                                       </div>
                                   </div>
@@ -198,40 +198,72 @@
 </script>
 
 <script>
-    function generarpdfadelanto(){
-     
-        var fechaadelantosecre =    $('#fechaadelantosecre').val();
-        var monto = $('#monto').val();
-        var estadoade = $('#estadoade').val();
-        var observacion = $('#observacion').val();
-        var secretaria_id = $('#secretaria_id option:selected').text();
-        const docDefinition = {
-        content: [
-          { text: "Reporte de adelanto", style: "header" },
-          {
-            table: {
-              headers: ["fecha de adelanto:", "monto", "estado", "observacion", "secretaria_id"],
-              body: [
-                ["fecha de adelanto:", "monto", "estado", "observacion", "secretaria_id"],
-                [fechaadelantosecre,monto,estadoade,observacion,profesor_id]
-              ],
-            },
-          },
-          /*
-          { text: 'fecha de adelanto:'+ fechaadelantopro},
-          { text: 'monto:'+ monto},
-          { text: 'observacion:'+ observacion},
-          { text: 'profesor_id:'+ profesor_id},*/
-        ],
-        styles: {
-          header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] },
-          subheader: { fontSize: 14, bold: true, margin: [0, 0, 0, 5] },
+  function generarpdfadelanto() {
+    
+    var currentDate = new Date();
+    var formattedDate = currentDate.toISOString().slice(0, 10);
+  
+    var fechaadelantosecre = $('#fechaadelantosecre').val();
+    var monto = $('#monto').val();
+    var observacion = $('#observacion').val();
+    var secretaria_id = $('#secretaria_id option:selected').text();
+    var monto_con_sufijo = monto + " bs";
+    alert(observacion)
+    const docDefinition = {
+      header: {
+        text: "Instituto TEL C",
+        alignment: "left",
+        margin: [40, 10, 10, 20],
+      },
+      footer: function(currentPage, pageCount) {
+        return {
+          text: "direccion:av san martin entre uruguay - Página " + currentPage.toString() + " de " + pageCount,
+          alignment: "left",
+           margin: [40, 10, 10, 20],
+        };
+      },
+      content: [
+        {
+          text: "Reporte de Adelanto",
+          style: "header",
         },
-      };
-           // Generar el documento PDF
-           pdfMake.createPdf(docDefinition).download("reporteadelanto.pdf");
-    }
-</script>
+        {
+          text: "Fecha: " + formattedDate,
+          alignment: "right",
+          margin: [0, 0, 0, 10],
+        },
+        {
+          table: {
+            widths: ["auto", "auto", "*", "auto"],
+            body: [
+              ["Fecha de Adelanto", "Monto", "Observación", "secretaria"],
+              [fechaadelantosecre, monto_con_sufijo, observacion, secretaria_id],
+            ],
+          },
+        },
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          alignment: "center",
+          margin: [0, 0, 0, 10],
+        },
+      },
+      defaultStyle: {
+        fontSize: 12,
+        margin: [0, 5],
+      },
+      pageMargins: [40, 80, 40, 60],
+    };
+  
+    pdfMake.createPdf(docDefinition).download(
+      "reporteadelanto_" + secretaria_id + "_" + formattedDate + ".pdf"
+    );
+  }
+  
+  
+  </script>
     <!--empeiza el modal-->
     <div class="modal fade " id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog modal-lg " role="document">

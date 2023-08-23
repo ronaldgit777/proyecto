@@ -8,7 +8,7 @@
           <div class="card-header border-0">
             <div class="row align-items-center">
                       <div class="col">
-                        <h3 class="mb-0">LISTA DE PROFESORES</h3>
+                        <h3 class="mb-0">LISTA DE PROFESORES-rol secre</h3>
                         <div class="row">
                                 <div class="col">
                                     <label class="text-primary text-capitalize">fecha de inicioA</label>
@@ -38,7 +38,7 @@
                                   </div>
                                 </div>
                                 <div class="col text-right">s
-                                  <button class="btn btn-danger btn-sm" type="button" onclick="generarpdflistaprofesor()"><i class="fas fa-print" ></i>imprimir</button>
+                                  {{-- <button class="btn btn-danger btn-sm" type="button" onclick="generarpdflistaprofesor()"><i class="fas fa-print" ></i>imprimir</button> --}}
                               </div>  
                         </div>
                     </div>
@@ -82,10 +82,10 @@
                             </td>
                             <td>{{ $profesor->sueldo }}</td>
                             <td>
-                            <a href="{{ url('/profesor/'.$profesor->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
+                            {{-- <a href="{{ url('/profesor/'.$profesor->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
                               <i class="fas fa-edit"></i>
-                              </a>
-                            <a href="{{ url('/profesor/'.$profesor->id.'/') }}" method="post" class="btn btn-sm btn-danger">
+                              </a> --}}
+                            <a href="{{ url('/profesor/show2/'.$profesor->id.'/') }}" method="post" class="btn btn-sm btn-danger">
                               <i class="far fa-eye"></i>
                             </a>                     
                             </td>
@@ -95,7 +95,7 @@
           </table>
          {{ $profesors->links() }}
         </div>
-   </div>s
+   </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
    <!-- Link to pdfmake font files -->
@@ -177,7 +177,7 @@
       });
       function generartabla(fecha_ini,fecha_fin,buscar,estado) {
             $.ajax({
-                  url: '{{ url("obtener-fechainicio2") }}', // Ruta a tu controlador Laravel
+                  url: '{{ url("obtener-fechainicio2secre") }}', // Ruta a tu controlador Laravel
                   type: 'POST',
                   data: {
                       fechainicio: fecha_ini, //lo de blanco es la llave q tienes para q se capture la variable
@@ -210,7 +210,7 @@
                                   ' <td>'+value.sueldo+'</td>'+
                                  // ' <td>'+value.role+'</td>'+
                                   ' <td>'+
-                                    '<a href="/proyecto/public/profesor/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
+                                    // '<a href="/proyecto/public/profesor/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
                                     '<a href="/proyecto/public/profesor/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
                                   ' </td>'+
                               ' </tr>'

@@ -28,7 +28,8 @@
                           </select>
                       </div>
                       <div class="col text-right">
-                        <button class="btn btn-sm  btn-danger" type="button"><i class="fas fa-print"></i>imprimir</button>
+                     
+                        <button class="btn btn-danger btn-sm" type="button" onclick="generarpdflistaprofesor()"><i class="fas fa-print" ></i>imprimir</button>
                         <a href="{{url('aula/create')}}" class="btn btn-sm btn-primary text-capitalize" >
                             <i class="fas fa-plus-circle"></i>
                             agregar nueva aula</a>
@@ -56,6 +57,7 @@
                       <td>
                       <a href="{{ url('/aula/'.$aula->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
                         <i class="fas fa-edit"></i></a>
+                        
                       {{-- <a href="{{ url('/aula/'.$aula->id.'/') }}" method="post" class="btn btn-sm btn-danger">
                         <i class="far fa-eye"></i></a>  --}}
                       </td>
@@ -120,4 +122,5 @@
  });
 
 </script>
+
 @endsection

@@ -73,7 +73,7 @@
                             <td>{{ $sueldosecre->totalpago }}</td>
                             <td>{{ $sueldosecre->observacion }}</td>
                             <td>{{ $sueldosecre->secretaria->nombre }}</td>
-                            <td> <a href="{{ url('/sueldosecre/'.$sueldosecre->id.'/show') }}" method="post"  class="btn btn-sm btn-danger"><i class="fas fa-print" ></i> </a>      
+                            <td> <a href="{{ url('/sueldosecre/'.$sueldosecre->id.'/show') }}" method="post"  class="btn btn-sm btn-success"><i class="fas fa-donate" ></i> </a>      
                             </td>
                         </tr>
                 @endforeach
@@ -132,7 +132,7 @@
                                   ' <td>'+value.nombre+'</td>'+
                                   // ' <td>'+value.estado+'</td>'+
                                   ' <td>'+
-                                    '<a href="/proyecto/public/sueldosecre/' + value.id + '/show" method="post" class="btn btn-sm btn-danger"> <i class="fas fa-print"></i></a>'+
+                                    '<a href="/proyecto/public/sueldosecre/' + value.id + '/show" method="post" class="btn btn-sm btn-success"> <i class="fas fa-donate"></i></a>'+
                                   ' </td>'+
                               ' </tr>'
                           );

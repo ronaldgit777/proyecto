@@ -27,12 +27,13 @@
                                                         <label class="text-primary text-capitalize">periodo</label>
                                             </div>
                                             <div class="col-8 col-md-9">
-                                                            <select type="text" name="periodo" id="periodo" class="form-control" required>
+                                                            {{-- <select type="text" name="periodo" id="periodo" class="form-control" required>
                                                                 <option selected disabled value="">seleccione el periodo</option>
                                                             <option value="manana">mañana</option> 
                                                             <option value="tarde">tarde</option> 
                                                             <option value="noche">noche</option> 
-                                                            </select><br>
+                                                            </select><br> --}}
+                                                            <input type="text" name="periodo" id="periodo" class="form-control" required> <br>
                                             </div>
                                         </div>
                                     </div>    

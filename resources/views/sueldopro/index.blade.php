@@ -31,7 +31,7 @@
                             <div class="col text-right">
                               {{-- <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button> --}}
                               <a href="{{url('sueldopro/create')}}" class="btn  btn-primary text-capitalize btn-sm"  >
-                                <i class="fas fa-plus-circle"></i>
+                                <i class="fas fa-donate"></i>
                                 agregar nuevo pago</a>
                           </div>  
                     </div>
@@ -64,7 +64,7 @@
                             <td>{{ $sueldopro->totalpago }}</td>
                             <td>{{ $sueldopro->observacion }}</td>
                             <td>{{ $sueldopro->profesor->nombre }}</td>
-                            <td> <a href="{{ url('/sueldopro/'.$sueldopro->id.'/show') }}" method="post"  class="btn btn-sm btn-danger"><i class="fas fa-print" ></i>
+                            <td> <a href="{{ url('/sueldopro/'.$sueldopro->id.'/show') }}" method="post"  class="btn btn-sm btn-success"><i class="fas fa-donate" ></i>
                               </a>
                             </td>           
                             </td>
@@ -125,7 +125,7 @@
                                   ' <td>'+value.nombre+'</td>'+
                                   // ' <td>'+value.estado+'</td>'+
                                   ' <td>'+
-                                    '<a href="/proyecto/public/sueldopro/' + value.id + '/show" method="post" class="btn btn-sm btn-danger"> <i class="fas fa-print"></i></a>'+
+                                    '<a href="/proyecto/public/sueldopro/' + value.id + '/show" method="post" class="btn btn-sm btn-success"> <i class="fas fa-donate"></i></a>'+
                                   ' </td>'+
                               ' </tr>'
                           );

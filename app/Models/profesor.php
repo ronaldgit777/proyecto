@@ -124,18 +124,46 @@ class profesor extends Model
                         ->orWhere('sueldo', 'like', "%$buscarpro2%");
                 });
             })  
-          
-              
            // ->select('profesors.*', 'users.email', 'users.role')
           //  ->get();
           ->select('profesors.*', 'users.email', 'users.role','profesors.estado')
-
-          
           ->selectRaw("CONCAT('$rutaImagenBase', profesors.imagen) as ruta_imagen")
           ->get();
       //return $fechaini;
   }
-
+  public static function obtenerprofesoresdesdefechainicio2secre($fechaini,$rutaImagenBase,$fechafin,$buscarpro2,$estadopro2)
+  {      
+      // Ejemplo de obtención del sueldo del profesor
+     // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
+      return self::join('users', 'profesors.user_id', '=', 'users.id') 
+            ->when($fechaini, function ($query, $fechaini) {
+                return $query->where('profesors.fechadeingreso', '>=', $fechaini);
+            })
+            ->when($fechafin, function ($query, $fechafin) {
+                return $query->where('profesors.fechadeingreso', '<=', $fechafin);
+            })  
+            ->when($estadopro2, function ($query, $estadopro2) {
+                return $query->where('profesors.estado', '=', $estadopro2);
+            }) 
+            ->when($buscarpro2, function ($query, $buscarpro2) {
+                return $query->where(function ($query) use ($buscarpro2) {
+                    $query->where('ci', 'like', "%$buscarpro2%")
+                        ->orWhere('nombre', 'like', "%$buscarpro2%")
+                        ->orWhere('apellidopaterno', 'like', "%$buscarpro2%")
+                        ->orWhere('apellidomaterno', 'like', "%$buscarpro2%")
+                        ->orWhere('celular', 'like', "%$buscarpro2%")
+                        ->orWhere('direccion', 'like', "%$buscarpro2%")
+                        ->orWhere('users.email', 'like', "%$buscarpro2%")
+                        ->orWhere('sueldo', 'like', "%$buscarpro2%");
+                });
+            })  
+           // ->select('profesors.*', 'users.email', 'users.role')
+          //  ->get();
+          ->select('profesors.*', 'users.email', 'users.role','profesors.estado')
+          ->selectRaw("CONCAT('$rutaImagenBase', profesors.imagen) as ruta_imagen")
+          ->get();
+      //return $fechaini;
+  }
 
 }
 

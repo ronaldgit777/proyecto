@@ -163,6 +163,36 @@ class nota extends Model
             //->selectRaw("CONCAT('$rutaImagenBase', alumnos.imagen) as ruta_imagen");
               return $consulta->get();  //return $fechaini;
     }
+    public static function obtenernotaalumnoiduseradmi($materiaid2,$alumnoid2)
+    {      
+        $consulta = self::join('actividads','notas.actividad_id','=','actividads.id')
+              
+        ->where('notas.materia_id','=',$materiaid2)
+        ->where('notas.alumno_id','=',$alumnoid2)
+    
+       // ->select('profesors.*', 'users.email', 'users.role')
+      //  ->get();6
+      ->select(
+          'actividads.actividad as nombre_actividad','notas.*'
+      );
+      //->selectRaw("CONCAT('$rutaImagenBase', alumnos.imagen) as ruta_imagen");
+        return $consulta->get();  //return $fechaini;
+    }
+    public static function obtenernotaalumnoidusersecre($materiaid2,$alumnoid2)
+    {      
+        $consulta = self::join('actividads','notas.actividad_id','=','actividads.id')
+              
+        ->where('notas.materia_id','=',$materiaid2)
+        ->where('notas.alumno_id','=',$alumnoid2)
+    
+       // ->select('profesors.*', 'users.email', 'users.role')
+      //  ->get();6
+      ->select(
+          'actividads.actividad as nombre_actividad','notas.*'
+      );
+      //->selectRaw("CONCAT('$rutaImagenBase', alumnos.imagen) as ruta_imagen");
+        return $consulta->get();  //return $fechaini;
+    }
     public static function enviarnotaeditada($notaid2,$nota2)
     {      
         // Ejemplo de obtención del sueldo del profesor

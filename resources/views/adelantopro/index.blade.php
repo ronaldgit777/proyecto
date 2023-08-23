@@ -38,6 +38,7 @@
                                                 </div>
                                                 <div class="col text-right">
                                                   {{-- <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print "></i>imprimir</button> --}}
+                                                  <button class="btn btn-danger btn-sm" type="button" onclick="generarpdflistaadelantopro()"><i class="fas fa-print" ></i>imprimir</button>
                                                   <a href="{{url('adelantopro/create')}}" class="btn  btn-primary text-capitalize btn-sm" >
                                                     <i class="fas fa-plus-circle"></i>
                                                    agregar nuevo adelanto</a>
@@ -51,26 +52,26 @@
                         <table id="tabla_id"  class="table align-items-center table-flush">
                             <thead class="thead-light table-primary">
                                 <tr>
-                                    {{-- <th>#</th> --}}
+                                    <th>#</th>
                                     <th>fechadesupre</th>
                                     <th>monto</th>
                                     <th>estado</th>
                                     <th>observacion</th>
                                     <th>profesor_id</th>
-                                    <th>acciones</th>
+                                    {{-- <th>acciones</th> --}}
                                 </tr>
                             </thead>
                             <tbody  id="tabla_profeade">
                                 @foreach ($adelantopros as $adelantopro)
                                 <tr>
-                                    {{-- <td>{{ $adelantopro->id }}</td> --}}
+                                    <td>{{ $adelantopro->id }}</td>
                                     <td>{{ $adelantopro->fechaadelantopro }}</td>
                                     <td>{{ $adelantopro->monto }}</td>
                                     <td>{{ $adelantopro->estadoade }}</td>
                                     <td>{{ $adelantopro->observacion }}</td>
                                     <td>{{ $adelantopro->profesor_id ."-".$adelantopro->profesor->nombre}}</td>
-                                    <td> <a href="{{ url('/adelantopro/'.$adelantopro->id.'/show') }}" method="post" class="btn btn-sm btn-danger"><i class="fas fa-print" ></i></a>
-                                    </td>
+                                    {{-- <td> <a href="{{ url('/adelantopro/'.$adelantopro->id.'/show') }}" method="post" class="btn btn-sm btn-danger"><i class="fas fa-print" ></i></a>
+                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -127,10 +128,10 @@
                                   ' <td>'+value.estadoade+'</td>'+
                                   ' <td>'+value.observacion+'</td>'+
                                   '<td>'+value.profesor_id+"-"+value.nombre_profesor+'</td>'+
-                                  ' <td>'+
-                                    // '<a href="/proyecto/public/profesor/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
-                                    '<a href="/proyecto/public/profesor/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="fas fa-print"></i></a>'+
-                                  ' </td>'+
+                                  // ' <td>'+
+                                  //   // '<a href="/proyecto/public/profesor/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
+                                  //   '<a href="/proyecto/public/profesor/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="fas fa-print"></i></a>'+
+                                  // ' </td>'+
                               ' </tr>'
                           );
                           //alert(value.id);
@@ -159,23 +160,25 @@
     function generarpdflistaadelantopro() {
     // Construir el contenido del reporte utilizando los datos de adelantoprosData
     const filas = [];
-    filas.push(['#', 'Fecha de Adelanto', 'Monto', 'Observación', 'Profesor']);
+    filas.push(['#', 'Fecha de Adelanto','estadoade', 'Monto', 'Observación', 'Profesor']);
     for (let i = 0; i < adelantoprosData.length; i++) {
       const adelantopro = adelantoprosData[i];
       const id = adelantopro.id;
       const fechaadelantopro = adelantopro.fechaadelantopro;
       const monto = adelantopro.monto;
+      const estadoade = adelantopro.estadoade;
       const observacion = adelantopro.observacion;
       const profesor_id = adelantopro.profesor_id + "-" + adelantopro.profesor.nombre;
-      filas.push([id, fechaadelantopro, monto, observacion, profesor_id]);
+      filas.push([id, fechaadelantopro,estadoade, monto, observacion, profesor_id]);
     }
+    alert(filas)
     // Definir la estructura del documento PDF con estilos para la tabla
     const docDefinition = {
       content: [
         { text: 'Lista de Adelantos del Profesor', style: 'header' },
         {
           table: {
-            headers: ['#', 'Fecha de Adelanto', 'Monto', 'Observación', 'Profesor'],
+            headers: ['#', 'Fecha de Adelanto','estadoade', 'Monto', 'Observación', 'Profesor'],
             body: filas,
           },
           // Estilo para la cabecera de la tabla

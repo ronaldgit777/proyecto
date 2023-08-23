@@ -63,13 +63,13 @@
                             <option value="inactivo">inactivo</option> 
                             </select>
                         </div>
-                        <div class="col">s
-                          <label class="text-primary text-capitalize">sueldo -desde</label>
+                        <div class="col">
+                          <label class="text-primary text-capitalize">sueldo</label>
                           <input type="text" name="sueldomin" id="sueldomin" class="form-control">
                           <span class="text-muted">minimo</span>
                         </div>
                         <div class="col">
-                          <label class="text-primary text-capitalize">hasta</label>
+                          <label class="text-primary text-capitalize"></label>
                           <input type="text" name="sueldomax" id="sueldomax" class="form-control">
                           <span class="text-muted">maximo</span>
                         </div>
