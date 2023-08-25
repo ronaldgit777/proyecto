@@ -78,7 +78,9 @@ Route::get('/', function () {
         Route::post('/obtener-fechainicionotaprofe',[App\Http\Controllers\AsignarpromaController::class, 'buscarfechainicionotasprofeuser'])->name('obtener-fechainicionotaprofe'); 
         
         Route::get('/show2', [App\Http\Controllers\AlumnoController::class, 'show2alu'])->name('show2alu')->middleware('auth');//ver al alumno rol profe-
-
+                
+        Route::get('/perfiluser', [App\Http\Controllers\Auth\RegisterController::class, 'verperfiluser'])->name('perfiluser')->middleware('auth');//ver al user -
+        Route::post('/perfiluser', [App\Http\Controllers\Auth\RegisterController::class, 'verperfiluser'])->name('perfiluser')->middleware('auth');//ver al user -
        // Route::post('/asigpro', [App\Http\Controllers\AsignarpromaController::class, 'index2'])->name('index2')->middleware('auth');
         Route::post('/obtener-fechainicionotasecre',[App\Http\Controllers\AsignarpromaController::class, 'buscarfechainicionotassecreuser'])->name('obtener-fechainicionotasecre'); //ajaax repor notas estudiantes rol admin
 

@@ -8,11 +8,13 @@ use App\Models\User;
 use App\Models\profesor;
 use App\Models\secretaria;
 use App\Models\adelantopro;
+use App\Models\alumno;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -151,6 +153,40 @@ class RegisterController extends Controller
     {
         return view('auth.registroEmpleado');
     }  
+
+    public function verperfiluser()
+{
+    // $user = Auth::user();
+    // $profesors = Profesor::all();
+    // return view('auth.perfil', compact('user', 'profesors'));
+
+    $user = Auth::user();
+
+    $profesor = Profesor::join('users', 'profesors.user_id', '=', 'users.id')
+    //->join('users', 'secretarias.user_id', '=', 'users.id')
+        ->where('users.id', $user->id)
+        ->select('profesors.*')
+        ->first();
+    
+    return view('auth.perfil', compact('user', 'profesor'));
+    
+
+    
+}
+    public function actualizaruser(Request $request, $id)
+    {
+    //     $datosprofesor=request()->except(['_token','_method']);
+    //     if($request->hasFile('imagen')){
+    //         $profesor=profesor::findOrFail($id);
+    //         storage::delete('public/'.$profesor->imagen);
+    //         $datosprofesor['imagen']=$request->file('imagen')->store('uploads','public');
+    //     }
+        //$users=user::where('users.id','=',$userid);
+    //     profesor::where('id','=',$id)->update($datosprofesor);
+    //     $profesor=profesor::findOrFail($id);
+    //    // return view('profesor.edit',compact('profesor'));
+    //    return redirect('profesor');
+    }
 }
 //xdebug
 

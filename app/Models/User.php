@@ -43,6 +43,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function profesor()
+        {
+            return $this->hasOne(Profesor::class);
+        }
+        public function secretaria()
+        {
+            return $this->hasOne(secretaria::class);
+        }
     public static function obtenernombreusuario($userid){
         return static::join('profesors','users.id','=','profesors.user_id')
 

@@ -124,7 +124,7 @@
                                         <img src="{{asset('storage').'/'.$profesor->imagen }}" alt=""  width="50px" class="img-thumbnail img-fluid" >
                                     </div>
                                     <div class="col-8 col-md-9">
-                                     <input type="file" name="imagen" id="imagen" class="form-control" value="{{ $profesor->imagen }}">
+                                     <input type="file" name="imagen" id="imagen" class="form-control" value="{{ $profesor->imagen }}" >
                                     </div>
                                 </div>
                             </div>
