@@ -27,11 +27,15 @@
                             <small>Ingrese los datos</small>
                         </div>
                          @endif
-        <?php $fcha = date("Y-m-d"); ?>
-       
-        <form role="form" method="POST" action="{{ route('registroEmpleado') }}" enctype="multipart/form-data">
+        <?php $fcha = date("Y-m-d");  
+        if ($user->profesor)    {  $role='profesor';}
+        else{ $role='secretaria';}
+         ?>
+        <form method="post"  action="{{ url('/editaruser/'.$user->id . '/' . $role)}}" enctype="multipart/form-data">
+            {{-- action="{{ url('/materia/'.$materia->id)}}" --}}
           @csrf
-          {{ method_field('PATCH')}} 
+         
+
           <div class="row p-3 mb-2 " >
             <div class="col-12  " > 
                 <div class="m-portlet__body m-portlet--primary" data-portlet="true" m-portlet="true">
@@ -65,7 +69,7 @@
                                     <label class="text text-capitalize">contraseña</label>
                                 </div>
                                   <div class="col-8 col-md-9">
-                                    <input class="form-control" placeholder="contraseña" type="text" name="password" required autocomplete="new-password" value="{{ $user->password }}">
+                                    <input class="form-control" placeholder="contraseña" type="text" name="password" required autocomplete="new-password" value="{{ $user->password }}" disabled>
 
                                   </div>
                             </div>
@@ -90,8 +94,10 @@
                                   <div class="col-8 col-md-9">
                                     @if ($user->profesor)
                                     <input class="form-control" placeholder="nombre" type="text" name="nombre" value="{{ $user->profesor->nombre ?? '' }}" disabled>
+                                    <input class="form-control d-none" placeholder="nombre" type="text" name="tipouser" value="profesor" disabled>
                                 @elseif ($user->secretaria)
                                     <input class="form-control" placeholder="nombre" type="text" name="nombre" value="{{ $user->secretaria->nombre ?? '' }}" disabled>
+                                    <input class="form-control d-none" placeholder="nombre" type="text" name="tipouser" value="secretaria" disabled>
                                 @else
                                     <input class="form-control" placeholder="nombre" type="text" name="nombre" value="" disabled>
                                 @endif
@@ -250,7 +256,7 @@
                                 <div class="col-8 col-md-9">
                                     <button type="submit" class="btn btn-primary btn-sm">
                                         <i class="fas fa-book"></i>
-                                        guardar datos</a></button>
+                                        editar datos</a></button>
                                 </div>
                               </div>
                           </div>

@@ -74,7 +74,7 @@ class AdelantosecreController extends Controller
     }
     public function reporadesecre()
     {
-        $adelantosecres=adelantosecre::all();
+        $adelantosecres=adelantosecre::obtenernombresecretaria();
         $secretarias=secretaria::all();
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);

@@ -92,12 +92,17 @@ class adelantopro extends Model
                 ->when($estadosecre2, function ($query, $estadosecre2) {
                     return $query->where('adelantopros.estadoade', '=', $estadosecre2);
                 }) 
-            ->select('adelantopros.*','fechaadelantopro', 
-            'profesors.nombre as nombre_profesor');
+            ->select('adelantopros.*', 
+            'profesors.nombre as nombre_profesor','profesors.apellidopaterno','profesors.apellidopaterno');
             if (!empty($ordenaradepro2) && !empty($mayorymenoradepro2)) {
                 $consulta->orderBy($ordenaradepro2, $mayorymenoradepro2);
             }
             return $consulta->get();  
     }
-
+    public static function obtenernombreprofesor(){
+        return self::join('profesors', 'adelantopros.profesor_id', '=', 'profesors.id')
+            ->select('adelantopros.*','profesors.nombre as nombre_profesor','profesors.apellidopaterno as apepa_profesor','profesors.apellidomaterno as apema_profesor')
+            //->selectRaw("CONCAT('$rutaImagenBase', secretarias.imagen) as ruta_imagen")
+            ->get();
+    }
 }

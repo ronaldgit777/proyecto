@@ -156,36 +156,40 @@ class RegisterController extends Controller
 
     public function verperfiluser()
 {
-    // $user = Auth::user();
-    // $profesors = Profesor::all();
-    // return view('auth.perfil', compact('user', 'profesors'));
-
     $user = Auth::user();
-
     $profesor = Profesor::join('users', 'profesors.user_id', '=', 'users.id')
     //->join('users', 'secretarias.user_id', '=', 'users.id')
         ->where('users.id', $user->id)
         ->select('profesors.*')
         ->first();
-    
     return view('auth.perfil', compact('user', 'profesor'));
-    
-
-    
 }
-    public function actualizaruser(Request $request, $id)
+
+    public function actualizaruser(Request $request, $id,$role)
     {
-    //     $datosprofesor=request()->except(['_token','_method']);
-    //     if($request->hasFile('imagen')){
-    //         $profesor=profesor::findOrFail($id);
-    //         storage::delete('public/'.$profesor->imagen);
-    //         $datosprofesor['imagen']=$request->file('imagen')->store('uploads','public');
-    //     }
-        //$users=user::where('users.id','=',$userid);
-    //     profesor::where('id','=',$id)->update($datosprofesor);
-    //     $profesor=profesor::findOrFail($id);
-    //    // return view('profesor.edit',compact('profesor'));
-    //    return redirect('profesor');
+        $datosasig=request()->except(['_token','_method']);
+        //$role = $request->input('tipouser');
+        if($role=="profesor"){
+            profesor::where('profesors.user_id','=',$id)->update([
+                'celular' =>$request->input('celular'),
+                'direccion' =>$request->input('direccion')
+            ]);
+            user::where('id','=',$id)->update([
+                'email' =>$request->input('email'),
+                'password' =>Hash::make($request->input('password_confirmation'))
+            ]);
+            return redirect('home');
+        }else{
+            secretaria::where('secretarias.user_id','=',$id)->update([
+                'celular' =>$request->input('celular'),
+                'direccion' =>$request->input('direccion')
+            ]);
+            user::where('id','=',$id)->update([
+                'email' =>$request->input('email'),
+                'password' =>Hash::make($request->input('password_confirmation'))
+            ]);
+            return redirect('home');
+        }
     }
 }
 //xdebug

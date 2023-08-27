@@ -151,18 +151,12 @@
                   @endforeach
       </tbody>
     </table>
-    ---
-    
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
 <!-- Link to pdfmake font files -->
 <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
-
-
-
-
 <script>
     $(document).ready(function() {
       var estiloOriginal = $('#nombre').css('border');
@@ -414,7 +408,6 @@
           // Estilo para la cabecera de la tabla
          // headerRows: 1,
           //fillColor: '#2c6aa6', // Color de fondo azul para la cabecera
-          
         },
       ],
       
@@ -426,7 +419,9 @@
     };
   
     // Generar el documento PDF
-    pdfMake.createPdf(docDefinition).download('reporte_profesores.pdf');
+    pdfMake.createPdf(docDefinition).download(
+      "reporte_profesor-" + formattedDate + ".pdf"
+    );
   }
   
   function obtenerDatosTabla() {
@@ -454,6 +449,6 @@
     });
     return filas;
   }
-  </script>
+</script>
 @endsection
 

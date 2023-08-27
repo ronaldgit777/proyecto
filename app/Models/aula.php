@@ -57,11 +57,11 @@ class aula extends Model
             $query->select('aula_id')
                 ->from('asignarpromas')
                 ->where('estado', 'activo')
-                ->where('periodo_id', 3);
-                //->where('profesor_id', $profesorId);
+                ->whereIn('periodo_id', $periodosNoAsignados    )
+                ->groupBy('aula_id')
+                ->havingRaw('COUNT(DISTINCT periodo_id) = ?', [count($periodosNoAsignados)]);
         })
         ->get();
-    
         return $aulasNoAsignadas;
     }
 }

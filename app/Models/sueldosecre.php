@@ -81,7 +81,7 @@ class sueldosecre extends Model
                 }) 
 
             ->select('sueldosecres.*','fechadesueldo',
-            'secretarias.nombre as nombre_secretaria','sueldo','secretarias.*');
+            'secretarias.nombre as nombre_secretaria');
             if (!empty($ordenarsusecre2) && !empty($mayorymenorsusecre2)) {
                 $consulta->orderBy($ordenarsusecre2, $mayorymenorsusecre2);
             }

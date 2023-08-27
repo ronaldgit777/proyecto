@@ -74,7 +74,8 @@ class AdelantoproController extends Controller
     
     public function reporadepro()
     {
-        $adelantopros=adelantopro::all();
+       
+        $adelantopros=adelantopro::obtenernombreprofesor();
         $profesors=profesor::all();
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);

@@ -22,7 +22,7 @@
                                     <select type="text" name="materia_id" id="materia_id" class="form-control" >
                                       <option selected value="">seleccione la materia</option>
                                       @foreach ($materias as $materia)
-                                      <option value="{{ $materia->id }}">{{ $materia->materia}}</option>
+                                      <option value="{{ $materia->materia }}">{{ $materia->materia}}</option>
                                       @endforeach
                                     </select>
                                   {{-- <input type="text" name="materia_id" id="materia_id" class="form-control" > --}}
@@ -146,7 +146,7 @@
             var periodoid = $('#periodo_id').val();
             var aulaid = $('#aula_id').val();  
             var estado = $('#estado').val();  
-           // alert(estado);
+           alert(materiaid);
             generartabla(fecha_ini,fecha_fin,profesorid,materiaid,periodoid,aulaid,estado); 
            
         });

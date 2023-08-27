@@ -120,11 +120,19 @@ class adelantosecre extends Model
                 }) 
 
             ->select('adelantosecres.*','fechaadelantosecre', 
-            'secretarias.nombre as nombre_secretaria','secretarias.*');
+            'secretarias.nombre as nombre_secretaria','secretarias.apellidopaterno','secretarias.apellidopaterno');
             if (!empty($ordenaradepro2) && !empty($mayorymenoradepro2)) {
                 $consulta->orderBy($ordenaradepro2, $mayorymenoradepro2);
             }
             return $consulta->get();  
+    }
+    public static function obtenernombresecretaria(){
+        
+
+        return self::join('secretarias', 'adelantosecres.secretaria_id', '=', 'secretarias.id')
+            ->select('adelantosecres.*','secretarias.nombre as nombre_secretaria','secretarias.apellidopaterno as apepa_secretaria','secretarias.apellidomaterno as apema_secretaria')
+            //->selectRaw("CONCAT('$rutaImagenBase', secretarias.imagen) as ruta_imagen")
+            ->get();
     }
    
 }

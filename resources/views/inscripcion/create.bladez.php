@@ -234,7 +234,7 @@
                         // Limpiar el campo de selección de periodos
                         
                         if(response!=''){
-                            //alert(response)
+                            alert(response)
                         
                         $("#profesor_id").prop("disabled", false); 
                         $('#profesor_id').empty();
@@ -310,7 +310,7 @@
                 data: {
                     materiaid: materiaid,
                     profesorid: profesorid,
-                    alumnoid:alumnoid,
+                    alumnoid: alumnoid,
                     _token: '{{ csrf_token() }}' // Agregar el token CSRF
                 },
                 success: function(response) {
@@ -333,7 +333,7 @@
             });
             });
             $('#periodo_id').on('change', function() {
-                   
+
             var periodoid = $(this).val(); // Obtener el valor del aula seleccionada
             var profesorid = $('#profesor_id').val(); 
             var materiaid = $('#materia_id').val(); 
@@ -349,6 +349,7 @@
                     _token: '{{ csrf_token() }}' // Agregar el token CSRF
                 },
                 success: function(response) {
+                    alert(response)
                     var costoma = response[0].costo_ma;
                     var aulanom = response[0].aula_nombre;
                     var asigpromasid =response[0].asig_id;

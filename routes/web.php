@@ -50,7 +50,7 @@ Route::get('/', function () {
         //route::get('/',[ProfesorController::class,'index'])->name('home');
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
         
-      
+        
         Route::post('/notamodal',[App\Http\Controllers\NotaController::class, 'notamodal'])->name('notamodal'); //lista de aulas
         Route::post('/obtener-listaalumnosinscritos',[App\Http\Controllers\InscripcionController::class, 'listaalumnosinscritos'])->name('obtener-listaalumnosinscritos'); //lista de aulas
         //periodos
@@ -81,6 +81,8 @@ Route::get('/', function () {
                 
         Route::get('/perfiluser', [App\Http\Controllers\Auth\RegisterController::class, 'verperfiluser'])->name('perfiluser')->middleware('auth');//ver al user -
         Route::post('/perfiluser', [App\Http\Controllers\Auth\RegisterController::class, 'verperfiluser'])->name('perfiluser')->middleware('auth');//ver al user -
+
+        Route::post('/editaruser/{id}/{role}', [App\Http\Controllers\Auth\RegisterController::class, 'actualizaruser'])->name('editaruser')->middleware('auth');//editar al user -
        // Route::post('/asigpro', [App\Http\Controllers\AsignarpromaController::class, 'index2'])->name('index2')->middleware('auth');
         Route::post('/obtener-fechainicionotasecre',[App\Http\Controllers\AsignarpromaController::class, 'buscarfechainicionotassecreuser'])->name('obtener-fechainicionotasecre'); //ajaax repor notas estudiantes rol admin
 
@@ -135,7 +137,7 @@ Route::get('/', function () {
         route::resource('profesor', ProfesorController::class)->middleware('auth');
         route::resource('sueldopro',SueldoproController::class)->middleware('auth');
         route::resource('adelantopro',adelantoprocontroller::class)->middleware('auth');
-
+        
         Route::post('/obtener-sueldoprofesor', [App\Http\Controllers\SueldoproController::class, 'obtenerSueldoProfesor'])->name('obtener-sueldoprofesor');
         Route::post('/obtener-SumatoriaAdelantos', [App\Http\Controllers\AdelantoproController::class, 'obtenersumatoriaadelantosProfesor'])->name('obtener-SumatoriaAdelantos');
         
@@ -213,9 +215,9 @@ Route::get('/', function () {
         Route::get('/repor-alusecre', [App\Http\Controllers\AlumnoController::class, 'reporalusecre'])->name('repor-alusecre')->middleware('auth');// lista de alumnos rol secre
         Route::post('/obtener-fechainicioreporalusecre',[App\Http\Controllers\AlumnoController::class, 'obtenerfechainicioreporalusecre'])->name('obtener-fechainicioreporalusecre'); //reporte de alumno rol secre ajax
 /*
-   obtener-periodos
-reporalu
-fechainicioreporalu
+   obtener-periodos fechainicioprosureporte fechainiciosecresureporte
+reporalu    fechainiciosecre    fechainiciosecreadereporte  fechainicio
+fechainicioreporalu fechainicioreporalu
 Route::middleware(['auth', 'admin'])->group(function () {
     //abre el formulario de registro de usuario
    // route::resource('user',user::class)->middleware('auth');

@@ -253,7 +253,7 @@ class inscripcion extends Model
                  return $query->where('alumnos.fechadeingreso', '<=', $fechafin);
              })  
              ->when($materiaid2, function ($query, $materiaid2) {
-                return $query->where('materias.id', '=', $materiaid2);
+                return $query->where('materias.materia', '=', $materiaid2);
             })  
              
              ->where('profesors.user_id','=',$userid)

@@ -75,6 +75,7 @@ class alumno extends Model
             //   })      
              // ->select('profesors.*', 'users.email', 'users.role')
             //  ->get();
+            
             ->select('alumnos.*')
             ->selectRaw("CONCAT('$rutaImagenBase', alumnos.imagen) as ruta_imagen");
               // Verificar si ambas variables tienen valor
@@ -184,5 +185,14 @@ class alumno extends Model
            ->selectRaw("CONCAT('$rutaImagenBase', alumnos.imagen) as ruta_imagen")
            ->get();
        //return $fechaini;
+   }
+   public static function obteneralumnosConRutaImagen()
+   {
+       $rutaImagenBase = asset('storage').'/';
+
+       return self::
+           select('alumnos.*')
+           ->selectRaw("CONCAT('$rutaImagenBase', alumnos.imagen) as ruta_imagen")
+           ->get();
    }
 }

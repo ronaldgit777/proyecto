@@ -261,9 +261,7 @@
       "reporteadelanto_" + secretaria_id + "_" + formattedDate + ".pdf"
     );
   }
-  
-  
-  </script>
+</script>
     <!--empeiza el modal-->
     <div class="modal fade " id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog modal-lg " role="document">

@@ -8,7 +8,6 @@ use App\Models\materia;
 use App\Models\aula;
 use App\Models\periodo;
 use App\Models\alumno;
-use App\Models\inscripcion;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -105,7 +104,7 @@ class AsignarpromaController extends Controller
        return response()->json($resultadoconsulta); 
     }
     public function  buscarfechainicioasigprofeuserreporte(Request $request)
-    {   
+    {   //ajax conlta de asigproreporte
         // $rutaImagenBase = asset('storage').'/';
        $fechaini = $request->input('fechainicio');
        $fechafin = $request->input('fechafinal');
@@ -169,7 +168,7 @@ class AsignarpromaController extends Controller
     {  
        $profesorid2 = $request->input('profesorid');
        $materiaid2 = $request->input('materiaid');
-       $periodoid2 = $request->input('periodoid');       
+       $periodoid2 = $request->input('periodoid');
        $resultadoconsulta = asignarproma::obteneraulaperimateriaprofesorid($profesorid2,$materiaid2,$periodoid2);
        return response()->json($resultadoconsulta); 
     }
@@ -191,8 +190,8 @@ class AsignarpromaController extends Controller
     public function obtenerprofesoresid(Request $request)
     {  
        $alumnoid2 = $request->input('alumnoid');
-       $resultadoconsulta = asignarproma::obtenerprofesores($alumnoid2);
-       //$resultadoconsulta = profesor::all();
+      // $resultadoconsulta = asignarproma::obtenerprofesores($alumnoid2);
+       $resultadoconsulta = profesor::all();
        return response()->json($resultadoconsulta); 
     }
     public function reporasigsecre()
@@ -224,7 +223,7 @@ class AsignarpromaController extends Controller
        $userid=auth()->user()->id;
        $asignarpromas =asignarproma::obtenerasignarcionproreporte($userid);
         //join('asignarpromas','asignarpromas.profesor_id','=','profesors.id')
-        $materias =materia::obtenermateriapro($userid);
+        $materias =materia::obtenermateriapronombre($userid);
         $aulas =aula::obteneraulapro($userid);
         $periodos =periodo::obtenerperiodopro($userid);
         //$asignarpromas=asignarproma::all();
@@ -251,8 +250,7 @@ class AsignarpromaController extends Controller
         $asignarpromas=asignarproma::obtenerdatosde3tablaas();
         return view('asignarproma.index',compact('asignarpromas'));
     }
-
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -339,7 +337,6 @@ class AsignarpromaController extends Controller
     {
         $datosasig=request()->except(['_token','_method']);
         asignarproma::where('id','=',$id)->update($datosasig);
-        inscripcion::where('asignarproma_id', $id)->update($datosasig);
         $asignarproma=asignarproma::findOrFail($id);
         //return view('asignarproma.edit',compact('asignarproma'));
         return redirect('asignarproma');
@@ -372,7 +369,7 @@ class AsignarpromaController extends Controller
         return response()->json($periodosDisponibles);
     }
     public function obteneraulas(Request $request)
-    {
+    {   
         /*$aulaId = $request->input('aula_id');
         
         $periodosDisponibles = periodo::obtenerPeriodosDisponibles($aulaId);
@@ -382,8 +379,8 @@ class AsignarpromaController extends Controller
         //$aulaId = $request->input('aula_id');
         $profesorId = $request->input('profesor_id');
         
-        $aulasDisponibles = aula::obteneraulasDisponibles($profesorId);
-        //$aulasDisponibles = aula::all();
+       $aulasDisponibles = aula::obteneraulasDisponibles($profesorId);
+       // $aulasDisponibles = aula::all();
             
         return response()->json($aulasDisponibles);
     }

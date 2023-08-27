@@ -29,7 +29,7 @@
                         <select type="text" name="materia_id2" id="materia_id2" class="form-control" >
                           <option selected value="">seleccione la materia</option>
                           @foreach ($materias as $materia)
-                          <option value="{{ $materia->id }}">{{ $materia->materia}}</option>
+                          <option value="{{ $materia->materia }}">{{ $materia->materia}}</option>
                           @endforeach
                         </select>
                       {{-- <input type="text" name="materia_id" id="materia_id" class="form-control" > --}}

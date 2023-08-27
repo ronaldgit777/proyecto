@@ -55,7 +55,7 @@
                                                       </div>
                                                     </div>
                                                 <div class="col text-right">
-                                                  <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button>
+                                                  <button class="btn btn-danger btn-sm" type="button" onclick="generarpdflistaprofesor()"><i class="fas fa-print"></i>imprimir</button>
                                                     <a href="{{url('opciones-reportesecre')}}" class="btn btn-sm btn-success" >
                                                         <i class="fas fa-plus-circle"></i>
                                                         regresar</a>
@@ -129,10 +129,119 @@
 <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
 <script>
+  var secreprosData = {!! json_encode($sueldosecres) !!};
+ var sueldosecrereporte =  {!! json_encode($sueldosecres) !!};
+ function encontrarListaPorId(idLista) {
+   return secreprosData.find(item => item.id === idLista);
+ }
+function generarpdflistaprofesor() {
+ //Reemplazar las URLs de las imágenes con las imágenes en base64 en la lista profesorreporte
+//  var totalImages = secretariareporte.length;
+//  var imagesProcessed = 0;
+
+   // secretariareporte.forEach(function (adelantosecre) {
+      //  var img = new Image();
+      //  img.crossOrigin = 'Anonymous';
+      //  img.onload = function () {
+      //    var canvas = document.createElement('canvas');
+      //    var ctx = canvas.getContext('2d');
+      //    canvas.width = img.width;
+      //    canvas.height = img.height;
+      //    ctx.drawImage(img, 0, 0, img.width, img.height);
+      //    var dataURL = canvas.toDataURL('image/jpeg'); // Cambiar a 'image/png' si es necesario
+
+      //    // Actualizar la URL de la imagen con la imagen en base64
+      //    adelantosecre.ruta_imagen = dataURL;
+
+      //    imagesProcessed++;
+      //    if (imagesProcessed === totalImages) {
+          // Una vez que todas las imágenes se hayan procesado, generar el PDF
+          generarPDF();
+      //    }
+      //  };
+
+      //  img.src = adelantosecre.ruta_imagen;
+
+   // });
+}
+function generarPDF() {
+ var currentDate = new Date();
+var formattedDate = currentDate.toISOString().slice(0, 10);
+ // Definir la estructura del documento PDF con estilos para la tabla
+ const docDefinition = {
+   pageSize: {  
+     width: 1000, // Ajusta el ancho de la página según tus necesidades
+     height: 800, // Puedes ajustar el alto de la página según lo requieras
+   },
+   pageOrientation: 'landscape',
+   header: {
+   text: "Instituto TEL C",
+   alignment: "left",
+   margin: [40, 10, 10, 20],
+ },
+       footer: function(currentPage, pageCount) {
+       return {
+         text: "direccion:av san martin entre uruguay - Página " + currentPage.toString() + " de " + pageCount,
+         alignment: "left",
+         margin: [40, 10, 10, 20],
+       };
+        },
+   content: [
+     { text: 'Lista de adelantos de Profesores', 
+       //style: 'header'
+      },
+      {
+     text: "Fecha: " + formattedDate,
+     alignment: "right",
+     margin: [0, 0, 0, 10],
+      },
+     {
+       table: {
+
+         headers: [ 'fechadesueldo','mesdepago','totaldescuento','totalpago','observacion','secretaria_id'],
+         body: obtenerDatosTabla(),
+       },
+       // Estilo para la cabecera de la tabla
+      // headerRows: 1,
+       //fillColor: '#2c6aa6', // Color de fondo azul para la cabecera
+     },
+   ],
+   styles: {
+     header: { fontSize: 10, bold: true, margin: [0, 0, 0, 10] },
+   },
+   // Estilo para las celdas del cuerpo de la tabla
+  // defaultStyle: { fillColor: '#bdd7e7' }, // Color de fondo azul claro para las celdas
+ };
+
+ // Generar el documento PDF
+ pdfMake.createPdf(docDefinition).download(
+   "reporte_sueldo_secretaria-" + formattedDate + ".pdf"
+ );
+}
+
+function obtenerDatosTabla() {
+ // Obtener los datos de la tabla a partir de la lista profesorreporte (con las URLs de las imágenes convertidas a base64)
+ var filas = [];
+ var headers= [ 'fechadesueldo','mesdepago','totaldescuento','totalpago','observacion','secretaria_id'];
+ filas.push(headers);
+sueldosecrereporte.forEach(function (sueldosecre) {
+   var fila = [
+    // profesor.id,
+    sueldosecre.fechadesueldo,
+    sueldosecre.mesdepago,
+    sueldosecre.totaldescuento,
+    sueldosecre.totalpago,
+    sueldosecre.observacion,
+    sueldosecre.secretaria_id,
+   ];
+   filas.push(fila);
+ });
+ return filas;
+}
+</script>
+<script>
   $(document).ready(function() {
-
       $('#fechainicio').on('change', function() {
-
           var fecha_ini = $(this).val(); 
           var fecha_fin = $('#fechafinal').val();
           var secretariaid = $('#secretaria_id').val();  
@@ -168,11 +277,9 @@
                       _token: '{{ csrf_token() }}' // Agregar el token CSRF
                   },
                   success: function(response) {
-                      
-                
                       // Limpiar el campo de selección de periodos
                       $('#tabla_susecre').empty();
-                      //profesorreporte=[];
+                      sueldosecrereporte=[];
 
                       $.each(response, function(key, value) {
                           // alert(value.id)
@@ -193,7 +300,7 @@
                               ' </tr>'
                           );
                           //alert(value.id);
-                         // profesorreporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
+                         sueldosecrereporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
                          // $('#miadelanto').find('td').css('border', '1px solid black');
                       });
                   }
@@ -238,47 +345,4 @@
         });
   });
 </script>
-
-{{-- <script>
-    var adelantoprosData = {!! json_encode($adelantopros) !!};
-    function generarpdflistaadelantopro() {
-    // Construir el contenido del reporte utilizando los datos de adelantoprosData
-    const filas = [];
-    filas.push(['#', 'Fecha de Adelanto', 'Monto', 'Observación', 'Profesor']);
-    for (let i = 0; i < adelantoprosData.length; i++) {
-      const adelantopro = adelantoprosData[i];
-      const id = adelantopro.id;
-      const fechaadelantopro = adelantopro.fechaadelantopro;
-      const monto = adelantopro.monto;
-      const observacion = adelantopro.observacion;
-      const profesor_id = adelantopro.profesor_id + "-" + adelantopro.profesor.nombre;
-      filas.push([id, fechaadelantopro, monto, observacion, profesor_id]);
-    }
-   
-
-    // Definir la estructura del documento PDF con estilos para la tabla
-    const docDefinition = {
-      content: [
-        { text: 'Lista de Adelantos del Profesor', style: 'header' },
-        {
-          table: {
-            headers: ['#', 'Fecha de Adelanto', 'Monto', 'Observación', 'Profesor'],
-            body: filas,
-          },
-          // Estilo para la cabecera de la tabla
-          headerRows: 1,
-          fillColor: '#2c6aa6', // Color de fondo azul para la cabecera
-        },
-      ],
-      styles: {
-        header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] },
-      },
-      // Estilo para las celdas del cuerpo de la tabla
-      defaultStyle: { fillColor: '#bdd7e7' }, // Color de fondo azul claro para las celdas
-    };
-
-    // Generar el documento PDF
-    pdfMake.createPdf(docDefinition).download('reporte_adelantos.pdf');
-  }
-</script> --}}
 @endsection

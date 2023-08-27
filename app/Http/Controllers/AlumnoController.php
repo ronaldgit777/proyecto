@@ -53,7 +53,7 @@ class AlumnoController extends Controller
         ->where('profesors.user_id','=',$userid)
         ->where('asignarpromas.estado','=','activo')
         ->get();  
-        $materias =materia::obtenermateriapro($userid);
+        $materias =materia::obtenermateriaprouser($userid);
         $aulas =aula::all();
         $periodos =periodo::all();
         $actividads =actividad::all();
@@ -154,7 +154,7 @@ class AlumnoController extends Controller
      }
      public function reporalu()
      {
-         $alumnos=alumno::all();
+         $alumnos=alumno::obteneralumnosConRutaImagen();
          // return profesor::with('sueldopro')->get(); 
           //$datos['sueldopros']=sueldopro::paginate(7);
           return view('alumno.reporalu',compact('alumnos'));

@@ -32,7 +32,7 @@
                                             </div>
                                             
                                                 <div class="col text-right">
-                                                  <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print"></i>imprimir</button>
+                                                  <button class="btn btn-danger btn-sm" type="button" onclick="generarpdflistaprofesor()"><i class="fas fa-print"></i>imprimir</button>
                                                     <a href="{{url('opciones-reportesecre')}}" class="btn btn-sm btn-success" >
                                                         <i class="fas fa-plus-circle"></i>
                                                         regresar</a>
@@ -99,7 +99,7 @@
                                     <td>{{ $adelantosecre->monto }}</td>
                                     <td>{{ $adelantosecre->estadoade }}</td>
                                     <td>{{ $adelantosecre->observacion }}</td>
-                                    <td>{{ $adelantosecre->secretaria->nombre." ".$adelantosecre->secretaria->apellidopaterno." ".$adelantosecre->secretaria->apellidomaterno}}</td>
+                                    <td>{{ $adelantosecre->nombre_secretaria}} {{ $adelantosecre->apepa_secretaria}} {{ $adelantosecre->apema_secretaria}}</td>
                                     {{-- <td> <a href="{{ url('/adelantosecre/'.$adelantosecre->id.'/show') }}" method="post" class="btn btn-sm btn-danger"><i class="fas fa-print"></i></a>
                                     </td> --}}
                                 </tr>
@@ -112,7 +112,119 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
+<script>
+  var secreprosData = {!! json_encode($adelantosecres) !!};
+ var secretariareporte =  {!! json_encode($adelantosecres) !!};
+ function encontrarListaPorId(idLista) {
+   return secreprosData.find(item => item.id === idLista);
+ }
+function generarpdflistaprofesor() {
+ //Reemplazar las URLs de las imágenes con las imágenes en base64 en la lista profesorreporte
+//  var totalImages = secretariareporte.length;
+//  var imagesProcessed = 0;
 
+   // secretariareporte.forEach(function (adelantosecre) {
+      //  var img = new Image();
+      //  img.crossOrigin = 'Anonymous';
+      //  img.onload = function () {
+      //    var canvas = document.createElement('canvas');
+      //    var ctx = canvas.getContext('2d');
+      //    canvas.width = img.width;
+      //    canvas.height = img.height;
+      //    ctx.drawImage(img, 0, 0, img.width, img.height);
+      //    var dataURL = canvas.toDataURL('image/jpeg'); // Cambiar a 'image/png' si es necesario
+
+      //    // Actualizar la URL de la imagen con la imagen en base64
+      //    adelantosecre.ruta_imagen = dataURL;
+
+      //    imagesProcessed++;
+      //    if (imagesProcessed === totalImages) {
+          // Una vez que todas las imágenes se hayan procesado, generar el PDF
+          generarPDF();
+      //    }
+      //  };
+
+      //  img.src = adelantosecre.ruta_imagen;
+
+   // });
+}
+
+function generarPDF() {
+ var currentDate = new Date();
+var formattedDate = currentDate.toISOString().slice(0, 10);
+ // Definir la estructura del documento PDF con estilos para la tabla
+ const docDefinition = {
+   pageSize: {  
+     width: 1000, // Ajusta el ancho de la página según tus necesidades
+     height: 800, // Puedes ajustar el alto de la página según lo requieras
+   },
+   pageOrientation: 'landscape',
+   header: {
+   text: "Instituto TEL C",
+   alignment: "left",
+   margin: [40, 10, 10, 20],
+ },
+       footer: function(currentPage, pageCount) {
+       return {
+         text: "direccion:av san martin entre uruguay - Página " + currentPage.toString() + " de " + pageCount,
+         alignment: "left",
+         margin: [40, 10, 10, 20],
+       };
+        },
+   content: [
+     { text: 'Lista de Profesores', 
+       //style: 'header'
+      },
+      {
+     text: "Fecha: " + formattedDate,
+     alignment: "right",
+     margin: [0, 0, 0, 10],
+      },
+     {
+       table: {
+
+         headers: [ 'fechaadelantosecre', 'monto', 'estadoade', 'observacion','secretaria_id'],
+         body: obtenerDatosTabla(),
+       },
+       // Estilo para la cabecera de la tabla
+      // headerRows: 1,
+       //fillColor: '#2c6aa6', // Color de fondo azul para la cabecera
+       
+     },
+   ],
+   
+   styles: {
+     header: { fontSize: 10, bold: true, margin: [0, 0, 0, 10] },
+   },
+   // Estilo para las celdas del cuerpo de la tabla
+  // defaultStyle: { fillColor: '#bdd7e7' }, // Color de fondo azul claro para las celdas
+ };
+
+ // Generar el documento PDF
+ pdfMake.createPdf(docDefinition).download(
+   "reporte_secretaria-" + formattedDate + ".pdf"
+ );
+}
+
+function obtenerDatosTabla() {
+ // Obtener los datos de la tabla a partir de la lista profesorreporte (con las URLs de las imágenes convertidas a base64)
+ var filas = [];
+ var headers= [ 'fechaadelantosecre', 'monto', 'estadoade', 'observacion','secretaria_id'];
+ filas.push(headers);
+ secretariareporte.forEach(function (adelantosecre) {
+   var fila = [
+    // profesor.id,
+    adelantosecre.	fechaadelantosecre,
+    adelantosecre.monto,
+    adelantosecre.estadoade,
+    adelantosecre.observacion,
+    adelantosecre.nombre_secretaria+' '+adelantosecre.apepa_secretaria+' '+adelantosecre.apema_secretaria,
+   ];
+   filas.push(fila);
+ });
+ return filas;
+}
+</script>
 <script>
     $(document).ready(function() {
   
@@ -150,7 +262,7 @@
                   
                         // Limpiar el campo de selección de periodos
                         $('#tabla_profeade').empty();
-                        //profesorreporte=[];
+                        secretariareporte=[];
   
                         $.each(response, function(key, value) {
                             // alert(value.id)
@@ -168,8 +280,8 @@
                                     // ' </td>'+
                                 ' </tr>'
                             );
-                            //alert(value.id);
-                           // profesorreporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
+                         //  alert(value.id);
+                            secretariareporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
                            // $('#miadelanto').find('td').css('border', '1px solid black');
                         });
                     }
@@ -200,5 +312,6 @@
              $('#fechainicio').trigger('change');
           });
     });
-  </script>
+</script>
+
 @endsection

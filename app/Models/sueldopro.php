@@ -82,7 +82,7 @@ class sueldopro extends Model
             if (!empty($ordenarsupro2) && !empty($mayorymenorsupro2)) {
                 $consulta->orderBy($ordenarsupro2, $mayorymenorsupro2);
             }
-            return $consulta->get();  
+            return $consulta->get();
     }
 }
    

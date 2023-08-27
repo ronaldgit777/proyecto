@@ -157,64 +157,123 @@
 <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
 
 <script>
-    var secreprosData = {!! json_encode($secretarias) !!};
-    var secretariareporte =  {!! json_encode($secretarias) !!};
-    function encontrarListaPorId(idLista) {
-      return secreprosData.find(item => item.id === idLista);
-    }
-    function generarpdflistaprofesor() {
-    // Construir el contenido del reporte utilizando los datos de adelantoprosData
-    const filas = [];
-    filas.push(['#', 'fechadeingreso', 'ci', 'nombre', 'apellidopaterno','apellidomaterno','celular','direccion','email','estado','imagen','sueldo','role']);
-    for (let i = 0; i < secretariareporte.length; i++) {
-      const secretaria = secretariareporte[i];
-      const id = secretaria.id;
-      const fechadeingreso = secretaria.fechadeingreso;
-      const ci = secretaria.ci;
-      const nombre = secretaria.nombre;
-      const apellidopaterno = secretaria.apellidopaterno;
-      const apellidomaterno = secretaria.apellidomaterno;
-      const celular = secretaria.celular;
-      const direccion = secretaria.direccion;
-      const user_id = secretaria.user_id + "-" + secretaria.user.email;
-      const estado = secretaria.estado;
-      const imagen = secretaria.imagen;
-    //  {  image: 'myImageDictionary/image1.jpg' }
-      const sueldo = secretaria.sueldo;
-      const role = secretaria.user.role;
-      filas.push([id, fechadeingreso, ci, nombre, apellidopaterno, apellidomaterno,celular,direccion,user_id,estado,imagen,sueldo,role]);
-    }
-   
+  var secreprosData = {!! json_encode($secretarias) !!};
+ var secretariareporte =  {!! json_encode($secretarias) !!};
+ function encontrarListaPorId(idLista) {
+   return secreprosData.find(item => item.id === idLista);
+ }
+function generarpdflistaprofesor() {
+ // Reemplazar las URLs de las imágenes con las imágenes en base64 en la lista profesorreporte
+ var totalImages = secretariareporte.length;
+ var imagesProcessed = 0;
 
-    // Definir la estructura del documento PDF con estilos para la tabla
-    const docDefinition = {
-      pageSize: {  
-      width: 1000, // Ajusta el ancho de la página según tus necesidades
-      height: 800, // Puedes ajustar el alto de la página según lo requieras
+secretariareporte.forEach(function (secretaria) {
+   var img = new Image();
+   img.crossOrigin = 'Anonymous';
+   img.onload = function () {
+     var canvas = document.createElement('canvas');
+     var ctx = canvas.getContext('2d');
+     canvas.width = img.width;
+     canvas.height = img.height;
+     ctx.drawImage(img, 0, 0, img.width, img.height);
+     var dataURL = canvas.toDataURL('image/jpeg'); // Cambiar a 'image/png' si es necesario
+
+     // Actualizar la URL de la imagen con la imagen en base64
+     secretaria.ruta_imagen = dataURL;
+
+     imagesProcessed++;
+     if (imagesProcessed === totalImages) {
+       // Una vez que todas las imágenes se hayan procesado, generar el PDF
+       generarPDF();
+     }
+   };
+
+   img.src = secretaria.ruta_imagen;
+ });
+}
+
+function generarPDF() {
+ var currentDate = new Date();
+var formattedDate = currentDate.toISOString().slice(0, 10);
+ // Definir la estructura del documento PDF con estilos para la tabla
+ const docDefinition = {
+   pageSize: {  
+     width: 1000, // Ajusta el ancho de la página según tus necesidades
+     height: 800, // Puedes ajustar el alto de la página según lo requieras
+   },
+   pageOrientation: 'landscape',
+   header: {
+   text: "Instituto TEL C",
+   alignment: "left",
+   margin: [40, 10, 10, 20],
+ },
+       footer: function(currentPage, pageCount) {
+       return {
+         text: "direccion:av san martin entre uruguay - Página " + currentPage.toString() + " de " + pageCount,
+         alignment: "left",
+         margin: [40, 10, 10, 20],
+       };
         },
-      pageOrientation: 'landscape',
-      content: [
-        { text: 'Lista de Profesor', style: 'header' },
-        {
-          table: {
-            headers: ['#', 'Fechadeingreso', 'ci', 'nombre', 'apellidopaterno','apellidomaterno','celular','direccion','correo','estado','imagen','sueldo','role'],
-            body: filas,
-          },
-          // Estilo para la cabecera de la tabla
-          headerRows: 1,
-          fillColor: '#2c6aa6', // Color de fondo azul para la cabecera
-        },
-      ],
-      styles: {
-        header: { fontSize: 10, bold: true, margin: [0, 0, 0, 10] },
+   content: [
+     { text: 'Lista de Profesores', 
+       //style: 'header'
       },
-      // Estilo para las celdas del cuerpo de la tabla
-      defaultStyle: { fillColor: '#bdd7e7' }, // Color de fondo azul claro para las celdas
-    };
+      {
+     text: "Fecha: " + formattedDate,
+     alignment: "right",
+     margin: [0, 0, 0, 10],
+      },
+     {
+       table: {
 
-    // Generar el documento PDF
-    pdfMake.createPdf(docDefinition).download('reporte_secretarias.pdf');
-  }
+         headers: ['Fechadeingreso', 'ci', 'nombre', 'apellidopaterno','apellidomaterno','celular','direccion','correo','estado','imagen','sueldo','role'],
+         body: obtenerDatosTabla(),
+       },
+       // Estilo para la cabecera de la tabla
+      // headerRows: 1,
+       //fillColor: '#2c6aa6', // Color de fondo azul para la cabecera
+       
+     },
+   ],
+   
+   styles: {
+     header: { fontSize: 10, bold: true, margin: [0, 0, 0, 10] },
+   },
+   // Estilo para las celdas del cuerpo de la tabla
+  // defaultStyle: { fillColor: '#bdd7e7' }, // Color de fondo azul claro para las celdas
+ };
+
+ // Generar el documento PDF
+ pdfMake.createPdf(docDefinition).download(
+   "reporte_secretaria-" + formattedDate + ".pdf"
+ );
+}
+
+function obtenerDatosTabla() {
+ // Obtener los datos de la tabla a partir de la lista profesorreporte (con las URLs de las imágenes convertidas a base64)
+ var filas = [];
+ var headers= [ 'Fechadeingreso', 'ci', 'nombre', 'apellidopaterno','apellidomaterno','celular','direccion','correo','estado','imagen','sueldo','role'];
+ filas.push(headers);
+ secretariareporte.forEach(function (secretaria) {
+   var fila = [
+    // profesor.id,
+    secretaria.fechadeingreso,
+    secretaria.ci,
+    secretaria.nombre,
+    secretaria.apellidopaterno,
+    secretaria.apellidomaterno,
+    secretaria.celular,
+    secretaria.direccion,
+    secretaria.email,
+    secretaria.estado,
+     { image: secretaria.ruta_imagen, width: 50, height: 50 }, // Mostrar la imagen en base64 en la tabla
+     secretaria.sueldo,
+     secretaria.role,
+   ];
+   filas.push(fila);
+ });
+ return filas;
+}
 </script>
 
 <script>
@@ -266,6 +325,7 @@
                         emailsecre:email,
                         estadosecre:estado,
                         sueldominsecre:sueldomin,
+                        sueldomaxsecre:sueldomax,
                         ordenarsecre:ordenar,
                         mayorymenorsecre:mayorymenor,
                       // profesor_id: profesorId,
