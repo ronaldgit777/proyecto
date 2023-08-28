@@ -189,7 +189,14 @@ class alumno extends Model
    public static function obteneralumnosConRutaImagen()
    {
        $rutaImagenBase = asset('storage').'/';
-
+       return self::
+           select('alumnos.*')
+           ->selectRaw("CONCAT('$rutaImagenBase', alumnos.imagen) as ruta_imagen")
+           ->get();
+   }
+   public static function obteneralumnosConRutaImagenreporte()
+   {
+       $rutaImagenBase = asset('storage').'/';
        return self::
            select('alumnos.*')
            ->selectRaw("CONCAT('$rutaImagenBase', alumnos.imagen) as ruta_imagen")

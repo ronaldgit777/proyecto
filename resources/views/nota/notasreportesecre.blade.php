@@ -160,7 +160,7 @@
                 {{-- <th scope="col">materia costo</th> --}}
                 <th scope="col">periodo</th>
                 <th scope="col">aula</th>
-                <th scope="col">estado</th>
+                <th scope="col">estado_asig</th>
                 <th scope="col">imagen</th>
                 <th scope="col">acciones</th>
               </tr>
@@ -183,7 +183,7 @@
                             {{-- <td>{{ $alumno->costo }}</td> --}}
                             <td>{{ $alumno->periodo }}</td>
                             <td>{{ $alumno->aula }}</td>
-                            <td>{{ $alumno->estado }}</td>
+                            <td>{{ $alumno->asignarpromas_estado }}</td>
                             <td>
                             <img src="{{ asset('storage').'/'.$alumno->imagen}}" alt=""  width="50px" height="50px"  class="img-thumbnail img-fluid">
                             </td>
@@ -232,7 +232,7 @@
             var estado = $('#estado').val();
             var ordenar = $('#ordenar').val();
             var mayorymenor = $('#mayorymenor').val();
-alert(aulaid)
+      //alert(aulaid)
             //alert(fecha_ini+fecha_fin+materiaid+periodoid+aulaid+alumno_nombre+alumno_apepa+alumno_apema+promin+promax+ordenar+mayorymenor)
 
             generartabla(fecha_ini,fecha_fin,materiaid,periodoid,aulaid,alumno_nombre,alumno_apepa,alumno_apema,promin,promax,estado,ordenar,mayorymenor); 
@@ -284,7 +284,7 @@ alert(aulaid)
                                     ' <td>'+promedio+'</td>'+
                                     ' <td>'+value.periodo_nombre+'</td>'+
                                     ' <td>'+value.aula_nombre+'</td>'+
-                                    ' <td>'+value.estado+'</td>'+
+                                    ' <td>'+value.asignarproma_estado+'</td>'+
                                     ' <td><img src="'+imagen+value.imagen+'" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid"></td>'+
                                    // ' <td>'+value.role+'</td>'+
                                     ' <td>'+

@@ -232,7 +232,7 @@ class asignarproma extends Model
                     }) 
             ->select(
                 'asignarpromas.*','fechadeasignacion',
-                'profesors.nombre as profesor_nombre',
+                'profesors.nombre as profesor_nombre','profesors.apellidopaterno as apellidopaterno','profesors.apellidomaterno as apellidomaterno',
                 'materias.materia as materia_nombre',
                 'materias.costo as materia_costo',
                 'periodos.periodo as periodo_nombre',
@@ -245,7 +245,7 @@ class asignarproma extends Model
               return $consulta->get();  //return $fechaini;
               
              /* ->where('profesors.id', 'like', "%$profesorid2%") 
-              ->where('materias.id', 'like', "%$materiaid2%") 
+              ->where('materias.id', 'like', "%$materiaid2%")               y
               ->where('periodos.id', 'like', "%$periodoid2%") 
               ->where('aulas.id', 'like', "%$aulaid2%") */
     }
@@ -283,8 +283,8 @@ class asignarproma extends Model
                     return $query->where('asignarpromas.estado',$estadoasig2);
                     }) 
             ->select(
-                'asignarpromas.*','fechadeasignacion',
-                'profesors.nombre as profesor_nombre',
+                'asignarpromas.*','asignarpromas.fechadeasignacion',
+                'profesors.nombre as profesor_nombre','profesors.apellidopaterno as apellidopaterno','profesors.apellidomaterno as apellidomaterno',
                 'materias.materia as materia_nombre',
                 'materias.costo as materia_costo',
                 'periodos.periodo as periodo_nombre',
@@ -294,12 +294,7 @@ class asignarproma extends Model
             if (!empty($ordenarasig2) && !empty($mayorymenorasig2)) {
                 $consulta->orderBy($ordenarasig2, $mayorymenorasig2);
             }
-              return $consulta->get();  //return $fechaini;
-              
-             /* ->where('profesors.id', 'like', "%$profesorid2%") 
-              ->where('materias.id', 'like', "%$materiaid2%") 
-              ->where('periodos.id', 'like', "%$periodoid2%") 
-              ->where('aulas.id', 'like', "%$aulaid2%") */
+              return $consulta->get();  //return $fechainio
     }
     public static function obtenerdatosde3tabla()
     {
@@ -312,8 +307,8 @@ class asignarproma extends Model
             ->join('periodos', 'asignarpromas.periodo_id', '=', 'periodos.id')
             ->join('aulas', 'asignarpromas.aula_id', '=', 'aulas.id')
             ->select(
-                'asignarpromas.*','fechadeasignacion',
-                'profesors.nombre as profesor_nombre',
+                'asignarpromas.*','asignarpromas.fechadeasignacion',
+                'profesors.nombre as profesor_nombre','profesors.apellidopaterno as apepa_profesor','profesors.apellidomaterno as apema_profesor',
                 'materias.materia as materia_nombre',
                 'materias.costo as materia_costo',
                 'periodos.periodo as periodo_nombre',
@@ -649,7 +644,7 @@ class asignarproma extends Model
             //->with(['promedioNotas'])
             ->select('alumnos.*','alumnos.nombre as nombre_alumno',
             'materias.materia as materia_nombre',
-            //'materias.costo as materia_costo',
+            'asignarpromas.estado as asignarproma_estado',
             'periodos.periodo as periodo_nombre',
             'aulas.aula as aula_nombre',
         DB::raw('ROUND((SELECT AVG(nota) FROM notas 

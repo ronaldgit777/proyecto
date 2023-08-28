@@ -105,7 +105,7 @@
                                     <td>{{ $sueldopro->totaldescuento }}</td>
                                     <td>{{ $sueldopro->totalpago }}</td>
                                     <td>{{ $sueldopro->observacion }}</td>
-                                    <td>{{ $sueldopro->profesor->nombre }}</td>
+                                    <td>{{ $sueldopro->nombre_profesor}} {{ $sueldopro->apepa_profesor}} {{ $sueldopro->apema_profesor}}</td>
                                     <td> 
                                       <a href="{{ url('/sueldopro/'.$sueldopro->id.'/show') }}" method="post"  class="btn btn-sm btn-danger"><i class="fas fa-print" ></i>
                                       </a>
@@ -192,7 +192,7 @@ var formattedDate = currentDate.toISOString().slice(0, 10);
      {
        table: {
 
-         headers: [ 'fechadesueldo','mesdepago','totaldescuento','totalpago','observacion','profesor_id'],
+         headers: [ 'fechadesueldo','mesdepago','sueldo','totaldescuento','totalpago','observacion','profesor_id'],
          body: obtenerDatosTabla(),
        },
        // Estilo para la cabecera de la tabla
@@ -218,17 +218,18 @@ var formattedDate = currentDate.toISOString().slice(0, 10);
 function obtenerDatosTabla() {
  // Obtener los datos de la tabla a partir de la lista profesorreporte (con las URLs de las imágenes convertidas a base64)
  var filas = [];
- var headers= [ 'fechadesueldo','mesdepago','totaldescuento','totalpago','observacion','profesor_id'];
+ var headers= [ 'fechadesueldo','mesdepago','sueldo','totaldescuento','totalpago','observacion','profesor_id'];
  filas.push(headers);
 sueldoproreporte.forEach(function (sueldopro) {
    var fila = [
     // profesor.id,
     sueldopro.fechadesueldo,
     sueldopro.mesdepago,
+    sueldopro.sueldo_profesor,
     sueldopro.totaldescuento,
     sueldopro.totalpago,
     sueldopro.observacion,
-    sueldopro.profesor_id,
+    sueldopro.nombre_profesor+' '+sueldopro.apepa_profesor+' '+sueldopro.apema_profesor,
    ];
    filas.push(fila);
  });
@@ -284,11 +285,11 @@ sueldoproreporte.forEach(function (sueldopro) {
                               // ' <td>'+value.id+'</td>'+
                               '<td>'+value.fechadesueldo+'</td>'+
                                   ' <td>'+value.mesdepago+'</td>'+
-                                  ' <td>'+value.sueldo+'</td>'+
+                                  ' <td>'+value.sueldo_secre+'</td>'+
                                   ' <td>'+value.totaldescuento+'</td>'+
                                   ' <td>'+value.totalpago+'</td>'+
                                   ' <td>'+value.observacion+'</td>'+  
-                                  '<td>'+value.nombre_profesor+'</td>'+
+                                  '<td>'+value.nombre_profesor+' '+value.apellidopaterno+' '+value.apellidomaterno+'</td>'+
                                   ' <td>'+
                                     // '<a href="/proyecto/public/profesor/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
                                     '<a href="/proyecto/public/profesor/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+

@@ -69,7 +69,7 @@ class inscripcion extends Model
     {
         return static
         ::
-        //where('inscripcions.estado', 'activo')
+        //where('inscripcions.estado', 'activo')    y
         //->
         join('asignarpromas', 'inscripcions.asignarproma_id', '=', 'asignarpromas.id')
             ->join('profesors', 'asignarpromas.profesor_id', '=', 'profesors.id')
@@ -79,7 +79,7 @@ class inscripcion extends Model
             ->join('aulas', 'asignarpromas.aula_id', '=', 'aulas.id')
             ->select(
                 'inscripcions.*','fechadeinscripcion',
-                'profesors.nombre as profesor_nombre',
+                'profesors.nombre as profesor_nombre','profesors.apellidopaterno as profesor_apellidopaterno','profesors.apellidomaterno as profesor_apellidomaterno',
                 'alumnos.nombre as alumno_nombre',
                 'alumnos.apellidopaterno as alumno_apellidopaterno',
                 'alumnos.apellidomaterno as alumno_apellidomaterno',
@@ -130,11 +130,11 @@ class inscripcion extends Model
                 return $query->where('alumnos.apellidomaterno',$alumnoidma2);
                 }) 
             ->when($estadosecre2, function ($query, $estadosecre2) {
-                return $query->where('alumnos.estado', '=', $estadosecre2);
+                return $query->where('inscripcions.estado', '=', $estadosecre2);
             }) 
             ->select(
-                'inscripcions.*','fechadeinscripcion',
-                'profesors.nombre as profesor_nombre',
+                'inscripcions.*','inscripcions.estado as inscripcion_estado',
+                'profesors.nombre as profesor_nombre','profesors.apellidopaterno as profesor_apellidopaterno','profesors.apellidomaterno as profesor_apellidomaterno',
                'alumnos.nombre as alumno_nombre', 'alumnos.apellidopaterno as alumno_apellidopaterno', 'alumnos.apellidomaterno as alumno_apellidomaterno',
                 'materias.materia as materia_nombre',
                  'materias.costo as materia_costo',
@@ -187,11 +187,11 @@ class inscripcion extends Model
                 return $query->where('alumnos.apellidomaterno',$alumnoidma2);
                 }) 
             ->when($estadosecre2, function ($query, $estadosecre2) {
-                return $query->where('alumnos.estado', '=', $estadosecre2);
+                return $query->where('inscripcions.estado', '=', $estadosecre2);
             }) 
             ->select(
                 'inscripcions.*','fechadeinscripcion',
-                'profesors.nombre as profesor_nombre',
+                'profesors.nombre as profesor_nombre','profesors.apellidopaterno as profesor_apellidopaterno','profesors.apellidomaterno as profesor_apellidomaterno',
                'alumnos.nombre as alumno_nombre', 'alumnos.apellidopaterno as alumno_apellidopaterno', 'alumnos.apellidomaterno as alumno_apellidomaterno',
                 'materias.materia as materia_nombre',
                  'materias.costo as materia_costo',

@@ -159,68 +159,125 @@
 <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
 <!-- Link to pdfmake font files -->
 <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
-
 <script>
-    var profeprosData = {!! json_encode($alumnos) !!};
-    var profesorreporte =  {!! json_encode($alumnos) !!};
-    function encontrarListaPorId(idLista) {
-      return profeprosData.find(item => item.id === idLista);
-    }
+  var profeprosData = {!! json_encode($alumnos) !!};
+ var profesorreporte =  {!! json_encode($alumnos) !!};
+ function encontrarListaPorId(idLista) {
+   return profeprosData.find(item => item.id === idLista);
+ }
     function generarpdflistaprofesor() {
-    // Construir el contenido del reporte utilizando los datos de adelantoprosData
-    const filas = [];
-    filas.push(['#', 'fechadeingreso', 'ci', 'nombre', 'apellidopaterno','apellidomaterno','celular','direccion','email','estado','imagen','sueldo','role']);
-    for (let i = 0; i < profesorreporte.length; i++) {
-      const profesor = profesorreporte[i];
-      const id = profesor.id;
-      const fechadeingreso = profesor.fechadeingreso;
-      const ci = profesor.ci;
-      const nombre = profesor.nombre;
-      const apellidopaterno = profesor.apellidopaterno;
-      const apellidomaterno = profesor.apellidomaterno;
-      const celular = profesor.celular;
-      const direccion = profesor.direccion;
-      const user_id = profesor.user_id + "-" + profesor.user.email;
-      const estado = profesor.estado;
-      const imagen = profesor.imagen;
-    //  {  image: 'myImageDictionary/image1.jpg' }
-      const sueldo = profesor.sueldo;
-      const role = profesor.user.role;
-      filas.push([id, fechadeingreso, ci, nombre, apellidopaterno, apellidomaterno,celular,direccion,user_id,estado,imagen,sueldo,role]);
+      
+    // Reemplazar las URLs de las imágenes con las imágenes en base64 en la lista profesorreporte
+    var totalImages = profesorreporte.length;
+    var imagesProcessed = 0;
+
+    profesorreporte.forEach(function (alumno) {
+      //debugger;
+      var img = new Image();
+      img.crossOrigin = 'Anonymous';
+      img.onload = function () {
+        var canvas = document.createElement('canvas');
+        var ctx = canvas.getContext('2d');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0, img.width, img.height);
+        var dataURL = canvas.toDataURL('image/jpeg'); // Cambiar a 'image/png' si es necesario
+
+        // Actualizar la URL de la imagen con la imagen en base64
+        alumno.ruta_imagen = dataURL;
+
+        imagesProcessed++;
+        if (imagesProcessed === totalImages) {
+          // Una vez que todas las imágenes se hayan procesado, generar el PDF
+          generarPDF();
+        }
+      };
+
+      img.src = alumno.ruta_imagen;
+    });
     }
-   
 
-    // Definir la estructura del documento PDF con estilos para la tabla
-    const docDefinition = {
-      pageSize: {  
-      width: 1000, // Ajusta el ancho de la página según tus necesidades
-      height: 800, // Puedes ajustar el alto de la página según lo requieras
+function generarPDF() {
+  
+ var currentDate = new Date();
+var formattedDate = currentDate.toISOString().slice(0, 10);
+ // Definir la estructura del documento PDF con estilos para la tabla
+ const docDefinition = {
+   pageSize: {  
+     width: 1000, // Ajusta el ancho de la página según tus necesidades
+     height: 800, // Puedes ajustar el alto de la página según lo requieras
+   },
+   pageOrientation: 'landscape',
+   header: {
+   text: "Instituto TEL C",
+   alignment: "left",
+   margin: [40, 10, 10, 20],
+ },
+       footer: function(currentPage, pageCount) {
+       return {
+         text: "direccion:av san martin entre uruguay - Página " + currentPage.toString() + " de " + pageCount,
+         alignment: "left",
+         margin: [40, 10, 10, 20],
+       };
         },
-      pageOrientation: 'landscape',
-      content: [
-        { text: 'Lista de Profesor', style: 'header' },
-        {
-          table: {
-            headers: ['#', 'Fechadeingreso', 'ci', 'nombre', 'apellidopaterno','apellidomaterno','celular','direccion','correo','estado','imagen','sueldo','role'],
-            body: filas,
-          },
-          // Estilo para la cabecera de la tabla
-          headerRows: 1,
-          fillColor: '#2c6aa6', // Color de fondo azul para la cabecera
-        },
-      ],
-      styles: {
-        header: { fontSize: 10, bold: true, margin: [0, 0, 0, 10] },
+   content: [
+     { text: 'Lista de alumnos', 
+       //style: 'header'
       },
-      // Estilo para las celdas del cuerpo de la tabla
-      defaultStyle: { fillColor: '#bdd7e7' }, // Color de fondo azul claro para las celdas
-    };
+      {
+     text: "Fecha: " + formattedDate,
+     alignment: "right",
+     margin: [0, 0, 0, 10],
+      },
+     {
+       table: {
 
-    // Generar el documento PDF
-    pdfMake.createPdf(docDefinition).download('reporte_profesores.pdf');
-  }
+         headers: ['Fechadeingreso', 'ci', 'nombre', 'apellidopaterno','apellidomaterno','celular','direccion','correo','estado','imagen'],
+         body: obtenerDatosTabla(),
+       },
+       // Estilo para la cabecera de la tabla
+      // headerRows: 1,
+       //fillColor: '#2c6aa6', // Color de fondo azul para la cabecera
+     },
+   ],
+   
+   styles: {
+     header: { fontSize: 10, bold: true, margin: [0, 0, 0, 10] },
+   },
+   // Estilo para las celdas del cuerpo de la tabla
+  // defaultStyle: { fillColor: '#bdd7e7' }, // Color de fondo azul claro para las celdas
+ };
+
+ // Generar el documento PDF
+ pdfMake.createPdf(docDefinition).download(
+   "reporte_alumno-" + formattedDate + ".pdf"
+ );
+}
+
+function obtenerDatosTabla() {
+ // Obtener los datos de la tabla a partir de la lista profesorreporte (con las URLs de las imágenes convertidas a base64)
+ var filas = [];
+ var headers= [ 'Fechadeingreso', 'ci', 'nombre', 'apellidopaterno','apellidomaterno','celular','direccion','correo','estado','imagen'];
+ filas.push(headers);
+ profesorreporte.forEach(function (alumno) {
+   var fila = [
+    // profesor.id,
+    alumno.fechadeingreso,
+    alumno.ci,
+    alumno.nombre,
+    alumno.apellidopaterno,
+    alumno.apellidomaterno,
+    alumno.celular,
+    alumno.direccion,
+    alumno.correo,
+    alumno.estado,
+     { image: alumno.ruta_imagen, width: 50, height: 50 }, // Mostrar la imagen en base64 en la tabla
+   ];
+   filas.push(fila);
+ });
+ return filas;
+}
 </script>
-
 <script>
     $(document).ready(function() {
       var estiloOriginal = $('#nombre').css('border');
@@ -277,11 +334,9 @@
                         _token: '{{ csrf_token() }}' // Agregar el token CSRF
                     },
                     success: function(response) {
-                        
-                  
                         // Limpiar el campo de selección de periodos
                         $('#tabla_alu').empty();
-                        //profesorreporte=[];
+                        profesorreporte=[];
 
                         $.each(response, function(key, value) {
                             // alert(value.id)
@@ -303,7 +358,7 @@
                                 ' </tr>'
                             );
                             //alert(value.id);
-                           // profesorreporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
+                            profesorreporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
                           //  $('#miadelanto').find('td').css('border', '1px solid black');
                         });
                     }

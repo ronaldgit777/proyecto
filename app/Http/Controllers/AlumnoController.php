@@ -146,7 +146,7 @@ class AlumnoController extends Controller
      }
      public function reporalusecre()
      {
-         $alumnos=alumno::all();
+         $alumnos=alumno::obteneralumnosConRutaImagen();
          // return profesor::with('sueldopro')->get(); 
           //$datos['sueldopros']=sueldopro::paginate(7);
           return view('alumno.reporalusecre',compact('alumnos'));

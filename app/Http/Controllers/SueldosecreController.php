@@ -44,7 +44,7 @@ class SueldosecreController extends Controller
     }
     public function reporsusecre()
     {
-        $sueldosecres=sueldosecre::all();
+        $sueldosecres=sueldosecre::obtenernombresecretaria();
         $secretarias=secretaria::all();
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);

@@ -140,7 +140,7 @@
                             <td>{{ $secretaria->direccion }}</td>
                             <td>{{ $secretaria->user->email }}</td>
                             <td>{{ $secretaria->estado }}</td>
-                            <td>secretaria
+                            <td>
                             <img src="{{ asset('storage').'/'.$secretaria->imagen}}" alt="" class="img-thumbnail img-fluid img-custom">
                             </td>
                             <td>{{ $secretaria->sueldo }}</td>

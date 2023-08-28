@@ -132,7 +132,7 @@
                                 <tr>
                                     {{-- <th>#</th> --}}
                                     <th>fechadeinscripcion</th>
-                                    <th>asignarproma</th>
+                                    {{-- <th>asignarproma</th> --}}
                                     <th>profesor</th>
                                     <th>materia</th>
                                     <th>materia_costo</th>
@@ -141,7 +141,7 @@
                                     <th>alumno_id</th>
                                     <th>alumno_pa</th>
                                     <th>alumno_ma</th>
-                                    <th>estado</th>
+                                    <th>estado_ins</th>
                                     <th>acciones</th>
                                 </tr>
                             </thead>
@@ -152,8 +152,8 @@
                                 <!--  <td> /* $inscripcion->asignarproma->materia->materia."--".$inscripcion->asignarproma->profesor->user->name}} */</td>-->
                               
                                     <td>{{ $inscripcion->fechadeinscripcion}}</td>
-                                    <td>{{ $inscripcion->asignarproma_id}}</td>
-                                    <td>{{ $inscripcion->profesor_nombre}}</td>
+                                    {{-- <td>{{ $inscripcion->asignarproma_id}}</td> --}}
+                                    <td>{{ $inscripcion->profesor_nombre}} {{ $inscripcion->profesor_apellidopaterno}} {{ $inscripcion->profesor_apellidomaterno}}</td>
                                     <td>{{ $inscripcion->materia_nombre}}</td>
                                     <td>{{ $inscripcion->materia_costo}}</td>
                                     <td>{{ $inscripcion->periodo_nombre}}</td>
@@ -172,9 +172,100 @@
                     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
-   <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
-   <script>
+<script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
+<script>
+  var secreprosData = {!! json_encode($inscripcions) !!};
+ var sueldoproreporte =  {!! json_encode($inscripcions) !!};
+ function encontrarListaPorId(idLista) {
+   return secreprosData.find(item => item.id === idLista);
+ }
+function generarpdflistaprofesor() {
+          generarPDF();
+}
+
+function generarPDF() {
+ var currentDate = new Date();
+var formattedDate = currentDate.toISOString().slice(0, 10);
+ // Definir la estructura del documento PDF con estilos para la tabla
+ const docDefinition = {
+   pageSize: {  
+     width: 1000, // Ajusta el ancho de la página según tus necesidades
+     height: 800, // Puedes ajustar el alto de la página según lo requieras
+   },
+   pageOrientation: 'landscape',
+   header: {
+   text: "Instituto TEL C",
+   alignment: "left",
+   margin: [40, 10, 10, 20],
+ },
+       footer: function(currentPage, pageCount) {
+       return {
+         text: "direccion:av san martin entre uruguay - Página " + currentPage.toString() + " de " + pageCount,
+         alignment: "left",
+         margin: [40, 10, 10, 20],
+       };
+        },
+   content: [
+     { text: 'Lista de inscripciones de Alumnos', 
+       //style: 'header'
+      },
+      {
+     text: "Fecha: " + formattedDate,
+     alignment: "right",
+     margin: [0, 0, 0, 10],
+      },
+     {
+       table: {
+
+         headers: [ 'fechadeinscripcion','	profesor_id','materia_id','costo','	periodo_id','aula_id','alumno','apellidopa','apellidoma','estado'],
+         body: obtenerDatosTabla(),
+       },
+       // Estilo para la cabecera de la tabla
+      // headerRows: 1,
+       //fillColor: '#2c6aa6', // Color de fondo azul para la cabecera
+       
+     },
+   ],
+   
+   styles: {
+     header: { fontSize: 10, bold: true, margin: [0, 0, 0, 10] },
+   },
+   // Estilo para las celdas del cuerpo de la tabla
+  // defaultStyle: { fillColor: '#bdd7e7' }, // Color de fondo azul claro para las celdas
+ };
+
+ // Generar el documento PDF
+ pdfMake.createPdf(docDefinition).download(
+   "reporte_sueldo_profesor-" + formattedDate + ".pdf"
+ );
+}
+
+function obtenerDatosTabla() {
+ // Obtener los datos de la tabla a partir de la lista profesorreporte (con las URLs de las imágenes convertidas a base64)
+ var filas = [];
+ var headers= [ 'fechadeinscripcion','	profesor_id','materia_id','costo','	periodo_id','aula_id','alumno','apellidopa','apellidoma','estado'];
+ filas.push(headers);
+sueldoproreporte.forEach(function (inscripcion) {
+   var fila = [
+    // profesor.id,
+    inscripcion.fechadeinscripcion,
+    inscripcion.profesor_nombre+' '+inscripcion.profesor_apellidopaterno+' '+inscripcion.profesor_apellidomaterno,
+    inscripcion.materia_nombre,
+    inscripcion.materia_costo,
+    inscripcion.periodo_nombre,
+    inscripcion.aula_nombre,
+    inscripcion.alumno_nombre,
+    inscripcion.alumno_apellidopaterno,
+    inscripcion.alumno_apellidomaterno,
+    inscripcion.estado,
+   ];
+   filas.push(fila);
+ });
+ return filas;
+}
+</script>
+<script>
     $(document).ready(function() {
   
         $('#fechainicio').on('change', function() {
@@ -214,15 +305,15 @@
                     success: function(response) {
                         // Limpiar el campo de selección de periodos
                         $('#tabla_ins').empty();
-                      // profesorreporte=[];
+                        sueldoproreporte=[];
                         $.each(response, function(key, value) {
                             // alert(value.id)
                             $('#tabla_ins').append(
                                 '<tr>'+
                                 // ' <td>'+value.id+'</td>'+
                                     '<td>'+value.fechadeinscripcion+'</td>'+
-                                    '<td>'+value.asignarproma_id+'</td>'+
-                                    ' <td>'+value.profesor_nombre+'</td>'+
+                                   // '<td>'+value.asignarproma_id+'</td>'+
+                                    ' <td>'+value.profesor_nombre+' '+value.profesor_apellidopaterno+' '+value.profesor_apellidomaterno+'</td>'+
                                     ' <td>'+value.materia_nombre+'</td>'+
                                     ' <td>'+value.materia_costo+'</td>'+
                                     ' <td>'+value.periodo_nombre+'</td>'+
@@ -230,7 +321,7 @@
                                     ' <td>'+value.alumno_nombre+'</td>'+
                                     ' <td>'+value.alumno_apellidopaterno+'</td>'+
                                     ' <td>'+value.alumno_apellidomaterno+'</td>'+
-                                    ' <td>'+value.estado+'</td>'+
+                                    ' <td>'+value.inscripcion_estado+'</td>'+
                                    // ' <td>'+value.role+'</td>'+
                                     ' <td>'+
                                       '<a href="/proyecto/public/inscripcion/' + value.id + '/show" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
@@ -238,7 +329,7 @@
                                 ' </tr>'
                             );
                             //alert(value.id);
-                           // profesorreporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
+                            sueldoproreporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
                            // $('#miadelanto').find('td').css('border', '1px solid black');
                         });
                     }

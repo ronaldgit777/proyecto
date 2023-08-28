@@ -43,7 +43,7 @@ class SueldoproController extends Controller
     }
     public function reporsupro()
     {
-        $sueldopros=sueldopro::all();
+        $sueldopros=sueldopro::obtenernombreprofesor();
         $profesors=profesor::all();
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);

@@ -119,8 +119,8 @@ class adelantosecre extends Model
                     return $query->where('adelantosecres.estadoade', '=', $estadosecre2);
                 }) 
 
-            ->select('adelantosecres.*','fechaadelantosecre', 
-            'secretarias.nombre as nombre_secretaria','secretarias.apellidopaterno','secretarias.apellidopaterno');
+            ->select('adelantosecres.*','adelantosecres.fechaadelantosecre', 
+            'secretarias.nombre as nombre_secretaria','secretarias.apellidopaterno','secretarias.apellidomaterno');
             if (!empty($ordenaradepro2) && !empty($mayorymenoradepro2)) {
                 $consulta->orderBy($ordenaradepro2, $mayorymenoradepro2);
             }

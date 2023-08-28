@@ -102,6 +102,7 @@ class NotaController extends Controller
     public function notasreporte()
     {   
        $userid=auth()->user()->id;
+       $alumnosima=alumno::obteneralumnosConRutaImagenreporte();
        $alumnos =alumno
        ::join('inscripcions','inscripcions.alumno_id','=','alumnos.id')
         ->join('asignarpromas','inscripcions.asignarproma_id','=','asignarpromas.id')
@@ -126,7 +127,7 @@ class NotaController extends Controller
        // $alumnos=alumno::all();
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);
-         return view('nota.notasreporte',compact('alumnos','materias','aulas','periodos','usuario'   ));
+         return view('nota.notasreporte',compact('alumnos','materias','aulas','periodos','usuario' ,'alumnosima'  ));
          
     }
     public function notasreportesecre()

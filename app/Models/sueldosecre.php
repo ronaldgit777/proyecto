@@ -80,11 +80,19 @@ class sueldosecre extends Model
                     return $query->where('sueldosecres.totalpago', '<=', $topamax2);
                 }) 
 
-            ->select('sueldosecres.*','fechadesueldo',
-            'secretarias.nombre as nombre_secretaria');
+            ->select('sueldosecres.*','secretarias.sueldo as sueldo_secre',
+            'secretarias.nombre as nombre_secretaria','secretarias.apellidopaterno','secretarias.apellidomaterno');
             if (!empty($ordenarsusecre2) && !empty($mayorymenorsusecre2)) {
                 $consulta->orderBy($ordenarsusecre2, $mayorymenorsusecre2);
             }
             return $consulta->get();  
+    }
+    
+    public static function obtenernombresecretaria(){
+        return self::join('secretarias', 'sueldosecres.secretaria_id', '=', 'secretarias.id')
+            ->select('sueldosecres.*','secretarias.nombre as nombre_secretaria','secretarias.apellidopaterno as apepa_secretaria','secretarias.apellidomaterno as apema_secretaria'
+            ,'secretarias.sueldo as sueldo_secretaria')
+            //->selectRaw("CONCAT('$rutaImagenBase', secretarias.imagen) as ruta_imagen")
+            ->get();
     }
 }

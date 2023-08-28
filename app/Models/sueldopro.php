@@ -77,12 +77,19 @@ class sueldopro extends Model
                     return $query->where('sueldopros.totalpago', '<=', $topamax2);
                 }) 
   
-            ->select('sueldopros.*','fechadesueldo',
-            'profesors.nombre as nombre_profesor','sueldo');
+            ->select('sueldopros.*','profesors.sueldo as sueldo_secre',
+            'profesors.nombre as nombre_profesor','profesors.apellidopaterno','profesors.apellidomaterno');
             if (!empty($ordenarsupro2) && !empty($mayorymenorsupro2)) {
                 $consulta->orderBy($ordenarsupro2, $mayorymenorsupro2);
             }
             return $consulta->get();
+    }
+    public static function obtenernombreprofesor(){
+        return self::join('profesors', 'sueldopros.profesor_id', '=', 'profesors.id')
+            ->select('sueldopros.*','profesors.nombre as nombre_profesor','profesors.apellidopaterno as apepa_profesor','profesors.apellidomaterno as apema_profesor'
+            ,'profesors.sueldo as sueldo_profesor')
+            //->selectRaw("CONCAT('$rutaImagenBase', secretarias.imagen) as ruta_imagen")
+            ->get();
     }
 }
    

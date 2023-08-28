@@ -57,7 +57,7 @@
                                     <th>periodo</th>
                                     <th>aula</th>
                                     <th>alumno_id</th>
-                                    <th>estado</th>
+                                    <th>estado_ins</th>
                                     <th>acciones</th>
                                 </tr>
                             </thead>

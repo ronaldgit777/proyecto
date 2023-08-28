@@ -213,7 +213,7 @@ class AsignarpromaController extends Controller
         $materias =materia::all();
         $aulas =aula::all();
         $periodos =periodo::all();
-        //$asignarpromas =asignarproma::where('estado','activo')->get();
+        //$asignarpromas =asignarproma::where('estado','activo')->get();        9
         $asignarpromas =asignarproma::obtenerdatosde3tabla();
         return view('asignarproma.reporasig',compact('asignarpromas','profesors','materias','aulas','periodos'));
     }
@@ -231,6 +231,7 @@ class AsignarpromaController extends Controller
         //return view('auth.registroEmpleado');
         return view('asignarproma.asigproreporte',compact('asignarpromas','materias','aulas','periodos'));
     }
+    
     public function index2()
     {
        //s SELECT * FROM `asignarpromas` WHERE asignarpromas.profesor_id = 13
@@ -345,7 +346,7 @@ class AsignarpromaController extends Controller
         return redirect('asignarproma');
         
     }
-
+    
     /** 
      * Remove the specified resource from storage.
      *

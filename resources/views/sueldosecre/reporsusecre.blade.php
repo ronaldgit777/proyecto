@@ -113,7 +113,7 @@
                                     <td>{{ $sueldosecre->totaldescuento }}</td>
                                     <td>{{ $sueldosecre->totalpago }}</td>
                                     <td>{{ $sueldosecre->observacion }}</td>
-                                    <td>{{ $sueldosecre->secretaria->nombre." ".$sueldosecre->secretaria->apellidopaterno." ".$sueldosecre->secretaria->apellidomaterno}}</td>
+                                    <td>{{ $sueldosecre->nombre_secretaria}} {{ $sueldosecre->apepa_secretaria}} {{ $sueldosecre->apema_secretaria}}</td>
                                     <td> <a href="{{ url('/sueldosecre/'.$sueldosecre->id.'/show') }}" method="post"  class="btn btn-sm btn-danger"><i class="fas fa-print" ></i>
                                       </a>
                                     </td>           
@@ -198,7 +198,7 @@ var formattedDate = currentDate.toISOString().slice(0, 10);
      {
        table: {
 
-         headers: [ 'fechadesueldo','mesdepago','totaldescuento','totalpago','observacion','secretaria_id'],
+         headers: [ 'fechadesueldo','mesdepago','sueldo','totaldescuento','totalpago','observacion','secretaria_id'],
          body: obtenerDatosTabla(),
        },
        // Estilo para la cabecera de la tabla
@@ -222,17 +222,19 @@ var formattedDate = currentDate.toISOString().slice(0, 10);
 function obtenerDatosTabla() {
  // Obtener los datos de la tabla a partir de la lista profesorreporte (con las URLs de las imágenes convertidas a base64)
  var filas = [];
- var headers= [ 'fechadesueldo','mesdepago','totaldescuento','totalpago','observacion','secretaria_id'];
+ var headers= [ 'fechadesueldo','mesdepago','sueldo','totaldescuento','totalpago','observacion','secretaria_id'];
  filas.push(headers);
 sueldosecrereporte.forEach(function (sueldosecre) {
    var fila = [
     // profesor.id,
     sueldosecre.fechadesueldo,
     sueldosecre.mesdepago,
+    sueldosecre.sueldo_secretaria,
     sueldosecre.totaldescuento,
     sueldosecre.totalpago,
     sueldosecre.observacion,
-    sueldosecre.secretaria_id,
+    //sueldosecre.secretaria_id,
+    sueldosecre.nombre_secretaria+' '+sueldosecre.apepa_secretaria+' '+sueldosecre.apema_secretaria,
    ];
    filas.push(fila);
  });
@@ -288,7 +290,7 @@ sueldosecrereporte.forEach(function (sueldosecre) {
                               // ' <td>'+value.id+'</td>'+
                                   '<td>'+value.fechadesueldo+'</td>'+
                                   ' <td>'+value.mesdepago+'</td>'+
-                                  ' <td>'+value.sueldo+'</td>'+
+                                  ' <td>'+value.sueldo_secre+'</td>'+
                                   ' <td>'+value.totaldescuento+'</td>'+
                                   ' <td>'+value.totalpago+'</td>'+
                                   ' <td>'+value.observacion+'</td>'+  
