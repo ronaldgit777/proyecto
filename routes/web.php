@@ -69,7 +69,7 @@ Route::get('/', function () {
         
         Route::get('/alumproreporte',[App\Http\Controllers\AlumnoController::class, 'alumproreporte'])->name('alumproreporte'); //lista de alumnos reporte
         Route::get('/notasproreporte',[App\Http\Controllers\NotaController::class, 'notasproreporte'])->name('notasproreporte'); //lista de alumnos notas
-
+        
         //Route::get('/notassecrereporte',[App\Http\Controllers\NotaController::class, 'notassecrereporte'])->name('notassecrereporte'); //lista de alumnos
         Route::get('/notasreportesecre',[App\Http\Controllers\NotaController::class, 'notasreportesecre'])->name('notasreportesecre'); //index notas profe rol admin
 
@@ -89,7 +89,7 @@ Route::get('/', function () {
         Route::post('/obtener-fechainicionotasecrerol',[App\Http\Controllers\AsignarpromaController::class, 'buscarfechainicionotassecreuserrol'])->name('obtener-fechainicionotasecrerol'); //ajaax repor notas estudiantes rol secre
         
         Route::post('/obtener-notasdelalumnoid',[App\Http\Controllers\NotaController::class, 'obtenernotasdelalumnoid'])->name('obtener-notasdelalumnoid'); //buscar de asignaciones
-
+        
         Route::post('/obtener-notasdelalumnoidadmi',[App\Http\Controllers\NotaController::class, 'obtenernotasdelalumnoidadmi'])->name('obtener-notasdelalumnoidadmi'); //repote de notas cargas notas rol admi
 
         Route::post('/obtener-notasdelalumnoidsecre',[App\Http\Controllers\NotaController::class, 'obtenernotasdelalumnoidsecre'])->name('obtener-notasdelalumnoidsecre'); //repote de notas cargas notas rol secre
@@ -176,7 +176,7 @@ Route::get('/', function () {
 
         Route::post('/obtener-fechainicioasigprofeuser',[App\Http\Controllers\AsignarpromaController::class, 'buscarfechainicioasigprofeuser'])->name('obtener-fechainicioasigprofeuser'); //asignaciones profesor user
         Route::post('/obtener-fechainicioasigprofereporte',[App\Http\Controllers\AsignarpromaController::class, 'buscarfechainicioasigprofeuserreporte'])->name('obtener-fechainicioasigprofereporte'); //asignaciones reporte profe user
-
+        
        Route::post('/obtener-fechainicioprosureporte',[App\Http\Controllers\SueldoproController::class, 'obtenerfechainicioprosureporte'])->name('obtener-fechainicioprosureporte');//repor 
         //secretarias
         route::resource('secretaria',SecretariaController::class)->middleware('auth');
@@ -200,7 +200,7 @@ Route::get('/', function () {
         Route::get('/reporsusecre', [App\Http\Controllers\SueldosecreController::class, 'reporsusecre'])->name('reporsusecre')->middleware('auth');//ruta
         Route::post('/obtener-fechainiciosecreadereporte',[App\Http\Controllers\AdelantosecreController::class, 'obtenerfechainiciosecreadere'])->name('obtener-fechainiciosecreadereporte');//repor adelanto pro
         Route::post('/obtener-fechainiciosecresureporte',[App\Http\Controllers\SueldosecreController::class, 'obtenerfechainiciosecresureporte'])->name('obtener-fechainiciosecresureporte');//repor adelanto pro
-
+        
         route::resource('nota',NotaController::class)->middleware('auth');  
         Route::get('/repornota', [App\Http\Controllers\NotaController::class, 'repornota'])->name('repornota')->middleware('auth'); 
         

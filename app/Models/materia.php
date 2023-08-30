@@ -57,15 +57,54 @@ class materia extends Model
         })->get();
     
     }
+    public static function obtenermateriaproreporte($userid)
+    {
+        return static::join('asignarpromas','materias.id','=','asignarpromas.materia_id')
+        ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('materias.*')
+       
+        ->where('profesors.user_id','=',$userid)
+        ->distinct()
+        //->where('asignarpromas.estado','activo')//mostrando todas las asignaciones activas
+     //  ->asignarpromas()
+         ->get();  
+    }
     public static function obtenermateriapro($userid)
     {
         return static::join('asignarpromas','materias.id','=','asignarpromas.materia_id')
         ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
         ->join('users','users.id','=','profesors.user_id')
         ->select('materias.*')
+       // ->distinct()
         ->where('profesors.user_id','=',$userid)
         //->where('asignarpromas.estado','activo')//mostrando todas las asignaciones activas
      //  ->asignarpromas()
+         ->get();  
+    }
+    public static function obtenermateriapronotas($userid)
+    {
+        return static::join('asignarpromas','materias.id','=','asignarpromas.materia_id')
+        ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('materias.*')
+       ->distinct()
+        ->where('profesors.user_id','=',$userid)
+        //->where('asignarpromas.estado','activo')//mostrando todas las asignaciones activas
+     //  ->asignarpromas()
+         ->get();  
+    }
+    public static function obtenermateriaproalumno($userid)
+    {
+        return static::join('asignarpromas','materias.id','=','asignarpromas.materia_id')
+        ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('materias.*')
+      
+        ->where('profesors.user_id','=',$userid)
+        //->where('asignarpromas.estado','activo')//mostrando todas las asignaciones activas
+     //  ->asignarpromas()
+     ->distinct()
          ->get();  
     }
     public static function obtenermateriaprouser($userid)
@@ -75,6 +114,20 @@ class materia extends Model
         ->join('users','users.id','=','profesors.user_id')
         ->select('materias.*')
         ->where('profesors.user_id','=',$userid)
+        ->where('asignarpromas.estado','=','activo')
+        ->distinct()
+        //->where('asignarpromas.estado','activo')//mostrando todas las asignaciones activas
+     //  ->asignarpromas()
+         ->get();  
+    }
+    public static function obtenerperiodoprouser($userid)
+    {
+        return static::join('asignarpromas','periodos.id','=','asignarpromas.periodo_id')
+        ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('periodos.*')
+        ->where('profesors.user_id','=',$userid)
+        ->where('asignarpromas.estado','=','activo')
         ->distinct()
         //->where('asignarpromas.estado','activo')//mostrando todas las asignaciones activas
      //  ->asignarpromas()

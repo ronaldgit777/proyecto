@@ -101,7 +101,9 @@
                                     <label class="text text-capitalize" >ci</label>
                                 </div>
                                 <div class="col-8 col-md-9">
-                                  <input class="form-control" placeholder="ci" type="text" name="ci" value="{{ old('ci') }}" required autocomplete="ci" autofocus>
+                                  <input class="form-control" id="ci" placeholder="ci" type="text" 
+                                  name="ci" value="{{ old('ci') }}" required autocomplete="ci" autofocus oninput="validateInputci()">
+                                  <span id="ci-error" style="color: red; font-size: 14px;"></span>
                                 </div>
                               </div>
                           </div>
@@ -112,7 +114,10 @@
                                     <label class="text text-capitalize">nombre</label>
                                 </div>
                                   <div class="col-8 col-md-9">
-                                    <input class="form-control" placeholder="nombre" type="text" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre" autofocus>
+                                    <input class="form-control" id="nombre" placeholder="nombre" type="text" 
+                                    name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre" autofocus oninput="validateInput()">
+                                    <span id="nombre-error" style="color: red; font-size: 14px;"></span>
+                                    
                                   </div>
                             </div>
                           </div>
@@ -123,7 +128,9 @@
                                     <label class="text text-capitalize" >apellido paterno</label>
                                 </div>
                                 <div class="col-8 col-md-9">
-                                  <input class="form-control" placeholder="apellidopaterno" type="text" name="apellidopaterno" value="{{ old('apellidopaterno') }}" required autocomplete="apellidopaterno" autofocus>
+                                  <input class="form-control" id="apellidopaterno" placeholder="apellidopaterno" type="text" name="apellidopaterno" 
+                                  value="{{ old('apellidopaterno') }}" required autocomplete="apellidopaterno" autofocus oninput="validateInputapellidopaterno()">
+                                  <span id="apellidopaterno-error" style="color: red; font-size: 14px;"></span>
                                 </div>
                               </div>
                           </div>
@@ -134,7 +141,9 @@
                                     <label class="text text-capitalize">apellido materno</label>
                                 </div>
                                   <div class="col-8 col-md-9">
-                                    <input class="form-control" placeholder="apellidomaterno" type="text" name="apellidomaterno" value="{{ old('apellidomaterno') }}" required autocomplete="apellidomaterno" autofocus>
+                                    <input class="form-control" id="apellidomaterno" placeholder="apellidomaterno" type="text" name="apellidomaterno" 
+                                    value="{{ old('apellidomaterno') }}" required autocomplete="apellidomaterno" autofocus oninput="validateInputapellidomaterno()">
+                                    <span id="apellidomaterno-error" style="color: red; font-size: 14px;"></span>
                                   </div>
                             </div>
                           </div>
@@ -145,7 +154,11 @@
                                     <label class="text text-capitalize" >celular</label>
                                 </div>
                                 <div class="col-8 col-md-9">
-                                  <input class="form-control" placeholder="celular" type="text" name="celular" value="{{ old('celular') }}" required autocomplete="celular" autofocus>
+                                 
+
+                                  <input class="form-control" id="celular" placeholder="celular"  type="text"
+                                  name="celular" value="{{ old('celular') }}" required autocomplete="celular" autofocus oninput="validateInputcelular()">
+                                  <span id="celular-error" style="color: red; font-size: 14px;"></span>
                                 </div>
                               </div>
                           </div>
@@ -172,7 +185,7 @@
                                     <option value="activo">activo</option>
                                     <option value="inactivo">inactivo</option>
                                 </select> --}}
-                                <input type="text" name="estado" id="estado" class="form-control" required value="activo" disabled> <br>
+                                <input type="text" name="estado" id="estado" class="form-control" required value="activo" readonly> <br>
                                 </div>
                               </div>
                           </div>
@@ -193,7 +206,9 @@
                                   <label class="text text-capitalize">sueldo</label>
                                 </div>
                                 <div class="col-8 col-md-9">
-                                  <input class="form-control" placeholder="sueldo" type="text" name="sueldo"  required autofocus>
+                                  <input class="form-control" placeholder="sueldo" id="sueldo" type="text" name="sueldo" 
+                                  value="{{ old('sueldo') }}" required autocomplete="sueldo" autofocus oninput="validateInputsueldo()">
+                                  <span id="sueldo-error" style="color: red; font-size: 14px;"></span>
                                 </div>
                               </div>
                           </div>
@@ -225,4 +240,88 @@
         </form>
     </div>
 </div>
+s
 @endsection
+<script>
+function validateInput() {
+    var inputElement = document.getElementById('nombre');
+    var errorElement = document.getElementById('nombre-error');
+    var regex = /[^a-zA-Z\s]/g;
+    
+    if (regex.test(inputElement.value)) {
+        errorElement.textContent = "Solo se deben ingresar letras en este campo.";
+        inputElement.value = inputElement.value.replace(regex, '');
+    } else {
+        errorElement.textContent = ""; // Limpiar el mensaje de error si es válido
+    }
+}
+function validateInputci() {
+    var inputElement = document.getElementById('ci');
+    var errorElement = document.getElementById('ci-error');
+    var regex = /[^0-9]/g;
+    
+    if (regex.test(inputElement.value)) {
+        errorElement.textContent = "Solo se deben ingresar números en este campo.";
+        inputElement.value = inputElement.value.replace(regex, '');
+    } else if (inputElement.value.length > 8) {
+        errorElement.textContent = "Máximo 8 dígitos permitidos.";
+        inputElement.value = inputElement.value.slice(0, 8);
+    } else {
+        errorElement.textContent = ""; // Limpiar el mensaje de error si es válido
+    }
+}
+function validateInputapellidopaterno() {
+    var inputElement = document.getElementById('apellidopaterno');
+    var errorElement = document.getElementById('apellidopaterno-error');
+    var regex = /[^a-zA-Z\s]/g;
+    
+    if (regex.test(inputElement.value)) {
+        errorElement.textContent = "Solo se deben ingresar letras en este campo.";
+        inputElement.value = inputElement.value.replace(regex, '');
+    } else {
+        errorElement.textContent = ""; // Limpiar el mensaje de error si es válido
+    }
+}
+function validateInputapellidomaterno() {
+    var inputElement = document.getElementById('apellidomaterno');
+    var errorElement = document.getElementById('apellidomaterno-error');
+    var regex = /[^a-zA-Z\s]/g;
+    
+    if (regex.test(inputElement.value)) {
+        errorElement.textContent = "Solo se deben ingresar letras en este campo.";
+        inputElement.value = inputElement.value.replace(regex, '');
+    } else {
+        errorElement.textContent = ""; // Limpiar el mensaje de error si es válido
+    }
+}
+function validateInputcelular() {
+    var inputElement = document.getElementById('celular');
+    var errorElement = document.getElementById('celular-error');
+    var regex = /[^0-9]/g;
+    
+    if (regex.test(inputElement.value)) {
+        errorElement.textContent = "Solo se deben ingresar números en este campo.";
+        inputElement.value = inputElement.value.replace(regex, '');
+    } else if (inputElement.value.length > 8) {
+        errorElement.textContent = "Máximo 8 dígitos permitidos.";
+        inputElement.value = inputElement.value.slice(0, 8);
+    } else {
+        errorElement.textContent = ""; // Limpiar el mensaje de error si es válido
+    }
+}
+function validateInputsueldo() {
+    var inputElement = document.getElementById('sueldo');
+    var errorElement = document.getElementById('sueldo-error');
+    var regex = /[^0-9]/g;
+    
+    if (regex.test(inputElement.value)) {
+        errorElement.textContent = "Solo se deben ingresar números en este campo.";
+        inputElement.value = inputElement.value.replace(regex, '');
+    }  else {
+        errorElement.textContent = ""; // Limpiar el mensaje de error si es válido
+    }
+}
+</script>
+
+
+

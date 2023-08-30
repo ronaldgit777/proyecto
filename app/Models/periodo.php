@@ -19,14 +19,16 @@ class periodo extends Model
         
         return $periodosDisponibles;
     }*/
-    public static function obtenerperiodopro($userid)
+    public static function obtenerperiodoprouser($userid)
     {
         return static::join('asignarpromas','periodos.id','=','asignarpromas.periodo_id')
         ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
         ->join('users','users.id','=','profesors.user_id')
         ->select('periodos.*')
+        //
         ->where('profesors.user_id','=',$userid)
-       // ->where('asignarpromas.estado','activo')
+       ->where('asignarpromas.estado','activo')
+       ->distinct()
      //  ->asignarpromas()
          ->get();  
     }
@@ -66,5 +68,54 @@ class periodo extends Model
             ->select('periodos.*')
             ->get();
         //return $fechaini;
+    }
+    public static function obtenerperiodopro($userid)
+    {
+        return static::join('asignarpromas','periodos.id','=','asignarpromas.periodo_id')
+        ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('periodos.*')
+       ->distinct()
+        ->where('profesors.user_id','=',$userid)
+        //->where('asignarpromas.estado','activo')//mostrando todas las asignaciones activas
+     //  ->asignarpromas()
+         ->get();  
+    }
+    public static function obtenerperiodopronotas($userid)
+    {
+        return static::join('asignarpromas','periodos.id','=','asignarpromas.periodo_id')
+        ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('periodos.*')
+       ->distinct()
+        ->where('profesors.user_id','=',$userid)
+        //->where('asignarpromas.estado','activo')//mostrando todas las asignaciones activas
+     //  ->asignarpromas()
+         ->get();  
+    }
+    public static function obtenerperiodoproalumno($userid)
+    {
+        return static::join('asignarpromas','periodos.id','=','asignarpromas.periodo_id')
+        ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('periodos.*')
+       // 
+        ->where('profesors.user_id','=',$userid)
+        ->distinct()
+        //->where('asignarpromas.estado','activo')//mostrando todas las asignaciones activas
+     //  ->asignarpromas()
+         ->get();  
+    }
+    public static function obtenerperiodoproreporte($userid)
+    {
+        return static::join('asignarpromas','periodos.id','=','asignarpromas.periodo_id')
+        ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('periodos.*')
+        ->distinct()
+        ->where('profesors.user_id','=',$userid)
+        //->where('asignarpromas.estado','activo')//mostrando todas las asignaciones activas
+     //  ->asignarpromas()
+         ->get();  
     }
 }

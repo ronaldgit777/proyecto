@@ -74,7 +74,7 @@ class ProfesorController extends Controller
      {   
          $profesors = Profesor::obtenerProfesoresConRutaImagen();
          $user=user::all();
-                  return view('profesor.reporpro', compact('profesors','user'));    
+         return view('profesor.reporpro', compact('profesors','user'));    
      }
     public function opcionesreporte()
     {   

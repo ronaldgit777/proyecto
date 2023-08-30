@@ -273,7 +273,7 @@ sueldoproreporte.forEach(function (asignarproma) {
                                 '<tr>'+
                                 // ' <td>'+value.id+'</td>'+
                                     '<td>'+value.fechadeasignacion+'</td>'+
-                                    ' <td>'+value.profesor_nombre+' '+value.apellidopaterno+' '+value.apellidomaterno+'</td>'+
+                                    ' <td>'+value.profesor_nombre+' '+value.profesor_apellidopaterno+' '+value.profesor_apellidomaterno+'</td>'+
                                     ' <td>'+value.materia_nombre+'</td>'+
                                     ' <td>'+value.materia_costo+'</td>'+
                                     ' <td>'+value.periodo_nombre+'</td>'+

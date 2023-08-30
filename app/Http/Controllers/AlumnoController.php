@@ -47,15 +47,16 @@ class AlumnoController extends Controller
        ::join('inscripcions','inscripcions.alumno_id','=','alumnos.id')
         ->join('asignarpromas','inscripcions.asignarproma_id','=','asignarpromas.id')
         ->join('materias','asignarpromas.materia_id','=','materias.id')
+        ->join('periodos','asignarpromas.periodo_id','=','periodos.id') ->join('aulas','asignarpromas.aula_id','=','aulas.id')
         ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
         ->join('users','users.id','=','profesors.user_id')
-        ->select('alumnos.*','materias.materia as nombre_materia','materias.id as materiaid')
+        ->select('alumnos.*','materias.materia as nombre_materia','materias.id as materiaid','periodos.periodo as nombre_periodo','aulas.aula as nombre_aula')
         ->where('profesors.user_id','=',$userid)
         ->where('asignarpromas.estado','=','activo')
         ->get();  
         $materias =materia::obtenermateriaprouser($userid);
-        $aulas =aula::all();
-        $periodos =periodo::all();
+        $aulas =aula::obteneraulaprouser($userid);
+        $periodos =periodo::obtenerperiodoprouser($userid);
         $actividads =actividad::all();
         $usuario=user::obtenernombreusuario($userid);
         $notas=nota::all();
@@ -79,8 +80,8 @@ class AlumnoController extends Controller
          ->select('alumnos.*','materias.*','aulas.*','periodos.*','asignarpromas.estado as asignarpromas_estado')
          ->where('profesors.user_id','=',$userid)
          ->get();  
-         $materias =materia::obtenermateriapro($userid);
-         $aulas =aula::obteneraulapro($userid);
+         $materias =materia::obtenermateriaproalumno($userid);
+         $aulas =aula::obteneraulaproalumno($userid);
         $periodos =periodo::obtenerperiodopro($userid);
 
          $usuario=user::all();

@@ -27,8 +27,10 @@ class InscripcionController extends Controller
        $fechafin = $request->input('fechafinal');
        $buscaralu2 = $request->input('buscaralu');
        $materiaid2 = $request->input('materiaid');
+       $aulaid2 = $request->input('aulaid');
+       $periodoid2 = $request->input('periodoid');
        $userid=auth()->user()->id;
-       $resultadoconsulta = inscripcion::obtenerfecchainicioalumnoslistaprofe($fechaini,$rutaImagenBase,$fechafin,$buscaralu2,$userid,$materiaid2);
+       $resultadoconsulta = inscripcion::obtenerfecchainicioalumnoslistaprofe($fechaini,$rutaImagenBase,$fechafin,$buscaralu2,$userid,$materiaid2,$aulaid2,$periodoid2);
        return response()->json($resultadoconsulta); 
     }
     public function  listaalumnosinscritos(Request $request)

@@ -46,7 +46,7 @@ class inscripcion extends Model
                 return $query->where(function ($query) use ($buscarin2) {
                  // $query->where('asignarpromas.asignarproma_id', 'like', "%$buscarin2%");
                     $query->where('alumnos.nombre', 'like', "%$buscarin2%")
-                        ->orWhere('profesors.nombre', 'like', "%$buscarin2%")
+                        ->orWhere('profesors.nombre', 'like', "%$buscarin2%")->orWhere('profesors.apellidopaterno', 'like', "%$buscarin2%")->orWhere('profesors.apellidomaterno', 'like', "%$buscarin2%")
                         ->orWhere('materias.materia', 'like', "%$buscarin2%")
                         ->orWhere('materias.costo', 'like', "%$buscarin2%")
                         ->orWhere('periodos.periodo', 'like', "%$buscarin2%")
@@ -55,7 +55,7 @@ class inscripcion extends Model
             })   
             ->select(
                 'inscripcions.*','fechadeinscripcion',
-                'profesors.nombre as profesor_nombre',
+                'profesors.nombre as profesor_nombre','profesors.apellidopaterno as profesor_apellidopaterno','profesors.apellidomaterno as profesor_apellidomaterno',
                 'alumnos.nombre as alumno_nombre',
                 'materias.materia as materia_nombre',
                 'materias.costo as materia_costo',
@@ -66,7 +66,7 @@ class inscripcion extends Model
         //return $fechaini;
     }
     public static function obtenerdatosde3tabla()
-    {
+    {   
         return static
         ::
         //where('inscripcions.estado', 'activo')    y
@@ -236,13 +236,15 @@ class inscripcion extends Model
 
 
     }
-    public static function obtenerfecchainicioalumnoslistaprofe($fechaini,$rutaImagenBase,$fechafin,$buscaralu2,$userid,$materiaid2)
+    public static function obtenerfecchainicioalumnoslistaprofe($fechaini,$rutaImagenBase,$fechafin,$buscaralu2,$userid,$materiaid2,$aulaid2,$periodoid2)
    {      
        // Ejemplo de obtención del sueldo del profesor
       // $fechaini = self::where('fechadeingreso','>=', $fechaini)->get();
        return self::join('alumnos','inscripcions.alumno_id','=','alumnos.id')
             ->join('asignarpromas','inscripcions.asignarproma_id','=','asignarpromas.id')
             ->join('materias','asignarpromas.materia_id','=','materias.id')
+            ->join('aulas','asignarpromas.aula_id','=','aulas.id')
+            ->join('periodos','asignarpromas.periodo_id','=','periodos.id')
             ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
             ->join('users','users.id','=','profesors.user_id')
 
@@ -255,8 +257,15 @@ class inscripcion extends Model
              ->when($materiaid2, function ($query, $materiaid2) {
                 return $query->where('materias.materia', '=', $materiaid2);
             })  
+            ->when($aulaid2, function ($query, $aulaid2) {
+                return $query->where('aulas.aula', '=', $aulaid2);
+            })  
+            ->when($periodoid2, function ($query, $periodoid2) {
+                return $query->where('periodos.periodo', '=', $periodoid2);
+            })  
              
              ->where('profesors.user_id','=',$userid)
+
              ->when($buscaralu2, function ($query, $buscaralu2) {
                  return $query->where(function ($query) use ($buscaralu2) {
                      $query->where('alumnos.ci', 'like', "%$buscaralu2%")
@@ -267,13 +276,18 @@ class inscripcion extends Model
                          ->orWhere('alumnos.direccion', 'like', "%$buscaralu2%")
                          ->orWhere('alumnos.correo', 'like', "%$buscaralu2%")
                          ->orWhere('alumnos.estado', 'like', "%$buscaralu2%")
-                         ->orWhere('materias.materia', 'like', "%$buscaralu2%");
+                         ->orWhere('materias.materia', 'like', "%$buscaralu2%")
+                         ->orWhere('periodos.periodo', 'like', "%$buscaralu2%")
+                         ->orWhere('aulas.aula', 'like', "%$buscaralu2%");
                  });
              })  
             // ->select('profesors.*', 'users.email', 'users.role')
            //  ->get();
-             ->select('alumnos.*','materias.materia as nombre_materia','materias.id as materiaid')
-      
+             ->select('alumnos.*',
+             'materias.materia as nombre_materia','materias.id as materiaid',
+             'aulas.aula as nombre_aula','aulas.id as aulaid',
+             'periodos.periodo as nombre_periodo','periodos.id as periodoid')
+             ->where('asignarpromas.estado','=','activo')
            ->selectRaw("CONCAT('$rutaImagenBase', alumnos.imagen) as ruta_imagen")
            ->get();
        //return $fechaini;

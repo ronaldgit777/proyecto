@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class alumno extends Model
 {
@@ -197,9 +198,36 @@ class alumno extends Model
    public static function obteneralumnosConRutaImagenreporte()
    {
        $rutaImagenBase = asset('storage').'/';
-       return self::
-           select('alumnos.*')
-           ->selectRaw("CONCAT('$rutaImagenBase', alumnos.imagen) as ruta_imagen")
-           ->get();
+      // return self::
+          // select('alumnos.*')
+         // ->selectRaw("CONCAT('$rutaImagenBase', alumnos.imagen) as ruta_imagen")
+         //  ->get();'
+
+           $consulta = self::join('inscripcions','inscripcions.alumno_id','=','alumnos.id')
+           ->join('asignarpromas','inscripcions.asignarproma_id','=','asignarpromas.id')
+           -> join('materias','asignarpromas.materia_id','=','materias.id')
+           -> join('aulas','asignarpromas.aula_id','=','aulas.id')
+           -> join('periodos','asignarpromas.periodo_id','=','periodos.id')  
+           ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+           ->join('users','users.id','=','profesors.user_id')
+           ->select('alumnos.*','alumnos.id as alumnoid','alumnos.nombre as alumno_nombre','alumnos.apellidopaterno as alumno_apellidopaterno','alumnos.nombre as alumno_apellidomaterno',
+           'materias.id as materiaid','materias.materia as materia_nombre',
+           'aulas.aula as aula_nombre','periodos.periodo as periodo_nombre',
+           'asignarpromas.estado as asignarpromas_estado',
+           'profesors.nombre as profesor_nombre','profesors.apellidomaterno as profesor_apellidomaterno','profesors.apellidopaterno as profesor_apellidopaterno',
+           DB::raw('ROUND((SELECT AVG(nota) FROM notas 
+           WHERE notas.alumno_id = alumnos.id and notas.materia_id = materias.id), 1) 
+           as promedio_notas')
+           )
+
+          // ->select('profesors.*', 'users.email', 'users.role')
+         //  ->get();
+         //->select('alumnos.*', 'users.email', 'users.role')
+         ->selectRaw("CONCAT('$rutaImagenBase', alumnos.imagen) as ruta_imagen");
+           // Verificar si ambas variables tienen valor
+           if (!empty($ordenarpro2) && !empty($mayorymenorpro2)) {
+               $consulta->orderBy($ordenarpro2, $mayorymenorpro2);
+           }
+           return $consulta->get();  
    }
 }

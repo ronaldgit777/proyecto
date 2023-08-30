@@ -139,7 +139,7 @@
                                           <label class="text text-capitalize">observacion</label>
                                       </div>
                                         <div class="col-8 col-md-9">
-                                          <input class="form-control" placeholder="observacion" type="observacion" name="observacion" required autocomplete="observacion" id="observacion" > 
+                                          <input class="form-control" placeholder="observacion" type="observacion" name="observacion" autocomplete="observacion" id="observacion" required  > 
                                         </div>
                                   </div>
                                 </div>

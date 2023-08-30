@@ -50,7 +50,7 @@
                                 <tr>
                                     {{-- <th>#</th> --}}
                                     <th>fechadeinscripcion</th>
-                                    <th>asignarproma</th>
+                                    {{-- <th>asignarproma</th> --}}
                                     <th>profesor</th>
                                     <th>materia</th>
                                     <th>materia_costo</th>
@@ -68,8 +68,8 @@
                                 <!--  <td> /* $inscripcion->asignarproma->materia->materia."--".$inscripcion->asignarproma->profesor->user->name}} */</td>-->
                               
                                     <td>{{ $inscripcion->fechadeinscripcion}}</td>
-                                    <td>{{ $inscripcion->asignarproma_id}}</td>
-                                    <td>{{ $inscripcion->profesor_nombre}}</td>
+                                    {{-- <td>{{ $inscripcion->asignarproma_id}}</td> --}}
+                                    <td>{{ $inscripcion->profesor_nombre}} {{ $inscripcion->profesor_apellidopaterno}} {{ $inscripcion->profesor_apellidomaterno}}</td>
                                     <td>{{ $inscripcion->materia_nombre}}</td>
                                     <td>{{ $inscripcion->materia_costo}}</td>
                                     <td>{{ $inscripcion->periodo_nombre}}</td>
@@ -129,8 +129,8 @@
                                 '<tr>'+
                                 // ' <td>'+value.id+'</td>'+
                                     '<td>'+value.fechadeinscripcion+'</td>'+
-                                    '<td>'+value.asignarproma_id+'</td>'+
-                                    ' <td>'+value.profesor_nombre+'</td>'+
+                                    // '<td>'+value.asignarproma_id+'</td>'+
+                                    ' <td>'+value.profesor_nombre+' '+value.profesor_apellidopaterno+' '+value.profesor_apellidomaterno+'</td>'+
                                     ' <td>'+value.materia_nombre+'</td>'+
                                     ' <td>'+value.materia_costo+'</td>'+
                                     ' <td>'+value.periodo_nombre+'</td>'+

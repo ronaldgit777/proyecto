@@ -36,9 +36,10 @@ class AsignarpromaController extends Controller
        $promax2 = $request->input('promax');
        $ordenarasig2 = $request->input('ordenarasig');
        $mayorymenorasig2 = $request->input('mayorymenorasig');
+       $estado2 = $request->input('estado');
        $userid=auth()->user()->id;
        $resultadoconsulta = asignarproma::obtenerfecchainicionotassecreuser($fechaini,$fechafin,$materiaid2,$periodoid2,$aulaid2,
-       $alumno_nombre2,$alumno_apepa2, $alumno_apema2 ,$promin2 ,$promax2,$ordenarasig2, $mayorymenorasig2,$userid);
+       $alumno_nombre2,$alumno_apepa2, $alumno_apema2 ,$promin2 ,$promax2,$ordenarasig2, $mayorymenorasig2,$userid,$estado2);
        return response()->json($resultadoconsulta); 
     }
     public function  buscarfechainicionotassecreuserrol(Request $request)
@@ -224,9 +225,9 @@ class AsignarpromaController extends Controller
        $userid=auth()->user()->id;
        $asignarpromas =asignarproma::obtenerasignarcionproreporte($userid);
         //join('asignarpromas','asignarpromas.profesor_id','=','profesors.id')
-        $materias =materia::obtenermateriapro($userid);
-        $aulas =aula::obteneraulapro($userid);
-        $periodos =periodo::obtenerperiodopro($userid);
+        $materias =materia::obtenermateriaproreporte($userid);
+        $aulas =aula::obteneraulaproreporte($userid);           //aqui falta arreglar
+        $periodos =periodo::obtenerperiodoproreporte($userid);
         //$asignarpromas=asignarproma::all();
         //return view('auth.registroEmpleado');
         return view('asignarproma.asigproreporte',compact('asignarpromas','materias','aulas','periodos'));

@@ -49,7 +49,7 @@
                         </div>
                         <div class="col">
                           <label class="text-primary text-capitalize">estado</label>
-                          <select type="text" name="observacionss" id="observacion" class="form-control">
+                          <select type="text" name="estado" id="estado" class="form-control">
                             <option selected  value="">ambos</option>
                             <option value="activo">activo</option> 
                             <option value="inactivo">inactivo</option> 
@@ -201,6 +201,7 @@
                         @endforeach
             </tbody>
           </table>
+          s
         </div>
    </div>s
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
@@ -212,40 +213,37 @@
  function encontrarListaPorId(idLista) {
    return profeprosData.find(item => item.id === idLista);
  }
-    function generarpdflistaprofesor() {
-      
-    // Reemplazar las URLs de las imágenes con las imágenes en base64 en la lista profesorreporte
-    var totalImages = profesorreporte.length;
-    var imagesProcessed = 0;
+function generarpdflistaprofesor() {
+ // Reemplazar las URLs de las imágenes con las imágenes en base64 en la lista profesorreporte
+ var totalImages = profesorreporte.length;
+ var imagesProcessed = 0;
 
-    profesorreporte.forEach(function (alumno) {
-     // debugger;
-      var img = new Image();
-      img.crossOrigin = 'Anonymous';
-      img.onload = function () {
-        var canvas = document.createElement('canvas');
-        var ctx = canvas.getContext('2d');
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0, img.width, img.height);
-        var dataURL = canvas.toDataURL('image/jpeg'); // Cambiar a 'image/png' si es necesario
+ profesorreporte.forEach(function (alumno) {
+   var img = new Image();
+   img.crossOrigin = 'Anonymous';
+   img.onload = function () {
+     var canvas = document.createElement('canvas');
+     var ctx = canvas.getContext('2d');
+     canvas.width = img.width;
+     canvas.height = img.height;
+     ctx.drawImage(img, 0, 0, img.width, img.height);
+     var dataURL = canvas.toDataURL('image/jpeg'); // Cambiar a 'image/png' si es necesario
 
-        // Actualizar la URL de la imagen con la imagen en base64
-        alumno.ruta_imagen = dataURL;
+     // Actualizar la URL de la imagen con la imagen en base64
+     alumno.ruta_imagen = dataURL;
 
-        imagesProcessed++;
-        if (imagesProcessed === totalImages) {
-          // Una vez que todas las imágenes se hayan procesado, generar el PDF
-          generarPDF();
-        }
-      };
+     imagesProcessed++;
+     if (imagesProcessed === totalImages) {
+       // Una vez que todas las imágenes se hayan procesado, generar el PDF
+       generarPDF();
+     }
+   };
 
-      img.src = alumno.ruta_imagen;
-    });
-    }
+   img.src = alumno.ruta_imagen;
+ });
+}
 
 function generarPDF() {
-  
  var currentDate = new Date();
 var formattedDate = currentDate.toISOString().slice(0, 10);
  // Definir la estructura del documento PDF con estilos para la tabla
@@ -268,7 +266,7 @@ var formattedDate = currentDate.toISOString().slice(0, 10);
        };
         },
    content: [
-     { text: 'Lista de notas de los alumnos', 
+     { text: 'Lista de Notas de los alumnos', 
        //style: 'header'
       },
       {
@@ -297,7 +295,7 @@ var formattedDate = currentDate.toISOString().slice(0, 10);
 
  // Generar el documento PDF
  pdfMake.createPdf(docDefinition).download(
-   "reporte_alumno-" + formattedDate + ".pdf"
+   "reporte_profesor-" + formattedDate + ".pdf"
  );
 }
 
@@ -309,21 +307,17 @@ function obtenerDatosTabla() {
  profesorreporte.forEach(function (alumno) {
    var fila = [
     // profesor.id,
-    alumno.Fechadeingreso,
+    alumno.fechadeingreso,
     alumno.ci,
-    alumno.nombre,
-    alumno.apellidopaterno,
-    alumno.apellidomaterno,
+    alumno.alumno_nombre,
+    alumno.alumno_apellidopaterno,
+    alumno.alumno_apellidomaterno,
     alumno.materia_nombre,
     alumno.promedio_notas,
     alumno.periodo_nombre,
     alumno.aula_nombre,
     alumno.asignarpromas_estado,
      { image: alumno.ruta_imagen, width: 50, height: 50 }, // Mostrar la imagen en base64 en la tabla
-
-
-
-    
    ];
    filas.push(fila);
  });
@@ -355,13 +349,14 @@ function obtenerDatosTabla() {
             var promax = $('#promax').val();
             var ordenar = $('#ordenar').val();
             var mayorymenor = $('#mayorymenor').val();
+            var estado = $('#estado').val();
 
             //alert(fecha_ini+fecha_fin+materiaid+periodoid+aulaid+alumno_nombre+alumno_apepa+alumno_apema+promin+promax+ordenar+mayorymenor)
 
-            generartabla(fecha_ini,fecha_fin,materiaid,periodoid,aulaid,alumno_nombre,alumno_apepa,alumno_apema,promin,promax,ordenar,mayorymenor); 
+            generartabla(fecha_ini,fecha_fin,materiaid,periodoid,aulaid,alumno_nombre,alumno_apepa,alumno_apema,promin,promax,ordenar,mayorymenor,estado); 
            
         });
-        function generartabla(fecha_ini,fecha_fin,materiaid,periodoid,aulaid,alumno_nombre,alumno_apepa,alumno_apema,promin,promax,ordenar,mayorymenor) {
+        function generartabla(fecha_ini,fecha_fin,materiaid,periodoid,aulaid,alumno_nombre,alumno_apepa,alumno_apema,promin,promax,ordenar,mayorymenor,estado) {
               $.ajax({
                     url: '{{ url("obtener-fechainicionotasecre") }}', // Ruta a tu controlador Laravel
                     type: 'POST',
@@ -379,6 +374,7 @@ function obtenerDatosTabla() {
                         promax:promax,
                         ordenarasig:ordenar,
                         mayorymenorasig:mayorymenor,
+                        estado:estado,
                       // profesor_id: profesorId,
                         _token: '{{ csrf_token() }}' // Agregar el token CSRF
                       
@@ -399,14 +395,14 @@ function obtenerDatosTabla() {
                                 // ' <td>'+value.id+'</td>'+
                                     '<td>'+value.fechadeingreso+'</td>'+
                                     '<td>'+value.ci+'</td>'+
-                                    ' <td>'+value.nombre+'</td>'+
-                                    '<td>'+value.apellidopaterno+'</td>'+
-                                    '<td>'+value.apellidomaterno+'</td>'+
+                                    ' <td>'+value.alumno_nombre+'</td>'+
+                                    '<td>'+value.alumno_paterno+'</td>'+
+                                    '<td>'+value.alumno_materno+'</td>'+
                                     ' <td>'+value.materia_nombre+'</td>'+
                                     ' <td>'+promedio+'</td>'+
                                     ' <td>'+value.periodo_nombre+'</td>'+
                                     ' <td>'+value.aula_nombre+'</td>'+
-                                    ' <td>'+value.estado+'</td>'+
+                                    ' <td>'+value.asignarpromas_estado+'</td>'+
                                     ' <td><img src="'+imagen+value.imagen+'" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid"></td>'+
                                    // ' <td>'+value.role+'</td>'+
                                     ' <td>'+
@@ -457,7 +453,10 @@ function obtenerDatosTabla() {
            $('#fechainicio').trigger('change');
         });
         $('#mayorymenor').on('change', function() {
-           $('#fechainicio').trigger('change');s
+           $('#fechainicio').trigger('change');
+        });
+        $('#estado').on('change', function() {
+           $('#fechainicio').trigger('change');
         });
     });
     function redondearAUnDecimal(numero) {

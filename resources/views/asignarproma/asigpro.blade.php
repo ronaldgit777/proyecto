@@ -47,7 +47,7 @@
                                 <tr>
                                     {{-- <td>{{ $asignarproma->id }}</td> --}}
                                     <td>{{ $asignarproma->fechadeasignacion }}</td>
-                                    <td>{{ $asignarproma->nombre."-".$asignarproma->profesor->apellidopaterno }}</td>
+                                    <td>{{ $asignarproma->nombre." ".$asignarproma->profesor->apellidopaterno." ".$asignarproma->profesor->apellidomaterno }}</td>
                                     {{-- <td>{{ $asignarproma->profesor->nombre."-".$asignarproma->profesor->apellidopaterno }}</td> --}}
                                     <td>{{ $asignarproma->nombre_materia}}</td>
                                     <td>{{ $asignarproma->materia->costo}}</td>

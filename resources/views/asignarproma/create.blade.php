@@ -27,7 +27,7 @@
                                     <label class=" text-capitalize">profesor </label>
                                 </div>
                                 <div class="col-8 col-md-9">
-                                    <select type="text" name="profesor_id" id="profesor_id" class="form-control">
+                                    <select type="text" name="profesor_id" id="profesor_id" class="form-control" required>
                                         @php
                                         $maximoPeriodos = $periodos->count();
                                         @endphp
@@ -39,6 +39,7 @@
                                             @endphp
 
                                             @if ($contpro < $maximoPeriodos)
+                                            <option value="">seleccione al profesor</option>
                                             <option value="{{ $profesor->id }}">{{ $profesor->nombre." ".$profesor->apellidopaterno." ".$profesor->apellidomaterno}}</option>
                                             @endif
                                         @endforeach

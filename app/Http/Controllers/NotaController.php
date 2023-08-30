@@ -88,9 +88,9 @@ class NotaController extends Controller
         )
         ->where('profesors.user_id','=',$userid)
         ->get();  
-        $materias =materia::obtenermateriapro($userid);
-        $aulas =aula::obteneraulapro($userid);
-       $periodos =periodo::obtenerperiodopro($userid);
+        $materias =materia::obtenermateriapronotas($userid);
+        $aulas =aula::obteneraulapronotas($userid);
+       $periodos =periodo::obtenerperiodopronotas($userid);
        $usuario=user::obtenernombreusuario($userid);
         
        // $alumnos=alumno::all();
@@ -102,23 +102,8 @@ class NotaController extends Controller
     public function notasreporte()
     {   
        $userid=auth()->user()->id;
-       $alumnosima=alumno::obteneralumnosConRutaImagenreporte();
-       $alumnos =alumno
-       ::join('inscripcions','inscripcions.alumno_id','=','alumnos.id')
-        ->join('asignarpromas','inscripcions.asignarproma_id','=','asignarpromas.id')
-        -> join('materias','asignarpromas.materia_id','=','materias.id')
-        -> join('aulas','asignarpromas.aula_id','=','aulas.id')
-        -> join('periodos','asignarpromas.periodo_id','=','periodos.id')  
-        ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
-        ->join('users','users.id','=','profesors.user_id')
-        ->select('alumnos.*','alumnos.id as alumnoid','materias.id as materiaid','materias.materia','aulas.*','periodos.*','asignarpromas.estado as asignarpromas_estado',
-        'profesors.nombre as profesor_nombre','profesors.apellidomaterno as profesor_apellidomaterno','profesors.apellidopaterno as profesor_apellidopaterno',
-        DB::raw('ROUND((SELECT AVG(nota) FROM notas 
-        WHERE notas.alumno_id = alumnos.id and notas.materia_id = materias.id), 1) 
-        as promedio_notas')
-        )
-        //->where('profesors.user_id','=',$userid)
-        ->get();  
+       $alumnos=alumno::obteneralumnosConRutaImagenreporte();
+    
         $materias =materia::all();
         $aulas =aula::all();
        $periodos =periodo::all();
@@ -127,7 +112,7 @@ class NotaController extends Controller
        // $alumnos=alumno::all();
         // return profesor::with('sueldopro')->get(); 
          //$datos['sueldopros']=sueldopro::paginate(7);
-         return view('nota.notasreporte',compact('alumnos','materias','aulas','periodos','usuario' ,'alumnosima'  ));
+         return view('nota.notasreporte',compact('alumnos','materias','aulas','periodos','usuario'   ));
          
     }
     public function notasreportesecre()

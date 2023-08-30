@@ -35,6 +35,26 @@
                       {{-- <input type="text" name="materia_id" id="materia_id" class="form-control" > --}}
                       </div>
                       <div class="col">
+                        <label class="text-primary text-capitalize">periodo</label>
+                        <select type="text" name="periodo_id2" id="periodo_id2" class="form-control" >
+                          <option selected value="">seleccione el periodo</option>
+                          @foreach ($periodos as $periodo)
+                          <option value="{{ $periodo->periodo }}">{{ $periodo->periodo}}</option>
+                          @endforeach
+                        </select>
+                      {{-- <input type="text" name="materia_id" id="materia_id" class="form-control" > --}}
+                      </div>
+                      <div class="col">
+                        <label class="text-primary text-capitalize">aula</label>
+                        <select type="text" name="aula_id2" id="aula_id2" class="form-control" >
+                          <option selected value="">seleccione la aula</option>
+                          @foreach ($aulas as $aula)
+                          <option value="{{ $aula->aula }}">{{ $aula->aula}}</option>
+                          @endforeach
+                        </select>
+                      {{-- <input type="text" name="materia_id" id="materia_id" class="form-control" > --}}
+                      </div>
+                      <div class="col">
                         <label class="text-primary text-capitalize">Buscar</label>
                         <div class="input-group">
                           <input type="text" name="buscar" id="buscar" class="form-control" placeholder="Ingrese término de búsqueda">
@@ -59,6 +79,8 @@
             <thead class="thead-light">
               <tr>
                 <th scope="col">materia</th>
+                <th scope="col">periodo</th>
+                <th scope="col">aula</th>
                 <th scope="col">fechadeingreso</th>
                 <th scope="col">ci</th>
                 <th scope="col">nombre</th>
@@ -76,6 +98,8 @@
               @foreach ($alumnos as $alumno)
                         <tr>
                             <td scope="row">{{ $alumno->nombre_materia }}</td>
+                            <td scope="row">{{ $alumno->nombre_periodo }}</td>
+                            <td scope="row">{{ $alumno->nombre_aula }}</td>
                             <td>{{ $alumno->fechadeingreso }}</td>
                             <td>{{ $alumno->ci }}</td>
                             <td>{{ $alumno->nombre }}</td>
@@ -305,7 +329,9 @@
                 var fecha_fin = $('#fechafinal').val();
                 var buscar = $('#buscar').val();  
                 var materiaid = $('#materia_id2').val();  //alert(materiaid)  
-                generartabla(fecha_ini,fecha_fin,buscar,materiaid);  
+                var aulaid = $('#aula_id2').val();
+                var periodoid = $('#periodo_id2').val();
+                generartabla(fecha_ini,fecha_fin,buscar,materiaid,aulaid,periodoid);  
             //}else{
                 //buscarpendiente=true;
             
@@ -314,7 +340,7 @@
         
             
             });
-            function generartabla(fecha_ini,fecha_fin,buscar,materiaid) {
+            function generartabla(fecha_ini,fecha_fin,buscar,materiaid,aulaid,periodoid) {
                 $.ajax({
                     url: '{{ url("obtener-fechainicioalumnosprofe") }}', // Ruta a tu controlador Laravel
                     type: 'POST',
@@ -324,6 +350,8 @@
                         //user_id:user_id,
                         buscaralu: buscar,// Enviar el ID del aula seleccionada
                         materiaid: materiaid,
+                        aulaid: aulaid,
+                        periodoid:periodoid,
                         // profesor_id: profesorId,
                         _token: '{{ csrf_token() }}' // Agregar el token CSRF
                     },
@@ -339,6 +367,8 @@
                                 '<tr>'+
                                 // ' <td>'+value.id+'</td>'+
                                     '<td>'+value.nombre_materia+'</td>'+
+                                    '<td>'+value.nombre_periodo+'</td>'+
+                                    '<td>'+value.nombre_aula+'</td>'+
                                     '<td>'+value.fechadeingreso+'</td>'+
                                     ' <td>'+value.ci+'</td>'+
                                     ' <td>'+value.nombre+'</td>'+
@@ -384,8 +414,12 @@
             $('#materia_id2').on('change', function() {
             $('#fechainicio').trigger('change');
             });
-         
-          
+            $('#aula_id2').on('change', function() {
+            $('#fechainicio').trigger('change');
+            });
+            $('#periodo_id2').on('change', function() {
+            $('#fechainicio').trigger('change');
+            });
        
     });
   </script>

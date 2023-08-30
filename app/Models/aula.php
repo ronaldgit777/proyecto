@@ -31,7 +31,44 @@ class aula extends Model
             ->get();
         //return $fechaini;
     }
+    public static function obteneraulaproreporte($userid)
+    {
+        return static::join('asignarpromas','aulas.id','=','asignarpromas.aula_id')
+        ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('aulas.*')//aqui falta arrelar
+        ->where('profesors.user_id','=',$userid)
+     //->where('asignarpromas.estado','activo')
+     //  ->asignarpromas()
+         ->distinct()
+         ->get();  
+    }
     public static function obteneraulapro($userid)
+    {
+        return static::join('asignarpromas','aulas.id','=','asignarpromas.aula_id')
+        ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('aulas.*')
+        ->where('profesors.user_id','=',$userid)
+     //   ->where('asignarpromas.estado','activo')
+     //  ->asignarpromas()
+         //->distinct()
+         ->get();  
+    }
+    public static function obteneraulapronotas($userid)
+    {
+        return static::join('asignarpromas','aulas.id','=','asignarpromas.aula_id')
+        ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('aulas.*')
+        ->distinct()
+        ->where('profesors.user_id','=',$userid)
+     //   ->where('asignarpromas.estado','activo')
+     //  ->asignarpromas()
+         //->distinct()
+         ->get();  
+    }
+    public static function obteneraulaproalumno($userid)
     {
         return static::join('asignarpromas','aulas.id','=','asignarpromas.aula_id')
         ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
@@ -43,7 +80,6 @@ class aula extends Model
          ->distinct()
          ->get();  
     }
-  
     public static function obteneraulasDisponibles( $profesorId)
     {//falta solucionar
         $periodosNoAsignados = Periodo::whereNotIn('id', function ($query) use ($profesorId) {
@@ -64,4 +100,18 @@ class aula extends Model
         ->get();
         return $aulasNoAsignadas;
     }
+    public static function obteneraulaprouser($userid)
+    {
+        return static::join('asignarpromas','aulas.id','=','asignarpromas.aula_id')
+        ->join('profesors','asignarpromas.profesor_id','=','profesors.id')
+        ->join('users','users.id','=','profesors.user_id')
+        ->select('aulas.*')
+        ->where('profesors.user_id','=',$userid)
+        ->where('asignarpromas.estado','activo')
+        ->distinct()
+     //  ->asignarpromas()
+         //->distinct()
+         ->get();  
+    }
+
 }
