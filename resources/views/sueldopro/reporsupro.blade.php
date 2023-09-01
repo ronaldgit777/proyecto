@@ -92,7 +92,7 @@
                             <th scope="col">totalpago</th>
                             <th scope="col">observacion</th>
                             <th scope="col">profesor_id</th>
-                            <th scope="col">acciones</th>
+                            {{-- <th scope="col">acciones</th> --}}
                                 </tr>
                             </thead>
                             <tbody  id="tabla_profesu">
@@ -106,10 +106,10 @@
                                     <td>{{ $sueldopro->totalpago }}</td>
                                     <td>{{ $sueldopro->observacion }}</td>
                                     <td>{{ $sueldopro->nombre_profesor}} {{ $sueldopro->apepa_profesor}} {{ $sueldopro->apema_profesor}}</td>
-                                    <td> 
+                                    {{-- <td> 
                                       <a href="{{ url('/sueldopro/'.$sueldopro->id.'/show') }}" method="post"  class="btn btn-sm btn-danger"><i class="fas fa-print" ></i>
                                       </a>
-                                    </td>           
+                                    </td>            --}}
                                     
                                 </tr>
                                 @endforeach
@@ -290,10 +290,10 @@ sueldoproreporte.forEach(function (sueldopro) {
                                   ' <td>'+value.totalpago+'</td>'+
                                   ' <td>'+value.observacion+'</td>'+  
                                   '<td>'+value.nombre_profesor+' '+value.apellidopaterno+' '+value.apellidomaterno+'</td>'+
-                                  ' <td>'+
-                                    // '<a href="/proyecto/public/profesor/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
-                                    '<a href="/proyecto/public/profesor/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
-                                  ' </td>'+
+                                  // ' <td>'+
+                                  //   // '<a href="/proyecto/public/profesor/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
+                                  //   '<a href="/proyecto/public/profesor/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
+                                  // ' </td>'+
                               ' </tr>'
                           );
                           //alert(value.id);

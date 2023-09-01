@@ -50,7 +50,7 @@
                                         <label class="text-primary text-capitalize">contraseña</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="" id="" class="form-control" " value="{{ $secretaria->user->password }}"> <br>
+                                        <input type="text" name="" id="" class="form-control" " value="{{ $secretaria->user->password }}" disabled> <br>
                                     </div>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                         <label class="text-primary text-capitalize">constraseña nueva</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="" id="password" class="form-control" value="{{ $secretaria->apellidopaterno }}" > <br>
+                                        <input type="text" name="" id="password" class="form-control" value="" > <br>
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +100,7 @@
                                         <label class="text-primary text-capitalize">correo</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="" id="" class="form-control" value="{{ $secretaria->user->email }}" required><br>
+                                        <input type="text" name="" id="email" class="form-control" value="{{ $secretaria->user->email }}" required><br>
                                     </div>
                                 </div>
                             </div>

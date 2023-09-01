@@ -530,7 +530,7 @@ class asignarproma extends Model
             ->where('profesors.user_id','=',$userid)    
             //->with(['promedioNotas'])
             ->select(
-                'alumnos.*','alumnos.nombre as alumno_nombre','alumnos.apellidopaterno as alumno_paterno','alumnos.apellidomaterno as alumno_materno',
+                'alumnos.*','alumnos.id as alumnoid','alumnos.nombre as alumno_nombre','alumnos.apellidopaterno as alumno_paterno','alumnos.apellidomaterno as alumno_materno',
                 'asignarpromas.*','fechadeasignacion','asignarpromas.estado as nombre_estado',  
                 'profesors.nombre as profesor_nombre','profesors.apellidopaterno as profesors_paterno','profesors.apellidomaterno as profesor_materno',
                 'materias.materia as materia_nombre','materias.id as materiaid',
@@ -657,7 +657,10 @@ class asignarproma extends Model
             }) 
              //->where('secretarias.user_id','=',$userid)
             //->with(['promedioNotas'])
-            ->select('alumnos.*','alumnos.nombre as nombre_alumno',
+            ->select(
+                'alumnos.*','alumnos.id as alumnoid','alumnos.nombre as alumno_nombre','alumnos.apellidopaterno as alumno_paterno','alumnos.apellidomaterno as alumno_materno',
+                'profesors.nombre as profesor_nombre','profesors.apellidopaterno as profesors_paterno','profesors.apellidomaterno as profesor_materno',
+             
             'materias.materia as materia_nombre',
             'asignarpromas.estado as asignarproma_estado',
             'periodos.periodo as periodo_nombre',

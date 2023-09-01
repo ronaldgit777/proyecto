@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\secretaria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class SecretariaController extends Controller
 {
@@ -140,8 +141,20 @@ class SecretariaController extends Controller
             storage::delete('public/'.$secretaria->imagen);
             $datossecretaria['imagen']=$request->file('imagen')->store('uploads','public');
         }
-        secretaria::where('id','=',$id)->update($datossecretaria);
+       secretaria::where('id','=',$id)->update($datossecretaria);
+
+        // secretaria::where('secretarias.user_id','=',$id)->update($datossecretaria)([
+        //     'celular' =>$request->input('celular'),
+        //     'direccion' =>$request->input('direccion')
+        // ]);
+        // user::where('id','=',$id)->update($datossecretaria)([
+        //     'email' =>$request->input('email'),
+        //     'password' =>Hash::make($request->input('password_confirmation'))
+        // ]);
+
+
         $secretaria=secretaria::findOrFail($id);
+     
        // return view('profesor.edit',compact('profesor'));
        return redirect('secretaria');
     }

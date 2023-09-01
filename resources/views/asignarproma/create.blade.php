@@ -39,7 +39,7 @@
                                             @endphp
 
                                             @if ($contpro < $maximoPeriodos)
-                                            <option value="">seleccione al profesor</option>
+                                      
                                             <option value="{{ $profesor->id }}">{{ $profesor->nombre." ".$profesor->apellidopaterno." ".$profesor->apellidomaterno}}</option>
                                             @endif
                                         @endforeach

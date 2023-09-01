@@ -126,7 +126,7 @@
                               {{-- <a href="{{ url('/alumno/'.$alumno->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
                                 <i class="fas fa-edit"></i></a>          --}}
                             </td>
-                            
+                            s
                         </tr>
                         @endforeach
             </tbody>
@@ -142,7 +142,110 @@
    <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
    <script>
+      //  var busquependiente=false; var buscarpendiente=false;
+      $(document).ready(function() {
+            $('#fechainicio').on('change', function() {
+           //     console.log(buscarpendiente);
+           // if(busquependiente==false){
+                //busquependiente=true;
+                var fecha_ini = $(this).val(); 
+                //var user_id = $('#user_id').val();
+                var fecha_fin = $('#fechafinal').val();
+                var buscar = $('#buscar').val();  
+                var materiaid = $('#materia_id2').val();  //alert(materiaid)  
+                var aulaid = $('#aula_id2').val();
+                var periodoid = $('#periodo_id2').val();
+                generartabla(fecha_ini,fecha_fin,buscar,materiaid,aulaid,periodoid);  
+            //}else{
+                //buscarpendiente=true;
+            
+                //$('#fechainicio').trigger('change');
+           // }
+        
+            
+            });
+            function generartabla(fecha_ini,fecha_fin,buscar,materiaid,aulaid,periodoid) {
+                $.ajax({
+                    url: '{{ url("obtener-fechainicioalumnosprofe") }}', // Ruta a tu controlador Laravel
+                    type: 'POST',
+                    data: {
+                        fechainicio: fecha_ini, //lo de blanco es la llave q tienes para q se capture la variable
+                        fechafinal: fecha_fin,
+                        //user_id:user_id,
+                        buscaralu: buscar,// Enviar el ID del aula seleccionada
+                        materiaid: materiaid,
+                        aulaid: aulaid,
+                        periodoid:periodoid,
+                        // profesor_id: profesorId,
+                        _token: '{{ csrf_token() }}' // Agregar el token CSRF
+                    },
+                    success: function(response) {
+                     
+                      
+                        // Limpiar el campo de selección de periodos
+                        $('#tabla_alu').empty();
+                        // profesorreporte=[];
+                        $.each(response, function(key, value) {
+                            // alert(value.id)
+                            $('#tabla_alu').append(
+                                '<tr>'+
+                                // ' <td>'+value.id+'</td>'+
+                                    '<td>'+value.nombre_materia+'</td>'+
+                                    '<td>'+value.nombre_periodo+'</td>'+
+                                    '<td>'+value.nombre_aula+'</td>'+
+                                    '<td>'+value.fechadeingreso+'</td>'+
+                                    ' <td>'+value.ci+'</td>'+
+                                    ' <td>'+value.nombre+'</td>'+
+                                    ' <td>'+value.apellidopaterno+'</td>'+
+                                    ' <td>'+value.apellidomaterno+'</td>'+
+                                    ' <td>'+value.celular+'</td>'+
+                                    ' <td>'+value.direccion+'</td>'+
+                                    ' <td>'+value.correo+'</td>'+
+                                    ' <td>'+value.estado+'</td>'+
+                                    ' <td><img src="'+value.ruta_imagen+'" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid"></td>'+
+                                    // ' <td>'+value.role+'</td>'+
+                                    ' <td>'+
+    '<button onclick="cargarid('+ value.alumnoid +','+ value.materiaid +')" data-toggle="modal" data-target="#myModal2" id="bo" class="btn btn-sm btn-success"> <i class="far fa-file-alt"></i></button>' +
+//'<button onclick="cargaridnotas('+{{ $alumno->id }}+','+{{ $alumno->materiaid }}+','+{{ $alumno->nombre }}+','+{{ $alumno->apellidopaterno }}+','+{{ $alumno->apellidomaterno }}+','+{{ $alumno->nombre_materia }}+')"  data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info">  <i class="far fa-file-alt"></i></button>'+
+'<button onclick="cargaridnotas('+ value.alumnoid +','+ value.materiaid +',\''+ value.nombre +'\',\''+ value.apellidopaterno +'\',\''+ value.apellidomaterno +'\',\''+ value.materia_nombre +'\',\''+ value.profesor_nombre +'\',\''+ value.profesors_paterno +'\',\''+ value.profesor_materno +'\') " data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info"><i class="far fa-file-alt"></i></button>'+                                    
+ ' </td>'+
+                                        // '<a href="/proyecto/public/alumno/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
+                                        '<a href="/proyecto/public/alumno/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
+                                    ' </td>'+
+                                ' </tr>'
+                            );
+                            //alert(value.id);
+                            // profesorreporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
+                            // $('#miadelanto').find('td').css('border', '1px solid black');
+                        });
+                        // if(buscarpendiente==true){
+                        //     buscarpendiente=false;
+                        //     $('#fechainicio').trigger('change');
+                        // }
+                    },
 
+                    // error: function (xhr, status, error) {
+                    // console.error('Error en la solicitud:', error);
+                    // }
+                });
+            }
+            $('#fechafinal').on('change', function() {
+            $('#fechainicio').trigger('change');
+            });
+            $('#buscar').on('input', function() {
+            $('#fechainicio').trigger('change');
+            });
+            $('#materia_id2').on('change', function() {
+            $('#fechainicio').trigger('change');
+            });
+            $('#aula_id2').on('change', function() {
+            $('#fechainicio').trigger('change');
+            });
+            $('#periodo_id2').on('change', function() {
+            $('#fechainicio').trigger('change');
+            });
+       
+    });
 
        function confirmareliminarnota(notaid,nota) {
       //  debugger;
@@ -226,7 +329,7 @@
 
 
 
-     function cargarid(alumnoid,materiaid) {
+     function cargarid(alumnoid,materiaid) {    
 
             var selectElement = document.getElementById('alumno_id'); // Obtener el elemento select
             var selectElementmateriaid = document.getElementById('materia_id'); 
@@ -318,110 +421,7 @@
         
      }
  
-       //  var busquependiente=false; var buscarpendiente=false;
-         $(document).ready(function() {
-            $('#fechainicio').on('change', function() {
-           //     console.log(buscarpendiente);
-           // if(busquependiente==false){
-                //busquependiente=true;
-                var fecha_ini = $(this).val(); 
-                //var user_id = $('#user_id').val();
-                var fecha_fin = $('#fechafinal').val();
-                var buscar = $('#buscar').val();  
-                var materiaid = $('#materia_id2').val();  //alert(materiaid)  
-                var aulaid = $('#aula_id2').val();
-                var periodoid = $('#periodo_id2').val();
-                generartabla(fecha_ini,fecha_fin,buscar,materiaid,aulaid,periodoid);  
-            //}else{
-                //buscarpendiente=true;
-            
-                //$('#fechainicio').trigger('change');
-           // }
-        
-            
-            });
-            function generartabla(fecha_ini,fecha_fin,buscar,materiaid,aulaid,periodoid) {
-                $.ajax({
-                    url: '{{ url("obtener-fechainicioalumnosprofe") }}', // Ruta a tu controlador Laravel
-                    type: 'POST',
-                    data: {
-                        fechainicio: fecha_ini, //lo de blanco es la llave q tienes para q se capture la variable
-                        fechafinal: fecha_fin,
-                        //user_id:user_id,
-                        buscaralu: buscar,// Enviar el ID del aula seleccionada
-                        materiaid: materiaid,
-                        aulaid: aulaid,
-                        periodoid:periodoid,
-                        // profesor_id: profesorId,
-                        _token: '{{ csrf_token() }}' // Agregar el token CSRF
-                    },
-                    success: function(response) {
-                     
-                      
-                        // Limpiar el campo de selección de periodos
-                        $('#tabla_alu').empty();
-                        // profesorreporte=[];
-                        $.each(response, function(key, value) {
-                            // alert(value.id)
-                            $('#tabla_alu').append(
-                                '<tr>'+
-                                // ' <td>'+value.id+'</td>'+
-                                    '<td>'+value.nombre_materia+'</td>'+
-                                    '<td>'+value.nombre_periodo+'</td>'+
-                                    '<td>'+value.nombre_aula+'</td>'+
-                                    '<td>'+value.fechadeingreso+'</td>'+
-                                    ' <td>'+value.ci+'</td>'+
-                                    ' <td>'+value.nombre+'</td>'+
-                                    ' <td>'+value.apellidopaterno+'</td>'+
-                                    ' <td>'+value.apellidomaterno+'</td>'+
-                                    ' <td>'+value.celular+'</td>'+
-                                    ' <td>'+value.direccion+'</td>'+
-                                    ' <td>'+value.correo+'</td>'+
-                                    ' <td>'+value.estado+'</td>'+
-                                    ' <td><img src="'+value.ruta_imagen+'" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid"></td>'+
-                                    // ' <td>'+value.role+'</td>'+
-                                    ' <td>'+
-    '<button onclick="cargarid('+{{ $alumno->id }}+','+{{ $alumno->materiaid }}+')" data-toggle="modal" data-target="#myModal2" id="bo" class="btn btn-sm btn-success"> <i class="far fa-file-alt"></i></button>' +
-
-//    '<button onclick="cargaridnotas('+{{ $alumno->id }}+','+{{ $alumno->materiaid }}+','+{{ $alumno->nombre }}+','+{{ $alumno->apellidopaterno }}+','+{{ $alumno->apellidomaterno }}+','+{{ $alumno->nombre_materia }}')"  data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info">  <i class="far fa-file-alt"></i></button>'+
-
-                                        // '<a href="/proyecto/public/alumno/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
-                                        '<a href="/proyecto/public/alumno/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
-                                    ' </td>'+
-                                ' </tr>'
-                            );
-                            //alert(value.id);
-                            // profesorreporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
-                            // $('#miadelanto').find('td').css('border', '1px solid black');
-                        });
-                        // if(buscarpendiente==true){
-                        //     buscarpendiente=false;
-                        //     $('#fechainicio').trigger('change');
-                        // }
-                    },
-
-                    // error: function (xhr, status, error) {
-                    // console.error('Error en la solicitud:', error);
-                    // }
-                });
-            }
-            $('#fechafinal').on('change', function() {
-            $('#fechainicio').trigger('change');
-            });
-            $('#buscar').on('input', function() {
-            $('#fechainicio').trigger('change');
-            });
-            $('#materia_id2').on('change', function() {
-            $('#fechainicio').trigger('change');
-            });
-            $('#aula_id2').on('change', function() {
-            $('#fechainicio').trigger('change');
-            });
-            $('#periodo_id2').on('change', function() {
-            $('#fechainicio').trigger('change');
-            });
-       
-    });
+ 
   </script>
   <!--empeiza el modal-->
   <div class="modal fade " id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

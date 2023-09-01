@@ -100,7 +100,7 @@
                             <th scope="col">totalpago</th>
                             <th scope="col">observacion</th>
                             <th scope="col">profesor_id</th>
-                            <th scope="col">acciones</th>
+                            {{-- <th scope="col">acciones</th> --}}
                                 </tr>
                             </thead>
                             <tbody  id="tabla_susecre">
@@ -114,10 +114,10 @@
                                     <td>{{ $sueldosecre->totalpago }}</td>
                                     <td>{{ $sueldosecre->observacion }}</td>
                                     <td>{{ $sueldosecre->nombre_secretaria}} {{ $sueldosecre->apepa_secretaria}} {{ $sueldosecre->apema_secretaria}}</td>
-                                    <td> <a href="{{ url('/sueldosecre/'.$sueldosecre->id.'/show') }}" method="post"  class="btn btn-sm btn-danger"><i class="fas fa-print" ></i>
+                                    {{-- <td> <a href="{{ url('/sueldosecre/'.$sueldosecre->id.'/show') }}" method="post"  class="btn btn-sm btn-danger"><i class="fas fa-print" ></i>
                                       </a>
-                                    </td>           
-                                    </td>
+                                    </td>            --}}
+                                    
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -295,10 +295,10 @@ sueldosecrereporte.forEach(function (sueldosecre) {
                                   ' <td>'+value.totalpago+'</td>'+
                                   ' <td>'+value.observacion+'</td>'+  
                                   '<td>'+value.nombre_secretaria+' '+value.apellidopaterno+' '+value.apellidomaterno+'</td>'+
-                                  ' <td>'+
-                                    // '<a href="/proyecto/public/profesor/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
-                                    '<a href="/proyecto/public/secretaria/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="fas fa-print"></i></a>'+
-                                  ' </td>'+
+                                  // ' <td>'+
+                                  //   // '<a href="/proyecto/public/profesor/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
+                                  //   '<a href="/proyecto/public/secretaria/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="fas fa-print"></i></a>'+
+                                  // ' </td>'+
                               ' </tr>'
                           );
                           //alert(value.id);

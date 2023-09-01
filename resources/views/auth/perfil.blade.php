@@ -78,10 +78,10 @@
                           <div class="col-12 col-sm-12 col-md-6">
                             <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                 <div class="col-4 col-md-3">
-                                    <label class="text text-capitalize" >repetir contraseña</label>
+                                    <label class="text text-capitalize" >contraseña nueva</label>
                                 </div>
                                 <div class="col-8 col-md-9">
-                                  <input class="form-control" placeholder="repetir contraseña" type="password" name="password_confirmation" required autocomplete="new-password">
+                                  <input class="form-control" placeholder="repetir contraseña" type="password" name="password_confirmation"  autocomplete="new-password">
                                 </div>
                               </div>
                           </div>

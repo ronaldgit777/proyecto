@@ -38,7 +38,7 @@
                                                 </div>
                                                 <div class="col text-right">
                                                   {{-- <button class="btn btn-danger btn-sm" type="button"><i class="fas fa-print "></i>imprimir</button> --}}
-                                                  <button class="btn btn-danger btn-sm" type="button" onclick="generarpdflistaadelantopro()"><i class="fas fa-print" ></i>imprimir</button>
+                                                  {{-- <button class="btn btn-danger btn-sm" type="button" onclick="generarpdflistaadelantopro()"><i class="fas fa-print" ></i>imprimir</button> --}}
                                                   <a href="{{url('adelantopro/create')}}" class="btn  btn-primary text-capitalize btn-sm" >
                                                     <i class="fas fa-plus-circle"></i>
                                                    agregar nuevo adelanto</a>

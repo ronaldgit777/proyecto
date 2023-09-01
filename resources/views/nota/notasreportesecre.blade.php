@@ -200,7 +200,7 @@
                         </tr>
                         @endforeach
             </tbody>
-          </table>
+          </table>5
         </div>
    </div>s
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
@@ -288,7 +288,8 @@
                                     ' <td><img src="'+imagen+value.imagen+'" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid"></td>'+
                                    // ' <td>'+value.role+'</td>'+
                                     ' <td>'+
-                                       '<a href="/proyecto/public/asignacion/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i>hola</a>' +
+'<button onclick="cargaridnotas('+ value.alumnoid +','+ value.materiaid +',\''+ value.nombre +'\',\''+ value.apellidopaterno +'\',\''+ value.apellidomaterno +'\',\''+ value.materia_nombre +'\',\''+ value.profesor_nombre +'\',\''+ value.profesors_paterno +'\',\''+ value.profesor_materno +'\') " data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info"><i class="far fa-file-alt"></i></button>'+                                    
+ ' </td>'+
 
 // '<button onclick="cargaridnotas('+{{ $alumno->alumnoid }}+','+{{ $alumno->materiaid }}+','+{{ $alumno->nombre }}+','+{{ $alumno->apellidopaterno }}+','+{{ $alumno->apellidomaterno }}+','+{{ $alumno->materia }}+','+{{ $alumno->profesor_nombre }}+','+{{ $alumno->profesor_apellidopaterno }}+','+{{ $alumno->profesor_apellidomaterno }}+')"data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info"><i class="far fa-file-alt"></i></button>'+
 //                                     ' </td>'+
@@ -341,7 +342,7 @@
            $('#fechainicio').trigger('change');
         });
     });
-    function redondearAUnDecimal(numero) {
+    function redondearAUnDecimal(numero) {2
             return Math.round(numero * 10) / 10;
             }
     function cargaridnotas(alumnoid,materiaid,nombre,apellidopaterno,apellidomaterno,nombre_materia,profesor_nombre,profesor_apellidopaterno,profesor_apellidomaterno) {

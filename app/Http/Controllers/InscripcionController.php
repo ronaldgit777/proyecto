@@ -20,6 +20,8 @@ class InscripcionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     
     public function  obtenerfechainicioalumnosprofe(Request $request)
     {   
        $rutaImagenBase = asset('storage').'/';

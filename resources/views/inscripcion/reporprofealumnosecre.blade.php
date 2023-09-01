@@ -142,7 +142,7 @@
                                     <th>alumno_pa</th>
                                     <th>alumno_ma</th>
                                     <th>estado_ins</th>
-                                    <th>acciones</th>
+                                    {{-- <th>acciones</th> --}}
                                 </tr>
                             </thead>
                             <tbody id="tabla_ins">
@@ -162,9 +162,9 @@
                                     <td>{{ $inscripcion->alumno_apellidopaterno}}</td>
                                     <td>{{ $inscripcion->alumno_apellidomaterno}}</td>
                                     <td>{{ $inscripcion->estado }}</td>
-                                    <td> <a href="{{ url('/inscripcion/'.$inscripcion->id.'/show') }}" method="post" class="btn btn-sm btn-danger">
+                                    {{-- <td> <a href="{{ url('/inscripcion/'.$inscripcion->id.'/show') }}" method="post" class="btn btn-sm btn-danger">
                                         <i class="far fa-eye"></i></a>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -323,9 +323,9 @@ sueldoproreporte.forEach(function (inscripcion) {
                                     ' <td>'+value.alumno_apellidomaterno+'</td>'+
                                     ' <td>'+value.inscripcion_estado+'</td>'+
                                    // ' <td>'+value.role+'</td>'+
-                                    ' <td>'+
-                                      '<a href="/proyecto/public/inscripcion/' + value.id + '/show" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
-                                    ' </td>'+
+                                    // ' <td>'+
+                                    //   '<a href="/proyecto/public/inscripcion/' + value.id + '/show" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
+                                    // ' </td>'+
                                 ' </tr>'
                             );
                             //alert(value.id);

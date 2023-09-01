@@ -37,8 +37,8 @@
                                       </div>  -->
                                   </div>
                                 </div>
-                                <div class="col text-right">s
-                                  <button class="btn btn-danger btn-sm" type="button" onclick="generarpdflistaprofesor()"><i class="fas fa-print" ></i>imprimir</button>
+                                <div class="col text-right">
+                                  {{-- <button class="btn btn-danger btn-sm" type="button" onclick="generarpdflistaprofesor()"><i class="fas fa-print" ></i>imprimir</button> --}}
                               </div>  
                         </div>
                     </div>

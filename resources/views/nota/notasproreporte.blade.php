@@ -11,7 +11,7 @@
                           <label class="text-primary text-capitalize">fecha de inicioA</label>
                           <input type="date" name="fechainicio" id="fechainicio" class="form-control" >
                           <span class="text-muted">desde</span>
-                      </div>S
+                      </div>
                       <div class="col">
                           <label class="text-primary text-capitalize">fecha de final</label>
                           <input type="date" name="fechafinal" id="fechafinal" class="form-control">
@@ -190,9 +190,8 @@
                             <td>
                               
                            
-                              <button onclick="cargaridnotas('{{ $alumno->alumnoid }}','{{ $alumno->materiaid }}','{{ $alumno->nombre }}','{{ $alumno->apellidopaterno }}','{{ $alumno->apellidomaterno }}','{{ $alumno->materia }}')" 
-                                data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info"> 
-                                <i class="far fa-file-alt"></i></button>
+<button onclick="cargaridnotas('{{ $alumno->alumnoid }}','{{ $alumno->materiaid }}','{{ $alumno->nombre }}','{{ $alumno->apellidopaterno }}','{{ $alumno->apellidomaterno }}','{{ $alumno->materia }}')" 
+ data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info"><i class="far fa-file-alt"></i></button>
                             {{-- <a href="{{ url('/alumno/'.$alumno->id.'/') }}" method="post" class="btn btn-sm btn-danger">
                               <i class="far fa-eye"></i></a>     
                               <a href="{{ url('/alumno/'.$alumno->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
@@ -287,7 +286,7 @@
                                     ' <td><img src="'+imagen+value.imagen+'" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid"></td>'+
                                    // ' <td>'+value.role+'</td>'+
                                     ' <td>'+
- '<button onclick="cargaridnotas('+ value.id +','+ value.materiaid +',\''+ value.nombre +'\',\''+ value.apellidopaterno +'\',\''+ value.apellidomaterno +'\',\''+ value.materia_nombre +'\',\''+ value.profesor_nombre +'\',\''+ value.profesors_paterno +'\',\''+ value.profesor_materno +'\') " data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info"><i class="far fa-file-alt"></i></button>'+                                    
+ '<button onclick="cargaridnotas('+ value.alumnoid +','+ value.materiaid +',\''+ value.nombre +'\',\''+ value.apellidopaterno +'\',\''+ value.apellidomaterno +'\',\''+ value.materia_nombre +'\',\''+ value.profesor_nombre +'\',\''+ value.profesors_paterno +'\',\''+ value.profesor_materno +'\') " data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info"><i class="far fa-file-alt"></i></button>'+                                    
  ' </td>'+
 //'<button onclick="cargaridnotas('+{{ $alumno->alumnoid }}+','+{{ $alumno->materiaid }}+','+{{ $alumno->nombre }}+','+{{ $alumno->apellidopaterno }}+','+{{ $alumno->apellidomaterno }}+','+{{ $alumno->materia }}+','+{{ $alumno->profesor_nombre }}+','+{{ $alumno->profesor_apellidopaterno }}+','+{{ $alumno->profesor_apellidomaterno }}+')"data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info"><i class="far fa-file-alt"></i></button>'+
   
@@ -348,7 +347,7 @@ function redondearAUnDecimal(numero) {
             }
     function cargaridnotas(alumnoid,materiaid,nombre,apellidopaterno,apellidomaterno,nombre_materia,profesor_nombre,profesor_apellidopaterno,profesor_apellidomaterno) {
             $('#alumno1').val(nombre+' '+apellidopaterno+' '+apellidomaterno);
-            $('#profesor1').val(profesor_nombre+' '+profesor_apellidopaterno+' '+profesor_apellidomaterno);
+            $('#profesor1').val('{{ $usuario[0]->nombre.'-'.$usuario[0]->apellidopaterno.'-'.$usuario[0]->apellidomaterno }} ');
             $('#materia1').val(nombre_materia);
         // alert(alumnoid+'-'+materiaid)
     $.ajax({
