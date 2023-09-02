@@ -135,6 +135,11 @@ class SecretariaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $contranueva=($request->input('password_confirmation'));
+        $email=($request->input('email'));
+        unset($request['password_confirmation']);
+        unset($request['email']);
+
         $datossecretaria=request()->except(['_token','_method']);
         if($request->hasFile('imagen')){
             $secretaria=secretaria::findOrFail($id);
@@ -142,7 +147,16 @@ class SecretariaController extends Controller
             $datossecretaria['imagen']=$request->file('imagen')->store('uploads','public');
         }
        secretaria::where('id','=',$id)->update($datossecretaria);
+      // $user=user::join('secretarias','users.secretaria_id','=',$id);
 
+      $secretaria = Secretaria::findOrFail($id);
+      $user = $secretaria->user;
+      $userId = $user->id;
+
+       user::where('id','=',$userId)->update([
+        'email' =>($email),
+        'password' =>Hash::make($contranueva)
+          ]);
         // secretaria::where('secretarias.user_id','=',$id)->update($datossecretaria)([
         //     'celular' =>$request->input('celular'),
         //     'direccion' =>$request->input('direccion')
@@ -151,7 +165,6 @@ class SecretariaController extends Controller
         //     'email' =>$request->input('email'),
         //     'password' =>Hash::make($request->input('password_confirmation'))
         // ]);
-
 
         $secretaria=secretaria::findOrFail($id);
      

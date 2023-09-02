@@ -60,7 +60,7 @@
                                         <label class="text-primary text-capitalize">constraseña nueva</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="" id="password" class="form-control" value="" > <br>
+                                        <input type="text" name="password_confirmation" id="password_confirmation" class="form-control" value="" > <br>
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +100,7 @@
                                         <label class="text-primary text-capitalize">correo</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="" id="email" class="form-control" value="{{ $secretaria->user->email }}" required><br>
+                                        <input type="text" name="email" id="email" class="form-control" value="{{ $secretaria->user->email }}" required><br>
                                     </div>
                                 </div>
                             </div>

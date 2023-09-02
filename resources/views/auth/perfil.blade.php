@@ -36,7 +36,7 @@
           @csrf
          
 
-          <div class="row p-3 mb-2 " >
+          <div class="row p-3 mb-2 " >s
             <div class="col-12  " > 
                 <div class="m-portlet__body m-portlet--primary" data-portlet="true" m-portlet="true">
                       <div class="form-group m-form__group row">
