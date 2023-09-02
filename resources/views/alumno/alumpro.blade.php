@@ -121,7 +121,8 @@
                                 data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info"> 
                                 <i class="far fa-file-alt"></i></button>
 
-                            <a href="{{ url('/alumno/'.$alumno->id.'/show2alu') }}" method="post" class="btn btn-sm btn-danger">
+                           
+                                <a href="{{ route('show2alu', ['id' => $alumno->id]) }}" class="btn btn-sm btn-danger">
                               <i class="far fa-eye"></i></a>     
                               {{-- <a href="{{ url('/alumno/'.$alumno->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
                                 <i class="fas fa-edit"></i></a>          --}}
@@ -205,16 +206,20 @@
                                     ' <td><img src="'+value.ruta_imagen+'" alt=""  width="50px"  height="50px" class="img-thumbnail img-fluid"></td>'+
                                     // ' <td>'+value.role+'</td>'+
                                     ' <td>'+
-    '<button onclick="cargarid('+ value.alumnoid +','+ value.materiaid +')" data-toggle="modal" data-target="#myModal2" id="bo" class="btn btn-sm btn-success"> <i class="far fa-file-alt"></i></button>' +
+'<button onclick="cargarid('+ value.alumnoid +','+ value.materiaid +')" data-toggle="modal" data-target="#myModal2" id="bo" class="btn btn-sm btn-success"> <i class="far fa-file-alt"></i></button>' +
 //'<button onclick="cargaridnotas('+{{ $alumno->id }}+','+{{ $alumno->materiaid }}+','+{{ $alumno->nombre }}+','+{{ $alumno->apellidopaterno }}+','+{{ $alumno->apellidomaterno }}+','+{{ $alumno->nombre_materia }}+')"  data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info">  <i class="far fa-file-alt"></i></button>'+
-'<button onclick="cargaridnotas('+ value.alumnoid +','+ value.materiaid +',\''+ value.nombre +'\',\''+ value.apellidopaterno +'\',\''+ value.apellidomaterno +'\',\''+ value.materia_nombre +'\',\''+ value.profesor_nombre +'\',\''+ value.profesors_paterno +'\',\''+ value.profesor_materno +'\') " data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info"><i class="far fa-file-alt"></i></button>'+                                    
- ' </td>'+
+'<button onclick="cargaridnotas('+ value.alumnoid +','+ value.materiaid +',\''+ value.nombre +'\',\''+ value.apellidopaterno +'\',\''+ value.apellidomaterno +'\',\''+ value.nombre_materia +'\',\''+ value.profesor_nombre +'\',\''+ value.profesors_paterno +'\',\''+ value.profesor_materno +'\') " data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info"><i class="far fa-file-alt"></i></button>'+                                    
+'<a href="/proyecto/public/alumno/show2/' + value.alumnoid + '" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+ 
+
+
+    
+' </td>'+
                                         // '<a href="/proyecto/public/alumno/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
-                                        '<a href="/proyecto/public/alumno/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="far fa-eye"></i></a>'+
-                                    ' </td>'+
+                                   
+                                   
                                 ' </tr>'
                             );
-                            //alert(value.id);
+                          //  alert(value.materiaid);
                             // profesorreporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
                             // $('#miadelanto').find('td').css('border', '1px solid black');
                         });
@@ -337,14 +342,14 @@
             $('#alumno2').val(alumnoid); 
             var options = selectElement.options; // Obtener todas las opciones del select
             var optionsmateriaid = selectElementmateriaid.options; 
-            
+           // debugger;
             for (var i = 0; i < options.length; i++) {
-                if (options[i].value === alumnoid) {
+                if (options[i].value == alumnoid) {
                 options[i].selected = true; // Seleccionar la opción si coincide con el valor
                 }
             }
             for (var i = 0; i < optionsmateriaid.length; i++) {
-                if (optionsmateriaid[i].value === materiaid) {
+                if (optionsmateriaid[i].value == materiaid) {
                     optionsmateriaid[i].selected = true; // Seleccionar la opción si coincide con el valor
                 }
             }

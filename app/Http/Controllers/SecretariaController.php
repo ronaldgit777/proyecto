@@ -148,7 +148,6 @@ class SecretariaController extends Controller
         }
        secretaria::where('id','=',$id)->update($datossecretaria);
       // $user=user::join('secretarias','users.secretaria_id','=',$id);
-
       $secretaria = Secretaria::findOrFail($id);
       $user = $secretaria->user;
       $userId = $user->id;
@@ -157,15 +156,6 @@ class SecretariaController extends Controller
         'email' =>($email),
         'password' =>Hash::make($contranueva)
           ]);
-        // secretaria::where('secretarias.user_id','=',$id)->update($datossecretaria)([
-        //     'celular' =>$request->input('celular'),
-        //     'direccion' =>$request->input('direccion')
-        // ]);
-        // user::where('id','=',$id)->update($datossecretaria)([
-        //     'email' =>$request->input('email'),
-        //     'password' =>Hash::make($request->input('password_confirmation'))
-        // ]);
-
         $secretaria=secretaria::findOrFail($id);
      
        // return view('profesor.edit',compact('profesor'));

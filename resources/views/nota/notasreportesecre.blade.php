@@ -200,7 +200,7 @@
                         </tr>
                         @endforeach
             </tbody>
-          </table>5
+          </table>
         </div>
    </div>s
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
@@ -295,7 +295,7 @@
 //                                     ' </td>'+
                                 ' </tr>'
                             );
-                            //alert(value.id);
+                            alert(value.materiaid);
                            // profesorreporte.push(encontrarListaPorId(value.id)); //añadiendo elemtos a la nueva variable
                            // $('#miadelanto').find('td').css('border', '1px solid black');
                         });

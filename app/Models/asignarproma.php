@@ -661,7 +661,7 @@ class asignarproma extends Model
                 'alumnos.*','alumnos.id as alumnoid','alumnos.nombre as alumno_nombre','alumnos.apellidopaterno as alumno_paterno','alumnos.apellidomaterno as alumno_materno',
                 'profesors.nombre as profesor_nombre','profesors.apellidopaterno as profesors_paterno','profesors.apellidomaterno as profesor_materno',
              
-            'materias.materia as materia_nombre',
+            'materias.materia as materia_nombre','materias.id as materiaid',
             'asignarpromas.estado as asignarproma_estado',
             'periodos.periodo as periodo_nombre',
             'aulas.aula as aula_nombre',

@@ -85,10 +85,13 @@
                             {{-- <a href="{{ url('/profesor/'.$profesor->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
                               <i class="fas fa-edit"></i>
                               </a> --}}
-                            <a href="{{ url('/profesor/show2/'.$profesor->id.'/') }}" method="post" class="btn btn-sm btn-danger">
+                          
+                              <a href="{{ route('show2', ['id' => $profesor->id]) }}" class="btn btn-sm btn-danger">
+                        
+
                               <i class="far fa-eye"></i>
                             </a>                     
-                            </td>
+                            </td>s
                         </tr>
                         @endforeach
             </tbody>

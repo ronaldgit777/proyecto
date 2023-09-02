@@ -67,6 +67,26 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
                                     <div class="col-4 col-md-3">
+                                        <label class="text-primary text-capitalize">contraseña</label>
+                                    </div>
+                                    <div class="col-8 col-md-9">
+                                        <input type="text" name="" id="" class="form-control" " value="{{ $profesor->user->password }}" disabled> <br>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6">
+                                <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
+                                    <div class="col-4 col-md-3">
+                                        <label class="text-primary text-capitalize">constraseña nueva</label>
+                                    </div>
+                                    <div class="col-8 col-md-9">
+                                        <input type="text" name="password_confirmation" id="password_confirmation" class="form-control" value="" > <br>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6">
+                                <div class="form-group m-form__group row" style="display: flex; margin-left: 2px">
+                                    <div class="col-4 col-md-3">
                                         <label class="text-primary text-capitalize">sueldo</label>
                                     </div>
                                     <div class="col-8 col-md-9">
@@ -100,7 +120,7 @@
                                         <label class="text-primary text-capitalize">correo</label>
                                     </div>
                                     <div class="col-8 col-md-9">
-                                        <input type="text" name="" id="" class="form-control" value="{{ $profesor->correo }}"><br>
+                                        <input type="text" name="email" id="email" class="form-control" value="{{ $profesor->user->email }}"><br>
                                     </div>
                                 </div>
                             </div>

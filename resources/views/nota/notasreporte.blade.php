@@ -305,6 +305,12 @@ function obtenerDatosTabla() {
  var headers= [ 'Fechadeingreso', 'ci', 'nombre', 'apellidopaterno','apellidomaterno','materia','promedio','periodo','aula','estado','imagen'];
  filas.push(headers);
  profesorreporte.forEach(function (alumno) {
+  var promedio=alumno.promedio_notas;
+ // debugger;
+  if(promedio==null)
+    {
+      promedio=0;
+    }
    var fila = [
     // profesor.id,
     alumno.fechadeingreso,
@@ -313,7 +319,7 @@ function obtenerDatosTabla() {
     alumno.alumno_apellidopaterno,
     alumno.alumno_apellidomaterno,
     alumno.materia_nombre,
-    alumno.promedio_notas,
+    promedio,
     alumno.periodo_nombre,
     alumno.aula_nombre,
     alumno.asignarpromas_estado,
@@ -326,6 +332,7 @@ function obtenerDatosTabla() {
 </script>
 <script>
     $(document).ready(function() {
+      //$('#fechainicio').trigger('change');
       var estiloOriginal = $('#buscar').css('border');
   
       // Cuando se produzca el evento 'click' en cualquier input

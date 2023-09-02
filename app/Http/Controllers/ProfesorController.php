@@ -7,6 +7,7 @@ use App\Models\profesor;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class ProfesorController extends Controller
 {
@@ -165,16 +166,32 @@ class ProfesorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datosprofesor=request()->except(['_token','_method']);
+       
+       $contranueva=($request->input('password_confirmation'));
+       $email=($request->input('email'));
+       unset($request['password_confirmation']);
+       unset($request['email']);
+
+       $datosprofesor=request()->except(['_token','_method']);
         if($request->hasFile('imagen')){
             $profesor=profesor::findOrFail($id);
             storage::delete('public/'.$profesor->imagen);
             $datosprofesor['imagen']=$request->file('imagen')->store('uploads','public');
         }
         profesor::where('id','=',$id)->update($datosprofesor);
-        $profesor=profesor::findOrFail($id);
-       // return view('profesor.edit',compact('profesor'));
-       return redirect('profesor');
+     // $user=user::join('secretarias','users.secretaria_id','=',$id);
+     $profesor = profesor::findOrFail($id);
+     $user = $profesor->user;
+     $userId = $user->id;
+
+      user::where('id','=',$userId)->update([
+       'email' =>($email),
+       'password' =>Hash::make($contranueva)
+         ]);
+       $profesor=profesor::findOrFail($id);
+    
+      // return view('profesor.edit',compact('profesor'));
+      return redirect('profesor');
     }
 
     /**

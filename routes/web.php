@@ -67,7 +67,7 @@ Route::get('/', function () {
         Route::post('/obtener-fechainicioalumnos',[App\Http\Controllers\AlumnoController::class, 'obtenerfechainicioalumnos'])->name('obtener-fechainicioalumnos'); //lista de alumnos
         Route::post('/obtener-fechainicioalumnosprofe',[App\Http\Controllers\InscripcionController::class, 'obtenerfechainicioalumnosprofe'])->name('obtener-fechainicioalumnosprofe');//rol profe notas ajax
 
-        Route::post('/obtener-fechainicioalumnosprofe',[App\Http\Controllers\InscripcionController::class, 'obtenerfechainicioalumnosprofe'])->name('obtener-fechainicioalumnosprofe');//arreglar
+        //Route::post('/obtener-fechainicioalumnosprofe',[App\Http\Controllers\InscripcionController::class, 'obtenerfechainicioalumnosprofe'])->name('obtener-fechainicioalumnosprofe');//arreglar
         
         Route::get('/alumproreporte',[App\Http\Controllers\AlumnoController::class, 'alumproreporte'])->name('alumproreporte'); //lista de alumnos reporte
         Route::get('/notasproreporte',[App\Http\Controllers\NotaController::class, 'notasproreporte'])->name('notasproreporte'); //lista de alumnos notas
@@ -79,8 +79,9 @@ Route::get('/', function () {
         
         Route::post('/obtener-fechainicionotaprofe',[App\Http\Controllers\AsignarpromaController::class, 'buscarfechainicionotasprofeuser'])->name('obtener-fechainicionotaprofe'); 
         
-        Route::get('/show2', [App\Http\Controllers\AlumnoController::class, 'show2alu'])->name('show2alu')->middleware('auth');//ver al alumno rol profe-
-                
+       // Route::get('/show2', [App\Http\Controllers\AlumnoController::class, 'show2alu'])->name('show2alu')->middleware('auth');//ver al alumno rol profe-
+        Route::get('/alumno/show2/{id}', [App\Http\Controllers\AlumnoController::class,'show2alu'])->name('show2alu');
+        
         Route::get('/perfiluser', [App\Http\Controllers\Auth\RegisterController::class, 'verperfiluser'])->name('perfiluser')->middleware('auth');//ver al user -
         Route::post('/perfiluser', [App\Http\Controllers\Auth\RegisterController::class, 'verperfiluser'])->name('perfiluser')->middleware('auth');//ver al user -
 
@@ -105,8 +106,8 @@ Route::get('/', function () {
         //obtener-aulas
         Route::post('/obtener-aulas', [App\Http\Controllers\AsignarpromaController::class, 'obteneraulas'])->name('obtener-aulas');
 
-        Route::get('/show2', [App\Http\Controllers\ProfesorController::class, 'show2'])->name('show2')->middleware('auth');
-        Route::post('/show2', [App\Http\Controllers\ProfesorController::class, 'show2'])->name('show2')->middleware('auth');
+       // Route::get('/show2', [App\Http\Controllers\ProfesorController::class,'show2'])->name('show2')->middleware('auth');
+        Route::get('/profesor/show2/{id}', [App\Http\Controllers\ProfesorController::class,'show2'])->name('show2');
 
         Route::post('/obtener-fechainicioasig',[App\Http\Controllers\AsignarpromaController::class, 'buscarfechainicioasignaciones'])->name('obtener-fechainicioasig'); //buscar de asignaciones
         //actividad
