@@ -88,7 +88,7 @@ Route::get('/', function () {
         Route::post('/editaruser/{id}/{role}', [App\Http\Controllers\Auth\RegisterController::class, 'actualizaruser'])->name('editaruser')->middleware('auth');//editar al user -
        // Route::post('/asigpro', [App\Http\Controllers\AsignarpromaController::class, 'index2'])->name('index2')->middleware('auth');
         Route::post('/obtener-fechainicionotasecre',[App\Http\Controllers\AsignarpromaController::class, 'buscarfechainicionotassecreuser'])->name('obtener-fechainicionotasecre'); //ajaax repor notas estudiantes rol admin
-
+        
        Route::post('/obtener-fechainicionotasecrerol',[App\Http\Controllers\AsignarpromaController::class, 'buscarfechainicionotassecreuserrol'])->name('obtener-fechainicionotasecrerol'); //arreglar 1/9
         
         Route::post('/obtener-notasdelalumnoid',[App\Http\Controllers\NotaController::class, 'obtenernotasdelalumnoid'])->name('obtener-notasdelalumnoid'); //buscar de asignaciones

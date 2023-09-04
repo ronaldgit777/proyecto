@@ -54,7 +54,7 @@
                         </div> --}}
                         <div class="box">
                           <img src="imag/pagoprofesor.png" alt="Imagen 3">
-                          <a  href="{{ url('/notasreporte') }}">alumnos y notas</a>
+                          <a  href="{{ url('/notasreporte') }}">Promedio de los alumnos</a>
                         </div>
                       </div>
                       {{-- <div class="bottom-row">

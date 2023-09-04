@@ -213,7 +213,7 @@
           </li> 
           <li class="nav-item">
             <a class="nav-link " href="{{ url('/reporprofealumnosecre') }}">
-              <i class="fas fa-chalkboard-teacher text-blue"></i> los profesores con sus alumnos
+              <i class="fas fa-chalkboard-teacher text-blue"></i> inscripciones de los alumnos
             </a>
         </li>
         <li class="nav-item">
@@ -223,7 +223,7 @@
       </li>
           <li class="nav-item">
               <a class="nav-link " href="{{ url('/notasreportesecre') }}">
-                <i class="fas fa-user-graduate"></i>notas de los alumnos con sus profesores
+                <i class="fas fa-user-graduate"></i>Promedio de los alumnos
               </a>
           </li>
         
@@ -289,7 +289,7 @@
                      </li> 
                      <li class="nav-item">
                        <a class="nav-link " href="{{ url('/notasproreporte') }}">
-                         <i class="fas fa-chalkboard-teacher text-blue"></i> reporte de notas de los alumnos
+                         <i class="fas fa-chalkboard-teacher text-blue"></i> Reporte de los Promedio de los alumnos
                        </a>
                    </li>
                  </ul>
