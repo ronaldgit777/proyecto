@@ -61,7 +61,7 @@ class adelantosecre extends Model
                 
              // ->select('profesors.*', 'users.email', 'users.role')
             //  ->get();
-            ->select('adelantosecres.*', 'secretarias.nombre as nombre_secretaria')
+            ->select('adelantosecres.*', 'secretarias.nombre as nombre_secretaria','secretarias.apellidopaterno as secreapellidopaterno')
             ->get();
         //return $fechaini;
     }

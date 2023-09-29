@@ -42,7 +42,7 @@ class sueldosecre extends Model
                           ->orWhere('secretarias.nombre', 'like', "%$buscarpro2%");
                   });
               })  
-            ->select('sueldosecres.*', 'secretarias.nombre', 'secretarias.sueldo')
+            ->select('sueldosecres.*', 'secretarias.*', 'secretarias.sueldo')
             ->get();
     }  
     public static function obtenersusecredesdefechainiciore($fechaini,$fechafin,$secretariaid2,

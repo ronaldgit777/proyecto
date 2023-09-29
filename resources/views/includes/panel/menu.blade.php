@@ -1,12 +1,12 @@
   <h1 class="navbar-heading text-muted">
-    @if(auth()->user()->role == 'admin')
-        bienvenido admin
+    @if(auth()->user()->role == 'director')
+        bienvenido director
       @elseif(auth()->user()->role == 'secretaria')
           bienvenido secretaria
       @else 
           bienveido profesor
      @endif</h1>
-    @if(auth()->user()->role == 'admin')
+    @if(auth()->user()->role == 'director')
         <ul class="navbar-nav  ">
           
                 <li class="nav-item">

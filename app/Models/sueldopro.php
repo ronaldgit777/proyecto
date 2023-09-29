@@ -39,7 +39,7 @@ class sueldopro extends Model
                           ->orWhere('profesors.nombre', 'like', "%$buscarpro2%");
                   });
               })  
-            ->select('sueldopros.*', 'profesors.nombre', 'profesors.sueldo')
+            ->select('sueldopros.*', 'profesors.*', 'profesors.sueldo')
             ->get();
     }  
     public static function obtenersuprodesdefechainiciore($fechaini,$fechafin,$profesorid2,

@@ -57,18 +57,18 @@
                           <a href="{{ url('/repor-pro') }}">lista de profesores</a>
                         </div>
                         <div class="box">
-                          <img src="imag/asigprofesores.jpg" alt="Imagen 2">
-                          <a href="{{ url('/reporasig') }}">asignaciones de profesores</a>
-                        </div>
-                        <div class="box">
                           <img src="imag/adelantopro.jpg" alt="Imagen 3">
                           <a href="{{ url('/reporadepro') }}">adelantos profesores</a>
+                        </div>
+                        <div class="box">
+                          <img src="imag/pagoprofesor.png" alt="Imagen 4">
+                          <a  href="{{ url('/reporsupro') }}">sueldos profesores</a>
                         </div>
                       </div>
                       <div class="bottom-row">
                         <div class="box">
-                          <img src="imag/pagoprofesor.png" alt="Imagen 4">
-                          <a  href="{{ url('/reporsupro') }}">sueldos profesores</a>
+                          <img src="imag/asigprofesores.jpg" alt="Imagen 2">
+                          <a href="{{ url('/reporasig') }}">asignaciones de profesores</a>
                         </div>
                         <div class="box">
                           <img src="imag/alumnosprofe.jpg" alt="Imagen 5">

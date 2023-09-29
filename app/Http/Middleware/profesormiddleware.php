@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
-class adminmiddleware
+class profesormiddleware
 {
     /**
      * Handle an incoming request.
@@ -14,9 +14,8 @@ class adminmiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->role == 'admin')
+        if(auth()->user()->role == 'profesor')
         return $next($request);
         return redirect('/home');
     }
 }
-

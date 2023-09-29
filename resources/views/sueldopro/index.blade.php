@@ -50,7 +50,7 @@
                             <th scope="col">totalpago</th>
                             <th scope="col">observacion</th>
                             <th scope="col">profesor_id</th>
-                            <th scope="col">acciones</th>
+                            {{-- <th scope="col">acciones</th> --}}
               </tr>
             </thead>
             <tbody id="tabla_supro">
@@ -63,10 +63,10 @@
                             <td>{{ $sueldopro->totaldescuento }}</td>
                             <td>{{ $sueldopro->totalpago }}</td>
                             <td>{{ $sueldopro->observacion }}</td>
-                            <td>{{ $sueldopro->profesor->nombre }}</td>
-                            <td> <a href="{{ url('/sueldopro/'.$sueldopro->id.'/show') }}" method="post"  class="btn btn-sm btn-success"><i class="fas fa-donate" ></i>
+                            <td>{{ $sueldopro->profesor->nombre }} {{ $sueldopro->profesor->apellidopaterno }}< {{ $sueldopro->profesor->apellidomaterno }}<</td>
+                            {{-- <td> <a href="{{ url('/sueldopro/'.$sueldopro->id.'/show') }}" method="post"  class="btn btn-sm btn-success"><i class="fas fa-donate" ></i>
                               </a>
-                            </td>           
+                            </td>            --}}
                             </td>
                         </tr>
                 @endforeach
@@ -122,11 +122,11 @@
                                   ' <td>'+value.totaldescuento+'</td>'+
                                   ' <td>'+value.totalpago+'</td>'+
                                   ' <td>'+value.observacion+'</td>'+
-                                  ' <td>'+value.nombre+'</td>'+
+                                  ' <td>'+value.nombre+' '+value.apellidopaterno+' '+value.apellidomaterno+'</td>'+
                                   // ' <td>'+value.estado+'</td>'+
-                                  ' <td>'+
-                                    '<a href="/proyecto/public/sueldopro/' + value.id + '/show" method="post" class="btn btn-sm btn-success"> <i class="fas fa-donate"></i></a>'+
-                                  ' </td>'+
+                                  // ' <td>'+
+                                  //   '<a href="/proyecto/public/sueldopro/' + value.id + '/show" method="post" class="btn btn-sm btn-success"> <i class="fas fa-donate"></i></a>'+
+                                  // ' </td>'+
                               ' </tr>'
                           );
                           //alert(value.id);

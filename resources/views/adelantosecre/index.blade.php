@@ -68,7 +68,7 @@
                         <td>{{ $adelantosecre->monto }}</td>
                         <td>{{ $adelantosecre->estadoade }}</td>
                         <td>{{ $adelantosecre->observacion }}</td>
-                        <td>{{ $adelantosecre->secretaria_id ."-".$adelantosecre->secretaria->nombre}}</td>
+                        <td>{{ $adelantosecre->secretaria->nombre}} {{ $adelantosecre->secretaria->apellidopaterno}} {{ $adelantosecre->secretaria->apellidomaterno}}</td>
                         {{-- <td> <a href="{{ url('/adelantosecre/'.$adelantosecre->id.'/show') }}" method="post"class="btn btn-sm btn-danger"><i class="fas fa-print" ></i></a>
                         </td> --}}
                     </tr>
@@ -122,13 +122,13 @@
                       $.each(response, function(key, value) {
                           // alert(value.id)
                           $('#tabla_secreade').append(
-                              '<tr>'+
+                              '<tr>'+ 
                               // ' <td>'+value.id+'</td>'+
                                   '<td>'+value.fechaadelantosecre+'</td>'+
                                   ' <td>'+value.monto+'</td>'+
                                   ' <td>'+value.estadoade+'</td>'+
                                   ' <td>'+value.observacion+'</td>'+
-                                  '<td>'+value.secretaria_id+"-"+value.nombre_secretaria+'</td>'+
+                                  '<td>'+value.nombre_secretaria+' '+value.secreapellidopaterno+'</td>'+
                                   // ' <td>'+
                                   //   // '<a href="/proyecto/public/profesor/' + value.id + '/edit" method="post" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>' +
                                   //   '<a href="/proyecto/public/secretaria/' + value.id + '/" method="post" class="btn btn-sm btn-danger"> <i class="fas fa-print"></i></a>'+
