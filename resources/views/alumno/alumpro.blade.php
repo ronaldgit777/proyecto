@@ -8,12 +8,12 @@
               <h3 class="mb-0">LISTA DE ALUMNOS del profesor <label>  {{ $usuario[0]->nombre.'-'.$usuario[0]->apellidopaterno.'-'.$usuario[0]->apellidomaterno }} </label>
               </h3>
               <div class="row">
-                
+{{--                 
                 <select class="selectpicker" data-live-search="true">
                     <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
                     <option data-tokens="mustard">Burger, Shake and a Smile</option>
                     <option data-tokens="frosting">Sugar, Spice and all things nice</option>
-                  </select>
+                  </select> --}}
                       <div class="col">
                           <label class="text-primary text-capitalize">fecha de inicioA</label>
                           <input type="date" name="fechainicio" id="fechainicio" class="form-control" >
@@ -68,7 +68,7 @@
                         <i class="fas fa-plus-circle"></i>
                         regresar</a>
                     </div>  
-              </div>s
+              </div>
           </div>
   </div>
 </div> 
@@ -120,14 +120,12 @@
                             <button onclick="cargaridnotas('{{ $alumno->id }}','{{ $alumno->materiaid }}','{{ $alumno->nombre }}','{{ $alumno->apellidopaterno }}','{{ $alumno->apellidomaterno }}','{{ $alumno->nombre_materia }}')" 
                                 data-toggle="modal" data-target="#myModal3"  id="bonota" class="btn btn-sm btn-info"> 
                                 <i class="far fa-file-alt"></i></button>
-
                            
                                 <a href="{{ route('show2alu', ['id' => $alumno->id]) }}" class="btn btn-sm btn-danger">
                               <i class="far fa-eye"></i></a>     
                               {{-- <a href="{{ url('/alumno/'.$alumno->id.'/edit') }}" method="post" class="btn btn-sm btn-primary">
                                 <i class="fas fa-edit"></i></a>          --}}
                             </td>
-                            s
                         </tr>
                         @endforeach
             </tbody>
@@ -591,9 +589,9 @@
                                                     <input type="text" name="promedio" id="promedio" class="form-control" placeholder="promedio" disabled>
                                                     <snap class="text-sm">promedio</snap>
                                                 </div>   
-                                                <div class="col">
+                                                {{-- <div class="col">
                                                     <button class="btn btn-danger" type="button"><i class="fas fa-print"></i>imprimir</button>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <div class="row">
                                                 <div class="col">

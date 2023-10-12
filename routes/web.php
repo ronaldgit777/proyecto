@@ -38,10 +38,13 @@ Route::get('/profesor', function () {
 */
 
 Auth::routes();
+
+
 Route::get('/', function () {
     return view('auth.login');
 });
-
+Route::post('/custom/password/email',[App\Http\Controllers\Auth\ForgotPasswordController::class, 'customSendResetLinkEmail'])->name('EnviarTokenParaPassword');
+Route::post('/custom/password/reset', [App\Http\Controllers\Auth\ResetPasswordController::class, 'reset1'])->name('reset1');///lista deprofesores rol secre
 //Auth::routes();
 
 //route::get('/home',[ProfesorController::class,'index'])->name('home');

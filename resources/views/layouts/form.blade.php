@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>
     {{config('app.name')}}|@yield('title')
-  </title>
+  </title> 
   <!-- Favicon -->
   <link href="{{asset('img/brand/favicon.png')}}" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -16,6 +16,7 @@
   <link href="{{asset('js/plugins/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet" />
   <!-- CSS Files -->
   <link href="{{asset('css/argon-dashboard.css?v=1.1.2')}}" rel="stylesheet" />
+  @yield('head')
 </head>
 
 <body class="bg-primary">
@@ -46,6 +47,7 @@
               </div>
             </div>
           </div>
+          
           <!-- Navbar items -->
           <ul class="navbar-nav ml-auto">
             {{-- <li class="nav-item">
